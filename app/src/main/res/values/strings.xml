@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Socify</string>
+    <string name="splash_text">SOCIFY</string>
 </resources>
