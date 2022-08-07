@@ -1,14 +1,15 @@
 package com.example.socify;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.cuberto.liquid_swipe.LiquidPager;
 import com.example.socify.databinding.ActivityMainBinding;
-
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
     LiquidPager liquidPager;
     ViewPager viewPager;
 
+
+
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         liquidPager = binding.pager;
         viewPager = new ViewPager(getSupportFragmentManager(), 1);
         liquidPager.setAdapter(viewPager);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+
+       
     }
+
+
 }

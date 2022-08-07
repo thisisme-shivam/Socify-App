@@ -1,116 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#377eaa"
     android:layout_height="match_parent"
-    tools:context=".OnBoardingFragments.EventsFragment">
+    android:background="@color/blue_onboard">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="62dp"
+        android:layout_weight="1"
+        android:gravity="start"
+        android:text="Socify"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/buddyimg"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_above="@+id/buddyheader"
-        android:layout_centerHorizontal="true"
-        android:layout_marginVertical="80dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/events" />
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="114dp"
+        android:layout_marginBottom="27dp"
+        android:src="@drawable/events"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/buddyheader"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/buddytext"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/gg1"
-        android:text="College Events"
-        android:textColor="@color/black"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+        android:layout_marginBottom="88dp"
+        android:fontFamily="sans-serif-light"
+        android:includeFontPadding="false"
+        android:letterSpacing="-0.01"
+        android:text="College"
+        android:textColor="@color/palette_grey"
+        android:textSize="41sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
-        android:id="@+id/buddytext"
-        android:layout_width="match_parent"
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/LinearLayoutIndicator"
-        android:layout_centerInParent="true"
-        android:layout_marginVertical="60dp"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="250dp"
+        android:fontFamily="sans-serif-condensed"
+        android:includeFontPadding="false"
+        android:letterSpacing="-0.01"
+        android:text="Events"
+        android:textColor="@android:color/black"
+        android:textSize="56sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="195dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/osr"
+        android:letterSpacing="-0.01"
+        android:lineSpacingExtra="4sp"
         android:text="@string/Events"
         android:textColor="@color/black"
-        android:textSize="24sp" />
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-
-    <LinearLayout
-        android:id="@+id/LinearLayoutIndicator"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_above="@+id/buttons">
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="130dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <ImageView
-            android:id="@+id/buddyindicator"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_margin="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/circle_blank" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/circle_blank" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="32dp"
             android:src="@drawable/circle_filled" />
 
         <ImageView
-            android:id="@+id/buddyindicator2"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_margin="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="32dp"
             android:src="@drawable/circle_blank" />
 
-        <ImageView
-            android:id="@+id/buddyindicator3"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_margin="10dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/circle_blank" />
-
-        <ImageView
-            android:id="@+id/buddyindicator4"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_margin="10dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/circle_blank" />
-
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true">
+        android:layout_gravity="center"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginBottom="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat2">
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:background="@drawable/button_rounds"
+            android:elevation="10dp"
+            android:padding="5dp"
             android:text="LOGIN"
-            android:background="@drawable/button_rounds"
-            android:layout_margin="30dp"
-            android:elevation="10dp"
-            android:padding="10dp"
-            />
+            android:textColor="@color/black" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SIGNUP"
-            android:background="@drawable/button_rounds"
             android:layout_margin="30dp"
+            android:background="@drawable/button_rounds"
             android:elevation="10dp"
-            android:padding="10dp"
-            />
+            android:padding="5dp"
+            android:text="SIGNUP"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
