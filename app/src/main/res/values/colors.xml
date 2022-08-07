@@ -7,8 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="palette1">#1A1A1B</color>
-    <color name="palette2">#333F44</color>
-    <color name="palette3">#37AA9C</color>
-    <color name="palette4">#94F3E4</color>
+    <color name="palette_black">#1A1A1B</color>
+    <color name="palette_grey">#333F44</color>
+    <color name="palette_teal">#37AA9C</color>
+    <color name="green_onboard">#37aa63</color>
+    <color name="blue_onboard">#377eaa</color>
+    <color name="red_onboard">#aa3745</color>
+    <color name="_onboard">#37AA9C</color>
+    <color name="palette_light_teal">#94F3E4</color>
 </resources>

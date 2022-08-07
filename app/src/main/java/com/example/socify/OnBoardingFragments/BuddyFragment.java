@@ -2,12 +2,17 @@ package com.example.socify.OnBoardingFragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
+import com.example.socify.MainActivity;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentBuddyBinding;
 
@@ -68,4 +73,11 @@ public class BuddyFragment extends Fragment {
         binding = FragmentBuddyBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+       
+    }
+
 }
