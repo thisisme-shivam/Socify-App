@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#37aa63"
+    android:layout_height="match_parent"
+    tools:context=".OnBoardingFragments.QuestionsFragment">
+
+
+    <ImageView
+        android:id="@+id/buddyimg"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_above="@+id/buddyheader"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="80dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/questions" />
+
+    <TextView
+        android:id="@+id/buddyheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buddytext"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/gg1"
+        android:text="Questions and Queries"
+        android:textColor="@color/black"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/buddytext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/LinearLayoutIndicator"
+        android:layout_centerInParent="true"
+        android:layout_marginVertical="60dp"
+        android:layout_marginStart="80dp"
+        android:fontFamily="@font/osr"
+        android:text="@string/Queries"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/buttons">
+
+        <ImageView
+            android:id="@+id/buddyindicator"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/circle_blank" />
+
+        <ImageView
+            android:id="@+id/buddyindicator2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/circle_blank" />
+
+        <ImageView
+            android:id="@+id/buddyindicator3"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/circle_blank" />
+
+        <ImageView
+            android:id="@+id/buddyindicator4"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/circle_filled" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOGIN"
+            android:background="@drawable/button_rounds"
+            android:layout_margin="30dp"
+            android:elevation="10dp"
+            android:padding="10dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIGNUP"
+            android:background="@drawable/button_rounds"
+            android:layout_margin="30dp"
+            android:elevation="10dp"
+            android:padding="10dp"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
