@@ -2,9 +2,10 @@
     <string name="app_name">Socify</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="communities">Be a part of something bigger than yourself. Explore and grow yourself with the perfect communities</string>
-    <string name="buddyText">Looking for college crowd? or people like you? We have it all. Make college buddies and chat with them</string>
+    <string name="communities">Find like minded people having same interests. Grow and enrich yourself with the perfect communities</string>
+    <string name="buddyText">Can\'t find friends? or people like you? We have it all. Make college friends and chat with them</string>
     <string name="Queries">Have a query? Ask queries and questions and help others solve their doubts. Making doubt solving immersive. </string>
-    <string name="Events">They say that importance of events in a college is equal to education. Participate in events.</string>
+    <string name="Events">Every single event in the college counts, make sure to be a part of it. Participate in events.</string>
     <string name="splash_text">SOCIFY</string>
+    <string name="welocme">Welcome</string>
 </resources>

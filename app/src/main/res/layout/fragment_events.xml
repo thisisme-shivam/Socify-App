@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_onboard">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/textView"
+        android:visibility="invisible"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="48dp"
-        android:layout_marginBottom="62dp"
         android:layout_weight="1"
         android:gravity="start"
         android:text="Socify"
-        android:textColor="@android:color/black"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
 
@@ -61,8 +61,8 @@
         android:includeFontPadding="false"
         android:letterSpacing="-0.01"
         android:text="Events"
-        android:textColor="@android:color/black"
-        android:textSize="56sp"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -94,6 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="130dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6">
@@ -135,8 +136,9 @@
         android:layout_gravity="center"
         android:layout_marginStart="57dp"
         android:layout_marginTop="5dp"
+        android:visibility="invisible"
         android:layout_marginEnd="58dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -163,5 +165,6 @@
             android:textColor="@color/black" />
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

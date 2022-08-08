@@ -15,4 +15,5 @@
     <color name="red_onboard">#aa3745</color>
     <color name="_onboard">#37AA9C</color>
     <color name="palette_light_teal">#94F3E4</color>
+    <color name="text_grey">#808080</color>
 </resources>
