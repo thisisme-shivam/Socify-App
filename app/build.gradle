@@ -44,4 +44,5 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.0-alpha05'
     implementation  'com.cuberto:liquid-swipe:1.0.0'
     implementation("com.tbuonomo:dotsindicator:4.3")
+    implementation 'com.hbb20:ccp:2.6.1'
 }
