@@ -1,10 +1,12 @@
-package com.example.socify;
+package com.example.socify.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.example.socify.R;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -16,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, SlideScreen.class));
                 finish();
             }
         }, 1600);
