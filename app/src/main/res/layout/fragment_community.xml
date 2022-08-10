@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red_onboard">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
+        android:visibility="invisible"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="48dp"
@@ -16,7 +17,7 @@
         android:layout_weight="1"
         android:gravity="start"
         android:text="Socify"
-        android:textColor="@android:color/black"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
@@ -61,8 +62,8 @@
         android:includeFontPadding="false"
         android:letterSpacing="-0.01"
         android:text="Communities"
-        android:textColor="@android:color/black"
-        android:textSize="56sp"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -93,6 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:visibility="invisible"
         android:layout_marginBottom="130dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +138,8 @@
         android:layout_marginStart="57dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="58dp"
-        android:layout_marginBottom="17dp"
+        android:layout_marginBottom="5dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -163,5 +166,6 @@
             android:textColor="@color/black" />
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
