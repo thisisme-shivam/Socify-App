@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App/app/src/main/res/drawable/verification_input_bg.xml" value="0.181" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App/app/src/main/res/layout/activity_verification.xml" value="0.24375" />
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App/app/src/main/res/layout/otp_verification.xml" value="0.24375" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable-v24/circle_filled.xml" value="0.275" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.197" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable/backgroundsplashscreen.xml" value="0.197" />
