@@ -15,7 +15,7 @@ import com.example.socify.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-
+    public static int a =10;
 
     @SuppressLint("ResourceAsColor")
     @Override

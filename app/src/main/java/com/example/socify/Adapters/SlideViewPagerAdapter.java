@@ -8,10 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.example.socify.Fragments.BuddyFragment;
-import com.example.socify.Fragments.CommunityFragment;
-import com.example.socify.Fragments.EventsFragment;
-import com.example.socify.Fragments.QuestionsFragment;
 import com.example.socify.R;
 
 public class SlideViewPagerAdapter extends PagerAdapter {
@@ -35,7 +31,7 @@ public class SlideViewPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view;
         view = layoutInflater.inflate(R.layout.fragment_buddy, container, false);
         switch (position) {

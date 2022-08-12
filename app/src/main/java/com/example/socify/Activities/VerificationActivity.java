@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.socify.R;
 
@@ -22,13 +23,10 @@ public class VerificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_verification);
 
-
-
         btn_get_otp = findViewById(R.id.getOtpButton);
-
-
 
         Dialog otpDialog = new Dialog(VerificationActivity.this);
         otpDialog.setCancelable(false);

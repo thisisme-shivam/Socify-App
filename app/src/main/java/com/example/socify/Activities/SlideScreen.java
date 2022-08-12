@@ -14,7 +14,6 @@ import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator;
 public class SlideScreen extends AppCompatActivity {
 
     ActivitySlideScreenBinding binding;
-
     ViewPager viewPager;
     SlideViewPagerAdapter slideViewPagerAdapter;
 
@@ -28,17 +27,15 @@ public class SlideScreen extends AppCompatActivity {
         viewPager.setAdapter(slideViewPagerAdapter);
 
         SpringDotsIndicator springDotsIndicator = binding.dotsIndicator;
-        viewPager = binding.ViewPager;
+
         SlideViewPagerAdapter slideViewPagerAdapter = new SlideViewPagerAdapter(this);
         viewPager.setAdapter(slideViewPagerAdapter);
         springDotsIndicator.setViewPager(viewPager);
 
-        binding.Loginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SlideScreen.this, Login.class));
-            }
-        });
+        binding.Loginbtn.setOnClickListener(v -> startActivity(new Intent(SlideScreen.this, Login.class)));
+
+        binding.Signupbtn.setOnClickListener(v -> startActivity(new Intent(SlideScreen.this,VerificationActivity.class)));
+
 
     }
 
