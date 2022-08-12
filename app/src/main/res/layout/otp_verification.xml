@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
 
         <ImageView
@@ -23,6 +24,7 @@
         android:text="@string/enter_otp_info"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_margin="20dp"
         app:layout_constraintHorizontal_bias=".5"
@@ -64,6 +66,7 @@
             android:layout_height="wrap_content"
             android:text="@string/otp_sent_info"
             android:textSize="15sp"
+            android:textColor="@color/black"
             android:layout_gravity="center"
             app:layout_constraintVertical_bias=".5"
             app:layout_constraintHorizontal_bias=".38"/>

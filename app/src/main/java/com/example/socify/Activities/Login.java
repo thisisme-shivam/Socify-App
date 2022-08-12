@@ -3,6 +3,7 @@ package com.example.socify.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
@@ -24,6 +25,22 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showpass();
+            }
+        });
+
+        binding.signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this,VerificationActivity.class));
+            }
+        });
+
+        binding.forgotpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this,VerificationActivity.class);
+                intent.putExtra("id","Forgot Password");
+                startActivity(intent);
             }
         });
     }

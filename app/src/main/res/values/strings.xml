@@ -8,7 +8,7 @@
     <string name="Events">Every single event in the college counts, make sure to be a part of it. Participate in events.</string>
     <string name="splash_text">SOCIFY</string>
     <string name="welocme">Welcome</string>
-    <string name="verification_info">We\'ll send you a one time code on this number</string>
+    <string name="verification_info">You  will receive a One Time Password on this phone number</string>
     <string name="enter_phone_text">Enter your phone number</string>
     <string name="get_otp_btn">Get OTP</string>
     <string name="enter_otp_info">Enter OTP received on your phone number</string>

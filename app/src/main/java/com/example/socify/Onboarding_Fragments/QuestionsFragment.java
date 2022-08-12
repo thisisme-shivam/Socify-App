@@ -1,4 +1,4 @@
-package com.example.socify.Fragments;
+package com.example.socify.Onboarding_Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

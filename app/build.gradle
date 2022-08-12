@@ -46,4 +46,7 @@ dependencies {
     implementation("com.tbuonomo:dotsindicator:4.3")
     implementation 'io.github.chaosleung:pinview:1.4.4'
     implementation 'com.hbb20:ccp:2.6.1'
+    implementation 'io.github.chaosleung:pinview:1.4.4'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation "com.ncorti:slidetoact:0.9.0"
 }
