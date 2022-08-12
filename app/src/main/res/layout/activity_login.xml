@@ -205,6 +205,7 @@
         android:elevation="5dp"
         android:fontFamily="@font/osr"
         android:padding="10dp"
+        android:textStyle="bold"
         android:stateListAnimator="@null"
         android:text="Sign in"
         android:translationZ="5dp" />
@@ -213,14 +214,14 @@
         android:id="@+id/forgotpass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forgot Password?"
-        android:textStyle="bold"
-        android:fontFamily="@font/osr"
-        android:textColor="@color/text_grey"
         android:layout_below="@id/signinbutton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:textSize="16sp"/>
+        android:fontFamily="@font/osr"
+        android:text="Forgot Password?"
+        android:textColor="@color/text_grey"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/signup"
