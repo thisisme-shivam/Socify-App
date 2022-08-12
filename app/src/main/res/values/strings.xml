@@ -11,4 +11,7 @@
     <string name="verification_info">We\'ll send you a one time code on this number</string>
     <string name="enter_phone_text">Enter your phone number</string>
     <string name="get_otp_btn">Get OTP</string>
+    <string name="enter_otp_info">Enter OTP received on your phone number</string>
+    <string name="otp_sent_info">Didn\'t\ Received\,\ </string>
+    <string name="resend_text">Resend</string>
 </resources>
