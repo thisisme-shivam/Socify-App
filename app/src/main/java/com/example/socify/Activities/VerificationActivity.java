@@ -1,8 +1,10 @@
 package com.example.socify.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,8 +20,6 @@ public class VerificationActivity extends AppCompatActivity {
     Button btn_get_otp;
     ImageView close_dialog, back_btn;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,21 +33,19 @@ public class VerificationActivity extends AppCompatActivity {
         otpDialog.setContentView(R.layout.otp_verification);
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
 
+        otpDialog.findViewById(R.id.otpSubmitButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(VerificationActivity.this, Registration.class));
+                finish();
+    }
+});
+
         close_dialog = otpDialog.findViewById(R.id.close_icon);
 
-        btn_get_otp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                otpDialog.show();
-            }
-        });
+        btn_get_otp.setOnClickListener(view -> otpDialog.show());
 
-        close_dialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                otpDialog.dismiss();
-            }
-        });
+        close_dialog.setOnClickListener(view -> otpDialog.dismiss());
         
     }
 

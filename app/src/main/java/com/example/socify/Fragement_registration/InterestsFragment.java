@@ -1,9 +1,20 @@
 package com.example.socify.Fragement_registration;
 
+import static android.graphics.BlendMode.COLOR;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,14 +22,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.example.socify.Activities.Registration;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentInterestsBinding;
 import com.google.android.material.button.MaterialButton;
-import com.ncorti.slidetoact.SlideToActView;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
+import nl.bryanderidder.themedtogglebuttongroup.SelectAnimation;
+import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
+import nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup;
 
 public class InterestsFragment extends Fragment {
+
+    FragmentInterestsBinding binding;
+    Drawable buttonDrawable;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,41 +50,17 @@ public class InterestsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
-        bar.setProgress(30);
-
-//        MaterialButton btn = view.findViewById(R.id.refresh);
-//        SlideToActView sta = (SlideToActView) view.findViewById(R.id.tag1);
-//        SlideToActView sta1 = (SlideToActView) view.findViewById(R.id.tag2);
-//        SlideToActView sta2 = (SlideToActView) view.findViewById(R.id.tag3);
-//        SlideToActView sta3 = (SlideToActView) view.findViewById(R.id.tag4);
-//        SlideToActView sta4 = (SlideToActView) view.findViewById(R.id.tag5);
-//        SlideToActView sta5 = (SlideToActView) view.findViewById(R.id.tag6);
-//        SlideToActView sta6 = (SlideToActView) view.findViewById(R.id.tag7);
-//        SlideToActView sta7 = (SlideToActView) view.findViewById(R.id.tag8);
-//
-//
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(sta.isCompleted() || sta1.isCompleted() || sta2.isCompleted() || sta3.isCompleted() || sta4.isCompleted() || sta5.isCompleted() || sta6.isCompleted() || sta7.isCompleted()) {
-//                    sta.resetSlider();
-//                    sta1.resetSlider();
-//                    sta2.resetSlider();
-//                    sta3.resetSlider();
-//                    sta4.resetSlider();
-//                    sta5.resetSlider();
-//                    sta6.resetSlider();
-//                    sta7.resetSlider();
-//                }
-//            }
-//        });
-
+        bar.setProgress(100);
+        binding.groupedtags.setSelectAnimation(SelectAnimation.CIRCULAR_REVEAL);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_interests, container, false);
+        binding = FragmentInterestsBinding.inflate(inflater, container, false);
+
+        return binding.getRoot();
     }
+
 }
