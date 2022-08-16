@@ -1,8 +1,8 @@
 package com.example.socify.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.socify.Adapters.RegistrationPagerAdapter;
 import com.example.socify.databinding.ActivityRegistrationBinding;
@@ -19,5 +19,8 @@ public class Registration extends AppCompatActivity {
 
         RegistrationPagerAdapter adapter = new RegistrationPagerAdapter(this);
         binding.pagerRegistration.setAdapter(adapter);
+
+        //enable disable swiping of view pager
+        binding.pagerRegistration.setUserInputEnabled(true);
     }
 }

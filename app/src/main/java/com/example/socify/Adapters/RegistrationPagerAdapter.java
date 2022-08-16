@@ -1,22 +1,16 @@
 package com.example.socify.Adapters;
 
-import android.util.Log;
-import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.socify.Fragement_registration.CoursesFragment;
+import com.example.socify.Fragement_registration.GetCollegeFragment;
 import com.example.socify.Fragement_registration.InterestsFragment;
 import com.example.socify.Fragement_registration.NameFragement;
 import com.example.socify.Fragement_registration.ProfilePic;
-import com.example.socify.MainActivity;
-import com.example.socify.Onboarding_Fragments.BuddyFragment;
 import com.example.socify.databinding.ActivityMainBinding;
-
-import java.util.jar.Attributes;
 
 public class RegistrationPagerAdapter extends FragmentStateAdapter {
 
@@ -28,6 +22,8 @@ public class RegistrationPagerAdapter extends FragmentStateAdapter {
     ProfilePic pic = new ProfilePic();
     NameFragement name = new NameFragement();
     InterestsFragment interests = new InterestsFragment();
+    GetCollegeFragment getcollege = new GetCollegeFragment();
+    CoursesFragment coursesFragment = new CoursesFragment();
 
     @NonNull
     @Override
@@ -37,8 +33,10 @@ public class RegistrationPagerAdapter extends FragmentStateAdapter {
            case 0:
                return pic;
            case 1:
-               return name;
+               return getcollege;
            case 2:
+               return coursesFragment;
+           case 3:
                return interests;
        }
        return pic;
@@ -46,7 +44,7 @@ public class RegistrationPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 
 

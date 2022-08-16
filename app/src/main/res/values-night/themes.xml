@@ -22,4 +22,5 @@
         <item name="android:windowExitAnimation">@anim/dialog_close</item>
 
     </style>
+
 </resources>

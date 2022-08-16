@@ -35,7 +35,7 @@ public class ProfilePic extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.i("YEs","Entering");
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
-        bar.setProgress(10);
+        bar.setProgress(20);
 
     }
 

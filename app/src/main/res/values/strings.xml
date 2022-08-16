@@ -12,6 +12,7 @@
     <string name="enter_phone_text">Enter your phone number</string>
     <string name="get_otp_btn">Get OTP</string>
     <string name="enter_otp_info">Enter OTP received on your phone number</string>
-    <string name="otp_sent_info">Didn\'t\ Received\,\ </string>
+    <string name="otp_sent_info">Didn\'t\ Receive\,\ </string>
     <string name="resend_text">Resend</string>
+    <string name="searchhint">Eg : IIT Delhi</string>
 </resources>

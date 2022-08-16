@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "582263279020",
+    "project_id": "socify-app-42388",
+    "storage_bucket": "socify-app-42388.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582263279020:android:67804b27726250db757e09",
+        "android_client_info": {
+          "package_name": "com.example.socify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582263279020-i6mfbbu5euqg6mp9b17c5d0focif8aej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFm02JG2nAVEEl_DDGFp3mLe-7hNxIIjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582263279020-i6mfbbu5euqg6mp9b17c5d0focif8aej.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

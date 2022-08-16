@@ -8,14 +8,13 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.cuberto.liquid_swipe.LiquidPager;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    public static int a =10;
+
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -33,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
 // finally change the color
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.white));
+
 
 
     }
