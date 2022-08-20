@@ -16,7 +16,6 @@
         <activity
             android:name=".Activities.Home"
             android:exported="true" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,6 +39,7 @@
             android:exported="true"
             android:screenOrientation="fullSensor"
             android:theme="@style/SplashTheme" >
+
         </activity>
         <activity
             android:name=".Activities.VerificationActivity"

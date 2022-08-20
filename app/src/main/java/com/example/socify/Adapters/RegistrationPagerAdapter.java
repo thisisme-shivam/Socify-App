@@ -10,7 +10,7 @@ import com.example.socify.Fragement_registration.GetCollegeFragment;
 import com.example.socify.Fragement_registration.InterestsFragment;
 import com.example.socify.Fragement_registration.NameFragement;
 import com.example.socify.Fragement_registration.ProfilePic;
-import com.example.socify.databinding.ActivityMainBinding;
+
 
 public class RegistrationPagerAdapter extends FragmentStateAdapter {
 
