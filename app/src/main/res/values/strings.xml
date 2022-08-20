@@ -15,4 +15,7 @@
     <string name="otp_sent_info">Didn\'t\ Receive\,\ </string>
     <string name="resend_text">Resend</string>
     <string name="searchhint">Eg : IIT Delhi</string>
+    <string name="dots">&#8942;</string>
+    <string name="long_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed nibh eget sapien rutrum venenatis ut eget ligula. Curabitur faucibus molestie egestas. Suspendisse potenti. Nam dictum molestie arcu. Quisque tempus diam non elit fermentum, ac faucibus mi aliquam. Suspendisse odio arcu, ultricies vel metus eget, elementum auctor massa. Pellentesque lacinia quis nulla sed sollicitudin. Fusce quis enim a enim convallis dignissim. Fusce viverra sem in turpis hendrerit, at malesuada dolor elementum. Integer volutpat, tortor in euismod commodo, risus turpis ullamcorper mauris, nec sagittis ligula nisl finibus massa. In posuere risus purus, et posuere lacus rutrum eget. Proin eu felis eu nisl dictum gravida.</string>
+    <string name="username">\@kumarshi</string>
 </resources>
