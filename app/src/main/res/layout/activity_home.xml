@@ -8,6 +8,16 @@
     android:background="@color/white">
 
 
+    <FrameLayout
+        android:id="@+id/FragmentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:layout_constraintBottom_toTopOf="@+id/bottomnavigationview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomnavigationview"
         android:layout_width="0dp"
