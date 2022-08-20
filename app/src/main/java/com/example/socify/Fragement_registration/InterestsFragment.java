@@ -4,6 +4,7 @@ import static android.graphics.BlendMode.COLOR;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.example.socify.Activities.Home;
 import com.example.socify.Activities.Registration;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentInterestsBinding;
@@ -39,7 +41,15 @@ import nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup;
 public class InterestsFragment extends Fragment {
 
     FragmentInterestsBinding binding;
-    Drawable buttonDrawable;
+    public void onclicklisteners() {
+        binding.finishbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Home.class);
+                startActivity(intent);
+            }
+        });
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +62,7 @@ public class InterestsFragment extends Fragment {
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(100);
         binding.groupedtags.setSelectAnimation(SelectAnimation.CIRCULAR_REVEAL);
+        onclicklisteners();
     }
 
     @Override
@@ -59,7 +70,6 @@ public class InterestsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentInterestsBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
     }
 

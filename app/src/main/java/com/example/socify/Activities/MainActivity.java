@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.white));
 
 
-
     }
 
 }
