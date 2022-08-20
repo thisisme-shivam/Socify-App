@@ -3,21 +3,19 @@ package com.example.socify.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.socify.HomeFragments.NewsFeedFragment;
+import com.example.socify.HomeFragments.ProfileFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityHomeBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
 
     ActivityHomeBinding binding;
     NewsFeedFragment newsFeedFragment;
+    ProfileFragment profileFragment;
     BottomNavigationView navigationView;
     int[] drawables;
     ClipData.Item itemSelected;
@@ -27,7 +25,6 @@ public class Home extends AppCompatActivity {
         if(lastSelected == i ){
             return;
         }
-
         if(lastSelected > 2 )
             navigationView.getMenu().getItem(lastSelected).setIcon(drawables[lastSelected-1]);
         else
@@ -40,7 +37,6 @@ public class Home extends AppCompatActivity {
     }
 
     public void itemselectedfromnavbar() {
-
 
 
         binding.bottomnavigationview.setOnItemSelectedListener(item -> {
@@ -63,7 +59,7 @@ public class Home extends AppCompatActivity {
                 lastSelected = 3;
             }
             else if(item.getItemId() == R.id.profile){
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, profileFragment).commit();
                 setIcon(4);
                 lastSelected = 4;
             }
@@ -92,14 +88,19 @@ public class Home extends AppCompatActivity {
         };
         binding.bottomnavigationview.setItemIconTintList(null);
         newsFeedFragment = new NewsFeedFragment();
+        profileFragment = new ProfileFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,newsFeedFragment).commit();
-        navigationView.getMenu().getItem(0).setIcon(drawables[4]);
-        lastSelected = 0;
         itemselectedfromnavbar();
 
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        newsFeedFragment = new NewsFeedFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,newsFeedFragment).commit();
+        navigationView.getMenu().getItem(0).setIcon(drawables[4]);
+        lastSelected = 0;
+        itemselectedfromnavbar();
+
     }
 }

@@ -30,7 +30,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
         android:padding="5dp"
         android:text="@string/verification_info"
