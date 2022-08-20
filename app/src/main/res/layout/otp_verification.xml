@@ -30,10 +30,6 @@
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintVertical_bias=".9" />
 
-
-
-
-
     <com.chaos.view.PinView
         android:id="@+id/otpInput"
         android:layout_width="wrap_content"

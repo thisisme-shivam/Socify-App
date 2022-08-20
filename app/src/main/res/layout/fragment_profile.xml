@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="69"
+            android:text="0"
             android:textColor="@color/black"
             android:textSize="22sp"
             tools:layout_editor_absoluteX="172dp"
@@ -93,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="69"
+            android:text="0"
             android:textColor="@color/black"
             android:textSize="22sp"
             tools:layout_editor_absoluteX="172dp"
@@ -104,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="69"
+            android:text="0"
             android:textColor="@color/black"
             android:textSize="22sp"
             tools:layout_editor_absoluteX="172dp"
@@ -162,7 +162,7 @@
         app:readMoreMaxLine="4" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
@@ -172,52 +172,34 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/followbtn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginHorizontal="20dp"
-            android:layout_weight="1"
             android:backgroundTint="@color/palette_teal"
             android:text="Follow"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="20dp"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/msgbtn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:text="Message"
             android:layout_marginHorizontal="20dp"
             android:layout_weight="1"
-            android:text="Message"
             android:textAllCaps="false"
             android:textColor="@color/white" />
-    </LinearLayout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="My Activity"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView3"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
         tools:listitem="@layout/profile_posts" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

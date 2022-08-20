@@ -44,4 +44,12 @@
     <style name="SplashTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="SplashTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    
+    <style name="DialoAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+    <style name="CustomMaterialTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    
 </resources>
