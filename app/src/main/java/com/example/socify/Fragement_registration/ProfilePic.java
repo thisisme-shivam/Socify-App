@@ -12,11 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.example.socify.Activities.Registration;
-import com.example.socify.MainActivity;
 import com.example.socify.R;
-
-import java.util.Objects;
 
 
 public class ProfilePic extends Fragment {

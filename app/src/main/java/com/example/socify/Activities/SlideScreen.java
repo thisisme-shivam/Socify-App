@@ -5,9 +5,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.example.socify.Adapters.SlideViewPagerAdapter;
+import com.example.socify.R;
 import com.example.socify.databinding.ActivitySlideScreenBinding;
 import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator;
 
@@ -39,4 +39,12 @@ public class SlideScreen extends AppCompatActivity {
 
     }
 
+    public static class MainActivity extends AppCompatActivity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+        }
+    }
 }
