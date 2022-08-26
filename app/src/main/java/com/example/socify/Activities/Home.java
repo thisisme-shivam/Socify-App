@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.socify.HomeFragments.DiscoverFragment;
 import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.HomeFragments.ProfileFragment;
 import com.example.socify.R;
@@ -59,7 +60,7 @@ public class Home extends AppCompatActivity {
                 setIcon(0);
                 lastSelected = 0;
             }else if(item.getItemId() == R.id.discover){
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new DiscoverFragment()).commit();
                 setIcon(1);
                 lastSelected =1;
             }
