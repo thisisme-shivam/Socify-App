@@ -90,8 +90,6 @@ public class Home extends AppCompatActivity {
                 R.drawable.discovericon,
                 R.drawable.clubicon,
                 R.drawable.profileicon
-
-
         };
         binding.bottomnavigationview.setItemIconTintList(null);
         newsFeedFragment = new NewsFeedFragment();

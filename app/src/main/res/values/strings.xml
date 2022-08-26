@@ -18,4 +18,14 @@
     <string name="dots">&#8942;</string>
     <string name="long_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sed nibh eget sapien rutrum venenatis ut eget ligula. Curabitur faucibus molestie egestas. Suspendisse potenti. Nam dictum molestie arcu. Quisque tempus diam non elit fermentum, ac faucibus mi aliquam. Suspendisse odio arcu, ultricies vel metus eget, elementum auctor massa. Pellentesque lacinia quis nulla sed sollicitudin. Fusce quis enim a enim convallis dignissim. Fusce viverra sem in turpis hendrerit, at malesuada dolor elementum. Integer volutpat, tortor in euismod commodo, risus turpis ullamcorper mauris, nec sagittis ligula nisl finibus massa. In posuere risus purus, et posuere lacus rutrum eget. Proin eu felis eu nisl dictum gravida.</string>
     <string name="username">\@kumarshi</string>
+    <string name="title_activity_all_chat">AllChat</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_chat_room">ChatRoom</string>
 </resources>
