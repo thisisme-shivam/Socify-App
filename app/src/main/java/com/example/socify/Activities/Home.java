@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.socify.HomeFragments.DiscoverFragment;
 import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityHomeBinding;
@@ -50,7 +51,7 @@ public class Home extends AppCompatActivity {
                 setIcon(0);
                 lastSelected = 0;
             }else if(item.getItemId() == R.id.discover){
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new DiscoverFragment()).commit();
                 setIcon(1);
                 lastSelected =1;
             }
