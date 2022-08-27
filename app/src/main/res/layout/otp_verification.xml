@@ -7,6 +7,7 @@
     android:background="@color/white">
 
 
+
         <ImageView
             android:id="@+id/close_icon"
             android:layout_width="35dp"
@@ -42,7 +43,6 @@
         app:itemRadius="5dp"
         app:itemWidth="45dp"
         android:textColor="#838383"
-        android:focusedByDefault="true"
         android:layout_gravity="center"
         style="@style/PinWidget.PinView"
         app:layout_constraintHeight_percent=".065"
@@ -86,7 +86,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/verification_button_bg"
-        android:text="Continue and register"
+        android:text="Verify and register"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:layout_gravity="center"
