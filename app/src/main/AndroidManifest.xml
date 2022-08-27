@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.socify">
+    package="com.example.socify" >
 
     <application
         android:allowBackup="true"
@@ -12,30 +12,22 @@
         android:roundIcon="@drawable/splash_bg"
         android:supportsRtl="true"
         android:theme="@style/SplashTheme"
-        tools:targetApi="31">
-        <activity
-            android:name=".Activities.ChatRoom"
-            android:exported="true"
-            android:label="@string/title_activity_chat_room"
-            android:theme="@style/SplashTheme.NoActionBar" >
-
-
-        </activity>
-
-        <activity
-            android:name=".Activities.AllChat"
-            android:exported="true">
-
-        </activity>
+        tools:targetApi="31" >
         <activity
             android:name=".Activities.Home"
-            android:exported="true">
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activities.Registration"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan" >
+
+        </activity>
         <activity
             android:name=".Activities.SlideScreen"
             android:exported="true" />
@@ -46,16 +38,12 @@
             android:name=".Activities.SplashActivity"
             android:exported="true"
             android:screenOrientation="fullSensor"
-            android:theme="@style/SplashTheme" />
+            android:theme="@style/SplashTheme" >
+
+        </activity>
         <activity
             android:name=".Activities.VerificationActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"
             android:exported="false" />
