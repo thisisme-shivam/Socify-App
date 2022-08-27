@@ -18,11 +18,7 @@
             android:exported="true"
             android:label="@string/title_activity_chat_room"
             android:theme="@style/SplashTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -34,11 +30,7 @@
         <activity
             android:name=".Activities.Home"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activities.Registration"
@@ -57,7 +49,13 @@
             android:theme="@style/SplashTheme" />
         <activity
             android:name=".Activities.VerificationActivity"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activities.MainActivity"
             android:exported="false" />
