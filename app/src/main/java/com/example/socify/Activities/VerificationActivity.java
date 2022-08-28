@@ -6,12 +6,16 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -50,13 +54,27 @@ public class VerificationActivity extends AppCompatActivity {
     ProgressBar progressBar;
     FirebaseAuth fauth;
     String phonenumber;
+    PhoneAuthProvider.ForceResendingToken tok;
     String vid;
-
+    PhoneAuthOptions options;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks fcallbacks;
 
     private void setOnclicklistners(){
+         InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 
 
+
+         otpDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+               @Override
+               public void onShow(DialogInterface dialogInterface) {
+
+                   otpDialog.findViewById(R.id.otpInput).requestFocus();
+                   Window window = otpDialog.getWindow();
+                   window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                   window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+
+               }
+         });
         binding.getOtpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,18 +125,19 @@ public class VerificationActivity extends AppCompatActivity {
     }
 
     private void sendotp(){
-        progressDialog.show();
 
         fcallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             @Override
             public void onVerificationCompleted(PhoneAuthCredential credential) {
-
+                Toast.makeText(getApplicationContext(),"fjalskdjf",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
                 progressDialog.dismiss();
+                Log.i("country code",binding.countryCode.getSelectedCountryCode()+phonenumber);
+
             }
 
             @Override
@@ -127,20 +146,22 @@ public class VerificationActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 otpDialog.show();
                 vid = verificationId;
+                tok =token;
             }
         };
-
-
-        PhoneAuthOptions options =
+        options =
                 PhoneAuthOptions.newBuilder(fauth)
                         .setPhoneNumber( "+" + binding.countryCode.getSelectedCountryCode() + phonenumber)       // Phone number to verify
                         .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
                         .setActivity(this)                 // Activity (for callback binding)
-                        .setCallbacks(fcallbacks)          // OnVerificationStateChangedCallbacks
+                        .setCallbacks(fcallbacks)
+                        .setForceResendingToken(tok)
                         .build();
 
 
+
         PhoneAuthProvider.verifyPhoneNumber(options);
+        progressDialog.show();
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,7 +177,10 @@ public class VerificationActivity extends AppCompatActivity {
         otpDialog.setContentView(R.layout.otp_verification);
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
         close_dialog = otpDialog.findViewById(R.id.close_icon);
+        otpDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
 
+
+        binding.phoneInput.requestFocus();
         progressDialog = new Dialog(VerificationActivity.this);
         progressDialog.setCancelable(false);
         progressDialog.setContentView(R.layout.progressdialog);
@@ -166,9 +190,8 @@ public class VerificationActivity extends AppCompatActivity {
         //setting on click listeners for required views
         setOnclicklistners();
 
-        progressBar = (ProgressBar)progressDialog.findViewById(R.id.spin_kit);
+        progressBar = (ProgressBar) progressDialog.findViewById(R.id.spin_kit);
 
-        
     }
 
 
