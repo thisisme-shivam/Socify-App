@@ -60,16 +60,5 @@ public class Login extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setoncicklisteners();
-//        TextPaint paint = binding.socify.getPaint();
-//        float width = paint.measureText("SOCIFY");
-//
-//        Shader textShader = new LinearGradient(0, 0, width, binding.socify.getTextSize(),
-//                new int[]{
-//                        Color.parseColor("#000000"),
-//                        Color.parseColor("#37AA9C"),
-//                        Color.parseColor("#000000"),
-//                }, null, Shader.TileMode.CLAMP);
-//        binding.socify.getPaint().setShader(textShader);
-
     }
 }
