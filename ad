@@ -1,0 +1,269 @@
+[33mcommit 4501b6842ca64726480c7705437e9f030faec662[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: d4d585f d6dd2bf
+Author: Saurav Bauddh <103964385+sangeetkarthecoder@users.noreply.github.com>
+Date:   Sun Aug 28 19:32:30 2022 +0530
+
+    Merge pull request #14 from sangeetkarthecoder/main
+    
+    main
+
+[33mcommit d6dd2bf76b4e7f977bbcbb4c2f9224d758488270[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sun Aug 28 19:13:55 2022 +0530
+
+    Image Cropper Done
+
+[33mcommit d4d585f7309fb30a2f22b18906f5bd406947321a[m
+Merge: 1794af8 e27be80
+Author: Vishal1700 <88231328+Vishal1700@users.noreply.github.com>
+Date:   Sun Aug 28 18:29:56 2022 +0530
+
+    Merge pull request #13 from Vishal1700/main
+    
+    added discover
+
+[33mcommit e27be80aef4f8806945e5a9f76706d95912048f6[m
+Merge: c39de3e f8a5dfd
+Author: Vishal <nishadvishal1230@gmail.com>
+Date:   Sun Aug 28 18:27:47 2022 +0530
+
+    Merge branch 'main' of https://github.com/Vishal1700/Socify-App
+
+[33mcommit c39de3ef71a9ec1141398779329fb40b32892baa[m
+Author: Vishal <nishadvishal1230@gmail.com>
+Date:   Sun Aug 28 18:27:08 2022 +0530
+
+    discover updated
+
+[33mcommit f8a5dfd2a7cfc25b04693db7052dd2b6f7ca4880[m
+Merge: 6ca7f49 1794af8
+Author: Vishal1700 <88231328+Vishal1700@users.noreply.github.com>
+Date:   Sun Aug 28 18:19:56 2022 +0530
+
+    Merge branch 'iamryuga:main' into main
+
+[33mcommit f19b47690e4de7a76fbd0ab142404d6a032941ff[m
+Author: Vishal <nishadvishal1230@gmail.com>
+Date:   Sun Aug 28 18:12:18 2022 +0530
+
+    changes on discover
+
+[33mcommit d56849cfdd8cd8e823fcc76c26c43a7494bcd3a3[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Fri Aug 26 05:46:14 2022 +0530
+
+    Discover Fragment : "Clubs & Communities"
+
+[33mcommit 1794af898cb201c1f5824f6fa51c0b8290574a8a[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Sun Aug 28 18:18:20 2022 +0530
+
+    phone auth 2
+
+[33mcommit 90a6bd6e2c9ad8165fadc06f77785efe959b4b3c[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Sun Aug 28 00:05:03 2022 +0530
+
+    number authentication 1
+
+[33mcommit 6f74929fe0f717055bb5f810ef5bf36a8868f005[m
+Merge: f051e67 b368dda
+Author: Saurav Bauddh <103964385+sangeetkarthecoder@users.noreply.github.com>
+Date:   Sat Aug 27 12:16:23 2022 +0530
+
+    Merge pull request #12 from sangeetkarthecoder/main
+    
+    main
+
+[33mcommit b368dda372d66c9fe33646239e83d36f0b5357d0[m
+Merge: 98560e9 9b55f0e
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sat Aug 27 12:15:18 2022 +0530
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       app/build.gradle
+    #       app/src/main/AndroidManifest.xml
+    #       app/src/main/res/layout/activity_all_chat.xml
+
+[33mcommit 98560e962af439c63165d86e11aae4b84e77a88f[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sat Aug 27 12:14:39 2022 +0530
+
+    Bottom Sheet Done
+
+[33mcommit b1868009f93e1373c6d502d33fc2eec1f7928d85[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sat Aug 20 18:51:08 2022 +0530
+
+    Working on Profile UI
+
+[33mcommit a29ade8f74f3054d78ff74bcc9061722dc222250[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sat Aug 20 18:51:08 2022 +0530
+
+    Bottom Sheet Done
+
+[33mcommit 6e83ccf82d21058a8721acfd50e18f9efbb9b801[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sat Aug 20 18:51:08 2022 +0530
+
+    Working on Profile UI
+
+[33mcommit f051e67b5b35f997703039ba4458f269fb69b7a6[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Sat Aug 27 12:06:42 2022 +0530
+
+    chat activity
+
+[33mcommit 9b55f0edbf56ba3aa406074e1e197d694299fddd[m
+Merge: 658a284 29d04f5
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sat Aug 27 01:49:28 2022 +0530
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       .idea/misc.xml
+    #       app/src/main/AndroidManifest.xml
+    #       app/src/main/java/com/example/socify/Activities/Home.java
+    #       app/src/main/java/com/example/socify/HomeFragments/ProfileFragment.java
+    #       app/src/main/res/layout/fragment_profile.xml
+    #       app/src/main/res/values/strings.xml
+
+[33mcommit 658a2842d1b975deb04fc65704f381dbfc37e4ae[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sat Aug 20 18:51:08 2022 +0530
+
+    Bottom Sheet Done
+
+[33mcommit 6ca7f4996edbcac3b04a622c1221f4f012f2a160[m
+Merge: de2a21f 712231e
+Author: Vishal <nishadvishal1230@gmail.com>
+Date:   Fri Aug 26 05:46:46 2022 +0530
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit de2a21ff7c7827f9aafd11471e54a00b3b265792[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Fri Aug 26 05:46:14 2022 +0530
+
+    Discover Fragment : "Clubs & Communities"
+
+[33mcommit 712231e861c60efa63264473348726ef40710c43[m
+Merge: 8fcc811 ced7714
+Author: Vishal <nishadvishal1230@gmail.com>
+Date:   Fri Aug 26 04:53:42 2022 +0530
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 8fcc811c962721eba8cb1dd140eb2d9155d11ecb[m
+Merge: 938a534 33958fe
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Mon Aug 22 01:07:07 2022 +0530
+
+    Discover Fragment : (Clubs & Communities)
+
+[33mcommit 55b52ab6a20ac1fc5f9f6ba63e68664b5f52434d[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sat Aug 20 18:51:08 2022 +0530
+
+    Working on Profile UI
+
+[33mcommit ced7714c6b711b19db9c4c5606c87e58c290de91[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Wed Aug 24 19:12:46 2022 +0100
+
+    chat
+
+[33mcommit f23fe2076fe56c2afc7f2206ba8efb20e16d5add[m
+Merge: 938a534 33958fe
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Mon Aug 22 01:07:07 2022 +0530
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 938a53435ca02762ba1153a60cdb9ff0601c9edb[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Sun Aug 21 23:59:31 2022 +0530
+
+    home
+
+[33mcommit 29d04f5697bb51c370d999911a8b4bdcff2f5240[m
+Merge: a718e6c d8a8ae0
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Mon Aug 22 01:03:53 2022 +0530
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       .idea/misc.xml
+    #       app/src/main/java/com/example/socify/Activities/Home.java
+    #       app/src/main/res/layout/activity_home.xml
+    #       app/src/main/res/values/strings.xml
+
+[33mcommit a718e6c34a192d1932a88623bc922015817651d7[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sat Aug 20 18:51:08 2022 +0530
+
+    Working on Profile UI
+
+[33mcommit 33958febb7b648a59b16ad6321bc775f04ac2f78[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Sun Aug 21 23:59:31 2022 +0530
+
+    home
+
+[33mcommit 5cace714c22d5e1f40b3d10aa09ec4f5388455a4[m
+Merge: 5313f97 d8a8ae0
+Author: Saurav Bauddh <103964385+sangeetkarthecoder@users.noreply.github.com>
+Date:   Sat Aug 20 18:51:46 2022 +0530
+
+    Merge pull request #11 from sangeetkarthecoder/main
+    
+    update
+
+[33mcommit d8a8ae0fed932231c525f320362349161235ff0e[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sat Aug 20 18:51:08 2022 +0530
+
+    update
+
+[33mcommit 5313f9760fc056e8fd0e11e319bf9a119bb1ddc6[m
+Merge: 8a22b7d 1c0dbcd
+Author: Saurav Bauddh <103964385+sangeetkarthecoder@users.noreply.github.com>
+Date:   Tue Aug 16 18:21:50 2022 +0530
+
+    Merge pull request #10 from sangeetkarthecoder/main
+    
+    Changes in registration page
+
+[33mcommit 1c0dbcd04acb68624e6e218fe7f3a3fe1ba7a470[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Tue Aug 16 18:21:09 2022 +0530
+
+    Changes in registration page
+
+[33mcommit 8a22b7d433e8ae7cd28418c0ff42a51f5ef9bcd2[m
+Author: iamryuga <kumarshi605@gmail.com>
+Date:   Tue Aug 16 18:17:14 2022 +0530
+
+    home page.1
+
+[33mcommit 6f22f273e8a9cc5cc26e7595de2d727d869c6f91[m
+Merge: 19e0f18 118aa69
+Author: iamryuga <kumarshi605@gmail.com>
+Date:   Fri Aug 12 18:10:51 2022 +0530
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       .idea/misc.xml
+
+[33mcommit 118aa69067ecfba412049068c557bb57f58e0afd[m
+Merge: bca5a05 5a5db1b
+Author: Saurav Bauddh <103964385+sangeetkarthecoder@users.noreply.github.com>
+Date:   Fri Aug 12 18:10:21 2022 +0530
+
+    Merge pull request #9 from sangeetkarthecoder/ma
