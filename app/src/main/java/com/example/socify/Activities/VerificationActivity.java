@@ -15,12 +15,14 @@ import android.widget.TextView;
 
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityVerificationBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class VerificationActivity extends AppCompatActivity {
 
     ActivityVerificationBinding binding;
     Dialog otpDialog;
+    FirebaseAuth auth;
     ImageView close_dialog, back_btn;
 
     private void setOnclickListners(){
