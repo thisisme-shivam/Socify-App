@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.socify">
+    package="com.example.socify" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,38 +13,18 @@
         android:roundIcon="@drawable/splash_bg"
         android:supportsRtl="true"
         android:theme="@style/SplashTheme"
-        tools:targetApi="31">
-        <activity
-            android:name=".Activities.ChatRoom"
-            android:exported="true"
-            android:label="@string/title_activity_chat_room"
-            android:theme="@style/SplashTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
-
-        <activity
-            android:name=".Activities.AllChat"
-            android:exported="true">
-
-        </activity>
+        tools:targetApi="31" >
         <activity
             android:name=".Activities.Home"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activities.Registration"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan" >
+
+        </activity>
         <activity
             android:name=".Activities.SlideScreen"
             android:exported="true" />
@@ -54,14 +35,30 @@
             android:name=".Activities.SplashActivity"
             android:exported="true"
             android:screenOrientation="fullSensor"
-            android:theme="@style/SplashTheme" />
+            android:theme="@style/SplashTheme" >
+
+        </activity>
+
         <activity
             android:name=".Activities.VerificationActivity"
-            android:exported="false" />
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
         <activity
             android:name=".Activities.MainActivity"
-            android:exported="false" />
+            android:exported="true" >
 
+        </activity>
+
+        <activity android:name=".Activities.AllChat"
+            android:exported="false"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

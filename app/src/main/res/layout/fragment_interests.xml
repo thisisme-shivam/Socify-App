@@ -429,4 +429,19 @@
 
         </nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup>
 
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/finishbtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="6dp"
+            android:elevation="5dp"
+            android:text="✓"
+            app:cornerRadius="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
