@@ -29,9 +29,15 @@ public class SlideScreen extends AppCompatActivity {
         binding.ViewPager.setAdapter(slideViewPagerAdapter);
         binding.dotsIndicator.setViewPager(binding.ViewPager);
 
-        binding.Loginbtn.setOnClickListener(v -> startActivity(new Intent(SlideScreen.this, Login.class)));
+        binding.Loginbtn.setOnClickListener(v ->{
+            startActivity(new Intent(SlideScreen.this, Login.class));
+            finish();
+        } );
 
-        binding.Signupbtn.setOnClickListener(v -> startActivity(new Intent(SlideScreen.this,VerificationActivity.class)));
+        binding.Signupbtn.setOnClickListener(v -> {
+            startActivity(new Intent(SlideScreen.this,VerificationActivity.class));
+            finish();
+        });
 
 
     }

@@ -97,6 +97,8 @@ public class ProfilePic extends Fragment {
         Log.i("YEs","Entering");
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(20);
+
+
     }
 
     @Override
