@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
+        android:id="@+id/nametextlayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
         app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/getname"
+            android:id="@+id/nametext"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/osr"
@@ -92,14 +92,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
+        android:id="@+id/yoptextlayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="40dp"
-        android:hint="Create your username"
+        android:hint="Year of Passing"
         android:textColorHint="@color/text_grey"
         app:boxStrokeColor="@color/black"
         app:endIconMode="clear_text"
@@ -107,54 +107,36 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
-        app:startIconDrawable="@drawable/usernameicon"
+        app:layout_constraintTop_toBottomOf="@+id/nametextlayout"
+        app:startIconDrawable="@drawable/passingyear"
         app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passingyeartext"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/osr"
             android:lines="1"
             android:maxLines="1"
+            android:inputType="numberSigned"
+            android:maxLength="4"
             android:singleLine="true"
             android:textColor="@color/black"
             android:textStyle="bold" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout5"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="331dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/nextbtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="40dp"
-        android:hint="Create a password"
-        android:textColorHint="@color/text_grey"
-        app:boxStrokeColor="@color/black"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/black"
-        app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
-        app:startIconDrawable="@drawable/passwordicon"
-        app:startIconTint="@color/black">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/osr"
-            android:lines="1"
-            android:maxLines="1"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#D8D9D9"
+        android:foregroundGravity="center"
+        android:src="@drawable/arrowgrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
