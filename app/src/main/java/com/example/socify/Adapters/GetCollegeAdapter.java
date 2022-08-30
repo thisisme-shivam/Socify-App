@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class GetCollegeAdapter extends RecyclerView.Adapter<GetCollegeAdapter.CollegeViewHolder> {
 
     Context context;
-
     ArrayList<College> collegesNames;
 
     public GetCollegeAdapter(Context context , ArrayList<College> collegesNames){

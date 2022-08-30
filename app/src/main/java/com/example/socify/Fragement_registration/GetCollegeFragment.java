@@ -19,8 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.example.socify.Activities.Registration;
 import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.Classes.College;
+import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentGetCollegeBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +41,8 @@ public class GetCollegeFragment extends Fragment {
     DatabaseReference ref;
     ArrayList<College> colleges;
     GetCollegeAdapter adapter;
+    Registration registration;
+    SendProfileData sendProfileData = new SendProfileData();
 
 
     @Override
@@ -62,7 +66,6 @@ public class GetCollegeFragment extends Fragment {
         rec.setLayoutManager(new LinearLayoutManager(getContext()));
         rec.setAdapter(adapter);
 
-        adapter.notifyDataSetChanged();
 
         binding.searchcollege.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -80,9 +83,11 @@ public class GetCollegeFragment extends Fragment {
                     assert college != null;
                     Log.i("collegename",college.getCollege_name());
                     colleges.add(college);
-
+                    ++i;
+                    if(i==1)
+                        break;
                 }
-
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -103,6 +108,9 @@ public class GetCollegeFragment extends Fragment {
 
     private void onclicklisteners() {
         binding.next3btn.setOnClickListener(v -> {
+            registration.details.setCollege_name("SISTEC");
+            //Sending College Name
+            sendProfileData.sendCollegeName();
             CoursesFragment coursesFragment = new CoursesFragment();
             getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, coursesFragment).commit();
         });

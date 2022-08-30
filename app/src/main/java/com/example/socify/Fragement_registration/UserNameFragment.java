@@ -1,5 +1,6 @@
 package com.example.socify.Fragement_registration;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,16 +14,20 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.socify.Activities.Registration;
+import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.FireBaseClasses.UserDetails;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentNameFragementBinding;
+
+import java.util.Objects;
 
 
 public class UserNameFragment extends Fragment {
 
     FragmentNameFragementBinding binding;
     String Username, Password;
-    public Registration registration;
+    SendProfileData sendProfileData = new SendProfileData();
+    public Registration registration = (Registration) getActivity();
 
 
     public void onclicklisteners() {
@@ -31,11 +36,16 @@ public class UserNameFragment extends Fragment {
             public void onClick(View v) {
                 FieldValidation();
                 if(Username!=null && Password!=null) {
-                    registration.details.setUsername(Username);
-                    registration.details.setPassword(Password);
-                    Log.i("Name", registration.details.getName());
-                    Log.i("YOP", registration.details.getPassyear());
+                    Registration.details.setUsername(Username);
+                    Registration.details.setPassword(Password);
+                    Log.i("Name", Registration.details.getName());
+                    Log.i("YOP", Registration.details.getPassyear());
                     Log.e("Username", Username);
+
+                    //Uploading Username & Password
+                    sendProfileData.sendUsername();
+                    sendProfileData.sendPassword();
+
                     GetCollegeFragment getCollegeFragment = new GetCollegeFragment();
                     getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, getCollegeFragment).commit();
                 }
@@ -80,6 +90,9 @@ public class UserNameFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentNameFragementBinding.inflate(inflater, container, false);
         onclicklisteners();
+        if(!Objects.equals(Registration.details.getImgUri(), "No Image")) {
+            binding.ProfilePic.setImageURI(Uri.parse(Registration.details.getImgUri()));
+        }
         return binding.getRoot();
     }
 

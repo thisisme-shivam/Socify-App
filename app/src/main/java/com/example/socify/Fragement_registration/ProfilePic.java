@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.socify.Activities.CropperActivity;
 import com.example.socify.Activities.Registration;
+import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.FireBaseClasses.UserDetails;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfilePicBinding;
@@ -34,14 +35,9 @@ public class ProfilePic extends Fragment {
     FragmentProfilePicBinding binding;
     Uri imgUrl;
     public Registration registration;
-    final int PICK_IMAGE = 1;
-    UploadTask uploadTask;
-    FirebaseStorage firebaseStorage;
-    StorageReference storageReference;
-    FirebaseFirestore db;
-    DocumentReference documentReference;
     ActivityResultLauncher<String> mTakePhoto;
     String Name, Yop;
+    SendProfileData sendProfileData = new SendProfileData();
 
     public void FieldValidation() {
         //Field Validation
@@ -79,18 +75,37 @@ public class ProfilePic extends Fragment {
             public void onClick(View v) {
                 FieldValidation();
                 if(Name!=null && Yop!=null) {
+                    //Updating name, passing year and profile pic in the UserDetails object
                     registration = (Registration) getActivity();
+                    if(imgUrl==null) {
+                        imgUrl = Uri.parse("No Image");
+                    }
+                    //Storing Details in Class Variable
+                    registration.details.setImgUri(imgUrl.toString());
                     registration.details.setName(Name);
                     registration.details.setPassyear(Yop);
+
+                    //To be deleted Later
+                    registration.details.setCollege_name("SISTEC");
+
+                    //Sending Data
+                    sendProfileData.sendImg();
+                    sendProfileData.sendName();
+                    sendProfileData.sendpassyear();
+                    sendProfileData.sendCurrentUID();
+
+                    //Switching to new fragment
                     UserNameFragment userNameFragment = new UserNameFragment();
                     getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, userNameFragment).commit();
                     Log.e("Yop", Yop);
+                    Log.e("ImgURL", imgUrl.toString());
                 }
             }
         });
 
     }
 
+    //Image File Extension
     public String getFileExt(Uri uri) {
         ContentResolver contentResolver = requireContext().getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();

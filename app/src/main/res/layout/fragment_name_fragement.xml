@@ -7,7 +7,7 @@
     tools:context=".Fragement_registration.UserNameFragment">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circleImageView"
+        android:id="@+id/ProfilePic"
         android:layout_width="141dp"
         android:layout_height="141dp"
         android:layout_marginTop="40dp"
@@ -27,7 +27,7 @@
         android:text="Picture added"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/circleImageView2"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePic" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageView2"
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toStartOf="@+id/materialTextView"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePic" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/usernametextlayout"
