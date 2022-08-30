@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.example.socify.Activities.Registration;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentCoursesBinding;
 import com.example.socify.databinding.FragmentGetCollegeBinding;
@@ -19,13 +20,14 @@ import com.example.socify.databinding.FragmentInterestsBinding;
 public class CoursesFragment extends Fragment {
 
     FragmentCoursesBinding binding;
+    public Registration registration;
 
     public void setonclicklisteners() {
         binding.next2btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 InterestsFragment interestsFragment = new InterestsFragment();
-                getFragmentManager().beginTransaction().replace(R.id.frame_registration, interestsFragment).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, interestsFragment).commit();
             }
         });
     }

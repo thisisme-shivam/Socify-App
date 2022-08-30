@@ -7,6 +7,21 @@ public class UserDetails {
     String ImgUri, name, username, password, passyear, college_name, course;
     ArrayList <String> tags;
 
+    public UserDetails(String imgUri, String name, String username, String password, String passyear, String college_name, String course, ArrayList<String> tags) {
+        ImgUri = imgUri;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.passyear = passyear;
+        this.college_name = college_name;
+        this.course = course;
+        this.tags = tags;
+    }
+
+    public UserDetails() {
+
+    }
+
     public void setImgUri(String imgUri) {
         ImgUri = imgUri;
     }

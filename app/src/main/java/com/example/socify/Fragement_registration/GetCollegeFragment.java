@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.example.socify.Activities.Registration;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentGetCollegeBinding;
 import com.example.socify.databinding.FragmentProfilePicBinding;
@@ -23,13 +24,14 @@ import java.util.Objects;
 public class GetCollegeFragment extends Fragment {
 
     FragmentGetCollegeBinding binding;
+    public Registration registration;
 
     public void setonclicklisteners() {
         binding.next3btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CoursesFragment coursesFragment = new CoursesFragment();
-                getFragmentManager().beginTransaction().replace(R.id.frame_registration, coursesFragment).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, coursesFragment).commit();
             }
         });
     }
