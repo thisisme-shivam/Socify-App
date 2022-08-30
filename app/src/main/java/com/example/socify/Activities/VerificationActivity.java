@@ -64,31 +64,25 @@ public class VerificationActivity extends AppCompatActivity {
 
 
 
-         otpDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-               @Override
-               public void onShow(DialogInterface dialogInterface) {
+         otpDialog.setOnShowListener(dialogInterface -> {
 
-                   otpDialog.findViewById(R.id.otpInput).requestFocus();
-                   Window window = otpDialog.getWindow();
-                   window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-                   window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+             otpDialog.findViewById(R.id.otpInput).requestFocus();
+             Window window = otpDialog.getWindow();
+             window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
-               }
          });
-        binding.getOtpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                phonenumber = binding.phoneInput.getText().toString();
-                if (phonenumber.isEmpty())
-                    Toast.makeText(getApplicationContext(), "Enter Phone Number", Toast.LENGTH_SHORT).show();
-                else if (phonenumber.length() < 10) {
-                    if (phonenumber.length() == 9)
-                        Toast.makeText(getApplicationContext(), Integer.toString(10 - phonenumber.length()) + " digit is missing", Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(getApplicationContext(), Integer.toString(10 - phonenumber.length()) + " digits are missing", Toast.LENGTH_SHORT).show();
-                }else{
-                    sendotp();
-                }
+        binding.getOtpButton.setOnClickListener(view -> {
+            phonenumber = binding.phoneInput.getText().toString();
+            if (phonenumber.isEmpty())
+                Toast.makeText(getApplicationContext(), "Enter Phone Number", Toast.LENGTH_SHORT).show();
+            else if (phonenumber.length() < 10) {
+                if (phonenumber.length() == 9)
+                    Toast.makeText(getApplicationContext(), Integer.toString(10 - phonenumber.length()) + " digit is missing", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getApplicationContext(), Integer.toString(10 - phonenumber.length()) + " digits are missing", Toast.LENGTH_SHORT).show();
+            }else{
+                sendotp();
             }
         });
         close_dialog.setOnClickListener(view -> {
@@ -96,30 +90,19 @@ public class VerificationActivity extends AppCompatActivity {
             binding.phoneInput.requestFocus();
 
         });
-        otpDialog.findViewById(R.id.otpSubmitButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PinView vie = (PinView) otpDialog.findViewById(R.id.otpInput);
-                PhoneAuthCredential credential = PhoneAuthProvider.getCredential(vid,Objects.requireNonNull(vie.getText()).toString());
+        otpDialog.findViewById(R.id.otpSubmitButton).setOnClickListener(view -> {
+            PinView vie = (PinView) otpDialog.findViewById(R.id.otpInput);
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(vid,Objects.requireNonNull(vie.getText()).toString());
 
-                fauth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            startActivity(new Intent(getApplicationContext(),Registration.class));
-                            finish();
-                        }else
-                            Toast.makeText(getApplicationContext(),"Failed to login" , Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+            fauth.signInWithCredential(credential).addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    startActivity(new Intent(getApplicationContext(),Registration.class));
+                    finish();
+                }else
+                    Toast.makeText(getApplicationContext(),"Failed to login" , Toast.LENGTH_SHORT).show();
+            });
         });
-        otpDialog.findViewById(R.id.resendText).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendotp();
-            }
-        });
+        otpDialog.findViewById(R.id.resendText).setOnClickListener(view -> sendotp());
 
 
     }
@@ -158,8 +141,6 @@ public class VerificationActivity extends AppCompatActivity {
                         .setForceResendingToken(tok)
                         .build();
 
-
-
         PhoneAuthProvider.verifyPhoneNumber(options);
         progressDialog.show();
     }
@@ -193,7 +174,4 @@ public class VerificationActivity extends AppCompatActivity {
         progressBar = (ProgressBar) progressDialog.findViewById(R.id.spin_kit);
 
     }
-
-
-
 }
