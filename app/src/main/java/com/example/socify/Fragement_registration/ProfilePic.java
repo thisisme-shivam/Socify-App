@@ -4,8 +4,6 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,25 +18,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.socify.Activities.CropperActivity;
-import com.example.socify.Activities.Home;
 import com.example.socify.Activities.Registration;
+import com.example.socify.FireBaseClasses.UserDetails;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfilePicBinding;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.auth.User;
-import com.google.firebase.firestore.local.BundleCache;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.util.Objects;
 
 
 public class ProfilePic extends Fragment {
 
     FragmentProfilePicBinding binding;
     Uri imgUrl;
+    public Registration registration;
     final int PICK_IMAGE = 1;
     UploadTask uploadTask;
     FirebaseStorage firebaseStorage;
@@ -46,7 +41,7 @@ public class ProfilePic extends Fragment {
     FirebaseFirestore db;
     DocumentReference documentReference;
     ActivityResultLauncher<String> mTakePhoto;
-    String Name, Username, Password, Yop;
+    String Name, Yop;
 
     public void FieldValidation() {
         //Field Validation
@@ -56,20 +51,6 @@ public class ProfilePic extends Fragment {
        else{
            Name = binding.nametext.getText().toString();
        }
-
-        if(binding.usernametext.getText().toString().isEmpty()){
-            binding.usernametextlayout.setError("cannot be empty");
-        }
-        else{
-            Username = binding.usernametext.getText().toString();
-        }
-
-        if(binding.passwordtext.getText().toString().isEmpty()){
-            binding.passwordtextlayout.setError("cannot be empty");
-        }
-        else{
-            Password = binding.passwordtext.getText().toString();
-        }
 
         if(binding.passingyeartext.getText().toString().isEmpty()){
             binding.yoptextlayout.setError("cannot be empty");
@@ -97,10 +78,13 @@ public class ProfilePic extends Fragment {
             @Override
             public void onClick(View v) {
                 FieldValidation();
-                if(Name!=null && Username!=null && Password!=null && Yop!=null) {
-                    GetCollegeFragment getCollegeFragment = new GetCollegeFragment();
-                    getFragmentManager().beginTransaction().replace(R.id.frame_registration, getCollegeFragment).commit();
-                    Log.e("Username", Username);
+                if(Name!=null && Yop!=null) {
+                    registration = (Registration) getActivity();
+                    registration.details.setName(Name);
+                    registration.details.setPassyear(Yop);
+                    UserNameFragment userNameFragment = new UserNameFragment();
+                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, userNameFragment).commit();
+                    Log.e("Yop", Yop);
                 }
             }
         });

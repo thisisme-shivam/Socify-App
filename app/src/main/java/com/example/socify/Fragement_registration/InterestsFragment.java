@@ -41,6 +41,7 @@ import nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup;
 public class InterestsFragment extends Fragment {
 
     FragmentInterestsBinding binding;
+    public Registration registration;
     public void onclicklisteners() {
         binding.finishbtn.setOnClickListener(new View.OnClickListener() {
             @Override
