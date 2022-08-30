@@ -18,7 +18,7 @@
         android:gravity="center"
         android:text="Be more social with Socify! Let us know more about yourself."
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/profile_image"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,8 +27,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="149dp"
-        android:layout_height="148dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginStart="131dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="131dp"
@@ -52,14 +52,14 @@
         android:gravity="center"
         android:text="Add your picture"
         android:textColor="@color/palette_teal"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
+        android:id="@+id/nametextlayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
@@ -71,6 +71,7 @@
         app:boxStrokeColor="@color/black"
         app:endIconMode="clear_text"
         app:endIconTint="@color/black"
+        app:errorEnabled="true"
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,6 +80,7 @@
         app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nametext"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/osr"
@@ -91,13 +93,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
+        android:id="@+id/usernametextlayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
+        app:errorEnabled="true"
         android:layout_marginEnd="40dp"
+        app:helperTextEnabled="true"
         android:hint="Create your username"
         android:textColorHint="@color/text_grey"
         app:boxStrokeColor="@color/black"
@@ -106,12 +110,13 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/nametextlayout"
         app:startIconDrawable="@drawable/usernameicon"
         app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
+            android:id="@+id/usernametext"
             android:layout_height="match_parent"
             android:fontFamily="@font/osr"
             android:lines="1"
@@ -123,14 +128,16 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout5"
+        android:id="@+id/passwordtextlayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="40dp"
         android:hint="Create a password"
+        app:errorEnabled="true"
+        app:helperTextEnabled="true"
         android:textColorHint="@color/text_grey"
         app:boxStrokeColor="@color/black"
         app:endIconMode="clear_text"
@@ -138,12 +145,13 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/usernametextlayout"
         app:startIconDrawable="@drawable/passwordicon"
         app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
+            android:id="@+id/passwordtext"
             android:layout_height="match_parent"
             android:fontFamily="@font/osr"
             android:lines="1"
@@ -155,5 +163,53 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/yoptextlayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        app:errorEnabled="true"
+        app:helperTextEnabled="true"
+        android:hint="Year of Passing"
+        android:textColorHint="@color/text_grey"
+        app:boxStrokeColor="@color/black"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/black"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordtextlayout"
+        app:startIconDrawable="@drawable/passingyear"
+        app:startIconTint="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passingyeartext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/osr"
+            android:inputType="numberSigned"
+            android:lines="1"
+            android:maxLines="1"
+            android:maxLength="4"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/nextbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#D8D9D9"
+        android:foregroundGravity="center"
+        android:src="@drawable/arrowgrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

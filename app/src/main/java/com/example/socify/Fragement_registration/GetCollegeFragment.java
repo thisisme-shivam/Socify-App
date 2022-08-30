@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentGetCollegeBinding;
+import com.example.socify.databinding.FragmentProfilePicBinding;
 
 import java.util.Objects;
 
@@ -22,6 +23,16 @@ import java.util.Objects;
 public class GetCollegeFragment extends Fragment {
 
     FragmentGetCollegeBinding binding;
+
+    public void setonclicklisteners() {
+        binding.next3btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CoursesFragment coursesFragment = new CoursesFragment();
+                getFragmentManager().beginTransaction().replace(R.id.frame_registration, coursesFragment).commit();
+            }
+        });
+    }
 
     @Override
 
@@ -33,15 +44,18 @@ public class GetCollegeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding = FragmentGetCollegeBinding.inflate(getLayoutInflater());
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(60);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_get_college, container, false);
+
+        binding = FragmentGetCollegeBinding.inflate(inflater, container, false);
+        setonclicklisteners();
+        return binding.getRoot();
     }
 }

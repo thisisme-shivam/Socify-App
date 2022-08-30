@@ -21,27 +21,14 @@ public class Login extends AppCompatActivity {
     ActivityLoginBinding binding;
 
     private  void setoncicklisteners(){
-        binding.passwordshow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showpass();
-            }
-        });
+        binding.passwordshow.setOnClickListener(v -> showpass());
 
-        binding.signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Login.this,VerificationActivity.class));
-            }
-        });
+        binding.signup.setOnClickListener(v -> startActivity(new Intent(Login.this,VerificationActivity.class)));
 
-        binding.forgotpass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login.this,VerificationActivity.class);
-                intent.putExtra("id","Forgot Password");
-                startActivity(intent);
-            }
+        binding.forgotpass.setOnClickListener(v -> {
+            Intent intent = new Intent(Login.this,VerificationActivity.class);
+            intent.putExtra("id","Forgot Password");
+            startActivity(intent);
         });
     }
     int i =1;
