@@ -18,6 +18,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.socify.Activities.CropperActivity;
+import com.example.socify.Activities.Registration;
+import com.example.socify.FireBaseClasses.UserDetails;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfilePicBinding;
 import com.google.firebase.firestore.DocumentReference;
@@ -31,6 +33,7 @@ public class ProfilePic extends Fragment {
 
     FragmentProfilePicBinding binding;
     Uri imgUrl;
+    public Registration registration;
     final int PICK_IMAGE = 1;
     UploadTask uploadTask;
     FirebaseStorage firebaseStorage;
@@ -38,7 +41,25 @@ public class ProfilePic extends Fragment {
     FirebaseFirestore db;
     DocumentReference documentReference;
     ActivityResultLauncher<String> mTakePhoto;
+    String Name, Yop;
 
+    public void FieldValidation() {
+        //Field Validation
+       if(binding.nametext.getText().toString().isEmpty()){
+           binding.nametextlayout.setError("cannot be empty");
+       }
+       else{
+           Name = binding.nametext.getText().toString();
+       }
+
+        if(binding.passingyeartext.getText().toString().isEmpty()){
+            binding.yoptextlayout.setError("cannot be empty");
+        }
+        else{
+            Yop = binding.passingyeartext.getText().toString();
+        }
+
+    }
 
     public void onclicklisteners() {
         binding.profileImage.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +74,21 @@ public class ProfilePic extends Fragment {
                 mTakePhoto.launch("image/*");
             }
         });
+        binding.nextbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FieldValidation();
+                if(Name!=null && Yop!=null) {
+                    registration = (Registration) getActivity();
+                    registration.details.setName(Name);
+                    registration.details.setPassyear(Yop);
+                    UserNameFragment userNameFragment = new UserNameFragment();
+                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, userNameFragment).commit();
+                    Log.e("Yop", Yop);
+                }
+            }
+        });
+
     }
 
     public String getFileExt(Uri uri) {
@@ -109,4 +145,6 @@ public class ProfilePic extends Fragment {
         onclicklisteners();
         return binding.getRoot();
     }
+
+
 }
