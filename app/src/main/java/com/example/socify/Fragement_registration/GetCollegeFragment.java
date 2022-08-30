@@ -46,7 +46,7 @@ public class GetCollegeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         colleges = new ArrayList<>();
 
-        ref = FirebaseDatabase.getInstance().getReference("CollegeNames");
+         ref = FirebaseDatabase.getInstance().getReference("CollegeNames");
          adapter = new GetCollegeAdapter(getContext(),colleges);
 
     }
@@ -90,16 +90,21 @@ public class GetCollegeFragment extends Fragment {
 
             }
         });
-
-
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_get_college, container, false);
+        binding = FragmentGetCollegeBinding.inflate(inflater, container, false);
+        onclicklisteners();
+        return binding.getRoot();
+    }
+
+    private void onclicklisteners() {
+        binding.next3btn.setOnClickListener(v -> {
+            CoursesFragment coursesFragment = new CoursesFragment();
+            getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, coursesFragment).commit();
+        });
     }
 }

@@ -118,6 +118,8 @@
             android:fontFamily="@font/osr"
             android:lines="1"
             android:maxLines="1"
+            android:inputType="numberSigned"
+            android:maxLength="4"
             android:singleLine="true"
             android:textColor="@color/black"
             android:textStyle="bold" />
