@@ -1,13 +1,14 @@
 package com.example.socify.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
-import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -21,7 +22,17 @@ import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.HomeFragments.ProfileFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityHomeBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Home extends AppCompatActivity {
 
@@ -30,6 +41,9 @@ public class Home extends AppCompatActivity {
     ProfileFragment profileFragment;
     BottomNavigationView navigationView;
     int[] drawables;
+    public String name, college_name, passyear, branch, imgurl, username;
+    Map<String, Object> tagmap;
+    public ArrayList<String> tags;
 
     int lastSelected;
     public void setIcon(int i){
@@ -47,13 +61,7 @@ public class Home extends AppCompatActivity {
 
     }
 
-    public void createpopuponclicks() {
-
-
-    }
-
     public void itemselectedfromnavbar() {
-
 
         binding.bottomnavigationview.setOnItemSelectedListener(item -> {
 
@@ -142,8 +150,6 @@ public class Home extends AppCompatActivity {
                 R.drawable.discovericon,
                 R.drawable.clubicon,
                 R.drawable.profileicon
-
-
         };
         binding.bottomnavigationview.setItemIconTintList(null);
         newsFeedFragment = new NewsFeedFragment();
@@ -155,8 +161,74 @@ public class Home extends AppCompatActivity {
         otpDialog.setCancelable(false);
         otpDialog.setContentView(R.layout.post_creation_popup);
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
-
         Intent intent = getIntent();
+
+        //Loading User Profile Data
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUID = user.getUid();
+        DocumentReference documentReference;
+        documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
+
+        documentReference.get()
+                .addOnCompleteListener(task -> {
+
+                    if(task.getResult().exists()) {
+                        name = task.getResult().getString("Name");
+                        college_name = task.getResult().getString("CollegeName");
+                        passyear = task.getResult().getString("Passing Year");
+                        branch = task.getResult().getString("Course");
+                        imgurl = task.getResult().getString("ImgUrl");
+                        username = task.getResult().getString("Username");
+                        Log.e("asd", imgurl);
+
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                            }
+                        }, 2000);
+
+                    } else{
+                        try {
+                            throw new Exception("User doesn't exist");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                });
+
+        //Loading Tags
+        tags = new ArrayList<>();
+        documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID).collection("Interests").document("UserTags");
+
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot documentSnapshot = task.getResult();
+                if(documentSnapshot.exists()) {
+                    tagmap = documentSnapshot.getData();
+                    assert tagmap != null;
+                    String toadd = "";
+                    String s = tagmap.get("Tags").toString();
+                    for(int i=1;i<s.length();i++){
+                        if(s.charAt(i)==',' || s.charAt(i) == ']'){
+                            System.out.println(toadd);
+                            tags.add(toadd.trim());
+                            toadd = "";
+                        }else{
+                            toadd = toadd.concat(String.valueOf(s.charAt(i)));
+                        }
+                    }
+                    System.out.println(s);
+
+                }
+            }
+        });
+
+
     }
     @Override
     protected void onDestroy() {

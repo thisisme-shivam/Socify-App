@@ -38,6 +38,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="149dp"
+            android:layout_marginBottom="8dp"
+            android:text="Select upto 5 tags"
+            android:textColor="@color/text_grey"
+            app:layout_constraintBottom_toTopOf="@+id/groupedtags"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <nl.bryanderidder.themedtogglebuttongroup.ThemedToggleButtonGroup
             android:id="@+id/groupedtags"
@@ -45,7 +58,7 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="15dp"
             android:layout_marginStart="14dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="120dp"
             android:layout_marginEnd="14dp"
             android:overScrollMode="ifContentScrolls"
             android:scrollbarSize="5dp"

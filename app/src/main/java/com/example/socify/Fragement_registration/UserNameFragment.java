@@ -93,6 +93,10 @@ public class UserNameFragment extends Fragment {
         if(!Objects.equals(Registration.details.getImgUri(), "No Image")) {
             binding.ProfilePic.setImageURI(Uri.parse(Registration.details.getImgUri()));
         }
+        else{
+            binding.picadded.setText("No Image Selected");
+        }
+
         return binding.getRoot();
     }
 

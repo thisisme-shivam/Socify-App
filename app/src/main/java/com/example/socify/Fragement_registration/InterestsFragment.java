@@ -56,7 +56,6 @@ public class InterestsFragment extends Fragment {
                 String newstr = but.getText().replaceAll("[^A-Za-z]+", "");
                 tags.add(newstr);
                 registration.details.setTags(tags);
-
                 //Uploading Tags
                 sendProfileData.sendTags();
                 Log.i("string",newstr);
@@ -79,6 +78,7 @@ public class InterestsFragment extends Fragment {
         bar.setProgress(100);
         tags = new ArrayList<>();
         binding.groupedtags.setSelectAnimation(SelectAnimation.CIRCULAR_REVEAL);
+        binding.groupedtags.setSelectableAmount(5);
         onclicklisteners();
     }
 

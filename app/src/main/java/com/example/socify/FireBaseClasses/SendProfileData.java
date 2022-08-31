@@ -50,32 +50,38 @@ public class SendProfileData {
 
     public void sendImg() {
         initialization();
-        final StorageReference reference = storageReference.child(registration.details.getImgUri());
-        uploadTask = reference.putFile(Uri.parse(registration.details.getImgUri()));
-        Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if(!task.isSuccessful()) {
-                    throw task.getException();
+        if(registration.details.getImgUri()!="No Image") {
+            final StorageReference reference = storageReference.child(registration.details.getImgUri());
+            uploadTask = reference.putFile(Uri.parse(registration.details.getImgUri()));
+            Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return reference.getDownloadUrl();
                 }
-                return reference.getDownloadUrl();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if(task.isSuccessful()) {
-                    Uri downloadUrl = task.getResult();
-                    profile.put("ImgUrl", downloadUrl.toString());
-                    documentReference.set(profile)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Log.i("Img Uploaded", "True");
-                                }
-                            });
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUrl = task.getResult();
+                        profile.put("ImgUrl", downloadUrl.toString());
+                        documentReference.set(profile)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.i("Img Uploaded", "True");
+                                    }
+                                });
+                    }
                 }
-            }
-        });
+            });
+        }
+        else{
+            Log.e("zzz", "No image selected");
+            profile.put("ImgUrl", "No Image");
+        }
 
     }
 
