@@ -37,7 +37,7 @@ public class ProfilePic extends Fragment {
     public Registration registration;
     ActivityResultLauncher<String> mTakePhoto;
     String Name, Yop;
-    SendProfileData sendProfileData = new SendProfileData();
+    static SendProfileData sendProfileData = new SendProfileData();
 
     public void FieldValidation() {
         //Field Validation

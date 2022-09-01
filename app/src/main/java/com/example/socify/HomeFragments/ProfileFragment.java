@@ -1,5 +1,6 @@
 package com.example.socify.HomeFragments;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.socify.Activities.Home;
 import com.example.socify.Activities.Registration;
+import com.example.socify.Fragement_registration.UserNameFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfileBinding;
 import com.google.android.material.chip.Chip;
@@ -29,7 +31,7 @@ import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
-    FragmentProfileBinding binding;
+    public FragmentProfileBinding binding;
     public Home home;
 
     public void setonclicklisteners() {
@@ -43,7 +45,9 @@ public class ProfileFragment extends Fragment {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.edit_details:
-                                Toast.makeText(requireActivity(), "Edit Profile", Toast.LENGTH_SHORT).show();
+                                //Switching to new fragment
+                                EditUserDetails editUserDetails = new EditUserDetails();
+                                getParentFragmentManager().beginTransaction().replace(R.id.FragmentView,editUserDetails).commit();
                                 return true;
                             case R.id.privacy:
                                 Toast.makeText(requireActivity(), "Privacy", Toast.LENGTH_SHORT).show();
