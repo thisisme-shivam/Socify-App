@@ -19,14 +19,21 @@ import androidx.fragment.app.Fragment;
 
 import com.example.socify.Activities.CropperActivity;
 import com.example.socify.Activities.Registration;
-import com.example.socify.FireBaseClasses.UserDetails;
+import com.example.socify.Classes.College;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfilePicBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
 
 
 public class ProfilePic extends Fragment {
@@ -133,7 +140,18 @@ public class ProfilePic extends Fragment {
         Log.i("YEs","Entering");
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(20);
+        DatabaseReference ref ;
+        ArrayList<College> colleges = new ArrayList<>();
+        ref = FirebaseDatabase.getInstance().getReference("CollegeNames");
 
+        ArrayList<College> finalColleges = new ArrayList<>();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+
+            }
+        }).start();
 
     }
 

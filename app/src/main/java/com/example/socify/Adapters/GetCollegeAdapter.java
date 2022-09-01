@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -19,24 +20,30 @@ public class GetCollegeAdapter extends RecyclerView.Adapter<GetCollegeAdapter.Co
 
     Context context;
 
+    CollegeViewHolder.Onitemclicked onitemclicked;
     ArrayList<College> collegesNames;
 
-    public GetCollegeAdapter(Context context , ArrayList<College> collegesNames){
+
+    public GetCollegeAdapter(Context context , ArrayList<College> collegesNames, CollegeViewHolder.Onitemclicked onitemclicked){
         this.context = context;
         this.collegesNames = collegesNames;
+        this.onitemclicked = onitemclicked;
     }
+
+
     @NonNull
     @Override
     public CollegeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.college_name_list,parent,false);
 
-        return new CollegeViewHolder(view);
+        return new CollegeViewHolder(view,onitemclicked);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CollegeViewHolder holder, int position) {
         College college = collegesNames.get(position);
         holder.collegeNameTextview.setText(college.getCollege_name());
+        ;
     }
 
     @Override
@@ -44,13 +51,33 @@ public class GetCollegeAdapter extends RecyclerView.Adapter<GetCollegeAdapter.Co
         return collegesNames.size();
     }
 
-    public static class CollegeViewHolder extends  RecyclerView.ViewHolder{
+    public void filterlist(ArrayList<College> filteredlist) {
+        collegesNames = filteredlist;
+        notifyDataSetChanged();
+    }
+
+    public static class CollegeViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
 
         MaterialTextView collegeNameTextview;
-        public CollegeViewHolder(@NonNull View itemView) {
+        Onitemclicked onitemclicked;
+        public CollegeViewHolder(@NonNull View itemView,Onitemclicked onitemclicked) {
             super(itemView);
+            this.onitemclicked = onitemclicked;
+
             collegeNameTextview = itemView.findViewById(R.id.college_names);
+            itemView.setOnClickListener(this);
 
         }
+
+        @Override
+        public void onClick(View view) {
+
+            onitemclicked.onclick(getBindingAdapterPosition());
+        }
+
+        public interface  Onitemclicked{
+            void onclick(int position);
+        }
+
     }
 }
