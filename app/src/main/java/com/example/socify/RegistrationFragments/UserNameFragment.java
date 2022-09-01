@@ -1,4 +1,4 @@
-package com.example.socify.Fragement_registration;
+package com.example.socify.RegistrationFragments;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import android.widget.ProgressBar;
 
 import com.example.socify.Activities.Registration;
 import com.example.socify.FireBaseClasses.SendProfileData;
-import com.example.socify.FireBaseClasses.UserDetails;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentNameFragementBinding;
 

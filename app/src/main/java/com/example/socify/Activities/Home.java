@@ -41,7 +41,7 @@ public class Home extends AppCompatActivity {
     ProfileFragment profileFragment;
     BottomNavigationView navigationView;
     int[] drawables;
-    public String name, college_name, passyear, branch, imgurl, username;
+    public String name, college_name, passyear, branch, imgurl, username, age, bio;
     Map<String, Object> tagmap;
     public ArrayList<String> tags;
 
@@ -107,6 +107,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 //Code for query creation to be written here
                 Toast.makeText(Home.this, "Query selected", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Home.this, QnA.class));
             }
         });
 
@@ -179,8 +180,9 @@ public class Home extends AppCompatActivity {
                         branch = task.getResult().getString("Course");
                         imgurl = task.getResult().getString("ImgUrl");
                         username = task.getResult().getString("Username");
+                        age = task.getResult().getString("Age");
+                        bio = task.getResult().getString("Bio");
                         Log.e("asd", imgurl);
-
 
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {

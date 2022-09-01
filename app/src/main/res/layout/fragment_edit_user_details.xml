@@ -185,14 +185,14 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dob"
+        android:id="@+id/age"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="40dp"
-        android:hint="Edit Your Passing Year"
+        android:hint="Edit Your Age"
         android:textColorHint="@color/text_grey"
         app:boxStrokeColor="@color/black"
         app:endIconMode="clear_text"
@@ -205,7 +205,7 @@
         app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dob_et"
+            android:id="@+id/age_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/osr"

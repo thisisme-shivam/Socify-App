@@ -16,6 +16,7 @@
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable/ic_eye.xml" value="0.243" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.197" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable/popup_bg.xml" value="0.234" />
+        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable/rounded_dropdown.xml" value="0.278" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable/verification_button_bg.xml" value="0.276" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable/verification_input_bg.xml" value="0.276" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/font/.xml" value="0.3046875" />
@@ -30,6 +31,7 @@
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/activity_introductory.xml" value="0.26268115942028986" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/activity_qn.xml" value="0.264" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/activity_registration.xml" value="0.176" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/activity_send_profile.xml" value="0.1265625" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/activity_slide_screen.xml" value="0.264" />
@@ -38,6 +40,7 @@
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/college_name_list.xml" value="0.1334853090172239" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/courses_name_list.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/discover_clubs.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_ask__query.xml" value="0.18478260869565216" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_blank.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_buddy.xml" value="0.1" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_community.xml" value="0.2" />
@@ -46,11 +49,11 @@
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_edit_user_details.xml" value="0.264" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_events.xml" value="0.264" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_get_college.xml" value="0.264" />
-        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_interests.xml" value="0.264" />
+        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_interests.xml" value="0.1" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_name_fragement.xml" value="0.264" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_news_feed.xml" value="0.4" />
-        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
-        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_profile_pic.xml" value="0.2" />
+        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_profile.xml" value="0.176" />
+        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_profile_pic.xml" value="0.264" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_questions.xml" value="0.1778846153846154" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/newsfeedbox.xml" value="0.264" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/otp_verification.xml" value="0.27309782608695654" />

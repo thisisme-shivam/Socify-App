@@ -10,9 +10,9 @@
         android:id="@+id/details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,6 +21,7 @@
             android:id="@+id/profile_actionbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="13dp"
             app:layout_constraintBottom_toTopOf="@+id/profile_pic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,12 +32,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="10dp"
+                android:onClick="showPopup"
                 android:text="@string/profile_username"
                 android:textColor="@color/black"
                 android:textSize="22sp"
-                android:onClick="showPopup"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/line"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,53 +61,68 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/three_dots" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_pic"
             android:layout_width="150dp"
-            android:elevation="20dp"
             android:layout_height="150dp"
-            android:layout_marginStart="30dp"
             android:layout_marginTop="13dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="8dp"
+            android:elevation="20dp"
             android:src="@drawable/doge"
-            app:layout_constraintBottom_toTopOf="@+id/name"
-            app:layout_constraintEnd_toStartOf="@+id/msg"
-            app:layout_constraintStart_toEndOf="@+id/follow"
-            app:layout_constraintTop_toBottomOf="@+id/profile_actionbar" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="150dp"
-            android:text="Shivam Kumar"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/bio"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_pic" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_actionbar" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_pic">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shivam Kumar"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="157dp"
+                tools:layout_editor_absoluteY="224dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/agetv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(18)"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="266dp"
+                tools:layout_editor_absoluteY="224dp" />
+
+
+        </LinearLayout>
 
         <GridLayout
             android:id="@+id/gridLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="10dp"
             android:columnCount="1"
             android:rowCount="1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/college_name">
 
             <TextView
                 android:id="@+id/followerscount"
@@ -137,12 +155,13 @@
             android:id="@+id/gridLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="10dp"
             android:columnCount="1"
             android:rowCount="1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/branch">
 
 
             <TextView
@@ -176,15 +195,17 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:layout_marginVertical="5dp"
-            android:maxLength="50"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:maxLength="30"
             android:text="Mai hu Shivam The DOGE"
             android:textAlignment="center"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/college_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
             app:readMoreMaxLine="3" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -192,12 +213,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="74dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="75dp"
-            android:layout_marginBottom="5dp"
             android:text="Sagar Institute of Science and Technology"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/branch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bio" />
@@ -207,8 +226,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="97dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="96dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="95dp"
             android:text="Computer Science and Engineering"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -219,24 +238,22 @@
             android:id="@+id/passyear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="38dp"
-            android:layout_marginBottom="52dp"
+            android:layout_marginTop="5dp"
             android:text="2024"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/gridLayout3"
-            app:layout_constraintStart_toEndOf="@+id/gridLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/branch" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/follow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="148dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="128dp"
+            android:layout_marginEnd="5dp"
             android:src="@drawable/plus"
-            app:layout_constraintEnd_toStartOf="@+id/profile_pic"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_actionbar" />
 
@@ -244,10 +261,12 @@
             android:id="@+id/msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="148dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="128dp"
+            android:layout_marginEnd="30dp"
             android:src="@drawable/chat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/profile_pic"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout2"
             app:layout_constraintTop_toBottomOf="@+id/profile_actionbar" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -255,9 +274,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
-            android:layout_marginTop="22dp"
-            android:layout_marginEnd="62dp"
-            android:layout_marginBottom="3dp"
+            android:layout_marginEnd="60dp"
             android:text="Interests"
             android:textColor="@color/black"
             android:textSize="20dp"
@@ -273,70 +290,69 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/details">
 
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:singleLine="true"
-            android:layout_marginHorizontal="10dp"
             android:layout_gravity="fill"
-            android:id="@+id/chip_group"
+            android:layout_marginHorizontal="10dp"
+            app:singleLine="true"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="374dp">
 
-<!--            <com.google.android.material.chip.Chip-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:backgroundTint="@color/palette_light_teal"-->
-<!--                android:elevation="5dp"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:layout_margin="5dp"-->
-<!--                android:text="Android Development"-->
-<!--                android:textAlignment="center" />-->
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/palette_light_teal"
+                android:elevation="5dp"
+                android:text="Android Development"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
 
-<!--            <com.google.android.material.chip.Chip-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_margin="5dp"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:backgroundTint="@color/palette_light_teal"-->
-<!--                android:elevation="5dp"-->
-<!--                android:text="Music"-->
-<!--                android:textAlignment="center" />-->
+            <!--            <com.google.android.material.chip.Chip-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:backgroundTint="@color/palette_light_teal"-->
+            <!--                android:elevation="5dp"-->
+            <!--                android:text="Music"-->
+            <!--                android:textAlignment="center" />-->
 
-<!--            <com.google.android.material.chip.Chip-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:backgroundTint="@color/palette_light_teal"-->
-<!--                android:elevation="5dp"-->
-<!--                android:layout_margin="5dp"-->
-<!--                android:text="Web Development"-->
-<!--                android:textAlignment="center" />-->
+            <!--            <com.google.android.material.chip.Chip-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:backgroundTint="@color/palette_light_teal"-->
+            <!--                android:elevation="5dp"-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:text="Web Development"-->
+            <!--                android:textAlignment="center" />-->
 
-<!--            <com.google.android.material.chip.Chip-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:backgroundTint="@color/palette_light_teal"-->
-<!--                android:elevation="5dp"-->
-<!--                android:layout_margin="5dp"-->
-<!--                android:text="Photography"-->
-<!--                android:textAlignment="center" />-->
+            <!--            <com.google.android.material.chip.Chip-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:backgroundTint="@color/palette_light_teal"-->
+            <!--                android:elevation="5dp"-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:text="Photography"-->
+            <!--                android:textAlignment="center" />-->
 
-<!--            <com.google.android.material.chip.Chip-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:backgroundTint="@color/palette_light_teal"-->
-<!--                android:elevation="5dp"-->
-<!--                android:layout_margin="5dp"-->
-<!--                android:text="Others"-->
-<!--                android:textAlignment="center" />-->
+            <!--            <com.google.android.material.chip.Chip-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:backgroundTint="@color/palette_light_teal"-->
+            <!--                android:elevation="5dp"-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:text="Others"-->
+            <!--                android:textAlignment="center" />-->
 
         </com.google.android.material.chip.ChipGroup>
 

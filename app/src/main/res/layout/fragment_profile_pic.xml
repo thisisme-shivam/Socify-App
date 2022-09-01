@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragement_registration.ProfilePic">
+    tools:context=".RegistrationFragments.ProfilePic">
 
     <TextView
         android:id="@+id/textView8"
@@ -30,7 +30,7 @@
         android:layout_width="149dp"
         android:layout_height="148dp"
         android:layout_marginStart="131dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="131dp"
         android:layout_marginBottom="21dp"
         android:src="@drawable/user"
@@ -91,13 +91,14 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/yoptextlayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="40dp"
         android:hint="Year of Passing"
         android:textColorHint="@color/text_grey"
@@ -107,7 +108,7 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nametextlayout"
+        app:layout_constraintTop_toBottomOf="@+id/biolayout"
         app:startIconDrawable="@drawable/passingyear"
         app:startIconTint="@color/black">
 
@@ -116,10 +117,80 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/osr"
-            android:lines="1"
-            android:maxLines="1"
             android:inputType="numberSigned"
+            android:lines="1"
             android:maxLength="4"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/biolayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="40dp"
+        android:hint="Describe yourself"
+        android:textColorHint="@color/text_grey"
+        app:boxStrokeColor="@color/black"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/black"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nametextlayout"
+        app:startIconDrawable="@drawable/bio"
+        app:startIconTint="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/biotext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/osr"
+            android:lines="1"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/agelayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="40dp"
+        android:hint="Age"
+        android:textColorHint="@color/text_grey"
+        app:boxStrokeColor="@color/black"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/black"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yoptextlayout"
+        app:startIconDrawable="@drawable/usernameicon"
+        app:startIconTint="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/agetext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/osr"
+            android:inputType="numberSigned"
+            android:lines="1"
+            android:maxLength="2"
+            android:maxLines="1"
             android:singleLine="true"
             android:textColor="@color/black"
             android:textStyle="bold" />

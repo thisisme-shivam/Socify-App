@@ -62,8 +62,6 @@ public class VerificationActivity extends AppCompatActivity {
     private void setOnclicklistners(){
          InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 
-
-
          otpDialog.setOnShowListener(dialogInterface -> {
 
              otpDialog.findViewById(R.id.otpInput).requestFocus();
