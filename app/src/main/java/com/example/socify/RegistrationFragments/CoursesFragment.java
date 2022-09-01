@@ -1,4 +1,4 @@
-package com.example.socify.Fragement_registration;
+package com.example.socify.RegistrationFragments;
 
 import android.os.Bundle;
 
@@ -15,8 +15,6 @@ import com.example.socify.Activities.Registration;
 import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentCoursesBinding;
-import com.example.socify.databinding.FragmentGetCollegeBinding;
-import com.example.socify.databinding.FragmentInterestsBinding;
 
 public class CoursesFragment extends Fragment {
 

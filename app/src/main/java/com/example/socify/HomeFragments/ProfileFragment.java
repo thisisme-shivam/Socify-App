@@ -1,8 +1,6 @@
 package com.example.socify.HomeFragments;
 
-import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,15 +16,12 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.socify.Activities.Home;
-import com.example.socify.Activities.Registration;
-import com.example.socify.Fragement_registration.UserNameFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfileBinding;
 import com.google.android.material.chip.Chip;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class ProfileFragment extends Fragment {
@@ -74,10 +69,13 @@ public class ProfileFragment extends Fragment {
             Picasso.get().load(Uri.parse(home.imgurl)).placeholder(R.drawable.user).into(binding.profilePic);
         }
         binding.branch.setText(home.branch);
-        binding.passyear.setText(new StringBuilder().append("Batch: ").append(home.passyear).toString());
+        binding.passyear.setText(home.passyear);
+        Log.i("BATCH", home.passyear);
         binding.collegeName.setText(home.college_name);
         binding.name.setText(home.name);
         binding.usernameProfile.setText("@"+home.username);
+        binding.bio.setText(home.bio);
+        binding.agetv.setText("(" + home.age + ")");
 
         ArrayList<String> t = home.tags;
 
@@ -85,6 +83,8 @@ public class ProfileFragment extends Fragment {
         for(String s: t){
             Chip chip = new Chip(requireActivity());
             chip.setText(s);
+            chip.setElevation(5);
+            chip.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.black)));
             chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.palette_light_teal)));
             binding.chipGroup.addView(chip);
         }

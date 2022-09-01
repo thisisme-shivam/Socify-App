@@ -1,4 +1,4 @@
-package com.example.socify.Onboarding_Fragments;
+package com.example.socify.OnBoardingFragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.socify.R;
 
-public class BuddyFragment extends Fragment {
+public class QuestionsFragment extends Fragment {
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root =  (ViewGroup) inflater.inflate(R.layout.fragment_buddy, container, false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_questions, container, false);
         return root;
     }
+
 }

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.socify.FireBaseClasses.UserDetails;
-import com.example.socify.Fragement_registration.ProfilePic;
+import com.example.socify.RegistrationFragments.ProfilePic;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityRegistrationBinding;
 

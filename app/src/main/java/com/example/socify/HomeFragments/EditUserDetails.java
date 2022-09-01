@@ -62,6 +62,8 @@ public class EditUserDetails extends Fragment {
                         //Code to be update more (BIO and DOB to be added while registration)
                         transaction.update(sfDoc, "Name", binding.nameEditEt.getText().toString());
                         transaction.update(sfDoc, "Passing Year", binding.passyearEt.getText().toString());
+                        transaction.update(sfDoc, "Bio", binding.bioEt.getText().toString());
+                        transaction.update(sfDoc, "Age", binding.ageEt.getText().toString());
                         // Success
                         return null;
                     }
@@ -99,13 +101,10 @@ public class EditUserDetails extends Fragment {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
                 if(task.getResult().exists()) {
-
-                    binding.bioEt.setText("XOXOXOX");
-                    binding.dobEt.setText("6/11/12");
                     binding.nameEditEt.setText(task.getResult().getString("Name"));
                     binding.passyearEt.setText(task.getResult().getString("Passing Year"));
-
-                    Toast.makeText(requireActivity(), "SUCCESS", Toast.LENGTH_SHORT).show();
+                    binding.ageEt.setText(task.getResult().getString("Age"));
+                    binding.bioEt.setText(task.getResult().getString("Bio"));
                 }
                 else{
                     Toast.makeText(requireActivity(), "FAILED", Toast.LENGTH_SHORT).show();
@@ -122,6 +121,7 @@ public class EditUserDetails extends Fragment {
             @Override
             public void onClick(View v) {
                 updateProfile();
+                Toast.makeText(requireActivity(), "Restarting the app will reflect the new changes", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), Home.class);
                 startActivity(intent);
             }

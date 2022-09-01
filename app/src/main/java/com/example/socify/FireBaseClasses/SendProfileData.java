@@ -124,6 +124,19 @@ public class SendProfileData {
         profile.put("Course", registration.details.getCourse());
         uploadtoCloud();
     }
+
+    public void sendDOB() {
+        initialization();
+        profile.put("Age", registration.details.getAge());
+        uploadtoCloud();
+    }
+
+    public void sendBio() {
+        initialization();
+        profile.put("Bio", registration.details.getBio());
+        uploadtoCloud();
+    }
+
     public void sendTags() {
         currentUID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         storageReference = FirebaseStorage.getInstance().getReference("Profile Images");
