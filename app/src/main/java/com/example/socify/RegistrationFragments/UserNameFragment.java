@@ -45,7 +45,7 @@ public class UserNameFragment extends Fragment {
                     sendProfileData.sendUsername();
                     sendProfileData.sendPassword();
 
-                    com.example.socify.Fragement_registration.GetCollegeFragment getCollegeFragment = new com.example.socify.Fragement_registration.GetCollegeFragment();
+                    GetCollegeFragment getCollegeFragment = new GetCollegeFragment();
                     getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, getCollegeFragment).commit();
                 }
             }
