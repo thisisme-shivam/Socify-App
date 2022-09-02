@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+        <include
+            android:id="@+id/id1"
+            layout="@layout/shimmer_college_list" />
+    <include
+        android:id="@+id/id2"
+        android:layout_below="@id/id1"
+        layout="@layout/shimmer_college_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <include
+        android:id="@+id/id3"
+        android:layout_below="@id/id2"
+        layout="@layout/shimmer_college_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <include
+        android:id="@+id/id4"
+        android:layout_below="@id/id3"
+        layout="@layout/shimmer_college_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <include
+        android:id="@+id/id5"
+        android:layout_below="@id/id4"
+        layout="@layout/shimmer_college_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <include
+        android:id="@+id/id6"
+        android:layout_below="@id/id5"
+        layout="@layout/shimmer_college_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <include
+        android:id="@+id/id7"
+        android:layout_below="@id/id6"
+        layout="@layout/shimmer_college_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <include
+        android:id="@+id/id8"
+        android:layout_below="@id/id7"
+        layout="@layout/shimmer_college_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
+
+
+
+
+</RelativeLayout>
