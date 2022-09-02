@@ -75,7 +75,7 @@ public class GetCollegeAdapter extends RecyclerView.Adapter<GetCollegeAdapter.Co
             onitemclicked.onclick(getBindingAdapterPosition());
         }
 
-        public interface  Onitemclicked{
+        public interface Onitemclicked{
             void onclick(int position);
         }
 

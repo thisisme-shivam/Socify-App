@@ -65,7 +65,6 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     //Image Loader
     implementation 'com.squareup.picasso:picasso:2.8'
-<<<<<<< HEAD
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 
@@ -76,10 +75,5 @@ dependencies {
 
     //Custom Spinner
     implementation "com.github.skydoves:powerspinner:1.2.4"
-=======
-    implementation 'com.google.firebase:firebase-storage:20.0.1'
-    implementation 'com.google.firebase:firebase-firestore:24.2.2'
-    implementation 'com.google.firebase:firebase-auth:21.0.7'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
->>>>>>> e6ed6f02343acfff4885aed3a335dfcd03c5f5ac
 }

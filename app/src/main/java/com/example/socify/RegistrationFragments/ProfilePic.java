@@ -19,11 +19,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.socify.Activities.CropperActivity;
 import com.example.socify.Activities.Registration;
-<<<<<<< HEAD:app/src/main/java/com/example/socify/RegistrationFragments/ProfilePic.java
 import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfilePicBinding;
-=======
 import com.example.socify.Classes.College;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfilePicBinding;
@@ -37,7 +35,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
->>>>>>> e6ed6f02343acfff4885aed3a335dfcd03c5f5ac:app/src/main/java/com/example/socify/Fragement_registration/ProfilePic.java
 
 import java.util.ArrayList;
 
@@ -54,13 +51,8 @@ public class ProfilePic extends Fragment {
     FirebaseFirestore db;
     DocumentReference documentReference;
     ActivityResultLauncher<String> mTakePhoto;
-<<<<<<< HEAD:app/src/main/java/com/example/socify/RegistrationFragments/ProfilePic.java
     String Name, Yop, age, bio;
     static SendProfileData sendProfileData = new SendProfileData();
-=======
-    String Name, Yop;
->>>>>>> e6ed6f02343acfff4885aed3a335dfcd03c5f5ac:app/src/main/java/com/example/socify/Fragement_registration/ProfilePic.java
-
     public void FieldValidation() {
         //Field Validation
        if(binding.nametext.getText().toString().isEmpty()){
@@ -114,7 +106,6 @@ public class ProfilePic extends Fragment {
                     registration = (Registration) getActivity();
                     registration.details.setName(Name);
                     registration.details.setPassyear(Yop);
-<<<<<<< HEAD:app/src/main/java/com/example/socify/RegistrationFragments/ProfilePic.java
                     registration.details.setAge(age);
                     registration.details.setBio(bio);
 
@@ -136,11 +127,7 @@ public class ProfilePic extends Fragment {
                     Log.e("Age", age);
                     Log.e("bio", bio);
                     Log.e("ImgURL", imgUrl.toString());
-=======
-                    UserNameFragment userNameFragment = new UserNameFragment();
-                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, userNameFragment).commit();
                     Log.e("Yop", Yop);
->>>>>>> e6ed6f02343acfff4885aed3a335dfcd03c5f5ac:app/src/main/java/com/example/socify/Fragement_registration/ProfilePic.java
                 }
             }
         });

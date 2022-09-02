@@ -46,7 +46,7 @@ public class GetCollegeFragment extends Fragment {
         colleges = new ArrayList<>();
 
          ref = FirebaseDatabase.getInstance().getReference("CollegeNames");
-         adapter = new GetCollegeAdapter(getContext(),colleges);
+//         adapter = new GetCollegeAdapter(getContext(),colleges);
 
     }
 
@@ -62,7 +62,7 @@ public class GetCollegeFragment extends Fragment {
         rec.setAdapter(adapter);
 
 
-        binding.searchcollege.setOnKeyListener(new View.OnKeyListener() {
+        binding.searchCollege.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 adapter.notifyDataSetChanged();
