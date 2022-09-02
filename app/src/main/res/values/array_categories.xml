@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="categories">
+        <item>🎸 Music</item>
+        <item>🤖 Android Development</item>
+        <item>🌐 Web Development</item>
+        <item>📸 Photography</item>
+        <item>⌨ Competitive Coding</item>
+        <item>⚽ Sports</item>
+        <item>💪 Fitness</item>
+        <item>🕺 Dancing</item>
+        <item>🍉 Food</item>
+        <item>🎨 Art &amp; Design</item>
+        <item>👨‍💻 Programming</item>
+        <item>🗣️ Comm. Skills</item>
+        <item>🧠 Aptitude</item>
+        <item>👷‍♂️Civil Eng.</item>
+        <item>👨‍🔧 Mechanical Eng.</item>
+        <item>💡 Electrical Eng.</item>
+        <item>📱 Electr. &amp;  Comm. Eng.</item>
+        <item>💊 Pharmacy</item>
+        <item>👨‍💼 MBA</item>
+        <item>🔯 Others</item>
+    </string-array>
+    
+</resources>
