@@ -1,4 +1,4 @@
-package com.example.socify.RegistrationFragments;
+package com.example.socify.Fragement_registration;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -19,9 +19,21 @@ import androidx.fragment.app.Fragment;
 
 import com.example.socify.Activities.CropperActivity;
 import com.example.socify.Activities.Registration;
-import com.example.socify.FireBaseClasses.SendProfileData;
+import com.example.socify.Classes.College;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfilePicBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
 
 
 public class ProfilePic extends Fragment {
@@ -29,9 +41,14 @@ public class ProfilePic extends Fragment {
     FragmentProfilePicBinding binding;
     Uri imgUrl;
     public Registration registration;
+    final int PICK_IMAGE = 1;
+    UploadTask uploadTask;
+    FirebaseStorage firebaseStorage;
+    StorageReference storageReference;
+    FirebaseFirestore db;
+    DocumentReference documentReference;
     ActivityResultLauncher<String> mTakePhoto;
-    String Name, Yop, age, bio;
-    static SendProfileData sendProfileData = new SendProfileData();
+    String Name, Yop;
 
     public void FieldValidation() {
         //Field Validation
@@ -47,20 +64,6 @@ public class ProfilePic extends Fragment {
         }
         else{
             Yop = binding.passingyeartext.getText().toString();
-        }
-
-        if(binding.biotext.getText().toString().isEmpty()){
-            binding.biolayout.setError("cannot be empty");
-        }
-        else{
-            bio = binding.biotext.getText().toString();
-        }
-
-        if(binding.agetext.getText().toString().isEmpty()){
-            binding.agelayout.setError("cannot be empty");
-        }
-        else{
-            age = binding.agetext.getText().toString();
         }
 
     }
@@ -83,43 +86,18 @@ public class ProfilePic extends Fragment {
             public void onClick(View v) {
                 FieldValidation();
                 if(Name!=null && Yop!=null) {
-                    //Updating name, passing year and profile pic in the UserDetails object
                     registration = (Registration) getActivity();
-                    if(imgUrl==null) {
-                        imgUrl = Uri.parse("No Image");
-                    }
-                    //Storing Details in Class Variable
-                    registration.details.setImgUri(imgUrl.toString());
                     registration.details.setName(Name);
                     registration.details.setPassyear(Yop);
-                    registration.details.setAge(age);
-                    registration.details.setBio(bio);
-
-                    //To be deleted Later
-                    registration.details.setCollege_name("SISTEC");
-
-                    //Sending Data
-                    sendProfileData.sendImg();
-                    sendProfileData.sendName();
-                    sendProfileData.sendpassyear();
-                    sendProfileData.sendCurrentUID();
-                    sendProfileData.sendDOB();
-                    sendProfileData.sendBio();
-
-                    //Switching to new fragment
                     UserNameFragment userNameFragment = new UserNameFragment();
                     getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, userNameFragment).commit();
                     Log.e("Yop", Yop);
-                    Log.e("Age", age);
-                    Log.e("bio", bio);
-                    Log.e("ImgURL", imgUrl.toString());
                 }
             }
         });
 
     }
 
-    //Image File Extension
     public String getFileExt(Uri uri) {
         ContentResolver contentResolver = requireContext().getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
@@ -162,7 +140,18 @@ public class ProfilePic extends Fragment {
         Log.i("YEs","Entering");
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(20);
+        DatabaseReference ref ;
+        ArrayList<College> colleges = new ArrayList<>();
+        ref = FirebaseDatabase.getInstance().getReference("CollegeNames");
 
+        ArrayList<College> finalColleges = new ArrayList<>();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+
+            }
+        }).start();
 
     }
 
