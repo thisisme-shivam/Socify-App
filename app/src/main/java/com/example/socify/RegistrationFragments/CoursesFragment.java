@@ -1,4 +1,4 @@
-package com.example.socify.Fragement_registration;
+package com.example.socify.RegistrationFragments;
 
 import android.os.Bundle;
 
@@ -12,23 +12,24 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.socify.Activities.Registration;
+import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentCoursesBinding;
-import com.example.socify.databinding.FragmentGetCollegeBinding;
-import com.example.socify.databinding.FragmentInterestsBinding;
 
 public class CoursesFragment extends Fragment {
 
     FragmentCoursesBinding binding;
     public Registration registration;
+    SendProfileData sendProfileData = new SendProfileData();
 
     public void setonclicklisteners() {
-        binding.next2btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                InterestsFragment interestsFragment = new InterestsFragment();
-                getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, interestsFragment).commit();
-            }
+        binding.next2btn.setOnClickListener(v -> {
+            registration.details.setCourse("CSE");
+            //Sending Course
+            sendProfileData.sendCourse();
+
+            InterestsFragment interestsFragment = new InterestsFragment();
+            getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, interestsFragment).commit();
         });
     }
 

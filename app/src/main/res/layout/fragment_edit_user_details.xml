@@ -4,138 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationFragments.ProfilePic">
+    tools:context=".HomeFragments.EditUserDetails">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="215dp"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profile_actionbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="98dp"
-        android:layout_marginBottom="18dp"
-        android:fontFamily="@font/osr"
-        android:gravity="center"
-        android:text="Be more social with Socify! Let us know more about yourself."
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/profile_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/backbtn"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/flag_transparent"
+            android:src="@drawable/backicon"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/ep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="121dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="97dp"
+            android:text="Edit Profile"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/savebtn"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/backbtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/savebtn"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:shadowColor="@color/palette_light_teal"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/flag_transparent"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/palette_teal"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.55" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="149dp"
-        android:layout_height="148dp"
-        android:layout_marginStart="131dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="131dp"
-        android:layout_marginBottom="21dp"
-        android:src="@drawable/user"
-        app:civ_border_color="#FF000000"
-        app:civ_border_width="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/addpic"
+        android:id="@+id/editprof_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="156dp"
+        android:src="@drawable/doge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_actionbar" />
 
-    <TextView
-        android:id="@+id/addpic"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="112dp"
-        android:fontFamily="@font/osr"
-        android:gravity="center"
-        android:text="Add your picture"
-        android:textColor="@color/palette_teal"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+        android:src="@drawable/plusprof"
+        app:layout_constraintBottom_toBottomOf="@+id/editprof_pic"
+        app:layout_constraintEnd_toEndOf="@+id/editprof_pic"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintStart_toStartOf="@+id/editprof_pic"
+        app:layout_constraintTop_toTopOf="@+id/editprof_pic"
+        app:layout_constraintVertical_bias="0.892" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nametextlayout"
+        android:id="@+id/name_edit"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="40dp"
-        android:hint="Enter your name"
-        android:textColorHint="@color/text_grey"
-        app:boxStrokeColor="@color/black"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/black"
-        app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addpic"
-        app:startIconDrawable="@drawable/usernameicon"
-        app:startIconTint="@color/black">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nametext"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/osr"
-            android:lines="1"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/yoptextlayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="331dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="40dp"
-        android:hint="Year of Passing"
-        android:textColorHint="@color/text_grey"
-        app:boxStrokeColor="@color/black"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/black"
-        app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/biolayout"
-        app:startIconDrawable="@drawable/passingyear"
-        app:startIconTint="@color/black">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passingyeartext"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/osr"
-            android:inputType="numberSigned"
-            android:lines="1"
-            android:maxLength="4"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/biolayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="331dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="40dp"
-        android:hint="Describe yourself"
+        android:hint="Edit Your Name"
         android:textColorHint="@color/text_grey"
         app:boxStrokeColor="@color/black"
         app:endIconMode="clear_text"
@@ -144,16 +102,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nametextlayout"
-        app:startIconDrawable="@drawable/bio"
+        app:startIconDrawable="@drawable/usernameicon"
         app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/biotext"
+            android:id="@+id/name_edit_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/osr"
             android:lines="1"
-            android:maxLength="50"
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="@color/black"
@@ -161,16 +118,15 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/agelayout"
+        android:id="@+id/nametextlayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="40dp"
-        android:hint="Age"
+        android:hint="Edit Your Bio"
         android:textColorHint="@color/text_grey"
         app:boxStrokeColor="@color/black"
         app:endIconMode="clear_text"
@@ -178,18 +134,16 @@
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yoptextlayout"
-        app:startIconDrawable="@drawable/usernameicon"
+        app:layout_constraintTop_toBottomOf="@+id/editprof_pic"
+        app:startIconDrawable="@drawable/bio"
         app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/agetext"
+            android:id="@+id/bio_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/osr"
-            android:inputType="numberSigned"
             android:lines="1"
-            android:maxLength="2"
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="@color/black"
@@ -197,17 +151,71 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/nextbtn"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passyear"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="331dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="#D8D9D9"
-        android:foregroundGravity="center"
-        android:src="@drawable/arrowgrey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:hint="Edit Your Passing Year"
+        android:textColorHint="@color/text_grey"
+        app:boxStrokeColor="@color/black"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/black"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_edit"
+        app:startIconDrawable="@drawable/passingyear"
+        app:startIconTint="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passyear_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/osr"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/age"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="40dp"
+        android:hint="Edit Your Age"
+        android:textColorHint="@color/text_grey"
+        app:boxStrokeColor="@color/black"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/black"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passyear"
+        app:startIconDrawable="@drawable/passingyear"
+        app:startIconTint="@color/black">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/age_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/osr"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.socify.Fragement_registration;
+package com.example.socify.RegistrationFragments;
 
 import android.content.ContentResolver;
 import android.content.Intent;

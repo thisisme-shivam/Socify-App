@@ -19,6 +19,7 @@ import com.example.socify.Activities.SplashActivity;
 import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.Classes.College;
 import com.example.socify.R;
+import com.example.socify.RegistrationFragments.CoursesFragment;
 import com.example.socify.databinding.FragmentGetCollegeBinding;
 import com.facebook.shimmer.ShimmerFrameLayout;
 

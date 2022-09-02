@@ -1,4 +1,4 @@
-package com.example.socify.Fragement_registration;
+package com.example.socify.RegistrationFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 
 import com.example.socify.Activities.Home;
 import com.example.socify.Activities.Registration;
+import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentInterestsBinding;
 
@@ -26,28 +27,27 @@ import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
 
 public class InterestsFragment extends Fragment {
 
+    SendProfileData sendProfileData = new SendProfileData();
+
     ArrayList<String> tags;
-    public void hasalphabets() {
-
-    }
-
     FragmentInterestsBinding binding;
-    public Registration registration;
+    public Registration registration = (Registration) getActivity();
     public void onclicklisteners() {
-        binding.finishbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<ThemedButton> str = binding.groupedtags.getSelectedButtons();
-                for(ThemedButton but : str){
-                    String newstr = but.getText().replaceAll("[^A-Za-z]+", "");
-                    tags.add(newstr);
-                    Log.i("string",newstr);
-                }
+        binding.finishbtn.setOnClickListener(v -> {
+            //Getting text from tapped tags
+            List<ThemedButton> str = binding.groupedtags.getSelectedButtons();
+            for(ThemedButton but : str){
+                String newstr = but.getText().replaceAll("[^A-Za-z]+", "");
+                tags.add(newstr);
+                registration.details.setTags(tags);
+                //Uploading Tags
+                sendProfileData.sendTags();
+                Log.i("string",newstr);
+
                 Intent intent = new Intent(getActivity(), Home.class);
                 startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -61,10 +61,8 @@ public class InterestsFragment extends Fragment {
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(100);
         tags = new ArrayList<>();
-        registration = (Registration) getActivity();
-        registration.details.setTags(tags);
-
         binding.groupedtags.setSelectAnimation(SelectAnimation.CIRCULAR_REVEAL);
+        binding.groupedtags.setSelectableAmount(5);
         onclicklisteners();
     }
 
