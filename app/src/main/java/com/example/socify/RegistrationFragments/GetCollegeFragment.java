@@ -96,6 +96,7 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
         binding = FragmentGetCollegeBinding.inflate(getLayoutInflater());
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(60);
+
         rec = view.findViewById(R.id.CollegeListRV);
         rec.setHasFixedSize(true);
         rec.setLayoutManager(new LinearLayoutManager(getContext()));

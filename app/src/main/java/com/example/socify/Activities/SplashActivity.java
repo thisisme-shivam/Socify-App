@@ -25,8 +25,7 @@ import java.util.HashMap;
 public class SplashActivity extends AppCompatActivity {
     DatabaseReference ref;
     public static ArrayList<College> colleges;
-    HashMap<String,Object> map;
-    DataSnapshot snap;
+
     FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,6 @@ public class SplashActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             for (DataSnapshot snapshot : snapshot.getChildren()) {
-
                                 College college = snapshot.getValue(College.class);
                                 colleges.add(college);
 
