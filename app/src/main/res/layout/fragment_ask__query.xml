@@ -52,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <com.skydoves.powerspinner.PowerSpinnerView
-        android:id="@+id/powerSpinnerView"
+        android:id="@+id/categories"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginHorizontal="20dp"
@@ -96,7 +96,7 @@
         android:textStyle="bold"
         app:fontFamily="@font/osr"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/powerSpinnerView" />
+        app:layout_constraintTop_toBottomOf="@+id/categories" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/questionlayout"
@@ -130,6 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="154dp"
         android:layout_marginEnd="154dp"
+        android:id="@+id/askbtn"
         android:layout_marginBottom="32dp"
         android:background="@drawable/rounded_dropdown"
         android:text="Ask Now"

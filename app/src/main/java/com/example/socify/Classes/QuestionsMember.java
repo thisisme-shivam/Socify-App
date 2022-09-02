@@ -1,12 +1,24 @@
 package com.example.socify.Classes;
 
 public class QuestionsMember {
-    String name,url,userid,key,question,time;
+
+    String name,url,userid,key,question,time,tag;
+
+    public QuestionsMember() {
+
+    }
 
     public String getName() {
         return name;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
     public void setName(String name) {
         this.name = name;
     }

@@ -135,6 +135,50 @@ public class Home extends AppCompatActivity {
 
     }
 
+    private void showDialogAccess() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.post_popup);
+
+        LinearLayout query = dialog.findViewById(R.id.querycreate);
+        LinearLayout post = dialog.findViewById(R.id.postcreate);
+        LinearLayout community = dialog.findViewById(R.id.communitycreate);
+
+        query.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Code for query creation to be written here
+                Toast.makeText(Home.this, "Query selected", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Home.this, QnA.class));
+            }
+        });
+
+        post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Code for post creation to be written here
+                Toast.makeText(Home.this, "Post selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        community.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Code for community creation to be written here
+                Toast.makeText(Home.this, "Community selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

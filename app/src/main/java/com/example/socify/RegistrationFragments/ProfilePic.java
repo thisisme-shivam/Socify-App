@@ -19,6 +19,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.socify.Activities.CropperActivity;
 import com.example.socify.Activities.Registration;
+import com.example.socify.FireBaseClasses.SendProfileData;
+import com.example.socify.R;
+import com.example.socify.databinding.FragmentProfilePicBinding;
 import com.example.socify.Classes.College;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfilePicBinding;
@@ -48,8 +51,8 @@ public class ProfilePic extends Fragment {
     FirebaseFirestore db;
     DocumentReference documentReference;
     ActivityResultLauncher<String> mTakePhoto;
-    String Name, Yop;
-
+    String Name, Yop, age, bio;
+    static SendProfileData sendProfileData = new SendProfileData();
     public void FieldValidation() {
         //Field Validation
        if(binding.nametext.getText().toString().isEmpty()){
@@ -64,6 +67,20 @@ public class ProfilePic extends Fragment {
         }
         else{
             Yop = binding.passingyeartext.getText().toString();
+        }
+
+        if(binding.biotext.getText().toString().isEmpty()){
+            binding.biolayout.setError("cannot be empty");
+        }
+        else{
+            bio = binding.biotext.getText().toString();
+        }
+
+        if(binding.agetext.getText().toString().isEmpty()){
+            binding.agelayout.setError("cannot be empty");
+        }
+        else{
+            age = binding.agetext.getText().toString();
         }
 
     }
@@ -89,8 +106,27 @@ public class ProfilePic extends Fragment {
                     registration = (Registration) getActivity();
                     registration.details.setName(Name);
                     registration.details.setPassyear(Yop);
+                    registration.details.setAge(age);
+                    registration.details.setBio(bio);
+
+                    //To be deleted Later
+                    registration.details.setCollege_name("SISTEC");
+
+                    //Sending Data
+                    sendProfileData.sendImg();
+                    sendProfileData.sendName();
+                    sendProfileData.sendpassyear();
+                    sendProfileData.sendCurrentUID();
+                    sendProfileData.sendDOB();
+                    sendProfileData.sendBio();
+
+                    //Switching to new fragment
                     UserNameFragment userNameFragment = new UserNameFragment();
                     getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, userNameFragment).commit();
+                    Log.e("Yop", Yop);
+                    Log.e("Age", age);
+                    Log.e("bio", bio);
+                    Log.e("ImgURL", imgUrl.toString());
                     Log.e("Yop", Yop);
                 }
             }
