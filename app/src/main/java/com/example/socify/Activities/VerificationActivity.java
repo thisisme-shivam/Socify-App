@@ -150,9 +150,7 @@ public class VerificationActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         //getting instatnce of firebase
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+
                 fauth = FirebaseAuth.getInstance();
                 // otp input dialog setup
                 otpDialog = new Dialog(VerificationActivity.this);
@@ -174,8 +172,6 @@ public class VerificationActivity extends AppCompatActivity {
                 setOnclicklistners();
 
                 progressBar = (ProgressBar) progressDialog.findViewById(R.id.spin_kit);
-            }
-        }, 0);
 
 
     }

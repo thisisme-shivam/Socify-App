@@ -165,6 +165,7 @@ public class ProfilePic extends Fragment {
             if(result!=null) {
                 resultUri = Uri.parse(result);
                 imgUrl = resultUri;
+                registration.details.setImgUri(String.valueOf(Uri.parse(String.valueOf(imgUrl))));
             }
             binding.profileImage.setImageURI(imgUrl);
         }

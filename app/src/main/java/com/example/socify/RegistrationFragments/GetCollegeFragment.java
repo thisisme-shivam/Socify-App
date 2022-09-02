@@ -1,52 +1,92 @@
 package com.example.socify.RegistrationFragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.os.Handler;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.example.socify.Activities.Registration;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.socify.Activities.SplashActivity;
 import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.Classes.College;
-import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
+import com.example.socify.RegistrationFragments.CoursesFragment;
 import com.example.socify.databinding.FragmentGetCollegeBinding;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 
 
-public class GetCollegeFragment extends Fragment {
+public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.CollegeViewHolder.Onitemclicked {
 
     FragmentGetCollegeBinding binding;
-    DatabaseReference ref;
-    ArrayList<College> colleges;
+
+
     GetCollegeAdapter adapter;
-    Registration registration;
-    SendProfileData sendProfileData = new SendProfileData();
+    Thread th = new Thread();
+    boolean notstopped  ;
+    RecyclerView rec;
+    ShimmerFrameLayout layout;
+    Handler hand = new Handler();
+    private void filter(String newText){
+        rec.setVisibility(View.GONE);
+        layout.setVisibility(View.VISIBLE);
+        layout.startShimmer();
+
+        ArrayList<College> filteredlist = new ArrayList<>();
+        notstopped = false;
+        th =new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(College college : SplashActivity.colleges ){
+                    if(notstopped)
+                        break;
+
+                    if(college.getCollege_name().toLowerCase().contains(newText.toLowerCase())){
+                        Log.i("college name " , college.getCollege_name());
+                        filteredlist.add(college);
+                    }
+                }
+
+
+                hand.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("Entering","fjdklsajf");
+
+                        adapter.filterlist(filteredlist);
+                        layout.stopShimmer();
+                        layout.setVisibility(View.GONE);
+                        rec.setVisibility(View.VISIBLE);
+
+                    }
+                });
+
+            }
+        });
+        th.start();
+
+
+
+    }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        colleges = new ArrayList<>();
 
-         ref = FirebaseDatabase.getInstance().getReference("CollegeNames");
-//         adapter = new GetCollegeAdapter(getContext(),colleges);
+
+
+
 
     }
 
@@ -56,38 +96,29 @@ public class GetCollegeFragment extends Fragment {
         binding = FragmentGetCollegeBinding.inflate(getLayoutInflater());
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(60);
-        RecyclerView rec = view.findViewById(R.id.CollegeListRV);
+        rec = view.findViewById(R.id.CollegeListRV);
         rec.setHasFixedSize(true);
         rec.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        adapter = new GetCollegeAdapter(getContext(),SplashActivity.colleges,this);
         rec.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
+        layout = getView().findViewById(R.id.shimmer_view_container);
 
-        binding.searchCollege.setOnKeyListener(new View.OnKeyListener() {
+        SearchView seachview = getView().findViewById(R.id.search_college);
+
+        seachview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                adapter.notifyDataSetChanged();
-                return true;
-            }
-        });
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int i=0;
-                for(DataSnapshot snap : snapshot.getChildren()){
-                    College college = snap.getValue(College.class);
-                    assert college != null;
-                    Log.i("collegename",college.getCollege_name());
-                    colleges.add(college);
-                    ++i;
-                    if(i==1)
-                        break;
-                }
-                adapter.notifyDataSetChanged();
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public boolean onQueryTextChange(String newText) {
+                notstopped = true;
+                filter(newText);
+                return false;
             }
         });
     }
@@ -103,11 +134,15 @@ public class GetCollegeFragment extends Fragment {
 
     private void onclicklisteners() {
         binding.next3btn.setOnClickListener(v -> {
-            registration.details.setCollege_name("SISTEC");
-            //Sending College Name
-            sendProfileData.sendCollegeName();
             CoursesFragment coursesFragment = new CoursesFragment();
             getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, coursesFragment).commit();
         });
     }
+
+    @Override
+    public void onclick(int position) {
+        Log.i("COllege name is " ,SplashActivity.colleges.get(position).getCollege_name().toString());
+    }
+
+
 }
