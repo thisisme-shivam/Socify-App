@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.Gravity;
@@ -149,27 +150,39 @@ public class VerificationActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         //getting instatnce of firebase
-        fauth = FirebaseAuth.getInstance();
-        // otp input dialog setup
-        otpDialog = new Dialog(VerificationActivity.this);
-        otpDialog.setCancelable(false);
-        otpDialog.setContentView(R.layout.otp_verification);
-        otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
-        close_dialog = otpDialog.findViewById(R.id.close_icon);
-        otpDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                fauth = FirebaseAuth.getInstance();
+                // otp input dialog setup
+                otpDialog = new Dialog(VerificationActivity.this);
+                otpDialog.setCancelable(false);
+                otpDialog.setContentView(R.layout.otp_verification);
+                otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
+                close_dialog = otpDialog.findViewById(R.id.close_icon);
+                otpDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
 
 
-        binding.phoneInput.requestFocus();
-        progressDialog = new Dialog(VerificationActivity.this);
-        progressDialog.setCancelable(false);
-        progressDialog.setContentView(R.layout.progressdialog);
-        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                binding.phoneInput.requestFocus();
+                progressDialog = new Dialog(VerificationActivity.this);
+                progressDialog.setCancelable(false);
+                progressDialog.setContentView(R.layout.progressdialog);
+                progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
-        //setting on click listeners for required views
-        setOnclicklistners();
+                //setting on click listeners for required views
+                setOnclicklistners();
 
-        progressBar = (ProgressBar) progressDialog.findViewById(R.id.spin_kit);
+                progressBar = (ProgressBar) progressDialog.findViewById(R.id.spin_kit);
+            }
+        }, 0);
 
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        otpDialog.dismiss();
     }
 }

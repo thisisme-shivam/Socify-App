@@ -1,6 +1,7 @@
 package com.example.socify.Classes;
 
 public class QuestionsMember {
+
     String name,url,userid,key,question,time,tag;
 
     public QuestionsMember() {
@@ -18,7 +19,6 @@ public class QuestionsMember {
     public void setTag(String tag) {
         this.tag = tag;
     }
-
     public void setName(String name) {
         this.name = name;
     }
