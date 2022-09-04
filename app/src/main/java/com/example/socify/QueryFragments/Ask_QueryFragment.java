@@ -62,6 +62,7 @@ public class Ask_QueryFragment extends Fragment {
                 member.setTime(time);
                 member.setUserid(UID);
                 member.setUrl(url);
+                member.setTag(tag);
 
                 String id = UserQuestions.push().getKey();
                 UserQuestions.child(id).setValue(member);

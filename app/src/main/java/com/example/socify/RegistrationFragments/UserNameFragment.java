@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.socify.Activities.Registration;
+import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentNameFragementBinding;
@@ -26,8 +27,6 @@ public class UserNameFragment extends Fragment {
     FragmentNameFragementBinding binding;
     String Username, Password;
     SendProfileData sendProfileData = new SendProfileData();
-    public Registration registration = (Registration) getActivity();
-
 
     public void onclicklisteners() {
         binding.nextbtn.setOnClickListener(new View.OnClickListener() {

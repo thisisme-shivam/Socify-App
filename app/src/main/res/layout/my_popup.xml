@@ -3,39 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/popup_bg"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/popup_bg">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="281dp"
+        android:layout_marginBottom="10dp"
         android:text="Access"
-        app:fontFamily="@font/osr"
         android:textColor="@color/black"
         android:textSize="26dp"
-        android:layout_margin="20dp"
+        app:fontFamily="@font/osr"
+        app:layout_constraintBottom_toTopOf="@+id/myqueries"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/querycreate"
+        android:id="@+id/myqueries"
         android:layout_width="match_parent"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="9dp"
         android:background="?selectableItemBackground"
-        android:layout_marginTop="20dp"
         android:clickable="true"
+        android:focusable="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialTextView3"
-        android:focusable="true">
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView3">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginVertical="5dp"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="5dp"
             android:src="@drawable/question" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -43,31 +50,33 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            app:fontFamily="@font/osr"
             android:text="My Queries"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:fontFamily="@font/osr" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/postcreate"
-        android:clickable="true"
+        android:id="@+id/mygroups"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/querycreate"
-        android:focusable="true">
+        app:layout_constraintTop_toBottomOf="@+id/myqueries">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginVertical="5dp"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="5dp"
             android:src="@drawable/post" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -75,32 +84,33 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            app:fontFamily="@font/osr"
             android:text="My Groups"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:fontFamily="@font/osr" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/communitycreate"
+        android:id="@+id/mycommunities"
         android:layout_width="match_parent"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:background="?selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postcreate">
+        app:layout_constraintTop_toBottomOf="@+id/mygroups">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginVertical="5dp"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="5dp"
             android:src="@drawable/post" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -122,8 +132,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="9dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.315"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/communitycreate" />
+        app:layout_constraintTop_toBottomOf="@+id/mycommunities" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

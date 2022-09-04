@@ -43,16 +43,10 @@ public class ProfilePic extends Fragment {
 
     FragmentProfilePicBinding binding;
     Uri imgUrl;
-    public Registration registration;
-    final int PICK_IMAGE = 1;
-    UploadTask uploadTask;
-    FirebaseStorage firebaseStorage;
-    StorageReference storageReference;
-    FirebaseFirestore db;
-    DocumentReference documentReference;
     ActivityResultLauncher<String> mTakePhoto;
     String Name, Yop, age, bio;
     static SendProfileData sendProfileData = new SendProfileData();
+
     public void FieldValidation() {
         //Field Validation
        if(binding.nametext.getText().toString().isEmpty()){
@@ -103,14 +97,13 @@ public class ProfilePic extends Fragment {
             public void onClick(View v) {
                 FieldValidation();
                 if(Name!=null && Yop!=null) {
-                    registration = (Registration) getActivity();
-                    registration.details.setName(Name);
-                    registration.details.setPassyear(Yop);
-                    registration.details.setAge(age);
-                    registration.details.setBio(bio);
+                    Registration.details.setName(Name);
+                    Registration.details.setPassyear(Yop);
+                    Registration.details.setAge(age);
+                    Registration.details.setBio(bio);
 
                     //To be deleted Later
-                    registration.details.setCollege_name("SISTEC");
+                    Registration.details.setCollege_name("SISTEC");
 
                     //Sending Data
                     sendProfileData.sendImg();
@@ -165,7 +158,7 @@ public class ProfilePic extends Fragment {
             if(result!=null) {
                 resultUri = Uri.parse(result);
                 imgUrl = resultUri;
-                registration.details.setImgUri(String.valueOf(Uri.parse(String.valueOf(imgUrl))));
+                Registration.details.setImgUri(String.valueOf(Uri.parse(String.valueOf(imgUrl))));
             }
             binding.profileImage.setImageURI(imgUrl);
         }

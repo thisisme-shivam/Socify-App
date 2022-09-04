@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.socify.Activities.CropperActivity;
 import com.example.socify.Activities.Home;
+import com.example.socify.Activities.Registration;
 import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentEditUserDetailsBinding;
@@ -45,10 +46,10 @@ import java.util.HashMap;
 public class EditUserDetails extends Fragment {
 
     FragmentEditUserDetailsBinding binding;
+    ActivityResultLauncher<String> mTakePhoto;
     String currentUID  = FirebaseAuth.getInstance().getCurrentUser().getUid();
     DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    StorageReference storageReference;
 
 
     public void updateProfile() {
@@ -114,7 +115,6 @@ public class EditUserDetails extends Fragment {
 
     }
 
-
     public void setonclicklisteners() {
 
         binding.savebtn.setOnClickListener(new View.OnClickListener() {
@@ -128,5 +128,37 @@ public class EditUserDetails extends Fragment {
         });
 
     }
+
+
+
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(resultCode==-1 && requestCode==101) {
+//            assert data != null;
+//            String result = data.getStringExtra("RESULT");
+//            Log.i("Result", result);
+//            Uri resultUri = null;
+//            if(result!=null) {
+//                resultUri = Uri.parse(result);
+////                imgUrl = resultUri;
+////                Registration.details.setImgUri(String.valueOf(Uri.parse(String.valueOf(imgUrl))));
+//            }
+////            binding.profileImage.setImageURI(imgUrl);
+//        }
+//
+//
+//        public String getFileExt(Uri uri) {
+//            ContentResolver contentResolver = requireContext().getContentResolver();
+//            MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+//            return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+//        }
+//
+//    }
+
+
+
+
 
 }

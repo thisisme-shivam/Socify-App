@@ -19,12 +19,11 @@ import com.example.socify.databinding.FragmentCoursesBinding;
 public class CoursesFragment extends Fragment {
 
     FragmentCoursesBinding binding;
-    public Registration registration;
     SendProfileData sendProfileData = new SendProfileData();
 
     public void setonclicklisteners() {
         binding.next2btn.setOnClickListener(v -> {
-            registration.details.setCourse("CSE");
+            Registration.details.setCourse("CSE");
             //Sending Course
             sendProfileData.sendCourse();
 
