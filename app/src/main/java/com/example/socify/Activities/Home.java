@@ -81,6 +81,7 @@ public class Home extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
                 setIcon(3);
                 lastSelected = 3;
+                showDialogAccess();
             }
             else if(item.getItemId() == R.id.profile){
                 getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, profileFragment).commit();
@@ -98,9 +99,9 @@ public class Home extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.post_popup);
 
-        LinearLayout query = dialog.findViewById(R.id.querycreate);
-        LinearLayout post = dialog.findViewById(R.id.postcreate);
-        LinearLayout community = dialog.findViewById(R.id.communitycreate);
+        LinearLayout query = dialog.findViewById(R.id.askquery);
+        LinearLayout post = dialog.findViewById(R.id.createpost);
+        LinearLayout community = dialog.findViewById(R.id.mycommunities);
 
         query.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +109,7 @@ public class Home extends AppCompatActivity {
                 //Code for query creation to be written here
                 Toast.makeText(Home.this, "Query selected", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(Home.this, QnA.class));
+                QnA.fragwitch =0;
             }
         });
 
@@ -138,22 +140,23 @@ public class Home extends AppCompatActivity {
     private void showDialogAccess() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.post_popup);
+        dialog.setContentView(R.layout.my_popup);
 
-        LinearLayout query = dialog.findViewById(R.id.querycreate);
-        LinearLayout post = dialog.findViewById(R.id.postcreate);
-        LinearLayout community = dialog.findViewById(R.id.communitycreate);
+        LinearLayout myquery = dialog.findViewById(R.id.myqueries);
+        LinearLayout mygroups = dialog.findViewById(R.id.mygroups);
+        LinearLayout mycommunity = dialog.findViewById(R.id.mycommunities);
 
-        query.setOnClickListener(new View.OnClickListener() {
+        myquery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Code for query creation to be written here
-                Toast.makeText(Home.this, "Query selected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Home.this, "MYQuery selected", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(Home.this, QnA.class));
+                QnA.fragwitch =1;
             }
         });
 
-        post.setOnClickListener(new View.OnClickListener() {
+        mygroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Code for post creation to be written here
@@ -161,7 +164,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        community.setOnClickListener(new View.OnClickListener() {
+        mycommunity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Code for community creation to be written here
@@ -174,7 +177,6 @@ public class Home extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
-
     }
 
 

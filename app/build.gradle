@@ -72,6 +72,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:20.0.1'
     implementation 'com.google.firebase:firebase-firestore:24.2.2'
     implementation 'com.google.firebase:firebase-auth:21.0.7'
+    implementation 'com.firebaseui:firebase-ui-database:8.0.1'
 
     //Custom Spinner
     implementation "com.github.skydoves:powerspinner:1.2.4"

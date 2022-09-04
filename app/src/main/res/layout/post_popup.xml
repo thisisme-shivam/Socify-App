@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/querycreate"
+        android:id="@+id/askquery"
         android:layout_width="match_parent"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/postcreate"
+        android:id="@+id/createpost"
         android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
         android:background="?selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/querycreate"
+        app:layout_constraintTop_toBottomOf="@+id/askquery"
         android:focusable="true">
 
         <ImageView
@@ -83,7 +83,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/communitycreate"
+        android:id="@+id/mycommunities"
         android:layout_width="match_parent"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postcreate">
+        app:layout_constraintTop_toBottomOf="@+id/createpost">
 
         <ImageView
             android:layout_width="24dp"
@@ -124,6 +124,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.315"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/communitycreate" />
+        app:layout_constraintTop_toBottomOf="@+id/mycommunities" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

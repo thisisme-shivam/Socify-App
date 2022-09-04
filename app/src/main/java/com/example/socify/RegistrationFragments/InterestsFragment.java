@@ -28,10 +28,9 @@ import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
 public class InterestsFragment extends Fragment {
 
     SendProfileData sendProfileData = new SendProfileData();
-
     ArrayList<String> tags;
     FragmentInterestsBinding binding;
-    public Registration registration = (Registration) getActivity();
+
     public void onclicklisteners() {
         binding.finishbtn.setOnClickListener(v -> {
             //Getting text from tapped tags
@@ -39,7 +38,7 @@ public class InterestsFragment extends Fragment {
             for(ThemedButton but : str){
                 String newstr = but.getText().replaceAll("[^A-Za-z]+", "");
                 tags.add(newstr);
-                registration.details.setTags(tags);
+                Registration.details.setTags(tags);
                 //Uploading Tags
                 sendProfileData.sendTags();
                 Log.i("string",newstr);

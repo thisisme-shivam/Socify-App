@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.socify.Activities.Registration;
 import com.example.socify.Activities.SplashActivity;
 import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.HelperClasses.OptimizedSearchCollege;
@@ -42,13 +43,9 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
         rec.setVisibility(View.GONE);
         layout.setVisibility(View.VISIBLE);
         layout.startShimmer();
-
         optimizedSearch.startSearch(newText);
 
-
-
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -114,6 +111,7 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
     private void onclicklisteners() {
         binding.next3btn.setOnClickListener(v -> {
             CoursesFragment coursesFragment = new CoursesFragment();
+            Registration.details.setCollege_name("Sagar Institute of Science and Technology");
             getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, coursesFragment).commit();
         });
     }

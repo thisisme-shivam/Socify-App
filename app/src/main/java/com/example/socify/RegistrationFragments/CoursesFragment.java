@@ -36,7 +36,6 @@ import java.util.jar.JarEntry;
 public class CoursesFragment extends Fragment implements GetCollegeAdapter.CollegeViewHolder.Onitemclicked {
 
     FragmentCoursesBinding binding;
-    public Registration registration;
     SendProfileData sendProfileData = new SendProfileData();
     public GetCourseAdapter adapter;
     public ShimmerFrameLayout shimmerFrameLayout;
@@ -47,8 +46,10 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
     CountDownTimer cntr;
     Integer waitingTime =200;
     public void setonclicklisteners() {
-        binding.next3btn.setOnClickListener(v -> {
-            registration.details.setCourse("CSE");
+
+        binding.next2btn.setOnClickListener(v -> {
+            Registration.details.setCourse("CSE");
+
             //Sending Course
             sendProfileData.sendCourse();
 

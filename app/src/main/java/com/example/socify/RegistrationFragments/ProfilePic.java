@@ -43,16 +43,11 @@ public class ProfilePic extends Fragment {
 
     FragmentProfilePicBinding binding;
     Uri imgUrl;
-    
-    final int PICK_IMAGE = 1;
-    UploadTask uploadTask;
-    FirebaseStorage firebaseStorage;
-    StorageReference storageReference;
-    FirebaseFirestore db;
-    DocumentReference documentReference;
+
     ActivityResultLauncher<String> mTakePhoto;
     String Name, Yop, age, bio;
     static SendProfileData sendProfileData = new SendProfileData();
+
     public void FieldValidation() {
         //Field Validation
        if(binding.nametext.getText().toString().isEmpty()){
@@ -103,7 +98,7 @@ public class ProfilePic extends Fragment {
             public void onClick(View v) {
                 FieldValidation();
                 if(Name!=null && Yop!=null) {
-                    
+
                     Registration.details.setName(Name);
                     Registration.details.setPassyear(Yop);
                     Registration.details.setAge(age);

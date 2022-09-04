@@ -32,7 +32,6 @@ public class SendProfileData {
     UploadTask uploadTask;
     String currentUID;
     StorageReference storageReference;
-    Registration registration;
     DocumentReference documentReference;
     CollectionReference collectionReference;
     public static HashMap<String, String> profile = new HashMap<>();
@@ -50,9 +49,9 @@ public class SendProfileData {
 
     public void sendImg() {
         initialization();
-        if(registration.details.getImgUri()!="No Image") {
-            final StorageReference reference = storageReference.child(registration.details.getImgUri());
-            uploadTask = reference.putFile(Uri.parse(registration.details.getImgUri()));
+        if(Registration.details.getImgUri()!="No Image") {
+            final StorageReference reference = storageReference.child(Registration.details.getImgUri());
+            uploadTask = reference.putFile(Uri.parse(Registration.details.getImgUri()));
             Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -87,31 +86,31 @@ public class SendProfileData {
 
     public void sendName() {
         initialization();
-        profile.put("Name", registration.details.getName());
+        profile.put("Name", Registration.details.getName());
         uploadtoCloud();
     }
 
     public void sendpassyear() {
         initialization();
-        profile.put("Passing Year", registration.details.getPassyear());
+        profile.put("Passing Year", Registration.details.getPassyear());
         uploadtoCloud();
     }
 
     public void sendUsername() {
         initialization();
-        profile.put("Username", registration.details.getUsername());
+        profile.put("Username", Registration.details.getUsername());
         uploadtoCloud();
     }
 
     public void sendPassword() {
         initialization();
-        profile.put("Password", registration.details.getPassword());
+        profile.put("Password", Registration.details.getPassword());
         uploadtoCloud();
     }
 
     public void sendCollegeName() {
         initialization();
-        profile.put("CollegeName", registration.details.getCollege_name());
+        profile.put("CollegeName", Registration.details.getCollege_name());
         uploadtoCloud();
     }
     public void sendCurrentUID() {
@@ -121,19 +120,19 @@ public class SendProfileData {
     }
     public void sendCourse() {
         initialization();
-        profile.put("Course", registration.details.getCourse());
+        profile.put("Course", Registration.details.getCourse());
         uploadtoCloud();
     }
 
     public void sendDOB() {
         initialization();
-        profile.put("Age", registration.details.getAge());
+        profile.put("Age", Registration.details.getAge());
         uploadtoCloud();
     }
 
     public void sendBio() {
         initialization();
-        profile.put("Bio", registration.details.getBio());
+        profile.put("Bio", Registration.details.getBio());
         uploadtoCloud();
     }
 
@@ -141,7 +140,7 @@ public class SendProfileData {
         currentUID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         storageReference = FirebaseStorage.getInstance().getReference("Profile Images");
         documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
-        interests.put("Tags", registration.details.getTags());
+        interests.put("Tags", Registration.details.getTags());
         documentReference.collection("Interests").document("UserTags").set(interests);
     }
 }
