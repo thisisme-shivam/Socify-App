@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
 
 import com.example.socify.Adapters.SlideViewPagerAdapter;
 import com.example.socify.R;
@@ -21,26 +22,17 @@ public class SlideScreen extends AppCompatActivity {
         binding = ActivitySlideScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         slideViewPagerAdapter = new SlideViewPagerAdapter(this);
         binding.ViewPager.setAdapter(slideViewPagerAdapter);
 
-
-
-        SlideViewPagerAdapter slideViewPagerAdapter = new SlideViewPagerAdapter(this);
+        slideViewPagerAdapter = new SlideViewPagerAdapter(this);
         binding.ViewPager.setAdapter(slideViewPagerAdapter);
         binding.dotsIndicator.setViewPager(binding.ViewPager);
 
         binding.Loginbtn.setOnClickListener(v ->
         {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    startActivity(new Intent(SlideScreen.this, Login.class));
-                    finish();
-                }
-            }, 400);
-
-
+            startActivity(new Intent(getApplicationContext(),Login.class));
         } );
 
         binding.Signupbtn.setOnClickListener(v -> {
@@ -51,12 +43,5 @@ public class SlideScreen extends AppCompatActivity {
 
     }
 
-    public static class MainActivity extends AppCompatActivity {
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-        }
-    }
 }

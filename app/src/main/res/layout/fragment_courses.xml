@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".RegistrationFragments.CoursesFragment">
+    tools:context=".RegistrationFragments.GetCollegeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -22,76 +22,78 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="60dp"
             android:layout_marginTop="60dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/osr"
             android:gravity="center"
-            android:text="Find your degree course"
+            android:text="Search Your Course"
             android:textColor="@color/black"
             android:textSize="32sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/search_college"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/LayoutSearch"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_course"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginVertical="35dp"
-            android:layout_marginTop="1000dp"
-            android:textColorHint="@color/text_grey"
-            app:boxStrokeColor="@color/black"
-            app:endIconMode="clear_text"
-            app:endIconTint="@color/black"
-            app:hintTextColor="@color/black"
+            android:layout_margin="10dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="81dp"
+            android:background="@drawable/search_view_bg"
+            android:elevation="5dp"
+
+            app:iconifiedByDefault="false"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.336"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10"
-            app:startIconDrawable="@drawable/ic_baseline_search_24"
-            app:startIconTint="@color/black">
+            app:queryHint="Search" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Searchbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="100dp"
-                android:fontFamily="@font/osr"
-                android:hint="Search your course"
-                android:lines="1"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/CoursesListRV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_course">
+
+
+            <include layout="@layout/shimmercollege" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/CoursesListRV"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/LayoutSearch"
-            app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/courses_name_list" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/next2btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="#D8D9D9"
-            android:foregroundGravity="center"
-            android:src="@drawable/arrowgrey"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/search_course"
+            tools:listitem="@layout/college_name_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/next3btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#D8D9D9"
+
+        android:foregroundGravity="center"
+        android:src="@drawable/arrowgrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

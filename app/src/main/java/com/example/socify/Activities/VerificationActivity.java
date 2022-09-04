@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.Gravity;
@@ -25,6 +26,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.ThemedSpinnerAdapter;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
@@ -151,28 +153,23 @@ public class VerificationActivity extends AppCompatActivity {
 
         //getting instatnce of firebase
 
+
                 fauth = FirebaseAuth.getInstance();
-                // otp input dialog setup
                 otpDialog = new Dialog(VerificationActivity.this);
                 otpDialog.setCancelable(false);
                 otpDialog.setContentView(R.layout.otp_verification);
                 otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
                 close_dialog = otpDialog.findViewById(R.id.close_icon);
-                otpDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-
-
-                binding.phoneInput.requestFocus();
+                otpDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM) ;
+                setOnclicklistners();;
                 progressDialog = new Dialog(VerificationActivity.this);
                 progressDialog.setCancelable(false);
                 progressDialog.setContentView(R.layout.progressdialog);
                 progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
-                //setting on click listeners for required views
-                setOnclicklistners();
-
                 progressBar = (ProgressBar) progressDialog.findViewById(R.id.spin_kit);
 
+
+                binding.phoneInput.requestFocus();
 
     }
 

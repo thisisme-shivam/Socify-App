@@ -43,6 +43,7 @@ public class ProfilePic extends Fragment {
 
     FragmentProfilePicBinding binding;
     Uri imgUrl;
+
     ActivityResultLauncher<String> mTakePhoto;
     String Name, Yop, age, bio;
     static SendProfileData sendProfileData = new SendProfileData();
@@ -97,6 +98,7 @@ public class ProfilePic extends Fragment {
             public void onClick(View v) {
                 FieldValidation();
                 if(Name!=null && Yop!=null) {
+
                     Registration.details.setName(Name);
                     Registration.details.setPassyear(Yop);
                     Registration.details.setAge(age);
