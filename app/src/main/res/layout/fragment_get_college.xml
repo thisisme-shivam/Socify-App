@@ -75,7 +75,7 @@
             android:id="@+id/CollegeListRV"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="visible"
+            android:visibility="gone"
             tools:listitem="@layout/college_name_list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,6 +93,7 @@
         android:layout_marginBottom="20dp"
         android:backgroundTint="#D8D9D9"
         android:foregroundGravity="center"
+
         android:src="@drawable/arrowgrey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

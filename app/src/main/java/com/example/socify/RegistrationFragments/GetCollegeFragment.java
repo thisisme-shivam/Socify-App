@@ -1,6 +1,7 @@
 package com.example.socify.RegistrationFragments;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,63 +18,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.socify.Activities.SplashActivity;
 import com.example.socify.Adapters.GetCollegeAdapter;
-import com.example.socify.Classes.College;
+import com.example.socify.HelperClasses.OptimizedSearchCollege;
 import com.example.socify.R;
-import com.example.socify.RegistrationFragments.CoursesFragment;
 import com.example.socify.databinding.FragmentGetCollegeBinding;
 import com.facebook.shimmer.ShimmerFrameLayout;
-
-import java.util.ArrayList;
 
 
 public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.CollegeViewHolder.Onitemclicked {
 
     FragmentGetCollegeBinding binding;
-
-
-    GetCollegeAdapter adapter;
-    Thread th = new Thread();
+    OptimizedSearchCollege optimizedSearch;
+    public GetCollegeAdapter adapter;
     boolean notstopped  ;
-    RecyclerView rec;
-    ShimmerFrameLayout layout;
-    Handler hand = new Handler();
+    public RecyclerView rec;
+    public ShimmerFrameLayout layout;
+    public Handler hand = new Handler();
+    SearchView seachview;
+    CountDownTimer cntr;
+    private Integer waitingTime = 200;
     private void filter(String newText){
+
+        optimizedSearch.stopRunningThread();
         rec.setVisibility(View.GONE);
         layout.setVisibility(View.VISIBLE);
         layout.startShimmer();
 
-        ArrayList<College> filteredlist = new ArrayList<>();
-        notstopped = false;
-        th =new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for(College college : SplashActivity.colleges ){
-                    if(notstopped)
-                        break;
-
-                    if(college.getCollege_name().toLowerCase().contains(newText.toLowerCase())){
-                        Log.i("college name " , college.getCollege_name());
-                        filteredlist.add(college);
-                    }
-                }
-
-
-                hand.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.i("Entering","fjdklsajf");
-
-                        adapter.filterlist(filteredlist);
-                        layout.stopShimmer();
-                        layout.setVisibility(View.GONE);
-                        rec.setVisibility(View.VISIBLE);
-
-                    }
-                });
-
-            }
-        });
-        th.start();
+        optimizedSearch.startSearch(newText);
 
 
 
@@ -84,9 +54,7 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
-
+        optimizedSearch = new OptimizedSearchCollege(this);
 
     }
 
@@ -107,8 +75,7 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
 
         layout = getView().findViewById(R.id.shimmer_view_container);
 
-        SearchView seachview = getView().findViewById(R.id.search_college);
-
+        seachview = getView().findViewById(R.id.search_college);
         seachview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -117,9 +84,20 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                notstopped = true;
-                filter(newText);
-                return false;
+                if(cntr != null){
+                    cntr.cancel();
+                }
+                cntr = new CountDownTimer(waitingTime, 500) {
+
+                    public void onTick(long millisUntilFinished) {
+                    }
+
+                    public void onFinish() {
+                        filter(newText);
+                    }
+                };
+                cntr.start();
+                return true;
             }
         });
     }
@@ -140,10 +118,14 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
         });
     }
 
+
     @Override
     public void onclick(int position) {
-        Log.i("COllege name is " ,SplashActivity.colleges.get(position).getCollege_name().toString());
+        seachview.setQuery(optimizedSearch.filterlist.get(position).getCollege_name(),true);
+        rec.setVisibility(View.GONE);
+        Log.i("College name is " ,optimizedSearch.filterlist.get(position).getCollege_name().toString());
     }
+
 
 
 }

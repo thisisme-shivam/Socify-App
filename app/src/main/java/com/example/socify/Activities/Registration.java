@@ -9,8 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.socify.Classes.College;
 import com.example.socify.Classes.Course;
 import com.example.socify.FireBaseClasses.UserDetails;
-import com.example.socify.RegistrationFragments.ProfilePic;
 import com.example.socify.R;
+import com.example.socify.RegistrationFragments.ProfilePic;
+
 import com.example.socify.databinding.ActivityRegistrationBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Registration extends AppCompatActivity {
 
@@ -45,10 +47,9 @@ public class Registration extends AppCompatActivity {
                     public void run() {
                         for (DataSnapshot snap : snapshot.getChildren()) {
 
-                            Course course = new Course(snap.child("course").getValue().toString());
-
+                            Course course = new Course(Objects.requireNonNull(snap.child("course").getValue()).toString());
                             courses.add(course);
-                            Log.i("course naem ", course.getcoursename());
+                            Log.i("course name ", course.getcoursename());
                         }
 
                     }

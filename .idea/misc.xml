@@ -3,17 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/bgtag.xml" value="0.2045" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/search_view_bg.xml" value="0.139" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout-v26/otp_verification.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/activity_croppper.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/activity_home.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/activity_login.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/activity_registration.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/activity_splash.xml" value="0.10536980749746708" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/college_name_list.xml" value="0.23229166666666667" />
-        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/courses_name_list.xml" value="0.1" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/courses_name_list.xml" value="0.16" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_community.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_courses.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_discover.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_edit_user_details.xml" value="0.11296859169199595" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_events.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_get_college.xml" value="0.264" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_interests.xml" value="0.23229166666666667" />
@@ -24,6 +28,10 @@
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_questions.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/newsfeedbox.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/otp_verification.xml" value="0.2151268115942029" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/post_creation_popup.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/post_popup.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/profile_posts.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/progressdialog.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/shimmer_college_list.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/shimmercollege.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/verification_toolbar.xml" value="0.21603260869565216" />
