@@ -47,7 +47,7 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
     Integer waitingTime =200;
     public void setonclicklisteners() {
 
-        binding.next2btn.setOnClickListener(v -> {
+        binding.next3btn.setOnClickListener(v -> {
             Registration.details.setCourse("CSE");
 
             //Sending Course
@@ -132,4 +132,6 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
         rec.setVisibility(View.GONE);
         Log.i("Course name is " , optimizedSearchCourses.filterlist.get(position).getcoursename());
     }
+
+
 }
