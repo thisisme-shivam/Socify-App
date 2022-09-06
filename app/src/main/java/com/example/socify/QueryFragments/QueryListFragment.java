@@ -40,9 +40,11 @@ public class QueryListFragment extends Fragment {
         super.onStart();
 
         UserQueriesFragment userQueriesFragment = new UserQueriesFragment();
+        AllQueriesFragment allQueriesFragment = new AllQueriesFragment();
 
         binding.tablayout.setupWithViewPager(binding.ViewPagerQuery);
         QueryTabViewPagerAdapter queryTabViewPagerAdapter = new QueryTabViewPagerAdapter(getChildFragmentManager(), 0);
+        queryTabViewPagerAdapter.addfragment(allQueriesFragment, "All Queries");
         queryTabViewPagerAdapter.addfragment(userQueriesFragment, "My Queries");
         binding.ViewPagerQuery.setAdapter(queryTabViewPagerAdapter);
     }

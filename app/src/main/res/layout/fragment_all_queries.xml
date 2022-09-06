@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QueryFragments.UserQueriesFragment">
+    tools:context=".QueryFragments.AllQueriesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/userqueriesRV"
+        android:id="@+id/allqueriesRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/list_user_query_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/list_all_query_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
