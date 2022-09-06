@@ -1,0 +1,258 @@
+[33mcommit 8b19d5125c6f22d04bdac7d9b1a40e7cc1e1b5ee[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Merge: 9c5baa0 d8ba7fa
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Tue Sep 6 19:29:19 2022 +0530
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       .idea/misc.xml
+    #       app/src/main/AndroidManifest.xml
+    #       app/src/main/java/com/example/socify/QueryFragments/QueryListFragment.java
+    #       app/src/main/java/com/example/socify/QueryFragments/UserQueriesFragment.java
+    #       app/src/main/java/com/example/socify/RegistrationFragments/CoursesFragment.java
+    #       app/src/main/java/com/example/socify/ViewHolders/Load_Questions.java
+    #       app/src/main/res/layout/fragment_query_list.xml
+    #       app/src/main/res/layout/fragment_user_queries.xml
+
+[33mcommit 9c5baa063bbbde0a719185c511b86fc01c467c24[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Tue Sep 6 19:25:59 2022 +0530
+
+    "Work on QueryHub Almost Finished"
+
+[33mcommit a9c7044d3963b297b22c202bf905c2874f27679c[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 23:07:06 2022 +0530
+
+    "Work Started on Query Answers"
+
+[33mcommit 84ec6b47e0cb63a506cb6ec953966fa490ac31ce[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 14:38:31 2022 +0530
+
+    threadded code in collegenme
+
+[33mcommit f45e9c0a6dcee48fa592fdac5bce248c53920a47[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 03:17:02 2022 +0530
+
+    "Work Started on Query Feature"
+
+[33mcommit 777c0bb89b3126439734511177a287206d166b1d[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Thu Sep 1 06:39:40 2022 +0530
+
+    GAND FATTI PADI H.. SENSES KAAM NHI KRRHE H...
+
+[33mcommit 67b895f65b0ede0fd7943e319eb2ba41e0607f82[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Thu Sep 1 03:28:02 2022 +0530
+
+    New Profile UI + User Registration Completed (Profile Data sent to Cloud FireStore) + Profile Fetching Done
+
+[33mcommit 36266b07e77df59d5d110ff8545f684693b16ad4[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sun Sep 4 16:46:29 2022 +0530
+
+    "Work Started on Query Replies"
+
+[33mcommit e6becb847b78f583e5118d1578ffe4e3a30684a3[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 23:07:06 2022 +0530
+
+    "Work Started on Query Answers"
+
+[33mcommit 8e857ba57619d752f8edd5221ff9157d900f1dc2[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 14:38:31 2022 +0530
+
+    threadded code in collegenme
+
+[33mcommit f09373b7c65d8847906a2ac2f5360b7e6db1b91a[m[33m ([m[1;31mupstream/main[m[33m)[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Sun Sep 4 17:58:37 2022 +0530
+
+    courses ans college search and question
+
+[33mcommit 4b3f2235e8c13324ae49fa0c072fe3bd10d8359e[m
+Author: Saurav Bauddh <103964385+sangeetkarthecoder@users.noreply.github.com>
+Date:   Sun Sep 4 17:43:28 2022 +0530
+
+    MERGE IT (#23)
+    
+    * New Profile UI + User Registration Completed (Profile Data sent to Cloud FireStore)
+    
+    * New Profile UI + User Registration Completed (Profile Data sent to Cloud FireStore) + Profile Fetching Done
+    
+    * GAND FATTI PADI H.. SENSES KAAM NHI KRRHE H...
+    
+    * "Work Started on Query Feature"
+    
+    * "Work Started on Query Feature"
+    
+    * threadded code in collegenme
+    
+    * "Work Started on Query Feature"
+    
+    * saurav merged thread
+    
+    * chull
+    
+    * "Work Started on Query Answers"
+    
+    * New Profile UI + User Registration Completed (Profile Data sent to Cloud FireStore) + Profile Fetching Done
+    
+    * "Work Started on Query Feature"
+    
+    * threadded code in collegenme
+    
+    * "Work Started on Query Answers"
+    
+    * "Work Started on Query Replies"
+    
+    Co-authored-by: iamryuga <78287034+iamryuga@users.noreply.github.com>
+
+[33mcommit d8ba7fa97736103c48c2b655598517b868d520f5[m
+Merge: 0e6f271 34c4da0
+Author: iamryuga <78287034+iamryuga@users.noreply.github.com>
+Date:   Sun Sep 4 17:43:16 2022 +0530
+
+    Merge branch 'main' into main
+
+[33mcommit 34c4da0010d3e363403d3199a1560cb6f5d4a61d[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Sun Sep 4 17:35:56 2022 +0530
+
+    courses ans college search
+
+[33mcommit 0e6f2713d19b3835c028b45377da8e528fea02f8[m
+Merge: faf2f37 bfbe340
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sun Sep 4 16:51:37 2022 +0530
+
+    "Work Started on Query Replies"
+
+[33mcommit faf2f373d79b9d9e5aa2699902ab257cacfdaf23[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Sun Sep 4 16:46:29 2022 +0530
+
+    "Work Started on Query Replies"
+
+[33mcommit a6a996cc6d4fe431df2503aafaf7ecf409f2063c[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Sat Sep 3 01:16:25 2022 +0530
+
+    course without shimmer
+
+[33mcommit 36b69f29a993ac17d7a6d695b222ebd9ab2d520e[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 23:07:06 2022 +0530
+
+    "Work Started on Query Answers"
+
+[33mcommit 3374cda6ac9b61f793ea2589c97e14aab86df690[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 14:38:31 2022 +0530
+
+    threadded code in collegenme
+
+[33mcommit 183e57358ea4ab07a5069cdd395f4f65bbfdc892[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 03:17:02 2022 +0530
+
+    "Work Started on Query Feature"
+
+[33mcommit 5fa0e5dd8212c3e4d2ce9bcb22afa34b00af7bab[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Thu Sep 1 03:28:02 2022 +0530
+
+    New Profile UI + User Registration Completed (Profile Data sent to Cloud FireStore) + Profile Fetching Done
+
+[33mcommit cdc94540a2e847bbe31bb086fa16f179ecdd2317[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Sat Sep 3 00:01:51 2022 +0530
+
+    all working
+
+[33mcommit b12d5ae206d923dba7e9b86372f209b7ea538844[m
+Merge: 026db5c e8d97a4
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Fri Sep 2 23:45:34 2022 +0530
+
+    Merge branch 'main' of https://github.com/iamryuga/Socify-App
+    
+     Conflicts:
+    	app/src/main/java/com/example/socify/RegistrationFragments/GetCollegeFragment.java
+
+[33mcommit 026db5cc6d3e3acc414c38c6dc0ff4a810c6bbfc[m
+Author: shivam kumar <kumarshi605@gmail.com>
+Date:   Fri Sep 2 23:43:25 2022 +0530
+
+    danger commit
+
+[33mcommit e8d97a429f2e54796124f3bd93004385ff5cb7e7[m
+Author: Saurav Bauddh <103964385+sangeetkarthecoder@users.noreply.github.com>
+Date:   Fri Sep 2 23:09:22 2022 +0530
+
+    WORKINGGG (#22)
+    
+    * New Profile UI + User Registration Completed (Profile Data sent to Cloud FireStore)
+    
+    * New Profile UI + User Registration Completed (Profile Data sent to Cloud FireStore) + Profile Fetching Done
+    
+    * GAND FATTI PADI H.. SENSES KAAM NHI KRRHE H...
+    
+    * "Work Started on Query Feature"
+    
+    * "Work Started on Query Feature"
+    
+    * threadded code in collegenme
+    
+    * "Work Started on Query Feature"
+    
+    * saurav merged thread
+    
+    * chull
+    
+    * "Work Started on Query Answers"
+
+[33mcommit bfbe340b86d16299e21a2b0ec16dfd0fd06c0a95[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 23:07:06 2022 +0530
+
+    "Work Started on Query Answers"
+
+[33mcommit a010d0182e6535c72945c8f3da95a86a1d5a7352[m
+Merge: 9d1fd42 7b960ef
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 15:41:32 2022 +0530
+
+    Merge branch 'main' of https://github.com/sangeetkarthecoder/Socify-App
+
+[33mcommit 9d1fd42ffabbf62a739909b78288b9454bf65338[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 15:41:25 2022 +0530
+
+    chull
+
+[33mcommit 7b960ef78943052703590c067e0590156ac4b8cc[m
+Merge: 0bfc6eb e6ed6f0
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 15:36:24 2022 +0530
+
+    saurav merged thread
+
+[33mcommit 0bfc6eb1118a16895b7076aef31f8ea6b4f4a443[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 15:34:55 2022 +0530
+
+    saurav merged thread
+
+[33mcommit 91a01e205219780c56c6e0ce331b5a0b0971f640[m
+Author: sangeetkarthecoder <bauddhsaurav@gmail.com>
+Date:   Fri Sep 2 03:17:02 2022 +0530
+
+    "Work Started on Query Feature"
+
+[33mcommit e
