@@ -37,8 +37,11 @@ public class SendProfileData {
     public static HashMap<String, String> profile = new HashMap<>();
     public static HashMap<String, ArrayList<String>> interests = new HashMap<>();
 
+    public SendProfileData(){
+        initialization();
+    }
     public void initialization() {
-        currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        currentUID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         storageReference = FirebaseStorage.getInstance().getReference("Profile Images");
         documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
     }
@@ -47,33 +50,27 @@ public class SendProfileData {
         documentReference.set(profile);
     }
 
-    public void sendImg() {
-        initialization();
-        if(Registration.details.getImgUri()!="No Image") {
-            final StorageReference reference = storageReference.child(Registration.details.getImgUri());
+        public void sendImg() {
+            if(!Registration.details.getImgUri().equals("No Image")) {
+                final StorageReference reference = storageReference.child(Registration.details.getImgUri());
             uploadTask = reference.putFile(Uri.parse(Registration.details.getImgUri()));
-            Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-                    return reference.getDownloadUrl();
+            uploadTask.continueWithTask(task -> {
+
+                if (!task.isSuccessful()) {
+                    throw Objects.requireNonNull(task.getException());
                 }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()) {
-                        Uri downloadUrl = task.getResult();
-                        profile.put("ImgUrl", downloadUrl.toString());
-                        documentReference.set(profile)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Log.i("Img Uploaded", "True");
-                                    }
-                                });
-                    }
+                return reference.getDownloadUrl();
+            }).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Uri downloadUrl = task.getResult();
+                    profile.put("ImgUrl", downloadUrl.toString());
+                    documentReference.set(profile)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Log.i("Img Uploaded", "True");
+                                }
+                            });
                 }
             });
         }
@@ -85,60 +82,40 @@ public class SendProfileData {
     }
 
     public void sendName() {
-        initialization();
         profile.put("Name", Registration.details.getName());
         uploadtoCloud();
     }
 
     public void sendpassyear() {
-        initialization();
         profile.put("Passing Year", Registration.details.getPassyear());
         uploadtoCloud();
     }
 
     public void sendUsername() {
-        initialization();
         profile.put("Username", Registration.details.getUsername());
         uploadtoCloud();
     }
 
     public void sendPassword() {
-        initialization();
         profile.put("Password", Registration.details.getPassword());
         uploadtoCloud();
     }
 
     public void sendCollegeName() {
-        initialization();
         profile.put("CollegeName", Registration.details.getCollege_name());
         uploadtoCloud();
     }
     public void sendCurrentUID() {
-        initialization();
         profile.put("UID", currentUID);
         uploadtoCloud();
     }
     public void sendCourse() {
-        initialization();
         profile.put("Course", Registration.details.getCourse());
-        uploadtoCloud();
-    }
-
-    public void sendDOB() {
-        initialization();
-        profile.put("Age", Registration.details.getAge());
-        uploadtoCloud();
-    }
-
-    public void sendBio() {
-        initialization();
-        profile.put("Bio", Registration.details.getBio());
         uploadtoCloud();
     }
 
     public void sendTags() {
         currentUID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        storageReference = FirebaseStorage.getInstance().getReference("Profile Images");
         documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
         interests.put("Tags", Registration.details.getTags());
         documentReference.collection("Interests").document("UserTags").set(interests);

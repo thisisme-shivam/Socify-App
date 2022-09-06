@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.socify.Activities.Registration;
 import com.example.socify.Activities.SplashActivity;
 import com.example.socify.Adapters.GetCollegeAdapter;
+import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.HelperClasses.OptimizedSearchCollege;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentGetCollegeBinding;
@@ -104,24 +105,19 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentGetCollegeBinding.inflate(inflater, container, false);
-        onclicklisteners();
         return binding.getRoot();
     }
 
-    private void onclicklisteners() {
-        binding.next3btn.setOnClickListener(v -> {
-            CoursesFragment coursesFragment = new CoursesFragment();
-            Registration.details.setCollege_name("Sagar Institute of Science and Technology");
-            getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, coursesFragment).commit();
-        });
-    }
 
 
     @Override
     public void onclick(int position) {
-        seachview.setQuery(optimizedSearch.filterlist.get(position).getCollege_name(),true);
-        rec.setVisibility(View.GONE);
-        Log.i("College name is " ,optimizedSearch.filterlist.get(position).getCollege_name().toString());
+        Registration.fragment_curr_pos++;
+        Registration.details.setCollege_name(optimizedSearch.filterlist.get(position).getCollege_name());
+        SendProfileData data = new SendProfileData();
+        data.sendCollegeName();
+        getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, new CoursesFragment()).commit();
+
     }
 
 

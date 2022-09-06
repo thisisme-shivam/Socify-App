@@ -39,6 +39,7 @@
             android:name=".Activities.Registration"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
+
         </activity>
         <activity
             android:name=".Activities.SlideScreen"

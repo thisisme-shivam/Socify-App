@@ -44,8 +44,8 @@ public class UserNameFragment extends Fragment {
                     sendProfileData.sendUsername();
                     sendProfileData.sendPassword();
 
-                    GetCollegeFragment getCollegeFragment = new GetCollegeFragment();
-                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, getCollegeFragment).commit();
+                    Registration.fragment_curr_pos++;
+                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.getCollegeFragment).commit();
                 }
             }
         });
@@ -58,9 +58,7 @@ public class UserNameFragment extends Fragment {
         }
         else{
             Username = binding.usernametext.getText().toString();
-        }
-
-        if(binding.passwordtext.getText().toString().isEmpty()){
+        }if(binding.passwordtext.getText().toString().isEmpty()){
             binding.passwordtextlayout.setError("cannot be empty");
         }
         else{

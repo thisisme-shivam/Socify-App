@@ -37,6 +37,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class ProfilePic extends Fragment {
@@ -45,38 +46,19 @@ public class ProfilePic extends Fragment {
     Uri imgUrl;
 
     ActivityResultLauncher<String> mTakePhoto;
-    String Name, Yop, age, bio;
+    String name, passing_year;
     static SendProfileData sendProfileData = new SendProfileData();
 
     public void FieldValidation() {
         //Field Validation
-       if(binding.nametext.getText().toString().isEmpty()){
+       if(binding.nametext.getText().toString().isEmpty())
            binding.nametextlayout.setError("cannot be empty");
-       }
+       else if (binding.graduationYear.getText().toString().isEmpty())
+           binding.graduationYear.setError("Select your graduation year");
        else{
-           Name = binding.nametext.getText().toString();
+           name = binding.nametext.getText().toString();
+           passing_year = binding.graduationYear.getText().toString();
        }
-
-        if(binding.passingyeartext.getText().toString().isEmpty()){
-            binding.yoptextlayout.setError("cannot be empty");
-        }
-        else{
-            Yop = binding.passingyeartext.getText().toString();
-        }
-
-        if(binding.biotext.getText().toString().isEmpty()){
-            binding.biolayout.setError("cannot be empty");
-        }
-        else{
-            bio = binding.biotext.getText().toString();
-        }
-
-        if(binding.agetext.getText().toString().isEmpty()){
-            binding.agelayout.setError("cannot be empty");
-        }
-        else{
-            age = binding.agetext.getText().toString();
-        }
 
     }
 
@@ -97,33 +79,22 @@ public class ProfilePic extends Fragment {
             @Override
             public void onClick(View v) {
                 FieldValidation();
-                if(Name!=null && Yop!=null) {
+                Registration.details.setName(name);
+                Registration.details.setPassyear(passing_year);
+                //Sending Data
+                sendProfileData.sendImg();
+                sendProfileData.sendName();
+                sendProfileData.sendpassyear();
+                sendProfileData.sendCurrentUID();
 
-                    Registration.details.setName(Name);
-                    Registration.details.setPassyear(Yop);
-                    Registration.details.setAge(age);
-                    Registration.details.setBio(bio);
 
-                    //To be deleted Later
-                    Registration.details.setCollege_name("SISTEC");
+                //Switching to new fragment
+                getActivity().findViewById(R.id.back_icon).setVisibility(View.VISIBLE);
+                Registration.fragment_curr_pos++;
+                getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.userNameFragment).commit();
+                getActivity().findViewById(R.id.back_icon).setVisibility(View.VISIBLE);
 
-                    //Sending Data
-                    sendProfileData.sendImg();
-                    sendProfileData.sendName();
-                    sendProfileData.sendpassyear();
-                    sendProfileData.sendCurrentUID();
-                    sendProfileData.sendDOB();
-                    sendProfileData.sendBio();
 
-                    //Switching to new fragment
-                    UserNameFragment userNameFragment = new UserNameFragment();
-                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, userNameFragment).commit();
-                    Log.e("Yop", Yop);
-                    Log.e("Age", age);
-                    Log.e("bio", bio);
-                    Log.e("ImgURL", imgUrl.toString());
-                    Log.e("Yop", Yop);
-                }
             }
         });
 
@@ -172,19 +143,12 @@ public class ProfilePic extends Fragment {
         Log.i("YEs","Entering");
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(20);
-        DatabaseReference ref ;
-        ArrayList<College> colleges = new ArrayList<>();
-        ref = FirebaseDatabase.getInstance().getReference("CollegeNames");
-
-        ArrayList<College> finalColleges = new ArrayList<>();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-
-            }
-        }).start();
-
+        ArrayList<String> years = new ArrayList<>();
+        int curr_year= Calendar.getInstance().get(Calendar.YEAR);
+        for(int i=0;i<=6;i++){
+            years.add(String.valueOf(curr_year+i));
+        }
+        binding.graduationYear.setItems(years);
     }
 
     @Override

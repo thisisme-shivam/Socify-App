@@ -33,6 +33,8 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import java.util.ArrayList;
 import java.util.jar.JarEntry;
 
+import kotlinx.coroutines.channels.Send;
+
 public class CoursesFragment extends Fragment implements GetCollegeAdapter.CollegeViewHolder.Onitemclicked {
 
     FragmentCoursesBinding binding;
@@ -127,10 +129,11 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
 
     @Override
     public void onclick(int position) {
-        searchView.setQuery(optimizedSearchCourses.filterlist.get(position).getcoursename(),true);
-
-        rec.setVisibility(View.GONE);
-        Log.i("Course name is " , optimizedSearchCourses.filterlist.get(position).getcoursename());
+        Registration.fragment_curr_pos++;
+        Registration.details.setCourse(optimizedSearchCourses.filterlist.get(position).getcoursename());
+        SendProfileData data = new SendProfileData();
+        data.sendCourse();
+        getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.interestsFragment).commit();
     }
 
 
