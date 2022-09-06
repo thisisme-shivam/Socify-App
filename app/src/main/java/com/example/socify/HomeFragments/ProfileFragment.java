@@ -68,14 +68,10 @@ public class ProfileFragment extends Fragment {
         if(home.imgurl!="No Image") {
             Picasso.get().load(Uri.parse(home.imgurl)).placeholder(R.drawable.user).into(binding.profilePic);
         }
-        binding.branch.setText(home.branch);
         binding.passyear.setText(home.passyear);
         Log.i("BATCH", home.passyear);
-        binding.collegeName.setText(home.college_name);
         binding.name.setText(home.name);
         binding.usernameProfile.setText("@"+home.username);
-        binding.bio.setText(home.bio);
-        binding.agetv.setText("(" + home.age + ")");
 
         ArrayList<String> t = home.tags;
 

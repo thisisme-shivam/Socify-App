@@ -4,21 +4,10 @@ import java.util.ArrayList;
 
 public class UserDetails {
 
-    String ImgUri, name, username, password, passyear, college_name, course, bio, age;
+    String ImgUri, name, username, password, passyear, college_name, course;
     ArrayList <String> tags;
 
-    public UserDetails(String imgUri, String name, String username, String password, String passyear, String college_name, String course, String bio, String age, ArrayList<String> tags) {
-        ImgUri = imgUri;
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.passyear = passyear;
-        this.college_name = college_name;
-        this.course = course;
-        this.tags = tags;
-        this.bio = bio;
-        this.age = age;
-    }
+
 
     public UserDetails() {
 
@@ -56,13 +45,6 @@ public class UserDetails {
         this.tags = tags;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
 
     public String getImgUri() {
         return ImgUri;
@@ -94,13 +76,6 @@ public class UserDetails {
 
     public ArrayList<String> getTags() {
         return tags;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-    public String getAge() {
-        return age;
     }
 
 }

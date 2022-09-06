@@ -31,6 +31,7 @@ public class OptimizedSearchCollege {
 
     String oldtext = "";
     public void startSearch(String newText){
+        // if new text is empty no need to search colleges directly assign origin list to adapter
         if(newText.isEmpty()){
             getCollegeFragment.adapter.filterlist(filterlist = SplashActivity.colleges);
             notifyUi();

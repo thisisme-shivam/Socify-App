@@ -63,9 +63,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginHorizontal="40dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="40dp"
+
         android:hint="Enter your name"
         android:textColorHint="@color/text_grey"
         app:boxStrokeColor="@color/black"
@@ -91,111 +91,35 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/yoptextlayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="331dp"
+    <com.skydoves.powerspinner.PowerSpinnerView
+        android:id="@+id/graduation_year"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="40dp"
-        android:hint="Year of Passing"
+        android:layout_marginHorizontal="32dp"
+        android:background="@drawable/profile_pic_select_year_background"
+        android:elevation="5dp"
+        android:layout_marginTop="20sp"
+        android:hint="Your Graduation Year"
+        android:padding="15dp"
+        android:textColor="@color/black"
         android:textColorHint="@color/text_grey"
-        app:boxStrokeColor="@color/black"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/black"
-        app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/biolayout"
-        app:startIconDrawable="@drawable/passingyear"
-        app:startIconTint="@color/black">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passingyeartext"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/osr"
-            android:inputType="numberSigned"
-            android:lines="1"
-            android:maxLength="4"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/biolayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="331dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="40dp"
-        android:hint="Describe yourself"
-        android:textColorHint="@color/text_grey"
-        app:boxStrokeColor="@color/black"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/black"
-        app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="14.5sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/osr"
         app:layout_constraintTop_toBottomOf="@+id/nametextlayout"
-        app:startIconDrawable="@drawable/bio"
-        app:startIconTint="@color/black">
+        app:spinner_arrow_drawable="@drawable/downarrow"
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/biotext"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/osr"
-            android:lines="1"
-            android:maxLength="50"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/agelayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="331dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="40dp"
-        android:hint="Age"
-        android:textColorHint="@color/text_grey"
-        app:boxStrokeColor="@color/black"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/black"
-        app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yoptextlayout"
-        app:startIconDrawable="@drawable/usernameicon"
-        app:startIconTint="@color/black">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/agetext"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/osr"
-            android:inputType="numberSigned"
-            android:lines="1"
-            android:maxLength="2"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:spinner_arrow_gravity="end"
+        app:spinner_arrow_padding="8dp"
+        app:spinner_divider_color="@color/black"
+        app:spinner_divider_show="true"
+        app:spinner_divider_size="0.5dp"
+        app:spinner_item_height="46dp"
+        app:spinner_popup_animation="dropdown"
+        app:spinner_popup_background="@color/white"
+        app:spinner_popup_elevation="14dp"
+        app:spinner_popup_height="250dp"
+        tools:layout_editor_absoluteX="40dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/nextbtn"

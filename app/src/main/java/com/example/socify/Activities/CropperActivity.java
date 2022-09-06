@@ -55,15 +55,15 @@ public class CropperActivity extends AppCompatActivity {
             setResult(-1, returnintent);
             assert resultUri != null;
             Log.i("URI", resultUri.toString());
-            finish();
+
         }
         else if(resultCode==UCrop.RESULT_ERROR) {
             final Throwable cropError = UCrop.getError(data);
             Toast.makeText(this, cropError.toString(), Toast.LENGTH_SHORT).show();
         }
-        else{
-            startActivity(new Intent(getApplicationContext(), Registration.class));
-        }
+
+        finish();
+
     }
 
     private void readintent() {
