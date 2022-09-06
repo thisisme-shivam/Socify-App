@@ -74,6 +74,7 @@
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/chattoolbar.xml" value="0.2259963768115942" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/college_name_list.xml" value="0.1334853090172239" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/courses_name_list.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_all_queries.xml" value="0.25679347826086957" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_ask__query.xml" value="0.18297101449275363" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_blank.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_buddy.xml" value="0.1" />
@@ -88,8 +89,11 @@
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_query_list.xml" value="0.264" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_question_list.xml" value="0.536" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_questions.xml" value="0.1778846153846154" />
+        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_reply.xml" value="0.264" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/fragment_user_queries.xml" value="0.25679347826086957" />
+        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/list_all_query_layout.xml" value="0.264" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/list_query_layout.xml" value="0.264" />
+        <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/list_user_query_layout.xml" value="0.4" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/my_popup.xml" value="0.26902173913043476" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/newsfeedbox.xml" value="0.264" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/layout/otp_verification.xml" value="0.27309782608695654" />

@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.socify.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -14,23 +15,36 @@ import com.google.android.material.textview.MaterialTextView;
 
 public class Load_Questions extends RecyclerView.ViewHolder {
 
-    MaterialTextView timeres,nameres,questionsres;
-    Chip tagres;
+    public MaterialTextView timeres,nameres,questionsres;
+    public Chip tagres;
+    public MaterialButton delbtn, replybtn;
 
     public Load_Questions(@NonNull View itemView) {
         super(itemView);
     }
 
-    public void setitem(FragmentActivity activity, String name, String url, String userid, String key, String question, String time, String tag) {
-        timeres = itemView.findViewById(R.id.timestamp);
-        nameres = itemView.findViewById(R.id.usernametv);
-        questionsres = itemView.findViewById(R.id.questiontv);
-        tagres = itemView.findViewById(R.id.questiontag);
-
+    public void setallitem(FragmentActivity activity, String name, String url, String userid, String key, String question, String time, String tag) {
+        timeres = itemView.findViewById(R.id.alltimestamp);
+        nameres = itemView.findViewById(R.id.allusernametv);
+        questionsres = itemView.findViewById(R.id.allquestiontv);
+        tagres = itemView.findViewById(R.id.allquestiontag);
         tagres.setText(tag);
         timeres.setText(time);
         nameres.setText("Posted by: "+name);
         questionsres.setText(question);
+        replybtn = itemView.findViewById(R.id.replyquerybtn);
+    }
+
+    public void deleteitem(FragmentActivity activity, String name, String url, String userid, String key, String question, String time, String tag) {
+        timeres = itemView.findViewById(R.id.timestamp);
+        nameres = itemView.findViewById(R.id.usernametv);
+        questionsres = itemView.findViewById(R.id.questiontv);
+        tagres = itemView.findViewById(R.id.questiontag);
+        tagres.setText(tag);
+        timeres.setText(time);
+        nameres.setText("Posted by: "+name);
+        questionsres.setText(question);
+        delbtn = itemView.findViewById(R.id.deletebtn);
     }
 
 }
