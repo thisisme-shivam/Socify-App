@@ -51,7 +51,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/osr"
-            android:text="What is Firebase and where do we use it?"
+            android:text="What is Firebase and where do we use it as a database?"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -81,8 +81,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/repliesRV"
-                android:layout_width="380dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 tools:listitem="@layout/reply_layout" />

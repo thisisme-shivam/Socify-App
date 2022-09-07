@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +84,13 @@ public class AllQueriesFragment extends Fragment {
                     }
                 };
 
+        //Ordering data from bottom to top
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+
         firebaseRecyclerAdapter.startListening();
+        binding.allqueriesRV.setLayoutManager(layoutManager);
         binding.allqueriesRV.setAdapter(firebaseRecyclerAdapter);
         return binding.getRoot();
 

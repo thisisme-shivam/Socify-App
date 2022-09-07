@@ -5,11 +5,10 @@ public class AnswerMember {
     String name;
     String uid;
     String answer;
+    String time;
 
     public AnswerMember() {
     }
-
-    String time;
 
     public String getName() {
         return name;
