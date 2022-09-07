@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,20 +29,21 @@ public class UserQueriesFragment extends Fragment {
 
     FragmentUserQueriesBinding binding;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = database.getReference("Questions").child("User's Questions").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+    DatabaseReference databaseReference;
 
 
     //Deleting User's Questions from the database when delete button is tapped
     public void delete(String time) {
 
         //Deleting from 'User's Questions' node
+        databaseReference = database.getReference("Questions").child("User's Questions").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         Query query = databaseReference.orderByChild("time").equalTo(time);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
                     dataSnapshot.getRef().removeValue();
-
+                    Log.i("Question Deleted", "YES");
                     Toast.makeText(requireActivity(), "Deleted", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -102,7 +104,6 @@ public class UserQueriesFragment extends Fragment {
                         holder.deleteitem(getActivity(), model.getName(),model.getUrl(),model.getUserid(),model.getKey(),model.getQuestion(),model.getTime(),model.getTag());
                         final String time = getItem(position).getTime();
                         holder.delbtn.setOnClickListener(v -> delete(time));
-
                     }
 
                     @NonNull

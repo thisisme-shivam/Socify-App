@@ -36,6 +36,7 @@
             android:id="@+id/tag"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
+            android:backgroundTint="@color/palette_light_teal"
             android:layout_marginStart="10dp"
             android:text="Android Development"
             android:textColor="@color/black"
@@ -50,7 +51,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/osr"
-            android:text="What is Firebase?"
+            android:text="What is Firebase and where do we use it?"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -60,7 +61,68 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/replylayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="right"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/repliesRV"
+                android:layout_width="380dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                tools:listitem="@layout/reply_layout" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/replylayout"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Type your reply"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        android:textColorHint="@color/text_grey"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/send_reply"
+        app:endIconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/replytxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

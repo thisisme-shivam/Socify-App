@@ -67,13 +67,14 @@ public class Ask_QueryFragment extends Fragment {
                 String id = UserQuestions.push().getKey();
                 UserQuestions.child(id).setValue(member);
 
-                String child = AllQuestions.push().getKey();
+//                String child = AllQuestions.push().getKey();
                 member.setKey(id);
-                AllQuestions.child(child).setValue(member);
+//                AllQuestions.child(child).setValue(member);
+                AllQuestions.child(id).setValue(member);
                 Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(requireActivity(), "Please enter the questions", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity(), "Please enter the question", Toast.LENGTH_SHORT).show();
             }
 
         });
