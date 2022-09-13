@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.PatternMatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,31 +20,36 @@ import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentNameFragementBinding;
 
+import org.intellij.lang.annotations.RegExp;
+
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.annotation.RegEx;
 
 
 public class UserNameFragment extends Fragment {
 
     FragmentNameFragementBinding binding;
-    String Username, Password;
+    String username, Password;
     SendProfileData sendProfileData = new SendProfileData();
 
     public void onclicklisteners() {
         binding.nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FieldValidation();
-                if(Username!=null && Password!=null) {
-                    Registration.details.setUsername(Username);
+                if(FieldValidation()) {
+                    Registration.details.setUsername(username);
                     Registration.details.setPassword(Password);
                     Log.i("Name", Registration.details.getName());
                     Log.i("YOP", Registration.details.getPassyear());
-                    Log.e("Username", Username);
+                    Log.e("username", username);
 
-                    //Uploading Username & Password
+                    //Uploading username & Password and mapping username with phone number
                     sendProfileData.sendUsername();
                     sendProfileData.sendPassword();
-
+                    sendProfileData.mapUserwithPhone(username);
                     Registration.fragment_curr_pos++;
                     getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.getCollegeFragment).commit();
                 }
@@ -51,19 +57,36 @@ public class UserNameFragment extends Fragment {
         });
     }
 
-    public void FieldValidation() {
+    public boolean FieldValidation() {
+        username = (Objects.requireNonNull(binding.usernametext.getText())).toString().trim();
+        Password = (Objects.requireNonNull(binding.passwordtext.getText())).toString();
+        if(binding.usernametextlayout.isErrorEnabled())
+            binding.usernametextlayout.setErrorEnabled(false);
+        if(username.isEmpty())
+            binding.usernametextlayout.setError("Username cannot be empty");
+        else if(username.matches("[0-9]+"))
+            binding.usernametextlayout.setError("username cannot contain only numbers");
+        else if (username.length()<3)
+            binding.usernametextlayout.setError("username should be greater than 3 character");
+        else if (Password.isEmpty())
+            binding.passwordtextlayout.setError("Password cannot be empty");
+        else if(Password.length() < 6)
+            binding.passwordtextlayout.setError("Password cannot be less than 6 characters");
+        else if(!checkstrength()) {
+            binding.passwordtextlayout.setError("Password should contain atleast\n" +
+                    "1 Uppercase and 1 Lowercase Letter \n" +
+                    "1 number \n" +
+                    "1 special character\n" +
+                    "and no spaces");
+        }else
+            return true;
+        return false;
+    }
 
-        if(binding.usernametext.getText().toString().isEmpty()){
-            binding.usernametextlayout.setError("cannot be empty");
-        }
-        else{
-            Username = binding.usernametext.getText().toString();
-        }if(binding.passwordtext.getText().toString().isEmpty()){
-            binding.passwordtextlayout.setError("cannot be empty");
-        }
-        else{
-            Password = binding.passwordtext.getText().toString();
-        }
+    private boolean checkstrength() {
+        Pattern p = Pattern.compile("^(?=(.*[a-z])+)(?=(.*[A-Z])+)(?=(.*[0-9])+)(?=(.*[!@#$%^&*()\\-_+.])+)(?=\\S+$).{6,}$");
+        Matcher m = p.matcher(Password);
+        return m.find();
     }
 
     @Override

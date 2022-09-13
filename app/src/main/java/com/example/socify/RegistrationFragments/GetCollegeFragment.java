@@ -35,7 +35,7 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
     public RecyclerView rec;
     public ShimmerFrameLayout layout;
     public Handler hand = new Handler();
-    SearchView seachview;
+    SearchView searchview;
     CountDownTimer cntr;
     private Integer waitingTime = 200;
     private void filter(String newText){
@@ -52,10 +52,9 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        optimizedSearch = new OptimizedSearchCollege(this);
-
     }
 
+    int i=1;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -63,18 +62,20 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(60);
 
+        Log.i("made again", "uyes");
         rec = view.findViewById(R.id.CollegeListRV);
         rec.setHasFixedSize(true);
         rec.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new GetCollegeAdapter(getContext(),SplashActivity.colleges,this);
+        adapter = new GetCollegeAdapter(getContext(),Registration.colleges,this);
         rec.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
         layout = getView().findViewById(R.id.shimmer_view_container);
 
-        seachview = getView().findViewById(R.id.search_college);
-        seachview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchview = getView().findViewById(R.id.search_college);
+        optimizedSearch = new OptimizedSearchCollege(this);
+        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -98,6 +99,7 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
                 return true;
             }
         });
+
     }
 
     @Override
@@ -113,10 +115,11 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
     @Override
     public void onclick(int position) {
         Registration.fragment_curr_pos++;
-        Registration.details.setCollege_name(optimizedSearch.filterlist.get(position).getCollege_name());
+        Registration.details.setCollege_name(optimizedSearch.newfilterlist.get(position).getCollege_name());
         SendProfileData data = new SendProfileData();
+        searchview.setQuery(optimizedSearch.newfilterlist.get(position).getCollege_name(),true);
         data.sendCollegeName();
-        getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, new CoursesFragment()).commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.coursesFragment).commit();
 
     }
 

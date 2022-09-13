@@ -31,10 +31,11 @@ import java.util.Objects;
 import io.grpc.InternalServer;
 
 public class Registration extends AppCompatActivity {
-    ArrayList<College> colleges;
+
     ArrayList<Fragment> gotoFragment;
     ActivityRegistrationBinding binding;
     DatabaseReference ref;
+    public static ArrayList<College> colleges;
     public static UserDetails details = new UserDetails();
     public static ArrayList<Course> courses;
     public static ProfilePic profilePic ;
@@ -48,9 +49,30 @@ public class Registration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRegistrationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        ref = FirebaseDatabase.getInstance().getReference("Courses");
-        courses = new ArrayList<>();
 
+        courses = new ArrayList<>();
+        colleges = new ArrayList<>();
+        ref = FirebaseDatabase.getInstance().getReference("CollegeNames");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (DataSnapshot snapshot : snapshot.getChildren()) {
+                            College college = snapshot.getValue(College.class);
+                            colleges.add(college);
+                        }
+                    }
+                }).start();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        ref = FirebaseDatabase.getInstance().getReference("Courses");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -58,10 +80,8 @@ public class Registration extends AppCompatActivity {
                     @Override
                     public void run() {
                         for (DataSnapshot snap : snapshot.getChildren()) {
-
                             Course course = new Course(Objects.requireNonNull(snap.child("course").getValue()).toString());
                             courses.add(course);
-                            Log.i("course name ", course.getcoursename());
                         }
 
                     }

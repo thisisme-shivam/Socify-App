@@ -33,7 +33,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import java.util.ArrayList;
 import java.util.jar.JarEntry;
 
-import kotlinx.coroutines.channels.Send;
+
 
 public class CoursesFragment extends Fragment implements GetCollegeAdapter.CollegeViewHolder.Onitemclicked {
 
@@ -47,6 +47,7 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
     public Handler hand = new Handler();
     CountDownTimer cntr;
     Integer waitingTime =200;
+    boolean clickd = false;
     public void setonclicklisteners() {
 
         binding.next3btn.setOnClickListener(v -> {
@@ -64,12 +65,14 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         optimizedSearchCourses = new OptimizedSearchCourses(this);
+        Log.i("ejfdsalkfjdls;afjs;klaf","fjlasdkjflkds");
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setonclicklisteners();
+        Log.i("Enterign again" , "ture");
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(80);
         rec = view.findViewById(R.id.CoursesListRV);
@@ -89,6 +92,10 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                if(clickd){
+                    clickd = false;
+                    return false;
+                }
                 if(cntr != null){
                     cntr.cancel();
                 }
@@ -130,9 +137,11 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
     @Override
     public void onclick(int position) {
         Registration.fragment_curr_pos++;
-        Registration.details.setCourse(optimizedSearchCourses.filterlist.get(position).getcoursename());
+        Registration.details.setCourse(optimizedSearchCourses.newfilterlist.get(position).getcoursename());
         SendProfileData data = new SendProfileData();
         data.sendCourse();
+        clickd = true;
+        searchView.setQuery(optimizedSearchCourses.newfilterlist.get(position).getcoursename(),false);
         getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.interestsFragment).commit();
     }
 

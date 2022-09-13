@@ -1,13 +1,14 @@
 package com.example.socify.HomeFragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.socify.Adapters.RecyclerClubAdapter;
 import com.example.socify.Adapters.RecyclerCommunityAdapter;
@@ -24,10 +25,30 @@ public class DiscoverFragment extends Fragment {
     FragmentDiscoverBinding binding;
     ArrayList<DiscoverClubModel> arrClubs = new ArrayList<>();
     ArrayList<DiscoverCommunityModel> arrCommunities = new ArrayList<>();
+    private SearchAll searchAll = new SearchAll();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        binding.searchbar.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b){
+                    getParentFragmentManager().beginTransaction().replace(R.id.FragmentView, searchAll).commit();
+                }
+            }
+        });
+        binding.searchbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getParentFragmentManager().beginTransaction().replace(R.id.FragmentView, searchAll).commit();
+            }
+        });
     }
 
     @Override

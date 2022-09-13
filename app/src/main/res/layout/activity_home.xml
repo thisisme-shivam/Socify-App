@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Home"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".Activities.Home">
 
 
     <FrameLayout
@@ -24,11 +24,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:elevation="5dp"
         app:backgroundTint="@color/white"
         app:itemIconTint="@color/palette_grey"
         app:itemRippleColor="@color/teal_200"
         app:labelVisibilityMode="unlabeled"
-        android:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -8,20 +8,18 @@
     tools:context=".HomeFragments.DiscoverFragment">
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_college"
+        android:id="@+id/searchbar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
         android:background="@drawable/search_view_bg"
         android:elevation="5dp"
         app:iconifiedByDefault="false"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".045"
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0"
         app:layout_constraintWidth_percent=".9"
         app:queryHint="Search" />
 
@@ -35,7 +33,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_college" >
+        app:layout_constraintTop_toBottomOf="@id/searchbar" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

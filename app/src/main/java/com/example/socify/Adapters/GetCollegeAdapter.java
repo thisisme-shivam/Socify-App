@@ -43,7 +43,6 @@ public class GetCollegeAdapter extends RecyclerView.Adapter<GetCollegeAdapter.Co
     public void onBindViewHolder(@NonNull CollegeViewHolder holder, int position) {
         College college = collegesNames.get(position);
         holder.collegeNameTextview.setText(college.getCollege_name());
-
     }
 
     @Override

@@ -24,7 +24,7 @@ public class OptimizedSearchCourses {
     Map<String,ArrayList<Course>> hashMap;
     CoursesFragment getCollegeFragment;
 
-    ArrayList<Course> newfilterlist;
+    public  ArrayList<Course> newfilterlist;
     public OptimizedSearchCourses(CoursesFragment getCollegeFragment){
         filterlist = Registration.courses;
         hashMap = new HashMap<>();
@@ -35,6 +35,7 @@ public class OptimizedSearchCourses {
     public void startSearch(String newText){
 
         if(newText.isEmpty()){
+            newfilterlist = Registration.courses;
             getCollegeFragment.adapter.filterlist(Registration.courses);
             getCollegeFragment.shimmerFrameLayout.setVisibility(View.GONE);
             getCollegeFragment.rec.setVisibility(View.VISIBLE);

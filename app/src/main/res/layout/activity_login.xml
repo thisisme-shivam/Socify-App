@@ -91,7 +91,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/osr"
-                android:text="Your username"
+                android:text="Your username or Phone"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -116,7 +116,7 @@
                 android:background="@null"
                 android:backgroundTint="@color/text_grey"
                 android:fontFamily="@font/osr"
-                android:hint="Username"
+                android:hint="Username or Phone"
                 android:importantForAutofill="no"
                 android:inputType="textVisiblePassword"
                 android:paddingBottom="20dp"
@@ -124,11 +124,21 @@
                 android:textColorHint="@color/text_grey" />
 
             <View
-                android:layout_below="@id/username"
-                android:layout_marginHorizontal="20dp"
+                android:id="@+id/line"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
+                android:layout_below="@id/username"
+                android:layout_marginHorizontal="20dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/setErrorUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line"
+                android:textColor="@color/red"
+                android:textSize="12dp"
+                android:layout_marginStart="20dp" />
 
             <TextView
                 android:id="@+id/text2"
@@ -137,8 +147,8 @@
                 android:layout_below="@id/username"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
-                android:text="Your password"
                 android:fontFamily="@font/osr"
+                android:text="Your password"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -160,16 +170,16 @@
                 android:layout_below="@id/text2"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="80dp"
-                android:textColor="@color/black"
                 android:layout_toRightOf="@id/lockimg"
                 android:background="@null"
-                android:inputType="textPassword"
                 android:backgroundTint="@color/text_grey"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/osr"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:paddingTop="15dp"
                 android:paddingBottom="20dp"
+                android:textColor="@color/black"
 
                 android:textColorHint="@color/text_grey" />
 
@@ -184,12 +194,22 @@
                 android:src="@drawable/ic_eye" />
 
             <View
+                android:id="@+id/line2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_below="@id/password"
                 android:layout_marginHorizontal="20dp"
                 android:background="@android:color/darker_gray" />
 
+            <TextView
+                android:id="@+id/setErrorPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:textSize="12dp"
+                android:layout_below="@+id/line2"
+                android:layout_marginStart="20dp"
+                />
         </RelativeLayout>
     </LinearLayout>
 

@@ -22,19 +22,6 @@ import com.example.socify.Activities.Registration;
 import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfilePicBinding;
-import com.example.socify.Classes.College;
-import com.example.socify.R;
-import com.example.socify.databinding.FragmentProfilePicBinding;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,17 +36,21 @@ public class ProfilePic extends Fragment {
     String name, passing_year;
     static SendProfileData sendProfileData = new SendProfileData();
 
-    public void FieldValidation() {
+    public boolean FieldValidation() {
         //Field Validation
-       if(binding.nametext.getText().toString().isEmpty())
-           binding.nametextlayout.setError("cannot be empty");
-       else if (binding.graduationYear.getText().toString().isEmpty())
+        name = binding.nametext.getText().toString().trim();
+        passing_year = binding.graduationYear.getText().toString();
+       if(name.isEmpty())
+           binding.nametextlayout.setError("Name cannot be empty");
+       else if (name.length()<3)
+           binding.nametextlayout.setError("Name should be atleast 3 characters");
+       else if (passing_year.isEmpty())
            binding.graduationYear.setError("Select your graduation year");
-       else{
-           name = binding.nametext.getText().toString();
-           passing_year = binding.graduationYear.getText().toString();
-       }
+       else
+           return true;
 
+
+        return false;
     }
 
     public void onclicklisteners() {
@@ -78,33 +69,30 @@ public class ProfilePic extends Fragment {
         binding.nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FieldValidation();
-                Registration.details.setName(name);
-                Registration.details.setPassyear(passing_year);
-                //Sending Data
-                sendProfileData.sendImg();
-                sendProfileData.sendName();
-                sendProfileData.sendpassyear();
-                sendProfileData.sendCurrentUID();
+               if(FieldValidation()) {
+                   Registration.details.setName(name);
+                   Registration.details.setPassyear(passing_year);
+                   //Sending Data
+                   sendProfileData.sendImg();
+                   sendProfileData.sendName();
+                   sendProfileData.sendpassyear();
+                   sendProfileData.sendCurrentUID();
 
 
-                //Switching to new fragment
-                getActivity().findViewById(R.id.back_icon).setVisibility(View.VISIBLE);
-                Registration.fragment_curr_pos++;
-                getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.userNameFragment).commit();
-                getActivity().findViewById(R.id.back_icon).setVisibility(View.VISIBLE);
-
+                   //Switching to new fragment
+                   getActivity().findViewById(R.id.back_icon).setVisibility(View.VISIBLE);
+                   Registration.fragment_curr_pos++;
+                   getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.userNameFragment).commit();
+                   getActivity().findViewById(R.id.back_icon).setVisibility(View.VISIBLE);
+               }
 
             }
         });
 
+
+
     }
 
-    public String getFileExt(Uri uri) {
-        ContentResolver contentResolver = requireContext().getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,17 +101,23 @@ public class ProfilePic extends Fragment {
                 new ActivityResultContracts.GetContent(),
                 result -> {
                     Intent intent = new Intent(getActivity(), CropperActivity.class);
-                    intent.putExtra("DATA", result.toString());
-                    startActivityForResult(intent, 101);
+                    if(result !=null) {
+                        intent.putExtra("DATA", result.toString());
+                        startActivityForResult(intent, 101);
+                    }
+
                 }
         );
+
+
 
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==-1 && requestCode==101) {
+
+        if(resultCode==-1 && requestCode==101 && data!= null ) {
             assert data != null;
             String result = data.getStringExtra("RESULT");
             Log.i("Result", result);
@@ -137,18 +131,24 @@ public class ProfilePic extends Fragment {
         }
     }
 
+    int i=1;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.i("YEs","Entering");
+
+        onclicklisteners();
+        Log.i("YEs", "Entering");
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
+        binding.profileImage.setImageURI(imgUrl);
         bar.setProgress(20);
         ArrayList<String> years = new ArrayList<>();
-        int curr_year= Calendar.getInstance().get(Calendar.YEAR);
-        for(int i=0;i<=6;i++){
-            years.add(String.valueOf(curr_year+i));
+        int curr_year = Calendar.getInstance().get(Calendar.YEAR);
+        for (int i = 0; i <= 6; i++) {
+            years.add(String.valueOf(curr_year + i));
         }
         binding.graduationYear.setItems(years);
+        i=0;
+
     }
 
     @Override
@@ -156,7 +156,7 @@ public class ProfilePic extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentProfilePicBinding.inflate(inflater, container, false);
-        onclicklisteners();
+
         return binding.getRoot();
     }
 

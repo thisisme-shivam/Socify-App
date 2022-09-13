@@ -23,9 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SplashActivity extends AppCompatActivity {
-    DatabaseReference ref;
-    public static ArrayList<College> colleges;
-
     FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,39 +31,13 @@ public class SplashActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-
-        colleges = new ArrayList<>();
-        ref = FirebaseDatabase.getInstance().getReference("CollegeNames");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        int i =0;
-                        for (DataSnapshot snapshot : snapshot.getChildren()) {
-                            Log.i("loljhjj",String.valueOf(i));
-                            College college = snapshot.getValue(College.class);
-                            colleges.add(college);
-                        }
-                    }
-                }).start();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
-
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(new Intent(SplashActivity.this, SlideScreen.class));
                 finish();
             }
-        },1000);
+        },1600);
 
     }
 

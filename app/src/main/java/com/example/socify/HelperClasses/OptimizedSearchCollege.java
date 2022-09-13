@@ -4,6 +4,7 @@ import android.util.Log;
 import android.util.MonthDisplayHelper;
 import android.view.View;
 
+import com.example.socify.Activities.Registration;
 import com.example.socify.Activities.SplashActivity;
 import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.Classes.College;
@@ -21,9 +22,9 @@ public class OptimizedSearchCollege {
     Map<String,ArrayList<College>> hashMap;
     GetCollegeFragment getCollegeFragment;
 
-    ArrayList<College> newfilterlist;
+    public ArrayList<College> newfilterlist;
     public OptimizedSearchCollege(GetCollegeFragment getCollegeFragment){
-        filterlist = SplashActivity.colleges;
+        filterlist = Registration.colleges;
         hashMap = new HashMap<>();
         this.getCollegeFragment = getCollegeFragment;
     }
@@ -33,8 +34,7 @@ public class OptimizedSearchCollege {
     public void startSearch(String newText){
         // if new text is empty no need to search colleges directly assign origin list to adapter
         if(newText.isEmpty()){
-            getCollegeFragment.adapter.filterlist(filterlist = SplashActivity.colleges);
-            notifyUi();
+            getCollegeFragment.adapter.filterlist(filterlist = Registration.colleges);
             return;
         }
 
@@ -48,7 +48,7 @@ public class OptimizedSearchCollege {
         else if(newText.contains(oldtext) && !oldtext.isEmpty() )
             filterlist = newfilterlist;
         else
-            filterlist = SplashActivity.colleges;
+            filterlist = Registration.colleges;
 
         final int[] i = {0};
 
