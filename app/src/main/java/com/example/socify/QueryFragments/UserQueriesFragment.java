@@ -1,15 +1,17 @@
 package com.example.socify.QueryFragments;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.socify.Activities.QnA;
 import com.example.socify.Classes.QuestionsMember;
 import com.example.socify.R;
 import com.example.socify.ViewHolders.Load_Questions;
@@ -28,20 +30,22 @@ public class UserQueriesFragment extends Fragment {
 
     FragmentUserQueriesBinding binding;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = database.getReference("Questions").child("User's Questions").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+    DatabaseReference databaseReference;
+    ReplyFragment replyFragment;
 
 
     //Deleting User's Questions from the database when delete button is tapped
     public void delete(String time) {
 
         //Deleting from 'User's Questions' node
+        databaseReference = database.getReference("Questions").child("User's Questions").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         Query query = databaseReference.orderByChild("time").equalTo(time);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
                     dataSnapshot.getRef().removeValue();
-
+                    Log.i("Question Deleted", "YES");
                     Toast.makeText(requireActivity(), "Deleted", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -101,8 +105,23 @@ public class UserQueriesFragment extends Fragment {
 
                         holder.deleteitem(getActivity(), model.getName(),model.getUrl(),model.getUserid(),model.getKey(),model.getQuestion(),model.getTime(),model.getTag());
                         final String time = getItem(position).getTime();
+                        String postkey = getItem(position).getKey();
                         holder.delbtn.setOnClickListener(v -> delete(time));
 
+                        holder.userReplyBtn.setOnClickListener(v -> {
+
+                            Bundle bundle2 = new Bundle();
+                            //Passing data onto Reply Fragment
+                            bundle2.putString("uid", getItem(holder.getAbsoluteAdapterPosition()).getUserid());
+                            bundle2.putString("question", getItem(holder.getAbsoluteAdapterPosition()).getQuestion());
+                            bundle2.putString("name", getItem(holder.getAbsoluteAdapterPosition()).getName());
+                            bundle2.putString("postkey", getItem(holder.getAbsoluteAdapterPosition()).getKey());
+                            bundle2.putString("tag", getItem(holder.getAbsoluteAdapterPosition()).getTag());
+                            replyFragment = new ReplyFragment();
+                            replyFragment.setArguments(bundle2);
+                            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, replyFragment).commit();
+                            QnA.fragwitch =3;
+                        });
                     }
 
                     @NonNull
@@ -114,7 +133,13 @@ public class UserQueriesFragment extends Fragment {
                     }
                 };
 
+        //Ordering data from bottom to top
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+
         firebaseRecyclerAdapter.startListening();
+        binding.userqueriesRV.setLayoutManager(layoutManager);
         binding.userqueriesRV.setAdapter(firebaseRecyclerAdapter);
         return binding.getRoot();
 

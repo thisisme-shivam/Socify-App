@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.socify.HomeFragments.DiscoverFragment;
 import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.HomeFragments.ProfileFragment;
+import com.example.socify.PostFragments.PostLoaderFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityHomeBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -118,6 +120,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 //Code for post creation to be written here
                 Toast.makeText(Home.this, "Post selected", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Home.this, CreatePost.class));
             }
         });
 
@@ -275,7 +278,6 @@ public class Home extends AppCompatActivity {
                 }
             }
         });
-
 
     }
     @Override

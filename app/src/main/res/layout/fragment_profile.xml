@@ -24,6 +24,7 @@
             android:layout_marginBottom="13dp"
             app:layout_constraintBottom_toTopOf="@+id/profile_pic"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -102,12 +103,13 @@
 
         </LinearLayout>
 
+
         <GridLayout
             android:id="@+id/gridLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="80dp"
             android:columnCount="1"
             android:rowCount="1"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -139,13 +141,12 @@
 
         </GridLayout>
 
-
         <GridLayout
             android:id="@+id/gridLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="80dp"
             android:columnCount="1"
             android:rowCount="1"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -189,32 +190,6 @@
             app:layout_constraintStart_toEndOf="@+id/gridLayout2"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/follow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="88dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/plus"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
-            app:layout_constraintHorizontal_bias="0.46"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_actionbar" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="88dp"
-            android:layout_marginEnd="30dp"
-            android:src="@drawable/chat"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.483"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/profile_actionbar" />
-
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView4"
             android:layout_width="wrap_content"
@@ -250,68 +225,18 @@
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="374dp">
 
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:backgroundTint="@color/palette_light_teal"
-                android:elevation="5dp"
-                android:text="Android Development"
-                android:textAlignment="center"
-                android:textColor="@color/black" />
-
-            <!--            <com.google.android.material.chip.Chip-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_margin="5dp"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:backgroundTint="@color/palette_light_teal"-->
-            <!--                android:elevation="5dp"-->
-            <!--                android:text="Music"-->
-            <!--                android:textAlignment="center" />-->
-
-            <!--            <com.google.android.material.chip.Chip-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:backgroundTint="@color/palette_light_teal"-->
-            <!--                android:elevation="5dp"-->
-            <!--                android:layout_margin="5dp"-->
-            <!--                android:text="Web Development"-->
-            <!--                android:textAlignment="center" />-->
-
-            <!--            <com.google.android.material.chip.Chip-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:backgroundTint="@color/palette_light_teal"-->
-            <!--                android:elevation="5dp"-->
-            <!--                android:layout_margin="5dp"-->
-            <!--                android:text="Photography"-->
-            <!--                android:textAlignment="center" />-->
-
-            <!--            <com.google.android.material.chip.Chip-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:backgroundTint="@color/palette_light_teal"-->
-            <!--                android:elevation="5dp"-->
-            <!--                android:layout_margin="5dp"-->
-            <!--                android:text="Others"-->
-            <!--                android:textAlignment="center" />-->
-
         </com.google.android.material.chip.ChipGroup>
 
     </HorizontalScrollView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView3"
+    <FrameLayout
+        android:id="@+id/postloader"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
-        tools:listitem="@layout/profile_posts" />
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
