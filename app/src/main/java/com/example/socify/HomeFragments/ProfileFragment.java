@@ -4,8 +4,12 @@ import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,9 +20,23 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.socify.Activities.Home;
+import com.example.socify.Adapters.PostsViewPagerAdapter;
+import com.example.socify.Adapters.QueryTabViewPagerAdapter;
+import com.example.socify.Classes.PostMember;
+import com.example.socify.PostFragments.ImagePostFragment;
+import com.example.socify.PostFragments.PostLoaderFragment;
+import com.example.socify.PostFragments.VideoPostFragment;
+import com.example.socify.QueryFragments.AllQueriesFragment;
+import com.example.socify.QueryFragments.UserQueriesFragment;
 import com.example.socify.R;
+import com.example.socify.ViewHolders.LoadUserPostsImages;
 import com.example.socify.databinding.FragmentProfileBinding;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.chip.Chip;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,6 +46,9 @@ public class ProfileFragment extends Fragment {
 
     public FragmentProfileBinding binding;
     public Home home;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference;
+    PostLoaderFragment postLoaderFragment = new PostLoaderFragment();
 
     public void setonclicklisteners() {
 
@@ -88,7 +109,6 @@ public class ProfileFragment extends Fragment {
     }
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +126,18 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
+        getChildFragmentManager().beginTransaction().replace(R.id.postloader,postLoaderFragment).commit();
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        databaseReference = database.getReference("Posts").child("All Images").child(currentUID);
+
+//        binding.userpostsRV.setLayoutManager(new LinearLayoutManager(requireActivity()));
+
+
+    }
 }

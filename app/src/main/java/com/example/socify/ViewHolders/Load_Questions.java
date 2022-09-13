@@ -17,7 +17,7 @@ public class Load_Questions extends RecyclerView.ViewHolder {
 
     public MaterialTextView timeres,nameres,questionsres;
     public Chip tagres;
-    public MaterialButton delbtn, replybtn;
+    public MaterialButton delbtn, replybtn, userReplyBtn;
 
     public Load_Questions(@NonNull View itemView) {
         super(itemView);
@@ -45,6 +45,7 @@ public class Load_Questions extends RecyclerView.ViewHolder {
         nameres.setText("Posted by: "+name);
         questionsres.setText(question);
         delbtn = itemView.findViewById(R.id.deletebtn);
+        userReplyBtn = itemView.findViewById(R.id.repliesbtn);
     }
 
 }

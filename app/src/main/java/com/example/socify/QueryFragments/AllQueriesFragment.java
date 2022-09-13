@@ -1,15 +1,19 @@
 package com.example.socify.QueryFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.socify.Activities.Home;
+import com.example.socify.Activities.QnA;
 import com.example.socify.Classes.QuestionsMember;
 import com.example.socify.R;
 import com.example.socify.ViewHolders.Load_Questions;
@@ -26,6 +30,7 @@ public class AllQueriesFragment extends Fragment {
     FragmentAllQueriesBinding binding;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference;
+    ReplyFragment replyFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,24 @@ public class AllQueriesFragment extends Fragment {
                     @Override
                     protected void onBindViewHolder(@NonNull Load_Questions holder, int position, @NonNull QuestionsMember model) {
                         holder.setallitem(getActivity(), model.getName(),model.getUrl(),model.getUserid(),model.getKey(),model.getQuestion(),model.getTime(),model.getTag());
+                        holder.replybtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                Bundle bundle = new Bundle();
+                                //Passing data onto Reply Fragment
+                                bundle.putString("uid", getItem(holder.getAbsoluteAdapterPosition()).getUserid());
+                                bundle.putString("question", getItem(holder.getAbsoluteAdapterPosition()).getQuestion());
+                                bundle.putString("name", getItem(holder.getAbsoluteAdapterPosition()).getName());
+                                bundle.putString("postkey", getItem(holder.getAbsoluteAdapterPosition()).getKey());
+                                bundle.putString("tag", getItem(holder.getAbsoluteAdapterPosition()).getTag());
+
+                                replyFragment = new ReplyFragment();
+                                replyFragment.setArguments(bundle);
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, replyFragment).commit();
+                                QnA.fragwitch =3;
+                            }
+                        });
                     }
 
                     @NonNull
@@ -67,7 +90,13 @@ public class AllQueriesFragment extends Fragment {
                     }
                 };
 
+        //Ordering data from bottom to top
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+
         firebaseRecyclerAdapter.startListening();
+        binding.allqueriesRV.setLayoutManager(layoutManager);
         binding.allqueriesRV.setAdapter(firebaseRecyclerAdapter);
         return binding.getRoot();
 

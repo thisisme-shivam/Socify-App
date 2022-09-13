@@ -45,7 +45,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="149dp"
             android:layout_marginBottom="8dp"
-            android:text="Select upto 5 tags"
+            android:text="Select atleast 1 tag"
             android:textColor="@color/text_grey"
             app:layout_constraintBottom_toTopOf="@+id/groupedtags"
             app:layout_constraintEnd_toEndOf="parent"
