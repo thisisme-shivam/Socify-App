@@ -32,7 +32,7 @@ public class Load_Answers extends RecyclerView.ViewHolder {
         Answer = itemView.findViewById(R.id.answertv);
         timestamp = itemView.findViewById(R.id.timestamp);
 
-        namereplier.setText(name);
+        namereplier.setText("Answered by: "+name);
         Answer.setText(answer);
         timestamp.setText(time);
 

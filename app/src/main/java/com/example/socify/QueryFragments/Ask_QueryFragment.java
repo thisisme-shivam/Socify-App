@@ -48,7 +48,7 @@ public class Ask_QueryFragment extends Fragment {
 
     public void setonclicklisteners() {
         binding.askbtn.setOnClickListener(v -> {
-            String question = binding.questiontext.getText().toString();
+            String question = binding.questiontext.getText().toString().trim();
             String tag = binding.categories.getText().toString();
 
             Calendar cdate = Calendar.getInstance();

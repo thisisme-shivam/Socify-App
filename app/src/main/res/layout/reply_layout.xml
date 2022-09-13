@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@drawable/bordered_whitebtn"
-    android:layout_margin="10dp"
+    android:layout_margin="5dp"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
             android:fontFamily="@font/osr"
             android:text="Answered by @saurav.bauddh"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,30 +34,32 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
             android:fontFamily="@font/osr"
             android:text="3 September 2022"
             android:textColor="@color/black"
             android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/usernametv"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/answertv"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="5dp"
             android:fontFamily="@font/osr"
             android:text="It is a NoSql Database"
+            android:textAlignment="viewStart"
             android:textColor="@color/black"
             android:textSize="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/approveTV"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/usernametv" />
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/approveTV"
