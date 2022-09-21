@@ -4,65 +4,196 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationFragments.ProfilePic">
+    tools:context=".HomeFragments.ProfileFragment">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="215dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="98dp"
-        android:layout_marginBottom="18dp"
-        android:fontFamily="@font/osr"
-        android:gravity="center"
-        android:text="Be more social with Socify! Let us know more about yourself."
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/profile_image"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/details"
+        android:layout_width="411dp"
+        android:layout_height="147dp"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="149dp"
-        android:layout_height="148dp"
-        android:layout_marginStart="131dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="131dp"
-        android:layout_marginBottom="21dp"
-        android:src="@drawable/user"
-        app:civ_border_color="#FF000000"
-        app:civ_border_width="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/addpic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <TextView
-        android:id="@+id/addpic"
-        android:layout_width="wrap_content"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="8dp"
+            android:elevation="20dp"
+            android:src="@drawable/doge"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile1_actionbar"
+            tools:ignore="UnknownId" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_pic"
+            android:orientation="horizontal"
+            >
+
+
+        </LinearLayout>
+
+
+        <GridLayout
+            android:id="@+id/gridLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160dp"
+            android:layout_marginBottom="55dp"
+            android:columnCount="1"
+            android:rowCount="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/followerscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                tools:layout_editor_absoluteX="172dp"
+                tools:layout_editor_absoluteY="99dp" />
+
+
+            <TextView
+                android:id="@+id/followers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Followers"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="172dp"
+                tools:layout_editor_absoluteY="99dp" />
+
+        </GridLayout>
+
+        <GridLayout
+            android:id="@+id/gridLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="55dp"
+            android:columnCount="1"
+            android:rowCount="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+
+            <TextView
+                android:id="@+id/followingcount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                tools:layout_editor_absoluteX="172dp"
+                tools:layout_editor_absoluteY="99dp" />
+
+
+            <TextView
+                android:id="@+id/Following"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Following"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="172dp"
+                tools:layout_editor_absoluteY="99dp" />
+        </GridLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/passyear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="94dp"
+            android:layout_marginEnd="96dp"
+            android:text="2024"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/gridLayout3"
+            app:layout_constraintStart_toEndOf="@+id/gridLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shivam Kumar"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="98dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
+        android:id="@+id/request"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="112dp"
-        android:fontFamily="@font/osr"
-        android:gravity="center"
-        android:text="Add your picture"
-        android:textColor="@color/palette_teal"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+        android:layout_marginEnd="-5dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/details">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nametextlayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="331dp"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/follo1"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rounds"
+            android:fontFamily="@font/osr"
+            android:letterSpacing="0.3"
+            android:padding="5dp"
+            android:stateListAnimator="@null"
+            android:text="FOLLOW"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:translationZ="2dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/message1"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rounds"
+            android:fontFamily="@font/osr"
+            android:letterSpacing="0.2"
+            android:stateListAnimator="@null"
+            android:text="MESSAGE"
+            android:textColor="@color/black"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:translationZ="2dp" />
+
+    </LinearLayout>
+
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:scrollbars="none"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="15dp"
         android:hint="Enter your name"
@@ -72,65 +203,171 @@
         app:endIconTint="@color/black"
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addpic"
-        app:startIconDrawable="@drawable/usernameicon"
-        app:startIconTint="@color/black">
+        app:layout_constraintTop_toBottomOf="@+id/request">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nametext"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/osr"
-            android:lines="1"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill"
+            android:layout_marginHorizontal="10dp"
+            app:singleLine="true"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="374dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/palette_light_teal"
+                android:elevation="5dp"
+                android:text="Android Development"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
 
-    <com.skydoves.powerspinner.PowerSpinnerView
-        android:id="@+id/graduation_year"
+            <!--            <com.google.android.material.chip.Chip-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:backgroundTint="@color/palette_light_teal"-->
+            <!--                android:elevation="5dp"-->
+            <!--                android:text="Music"-->
+            <!--                android:textAlignment="center" />-->
+
+            <!--            <com.google.android.material.chip.Chip-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:backgroundTint="@color/palette_light_teal"-->
+            <!--                android:elevation="5dp"-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:text="Web Development"-->
+            <!--                android:textAlignment="center" />-->
+
+            <!--            <com.google.android.material.chip.Chip-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:backgroundTint="@color/palette_light_teal"-->
+            <!--                android:elevation="5dp"-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:text="Photography"-->
+            <!--                android:textAlignment="center" />-->
+
+            <!--            <com.google.android.material.chip.Chip-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:backgroundTint="@color/palette_light_teal"-->
+            <!--                android:elevation="5dp"-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:text="Others"-->
+            <!--                android:textAlignment="center" />-->
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/private1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:background="@drawable/profile_pic_select_year_background"
-        android:elevation="5dp"
-        android:layout_marginTop="20sp"
-        android:hint="Your Graduation Year"
-        android:padding="15dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/text_grey"
-        android:textSize="14.5sp"
-        android:textStyle="bold"
-        app:fontFamily="@font/osr"
-        app:layout_constraintTop_toBottomOf="@+id/nametextlayout"
-        app:spinner_arrow_drawable="@drawable/downarrow"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/horizontalScrollView"
+        tools:layout_editor_absoluteX="13dp">
 
-        app:spinner_arrow_gravity="end"
-        app:spinner_arrow_padding="8dp"
-        app:spinner_divider_color="@color/black"
-        app:spinner_divider_show="true"
-        app:spinner_divider_size="0.5dp"
-        app:spinner_item_height="46dp"
-        app:spinner_popup_animation="dropdown"
-        app:spinner_popup_background="@color/white"
-        app:spinner_popup_elevation="14dp"
-        app:spinner_popup_height="250dp"
-        tools:layout_editor_absoluteX="40dp" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/padlock"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/nextbtn"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="This Account is Private"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            />
+
+     
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profile_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="3dp"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/username_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="10dp"
+            android:onClick="showPopup"
+            android:text="@string/profile_username"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/three_dots"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:background="@drawable/flag_transparent"
+            android:text="@string/dots"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/three_dots" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="#D8D9D9"
-        android:foregroundGravity="center"
-        android:src="@drawable/arrowgrey"
+        android:text="Interests"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="270dp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView3"
+        android:layout_width="424dp"
+        android:layout_height="278dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/profile_posts" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
