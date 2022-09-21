@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class UserDetails {
 
-    String ImgUri, name, username, password, passyear, college_name, course;
+    String ImgUri="", name, username, password, passyear, college_name, course;
     ArrayList <String> tags;
 
 

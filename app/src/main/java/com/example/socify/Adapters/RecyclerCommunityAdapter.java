@@ -26,6 +26,7 @@ public class RecyclerCommunityAdapter extends RecyclerView.Adapter<RecyclerCommu
         this.arrCommunities = arrCommunities;
     }
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

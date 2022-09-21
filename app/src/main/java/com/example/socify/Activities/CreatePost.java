@@ -67,7 +67,7 @@ public class CreatePost extends AppCompatActivity {
         postMember = new PostMember();
         db1 = database.getReference("Posts").child("All Images").child(currentUID);
         db2 = database.getReference("Posts").child("All Videos").child(currentUID);
-        db3 = database.getReference("Posts").child("All Posts").child(currentUID);
+        db3 = database.getReference("Posts").child("All Posts");
         storageReference = FirebaseStorage.getInstance().getReference("Posts").child("User's Posts").child(currentUID);;
         setonclicklisteners();
     }
@@ -100,8 +100,7 @@ public class CreatePost extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==PICK_FILE || requestCode==RESULT_OK
-        || data!=null || data.getData()!=null) {
+        if( requestCode == PICK_FILE && data != null) {
             selectedUri = data.getData();
             Log.e("Selected URI", String.valueOf(selectedUri));
             if(selectedUri.toString().contains("image")) {
@@ -156,7 +155,7 @@ public class CreatePost extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Uri downloaduri = task.getResult();
 
-                    if (type=="image") {
+                    if (type.equals("image")) {
                         postMember.setName(name);
                         postMember.setDesc(description);
                         postMember.setTime(saveDate);
@@ -177,7 +176,7 @@ public class CreatePost extends AppCompatActivity {
                         Toast.makeText(this, "Post Uploaded", Toast.LENGTH_SHORT).show();
 
                     }
-                    else if(type=="video") {
+                    else if(type.equals("video")) {
                         postMember.setName(name);
                         postMember.setDesc(description);
                         postMember.setTime(saveDate);

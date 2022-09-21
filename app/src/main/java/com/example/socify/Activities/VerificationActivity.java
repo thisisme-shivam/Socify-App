@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -58,13 +59,23 @@ public class VerificationActivity extends AppCompatActivity {
          });
         binding.getOtpButton.setOnClickListener(view -> {
             phonenumber = binding.phoneInput.getText().toString();
-            if (phonenumber.isEmpty())
-                Toast.makeText(getApplicationContext(), "Enter Phone Number", Toast.LENGTH_SHORT).show();
+            if (phonenumber.isEmpty()){
+                assert binding.errorbox != null;
+                binding.errorbox.setText("Phone number cannot be empty");
+                binding.errorbox.setVisibility(View.VISIBLE);
+            }
             else if (phonenumber.length() < 10) {
-                if (phonenumber.length() == 9)
-                    Toast.makeText(getApplicationContext(), Integer.toString(10 - phonenumber.length()) + " digit is missing", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getApplicationContext(), Integer.toString(10 - phonenumber.length()) + " digits are missing", Toast.LENGTH_SHORT).show();
+                if (phonenumber.length() == 9) {
+                    assert binding.errorbox != null;
+                    binding.errorbox.setText("Phone number missing 1 digit");
+                    binding.errorbox.setVisibility(View.VISIBLE);
+                }
+                else{
+                    assert binding.errorbox != null;
+                    binding.errorbox.setText("Phone number missing "+String.valueOf(10-phonenumber.length()) +"digits");
+                    binding.errorbox.setVisibility(View.VISIBLE);
+                }
+                    Toast.makeText(getApplicationContext(), 10 - phonenumber.length() + " digits are missing", Toast.LENGTH_SHORT).show();
             }else{
                 sendotp();
             }

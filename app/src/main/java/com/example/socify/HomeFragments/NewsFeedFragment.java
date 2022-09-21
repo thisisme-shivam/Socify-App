@@ -33,38 +33,11 @@ public class NewsFeedFragment extends Fragment {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference, likeref;
     Boolean likechecker = false;
-
+    RecyclerView rec;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.chat.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), AllChat.class);
-            startActivity(intent);
-        });
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentNewsFeedBinding.inflate(inflater, container, false);
-        String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        reference = database.getReference("Posts").child("All Posts").child(currentUID);
-        likeref = database.getReference("Likes");
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
         FirebaseRecyclerOptions<PostMember> options =
                 new FirebaseRecyclerOptions.Builder<PostMember>()
                         .setQuery(reference, PostMember.class)
@@ -79,7 +52,6 @@ public class NewsFeedFragment extends Fragment {
 
                         holder.setPost(requireActivity(), model.getName(), model.getUrl(), model.getPostUri(), model.getTime(), model.getUid(), model.getType(), model.getDesc(), model.getUsername());
 
-                        holder.likechecker(postkey);
                         holder.like.setOnClickListener(v -> {
                             likechecker = true;
                             likeref.addValueEventListener(new ValueEventListener() {
@@ -124,8 +96,37 @@ public class NewsFeedFragment extends Fragment {
         layoutManager.setStackFromEnd(true);
 
         firebaseRecyclerAdapter.startListening();
-        binding.postsRV.setLayoutManager(layoutManager);
-        binding.postsRV.setAdapter(firebaseRecyclerAdapter);
+        rec = getView().findViewById(R.id.postsRV);
+        rec.setLayoutManager(layoutManager);
+        rec.setAdapter(firebaseRecyclerAdapter);
+
+        binding.chat.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), AllChat.class);
+            startActivity(intent);
+        });
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        binding = FragmentNewsFeedBinding.inflate(inflater, container, false);
+        String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        reference = database.getReference("Posts").child("All Posts");
+        likeref = database.getReference("Likes");
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
 
     }
 }

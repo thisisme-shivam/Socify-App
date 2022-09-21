@@ -51,6 +51,7 @@ public class InterestsFragment extends Fragment {
                 }
                 Registration.details.setTags(tags);
                 //Uploading Tags
+                sendProfileData.insertintocollege();
                 sendProfileData.sendTags();
                 startActivity(new Intent(requireActivity(), Home.class));
                 requireActivity().finish();

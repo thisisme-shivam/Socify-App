@@ -2,25 +2,27 @@ package com.example.socify.Classes;
 
 public class Person {
     String name;
-    String usernmae;
+    String username;
     String follow_status;
     String uri;
 
     public Person(){}
 
-    public void setAllInfo(String name, String usernmae,String follow_status,String uri){
+    public Person(String name, String username,String follow_status,String uri){
         this.name = name;
-        this.usernmae = usernmae;
+        this.username = username;
         this.follow_status = follow_status;
         this.uri = uri;
     }
 
     public String getUsername() {
-        return usernmae;
+        return username;
     }
 
+
+
     public String getName(){
-        return usernmae;
+        return name;
     }
 
     public String getUri(){

@@ -31,13 +31,25 @@ public class SplashActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this, SlideScreen.class));
-                finish();
-            }
-        },1600);
+
+        if(auth.getCurrentUser() !=null)
+        {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(getApplicationContext(),Home.class));
+                    finish();
+                }
+            },1600);
+        }else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startActivity(new Intent(SplashActivity.this, SlideScreen.class));
+                    finish();
+                }
+            }, 1600);
+        }
 
     }
 

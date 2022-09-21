@@ -43,7 +43,7 @@ public class Home extends AppCompatActivity {
     ProfileFragment profileFragment;
     BottomNavigationView navigationView;
     int[] drawables;
-    public String name, college_name, passyear, branch, imgurl, username, age, bio;
+    public  static String name, college_name, passyear, branch, imgurl, username, age, bio,uid;
     Map<String, Object> tagmap;
     public ArrayList<String> tags;
 
@@ -223,6 +223,7 @@ public class Home extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
 
                     if(task.getResult().exists()) {
+                        uid = task.getResult().getString("UID");
                         name = task.getResult().getString("Name");
                         college_name = task.getResult().getString("CollegeName");
                         passyear = task.getResult().getString("Passing Year");

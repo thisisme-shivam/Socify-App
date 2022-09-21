@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.socify.Activities.Registration;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -15,6 +16,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,6 +39,7 @@ public class SendProfileData {
     String currentUID;
     StorageReference storageReference;
     DocumentReference documentReference;
+    DatabaseReference reference;
     CollectionReference collectionReference;
     public static HashMap<String, String> profile = new HashMap<>();
     HashMap<String, String> mpPhoneUser = new HashMap<>();
@@ -146,5 +154,13 @@ public class SendProfileData {
         documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
         interests.put("Tags", Registration.details.getTags());
         documentReference.collection("Interests").document("UserTags").set(interests);
+    }
+
+    public void insertintocollege() {
+        Log.i("uid",currentUID);
+        reference = FirebaseDatabase.getInstance().getReference("College").child(Registration.details.getCollege_name()).child("Profiles");
+
+        reference.child(currentUID).setValue(currentUID);
+
     }
 }

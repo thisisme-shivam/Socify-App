@@ -104,6 +104,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void loginbyusername() {
+        progressDialog.show();
         DocumentReference doc = FirebaseFirestore.getInstance().collection("MapPhoneUsername").document(username);
         doc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -111,6 +112,10 @@ public class Login extends AppCompatActivity {
                 if(task.getResult().exists()) {
                     username = task.getResult().getString(username) + "@gmail.com";
                     loginbyPhone();
+                }else{
+                    binding.setErrorUsername.setText("User dosen't exists");
+                    binding.setErrorUsername.setVisibility(View.VISIBLE);
+                    progressDialog.dismiss();
                 }
             }
         });
@@ -127,6 +132,8 @@ public class Login extends AppCompatActivity {
                     finish();
                 }
                 else {
+                    binding.setErrorUsername.setText("Wrong Credentials");
+                    binding.setErrorUsername.setVisibility(View.VISIBLE);
                     Toast.makeText(getApplicationContext(),"fjdsk",Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
@@ -146,15 +153,17 @@ public class Login extends AppCompatActivity {
 
         if(username.isEmpty()) {
             binding.setErrorUsername.setText("Required field cannot be empty");
-            binding.username.setError("");
             binding.setErrorUsername.setVisibility(View.VISIBLE);
         }
         else if(password.isEmpty()){
             binding.setErrorPassword.setText("Password cannot be empty");
-            binding.password.setError("");
+            binding.setErrorPassword.setVisibility(View.VISIBLE);
+        }else if (password.length()<8){
+            binding.setErrorPassword.setText("Password must have 8 characters");
             binding.setErrorPassword.setVisibility(View.VISIBLE);
         }else
             return true;
+
         return false;
     }
 

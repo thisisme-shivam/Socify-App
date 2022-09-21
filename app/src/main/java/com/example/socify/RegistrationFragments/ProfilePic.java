@@ -73,11 +73,11 @@ public class ProfilePic extends Fragment {
                    Registration.details.setName(name);
                    Registration.details.setPassyear(passing_year);
                    //Sending Data
+                   if(imgUrl!=null)
                    sendProfileData.sendImg();
                    sendProfileData.sendName();
                    sendProfileData.sendpassyear();
                    sendProfileData.sendCurrentUID();
-
 
                    //Switching to new fragment
                    getActivity().findViewById(R.id.back_icon).setVisibility(View.VISIBLE);

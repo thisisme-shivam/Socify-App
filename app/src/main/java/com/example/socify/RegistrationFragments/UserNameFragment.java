@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.PatternMatcher;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +21,17 @@ import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentNameFragementBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.intellij.lang.annotations.RegExp;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,7 +44,7 @@ public class UserNameFragment extends Fragment {
     FragmentNameFragementBinding binding;
     String username, Password;
     SendProfileData sendProfileData = new SendProfileData();
-
+    DocumentReference doc;
     public void onclicklisteners() {
         binding.nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +94,7 @@ public class UserNameFragment extends Fragment {
     }
 
     private boolean checkstrength() {
-        Pattern p = Pattern.compile("^(?=(.*[a-z])+)(?=(.*[A-Z])+)(?=(.*[0-9])+)(?=(.*[!@#$%^&*()\\-_+.])+)(?=\\S+$).{6,}$");
+        Pattern p = Pattern.compile("^(?=(.*[a-z])+)(?=(.*[A-Z])+)(?=(.*[0-9])+)(?=(.*[!@#$%^&*()\\-_+.])+)(?=\\S+$).{8}$");
         Matcher m = p.matcher(Password);
         return m.find();
     }
@@ -92,6 +102,7 @@ public class UserNameFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
 
@@ -101,6 +112,31 @@ public class UserNameFragment extends Fragment {
 
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(40);
+        binding.usernametext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    doc = FirebaseFirestore.getInstance().collection("MapPhoneUsernam").document(String.valueOf(charSequence));
+                    doc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(!task.isSuccessful()){
+                                binding.usernametext.setError("Username is tasken");
+                            }else
+                                binding.usernametext.setError("");
+                        }
+                    });
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     @Override
@@ -109,7 +145,7 @@ public class UserNameFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentNameFragementBinding.inflate(inflater, container, false);
         onclicklisteners();
-        if(!Objects.equals(Registration.details.getImgUri(), "No Image")) {
+        if(!Objects.equals(Registration.details.getImgUri(), "")) {
             binding.ProfilePic.setImageURI(Uri.parse(Registration.details.getImgUri()));
         }
         else{
