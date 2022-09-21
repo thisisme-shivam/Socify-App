@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.socify.QueryFragments.Ask_QueryFragment;
 import com.example.socify.QueryFragments.QueryListFragment;
+import com.example.socify.QueryFragments.ReplyFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityQnBinding;
 
@@ -14,6 +15,8 @@ public class QnA extends AppCompatActivity {
     ActivityQnBinding binding;
     Ask_QueryFragment ask_queryFragment;
     QueryListFragment questionListFragment;
+    ReplyFragment replyFragment;
+
     public static int fragwitch;
 
     @Override
@@ -22,13 +25,25 @@ public class QnA extends AppCompatActivity {
         binding = ActivityQnBinding.inflate(getLayoutInflater());
         ask_queryFragment = new Ask_QueryFragment();
         questionListFragment = new QueryListFragment();
+        replyFragment = new ReplyFragment();
 
-        if(fragwitch==0) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, ask_queryFragment).commit();
+        switch (fragwitch) {
+
+            case 0: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, ask_queryFragment).commit();
+            }
+            break;
+            case 1: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, questionListFragment).commit();
+            }
+            break;
+            case 2: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, replyFragment).commit();
+            }
+            break;
+
         }
-        else if(fragwitch==1) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, questionListFragment).commit();
-        }
+
         setContentView(binding.getRoot());
     }
 }

@@ -18,17 +18,17 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/like"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".7" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/like"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
@@ -46,7 +46,7 @@
         app:layout_constraintVertical_bias="0.471" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_phone_text"
@@ -56,7 +56,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/like"
         app:layout_constraintVertical_bias=".07" />
 
 
@@ -74,7 +74,7 @@
         app:layout_constraintBottom_toTopOf="@+id/getOtpButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/comment"
         app:layout_constraintWidth_percent=".7">
 
         <com.hbb20.CountryCodePicker
@@ -135,7 +135,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView2"
+        app:layout_constraintTop_toBottomOf="@id/comment"
         app:layout_constraintVertical_bias="0.3"
         app:layout_constraintWidth_percent=".7" />
 
@@ -147,7 +147,7 @@
         android:layout_marginTop="7dp"
         android:layout_marginEnd="81dp"
         android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/like"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"

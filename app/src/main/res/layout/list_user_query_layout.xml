@@ -91,6 +91,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/questiontv" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/repliesbtn"
+            android:layout_width="90dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="120dp"
+            android:background="@drawable/bordered_whitebtn"
+            android:fontFamily="@font/osr"
+            android:text="Replies"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/deletebtn"
+            app:layout_constraintTop_toBottomOf="@+id/questiontv" />
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
