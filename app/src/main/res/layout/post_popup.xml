@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Create a community"
+            android:text="Create a club"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:fontFamily="@font/osr" />

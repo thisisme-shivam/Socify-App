@@ -104,7 +104,7 @@ public class Home extends AppCompatActivity {
 
         LinearLayout query = dialog.findViewById(R.id.askquery);
         LinearLayout post = dialog.findViewById(R.id.createpost);
-        LinearLayout community = dialog.findViewById(R.id.mycommunities);
+        LinearLayout club = dialog.findViewById(R.id.mycommunities);
 
         query.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,11 +125,13 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        community.setOnClickListener(new View.OnClickListener() {
+        club.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Code for community creation to be written here
-                Toast.makeText(Home.this, "Community selected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Home.this, "Club selected", Toast.LENGTH_SHORT).show();
+                clubs.clubFragSwitch = 0;
+                startActivity(new Intent(Home.this, clubs.class));
             }
         });
 
@@ -148,7 +150,7 @@ public class Home extends AppCompatActivity {
 
         LinearLayout myquery = dialog.findViewById(R.id.myqueries);
         LinearLayout mygroups = dialog.findViewById(R.id.mygroups);
-        LinearLayout mycommunity = dialog.findViewById(R.id.mycommunities);
+        LinearLayout myclubs = dialog.findViewById(R.id.mycommunities);
 
         myquery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,15 +166,17 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Code for post creation to be written here
-                Toast.makeText(Home.this, "Post selected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Home.this, "Groups selected", Toast.LENGTH_SHORT).show();
             }
         });
 
-        mycommunity.setOnClickListener(new View.OnClickListener() {
+        myclubs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Code for community creation to be written here
-                Toast.makeText(Home.this, "Community selected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Home.this, "my clubs selected", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Home.this, clubs.class));
+                clubs.clubFragSwitch = 1;
             }
         });
 
