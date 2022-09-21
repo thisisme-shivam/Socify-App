@@ -160,8 +160,7 @@
                 android:layout_below="@id/text2"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/padlock"
-                />
+                android:src="@drawable/padlock" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/password"
@@ -224,9 +223,9 @@
         android:elevation="5dp"
         android:fontFamily="@font/osr"
         android:padding="10dp"
-        android:textStyle="bold"
         android:stateListAnimator="@null"
         android:text="Sign in"
+        android:textStyle="bold"
         android:translationZ="5dp" />
 
     <TextView
