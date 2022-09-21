@@ -67,7 +67,7 @@ public class CreatePost extends AppCompatActivity {
         postMember = new PostMember();
         db1 = database.getReference("Posts").child("All Images").child(currentUID);
         db2 = database.getReference("Posts").child("All Videos").child(currentUID);
-        db3 = database.getReference("Posts").child("All Posts");
+        db3 = database.getReference("Posts").child("All Posts").child(currentUID);
         storageReference = FirebaseStorage.getInstance().getReference("Posts").child("User's Posts").child(currentUID);;
         setonclicklisteners();
     }
@@ -140,6 +140,7 @@ public class CreatePost extends AppCompatActivity {
         SimpleDateFormat currenDate = new SimpleDateFormat("dd-MMMM-yy");
         final String saveDate = currenDate.format(cdate.getTime());
 
+        String time = saveDate;
         if(TextUtils.isEmpty(binding.desc.getText()) || selectedUri!=null) {
             final StorageReference reference = storageReference.child(System.currentTimeMillis()+ ":" + getFileExt(selectedUri));
             uploadTask = reference.putFile(selectedUri);

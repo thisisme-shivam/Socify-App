@@ -41,6 +41,7 @@ public class LoadNewsFeed extends RecyclerView.ViewHolder {
     private DatabaseReference databaseReference;
 
 
+
     public LoadNewsFeed(@NonNull View itemView) {
         super(itemView);
     }
@@ -91,29 +92,24 @@ public class LoadNewsFeed extends RecyclerView.ViewHolder {
 
     }
 
-    public void likechecker(String postKey) {
 
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("Questions").child("Approvals");
+    public void likechecker(final String postkey) {
         like = itemView.findViewById(R.id.like);
-
+        likesref = database.getReference("Likes");
         String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        likesref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                if (snapshot.child(postKey).hasChild(currentUID)) {
+                if(snapshot.child(postkey).hasChild(currentUID)) {
                     like.setImageResource(R.drawable.ic_eye_close);
-                    likecount = (int) snapshot.child(postKey).getChildrenCount();
-                    likescount.setText(likecount + " thunders");
+                    likecount = (int) snapshot.child(postkey).getChildrenCount();
+                    likescount.setText(Integer.toString(likecount) + " thunders");
                 }
                 else{
                     like.setImageResource(R.drawable.ic_eye);
-                    likecount = (int) snapshot.child(postKey).getChildrenCount();
-                    likescount.setText(likecount + " thunders");
+                    likecount = (int) snapshot.child(postkey).getChildrenCount();
+                    likescount.setText(Integer.toString(likecount) + " thunders");
                 }
-
             }
 
             @Override
@@ -126,7 +122,6 @@ public class LoadNewsFeed extends RecyclerView.ViewHolder {
     }
 
 
-
-
+    }
 
 }

@@ -39,32 +39,13 @@ public class SplashActivity extends AppCompatActivity {
             finishAffinity();
         }
 
-        else {
-
-            colleges = new ArrayList<>();
-            ref = FirebaseDatabase.getInstance().getReference("CollegeNames");
-            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        else{
+            new Handler().postDelayed(new Runnable() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    new Thread(() -> {
-                        int i = 0;
-                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                            Log.i("College Count", String.valueOf(i));
-                            College college = snapshot1.getValue(College.class);
-                            colleges.add(college);
-                        }
-                    }).start();
+                public void run() {
+                    startActivity(new Intent(SplashActivity.this, SlideScreen.class));
+                    finish();
                 }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
-
-
-            new Handler().postDelayed(() -> {
-                startActivity(new Intent(SplashActivity.this, SlideScreen.class));
-                finish();
             }, 1000);
 
         }

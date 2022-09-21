@@ -132,7 +132,6 @@ public class ReplyFragment extends Fragment {
 
                         holder.setAnswer(requireActivity().getApplication(), model.getName(), model.getUid(), model.getAnswer(), model.getTime());
                         holder.approvalchecker(postkey);
-
                         holder.approvaltv.setOnClickListener(v -> {
                             approvalchecker = true;
                             approvals.addValueEventListener(new ValueEventListener() {
@@ -154,7 +153,6 @@ public class ReplyFragment extends Fragment {
 
                                 }
                             });
-                        });
 
                     }
 

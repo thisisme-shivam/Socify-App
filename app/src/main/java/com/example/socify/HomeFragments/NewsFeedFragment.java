@@ -57,7 +57,7 @@ public class NewsFeedFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentNewsFeedBinding.inflate(inflater, container, false);
         String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        reference = database.getReference("Posts").child("All Posts");
+        reference = database.getReference("Posts").child("All Posts").child(currentUID);
         likeref = database.getReference("Likes");
         return binding.getRoot();
     }
@@ -77,7 +77,6 @@ public class NewsFeedFragment extends Fragment {
                     protected void onBindViewHolder(@NonNull LoadNewsFeed holder, int position, @NonNull PostMember model) {
                         final String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                         final String postkey = getRef(position).getKey();
-                        Log.e("PostKey", postkey);
 
                         holder.setPost(requireActivity(), model.getName(), model.getUrl(), model.getPostUri(), model.getTime(), model.getUid(), model.getType(), model.getDesc(), model.getUsername());
 
@@ -125,7 +124,6 @@ public class NewsFeedFragment extends Fragment {
         firebaseRecyclerAdapter.startListening();
         binding.postsRV.setLayoutManager(layoutManager);
         binding.postsRV.setAdapter(firebaseRecyclerAdapter);
-        binding.postsRV.smoothScrollToPosition(binding.postsRV.getAdapter().getItemCount());
 
     }
 }
