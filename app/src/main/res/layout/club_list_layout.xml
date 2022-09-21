@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/club_list_layout"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    android:elevation="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/club_profile"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/club_icon"
+                android:layout_margin="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/club_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Club Name"
+                android:textColor="@color/palette_black"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toEndOf="@+id/club_profile"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.35" />
+
+            <TextView
+                android:id="@+id/club_last_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="last delivered message"
+                android:textColor="@color/text_grey"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias=".14"
+                app:layout_constraintStart_toEndOf="@+id/club_profile"
+                app:layout_constraintTop_toBottomOf="@+id/club_name"
+                app:layout_constraintVertical_bias=".1" />
+
+            <TextView
+                android:id="@+id/message_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Message Time"
+                android:textColor="@color/text_grey"
+                android:textSize="15sp"
+                app:layout_constraintHorizontal_bias=".9"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/club_last_message"
+                app:layout_constraintTop_toBottomOf="@+id/club_name"
+                app:layout_constraintVertical_bias=".1" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>
