@@ -4,88 +4,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:elevation="10dp"
+    android:layout_margin="5dp"
+    android:background="@drawable/rounded_dropdown">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ProfilePic"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/doge"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/picadded"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Shivam Kumar"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ProfilePic"
-        app:layout_constraintStart_toEndOf="@+id/ProfilePic"
-        app:layout_constraintTop_toTopOf="@+id/ProfilePic"
-        app:layout_constraintVertical_bias="0.100000024" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/materialTextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/username"
-        android:textColor="@color/black"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ProfilePic"
-        app:layout_constraintStart_toEndOf="@+id/ProfilePic"
-        app:layout_constraintTop_toTopOf="@+id/ProfilePic"
-        app:layout_constraintVertical_bias="0.7" />
-
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/more"
-        app:layout_constraintBottom_toBottomOf="@+id/ProfilePic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ProfilePic"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ProfilePic"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/doge"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/picadded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Shivam Kumar"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ProfilePic"
+            app:layout_constraintStart_toEndOf="@+id/ProfilePic"
+            app:layout_constraintTop_toTopOf="@+id/ProfilePic"
+            app:layout_constraintVertical_bias="0.100000024" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="10 September 2022"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/usernamepost"
+            app:layout_constraintTop_toTopOf="@+id/ProfilePic"
+            app:layout_constraintVertical_bias="0.827" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/usernamepost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/username"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ProfilePic"
+            app:layout_constraintStart_toEndOf="@+id/ProfilePic"
+            app:layout_constraintTop_toTopOf="@+id/ProfilePic"
+            app:layout_constraintVertical_bias="0.7" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/more"
+            app:layout_constraintBottom_toBottomOf="@+id/ProfilePic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ProfilePic"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/post"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:layout_marginTop="5dp"
+        android:layout_marginHorizontal="10dp"
         android:src="@drawable/shivam"
+        android:visibility="visible"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ProfilePic" />
+        app:layout_constraintTop_toBottomOf="@+id/caption" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <com.google.android.exoplayer2.ui.StyledPlayerView
+        android:id="@+id/videopost"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginHorizontal="10dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/post"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/caption"
+        app:resize_mode="fill"
+        app:show_timeout="1000"
+        app:use_controller="true" />
+
+    <ImageView
+        android:id="@+id/comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="10dp"
-        app:drawableStartCompat="@drawable/comment"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        android:src="@drawable/comment"
+        app:layout_constraintStart_toEndOf="@+id/like"
+        app:layout_constraintTop_toBottomOf="@+id/post" />
 
-    <TextView
-        android:id="@+id/textView"
+    <ImageView
+        android:id="@+id/like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:drawableStartCompat="@drawable/thunder"
+        android:src="@drawable/thunder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/post" />
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/likecount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
@@ -93,22 +136,24 @@
         android:text="0 Thunders"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/post" />
 
     <kr.co.prnd.readmore.ReadMoreTextView
+        android:id="@+id/caption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="10dp"
-        android:text="@string/long_text"
+        android:text="heyheyheyhyehye"
         android:textColor="@color/black"
+        app:emojiCompatEnabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/post"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
         app:readMoreColor="@color/teal_200"
         app:readMoreMaxLine="4"
-        app:emojiCompatEnabled="true"
         app:readMoreText="…Read more" />
 
 

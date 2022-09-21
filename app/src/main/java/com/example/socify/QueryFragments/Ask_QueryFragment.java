@@ -1,5 +1,6 @@
 package com.example.socify.QueryFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.socify.Activities.Home;
+import com.example.socify.Activities.QnA;
 import com.example.socify.Classes.QuestionsMember;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityQnBinding;
@@ -36,6 +39,8 @@ public class Ask_QueryFragment extends Fragment {
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     String currentUID = firebaseUser.getUid();
     String name, url, UID;
+    //Fragment after successful question
+    QueryListFragment queriesFragment = new QueryListFragment();
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
@@ -43,7 +48,7 @@ public class Ask_QueryFragment extends Fragment {
 
     public void setonclicklisteners() {
         binding.askbtn.setOnClickListener(v -> {
-            String question = binding.questiontext.getText().toString();
+            String question = binding.questiontext.getText().toString().trim();
             String tag = binding.categories.getText().toString();
 
             Calendar cdate = Calendar.getInstance();
@@ -56,7 +61,7 @@ public class Ask_QueryFragment extends Fragment {
 
             String time = saveDate + ":" + saveTime;
 
-            if(question!=null) {
+            if(!question.isEmpty()) {
                 member.setName(name);
                 member.setQuestion(question);
                 member.setTime(time);
@@ -65,15 +70,16 @@ public class Ask_QueryFragment extends Fragment {
                 member.setTag(tag);
 
                 String id = UserQuestions.push().getKey();
-                UserQuestions.child(id).setValue(member);
-
-                String child = AllQuestions.push().getKey();
                 member.setKey(id);
-                AllQuestions.child(child).setValue(member);
+                UserQuestions.child(id).setValue(member);
+                AllQuestions.child(id).setValue(member);
+
                 Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
+                QnA.fragwitch=1;
+                startActivity(new Intent(requireActivity(), QnA.class));
             }
             else{
-                Toast.makeText(requireActivity(), "Please enter the questions", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity(), "Please enter the question", Toast.LENGTH_SHORT).show();
             }
 
         });

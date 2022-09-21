@@ -54,7 +54,7 @@
                         android:textStyle="bold" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/threequerydots"
+                        android:id="@+id/share"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -75,7 +75,6 @@
             android:background="@color/white"
             app:tabTextColor="@color/black"
             android:layout_height="wrap_content">
-
         </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
