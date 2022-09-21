@@ -31,7 +31,7 @@ import java.util.Objects;
 import io.grpc.InternalServer;
 
 public class Registration extends AppCompatActivity {
-    ArrayList<College> colleges;
+
     ArrayList<Fragment> gotoFragment;
     ActivityRegistrationBinding binding;
     DatabaseReference ref;
@@ -43,6 +43,7 @@ public class Registration extends AppCompatActivity {
     public static CoursesFragment coursesFragment;
     public static InterestsFragment interestsFragment;
     public static int fragment_curr_pos =0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,17 +55,13 @@ public class Registration extends AppCompatActivity {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (DataSnapshot snap : snapshot.getChildren()) {
-
-                            Course course = new Course(Objects.requireNonNull(snap.child("course").getValue()).toString());
-                            courses.add(course);
-                            Log.i("course name ", course.getcoursename());
-                        }
-
+                new Thread(() -> {
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        Course course = new Course(Objects.requireNonNull(snap.child("course").getValue()).toString());
+                        courses.add(course);
+                        Log.i("course name ", course.getcoursename());
                     }
+
                 }).start();
             }
 
@@ -87,16 +84,13 @@ public class Registration extends AppCompatActivity {
 
 
         getSupportFragmentManager().beginTransaction().add(R.id.frame_registration, profilePic).commit();
-        binding.backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fragment_curr_pos--;
-                if(fragment_curr_pos == 0)
-                    binding.backIcon.setVisibility(View.GONE);
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_registration, gotoFragment.get(fragment_curr_pos)).commit();
-            }
+        binding.backIcon.setOnClickListener(view -> {
+            fragment_curr_pos--;
+            if(fragment_curr_pos == 0)
+                binding.backIcon.setVisibility(View.GONE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_registration, gotoFragment.get(fragment_curr_pos)).commit();
         });
+
+
     }
-
-
 }

@@ -24,9 +24,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="sending otp"
+        android:text="Sending OTP"
         android:textColor="@color/text_grey"
         android:textSize="18sp"
+        android:fontFamily="@font/osr"
         app:layout_constraintBottom_toBottomOf="@+id/spin_kit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/spin_kit" />

@@ -204,9 +204,9 @@
         android:elevation="5dp"
         android:fontFamily="@font/osr"
         android:padding="10dp"
-        android:textStyle="bold"
         android:stateListAnimator="@null"
         android:text="Sign in"
+        android:textStyle="bold"
         android:translationZ="5dp" />
 
     <TextView

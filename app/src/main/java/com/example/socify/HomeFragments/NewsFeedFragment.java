@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,7 @@ public class NewsFeedFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentNewsFeedBinding.inflate(inflater, container, false);
         String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        reference = database.getReference("Posts").child("All Posts").child(currentUID);
+        reference = database.getReference("Posts").child("All Posts");
         likeref = database.getReference("Likes");
         return binding.getRoot();
     }
@@ -76,6 +77,7 @@ public class NewsFeedFragment extends Fragment {
                     protected void onBindViewHolder(@NonNull LoadNewsFeed holder, int position, @NonNull PostMember model) {
                         final String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                         final String postkey = getRef(position).getKey();
+                        Log.e("PostKey", postkey);
 
                         holder.setPost(requireActivity(), model.getName(), model.getUrl(), model.getPostUri(), model.getTime(), model.getUid(), model.getType(), model.getDesc(), model.getUsername());
 
@@ -85,18 +87,15 @@ public class NewsFeedFragment extends Fragment {
                             likeref.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                                     if(likechecker.equals(true)) {
                                         if(snapshot.child(postkey).hasChild(currentUID)) {
                                             likeref.child(postkey).child(currentUID).removeValue();
-                                            likechecker = false;
                                         }
-                                    }
-                                    else{
-                                        likeref.child(postkey).child(currentUID).setValue(true);
+                                        else{
+                                            likeref.child(postkey).child(currentUID).setValue(true);
+                                        }
                                         likechecker = false;
                                     }
-
                                 }
 
                                 @Override
@@ -126,6 +125,7 @@ public class NewsFeedFragment extends Fragment {
         firebaseRecyclerAdapter.startListening();
         binding.postsRV.setLayoutManager(layoutManager);
         binding.postsRV.setAdapter(firebaseRecyclerAdapter);
+        binding.postsRV.smoothScrollToPosition(binding.postsRV.getAdapter().getItemCount());
 
     }
 }

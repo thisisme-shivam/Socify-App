@@ -30,7 +30,18 @@ public class Login extends AppCompatActivity {
             intent.putExtra("id","Forgot Password");
             startActivity(intent);
         });
+
+        //Code for Sign-In is yet to be written
+
+//        binding.signinbutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+
     }
+
     int i =1;
     private void showpass(){
         if(i == 1) {

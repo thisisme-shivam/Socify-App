@@ -133,30 +133,27 @@ public class ReplyFragment extends Fragment {
                         holder.setAnswer(requireActivity().getApplication(), model.getName(), model.getUid(), model.getAnswer(), model.getTime());
                         holder.approvalchecker(postkey);
 
-                        holder.approvaltv.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                approvalchecker = true;
-                                approvals.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if(approvalchecker.equals(true)) {
-                                            if(snapshot.child(postkey).hasChild(currenUID)) {
-                                                approvals.child(postkey).child(currenUID).removeValue();
-                                            }
-                                            else{
-                                                approvals.child(postkey).child(currenUID).setValue(true);
-                                            }
-                                            approvalchecker = false;
+                        holder.approvaltv.setOnClickListener(v -> {
+                            approvalchecker = true;
+                            approvals.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if(approvalchecker.equals(true)) {
+                                        if(snapshot.child(postkey).hasChild(currenUID)) {
+                                            approvals.child(postkey).child(currenUID).removeValue();
                                         }
+                                        else{
+                                            approvals.child(postkey).child(currenUID).setValue(true);
+                                        }
+                                        approvalchecker = false;
                                     }
+                                }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
-                                    }
-                                });
-                            }
+                                }
+                            });
                         });
 
                     }

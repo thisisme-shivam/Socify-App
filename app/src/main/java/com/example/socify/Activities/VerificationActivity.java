@@ -53,7 +53,7 @@ public class VerificationActivity extends AppCompatActivity {
     ActivityVerificationBinding binding;
     Dialog otpDialog;
     Dialog progressDialog;
-    ImageView close_dialog, back_btn;
+    ImageView close_dialog;
     ProgressBar progressBar;
     FirebaseAuth fauth;
     String phonenumber;
@@ -73,15 +73,16 @@ public class VerificationActivity extends AppCompatActivity {
              window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
          });
+
         binding.getOtpButton.setOnClickListener(view -> {
             phonenumber = binding.phoneInput.getText().toString();
             if (phonenumber.isEmpty())
                 Toast.makeText(getApplicationContext(), "Enter Phone Number", Toast.LENGTH_SHORT).show();
             else if (phonenumber.length() < 10) {
                 if (phonenumber.length() == 9)
-                    Toast.makeText(getApplicationContext(), Integer.toString(10 - phonenumber.length()) + " digit is missing", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), 10 - phonenumber.length() + " digit is missing", Toast.LENGTH_SHORT).show();
                 else
-                    Toast.makeText(getApplicationContext(), Integer.toString(10 - phonenumber.length()) + " digits are missing", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), 10 - phonenumber.length() + " digits are missing", Toast.LENGTH_SHORT).show();
             }else{
                 sendotp();
             }
@@ -92,7 +93,7 @@ public class VerificationActivity extends AppCompatActivity {
 
         });
         otpDialog.findViewById(R.id.otpSubmitButton).setOnClickListener(view -> {
-            PinView vie = (PinView) otpDialog.findViewById(R.id.otpInput);
+            PinView vie = otpDialog.findViewById(R.id.otpInput);
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(vid,Objects.requireNonNull(vie.getText()).toString());
 
             fauth.signInWithCredential(credential).addOnCompleteListener(task -> {
@@ -104,8 +105,6 @@ public class VerificationActivity extends AppCompatActivity {
             });
         });
         otpDialog.findViewById(R.id.resendText).setOnClickListener(view -> sendotp());
-
-
     }
 
     private void sendotp(){
@@ -114,7 +113,7 @@ public class VerificationActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationCompleted(PhoneAuthCredential credential) {
-                Toast.makeText(getApplicationContext(),"fjalskdjf",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Verification Done",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -135,9 +134,9 @@ public class VerificationActivity extends AppCompatActivity {
         };
         options =
                 PhoneAuthOptions.newBuilder(fauth)
-                        .setPhoneNumber( "+" + binding.countryCode.getSelectedCountryCode() + phonenumber)       // Phone number to verify
+                        .setPhoneNumber( "+" + binding.countryCode.getSelectedCountryCode() + phonenumber)  // Phone number to verify
                         .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                        .setActivity(this)                 // Activity (for callback binding)
+                        .setActivity(this)  // Activity (for callback binding)
                         .setCallbacks(fcallbacks)
                         .setForceResendingToken(tok)
                         .build();
@@ -151,8 +150,7 @@ public class VerificationActivity extends AppCompatActivity {
         binding = ActivityVerificationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //getting instatnce of firebase
-
+        //getting instances of firebase
 
                 fauth = FirebaseAuth.getInstance();
                 otpDialog = new Dialog(VerificationActivity.this);
@@ -161,13 +159,13 @@ public class VerificationActivity extends AppCompatActivity {
                 otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
                 close_dialog = otpDialog.findViewById(R.id.close_icon);
                 otpDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM) ;
-                setOnclicklistners();;
+                setOnclicklistners();
+
                 progressDialog = new Dialog(VerificationActivity.this);
                 progressDialog.setCancelable(false);
                 progressDialog.setContentView(R.layout.progressdialog);
                 progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                progressBar = (ProgressBar) progressDialog.findViewById(R.id.spin_kit);
-
+                progressBar = progressDialog.findViewById(R.id.spin_kit);
 
                 binding.phoneInput.requestFocus();
 

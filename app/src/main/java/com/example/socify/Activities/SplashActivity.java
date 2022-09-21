@@ -23,15 +23,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SplashActivity extends AppCompatActivity {
+
     DatabaseReference ref;
     public static ArrayList<College> colleges;
-
     FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
         auth = FirebaseAuth.getInstance();
 
         if(auth.getCurrentUser()!=null) {
@@ -46,15 +46,12 @@ public class SplashActivity extends AppCompatActivity {
             ref.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            int i = 0;
-                            for (DataSnapshot snapshot : snapshot.getChildren()) {
-                                Log.i("loljhjj", String.valueOf(i));
-                                College college = snapshot.getValue(College.class);
-                                colleges.add(college);
-                            }
+                    new Thread(() -> {
+                        int i = 0;
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                            Log.i("College Count", String.valueOf(i));
+                            College college = snapshot1.getValue(College.class);
+                            colleges.add(college);
                         }
                     }).start();
                 }
@@ -65,12 +62,9 @@ public class SplashActivity extends AppCompatActivity {
             });
 
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    startActivity(new Intent(SplashActivity.this, SlideScreen.class));
-                    finish();
-                }
+            new Handler().postDelayed(() -> {
+                startActivity(new Intent(SplashActivity.this, SlideScreen.class));
+                finish();
             }, 1000);
 
         }

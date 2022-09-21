@@ -34,6 +34,7 @@ public class SlideViewPagerAdapter extends PagerAdapter {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view;
         view = layoutInflater.inflate(R.layout.fragment_buddy, container, false);
+
         switch (position) {
             case 0:
                 view = layoutInflater.inflate(R.layout.fragment_buddy, container, false);

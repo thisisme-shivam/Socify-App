@@ -22,10 +22,6 @@ public class SlideScreen extends AppCompatActivity {
         binding = ActivitySlideScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-        slideViewPagerAdapter = new SlideViewPagerAdapter(this);
-        binding.ViewPager.setAdapter(slideViewPagerAdapter);
-
         slideViewPagerAdapter = new SlideViewPagerAdapter(this);
         binding.ViewPager.setAdapter(slideViewPagerAdapter);
         binding.dotsIndicator.setViewPager(binding.ViewPager);
@@ -37,7 +33,7 @@ public class SlideScreen extends AppCompatActivity {
 
         binding.Signupbtn.setOnClickListener(v -> {
             startActivity(new Intent(SlideScreen.this,VerificationActivity.class));
-            finish();
+            finishAffinity();
         });
 
 

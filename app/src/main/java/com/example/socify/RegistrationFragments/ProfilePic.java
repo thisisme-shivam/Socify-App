@@ -39,7 +39,6 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
 public class ProfilePic extends Fragment {
 
     FragmentProfilePicBinding binding;

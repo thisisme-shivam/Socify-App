@@ -38,6 +38,7 @@ public class LoadNewsFeed extends RecyclerView.ViewHolder {
     int likecount;
     StyledPlayerView playerView;
     ExoPlayer exoplayer;
+    private DatabaseReference databaseReference;
 
 
     public LoadNewsFeed(@NonNull View itemView) {
@@ -90,23 +91,29 @@ public class LoadNewsFeed extends RecyclerView.ViewHolder {
 
     }
 
-    public void likechecker(final String postkey) {
+    public void likechecker(String postKey) {
+
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("Questions").child("Approvals");
         like = itemView.findViewById(R.id.like);
-        likesref = database.getReference("Likes");
+
         String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        likesref.addValueEventListener(new ValueEventListener() {
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child(postkey).hasChild(currentUID)) {
+
+                if (snapshot.child(postKey).hasChild(currentUID)) {
                     like.setImageResource(R.drawable.ic_eye_close);
-                    likecount = (int) snapshot.child(postkey).getChildrenCount();
-                    likescount.setText(Integer.toString(likecount) + " thunders");
+                    likecount = (int) snapshot.child(postKey).getChildrenCount();
+                    likescount.setText(likecount + " thunders");
                 }
                 else{
                     like.setImageResource(R.drawable.ic_eye);
-                    likecount = (int) snapshot.child(postkey).getChildrenCount();
-                    likescount.setText(Integer.toString(likecount) + " thunders");
+                    likecount = (int) snapshot.child(postKey).getChildrenCount();
+                    likescount.setText(likecount + " thunders");
                 }
+
             }
 
             @Override
@@ -114,6 +121,12 @@ public class LoadNewsFeed extends RecyclerView.ViewHolder {
 
             }
         });
+
+
     }
+
+
+
+
 
 }
