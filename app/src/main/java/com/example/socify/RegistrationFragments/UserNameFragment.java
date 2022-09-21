@@ -94,7 +94,7 @@ public class UserNameFragment extends Fragment {
     }
 
     private boolean checkstrength() {
-        Pattern p = Pattern.compile("^(?=(.*[a-z])+)(?=(.*[A-Z])+)(?=(.*[0-9])+)(?=(.*[!@#$%^&*()\\-_+.])+)(?=\\S+$).{8}$");
+        Pattern p = Pattern.compile("^(?=(.*[a-z])+)(?=(.*[A-Z])+)(?=(.*[0-9])+)(?=(.*[!@#$%^&*()\\-_+.])+)(?=\\S+$).{8,20}$");
         Matcher m = p.matcher(Password);
         return m.find();
     }
@@ -120,16 +120,6 @@ public class UserNameFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    doc = FirebaseFirestore.getInstance().collection("MapPhoneUsernam").document(String.valueOf(charSequence));
-                    doc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if(!task.isSuccessful()){
-                                binding.usernametext.setError("Username is tasken");
-                            }else
-                                binding.usernametext.setError("");
-                        }
-                    });
             }
 
             @Override

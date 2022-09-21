@@ -61,21 +61,13 @@ public class VerificationActivity extends AppCompatActivity {
             phonenumber = binding.phoneInput.getText().toString();
             if (phonenumber.isEmpty()){
                 assert binding.errorbox != null;
-                binding.errorbox.setText("Phone number cannot be empty");
+                binding.errorbox.setText("Phone number field is empty");
                 binding.errorbox.setVisibility(View.VISIBLE);
             }
             else if (phonenumber.length() < 10) {
-                if (phonenumber.length() == 9) {
                     assert binding.errorbox != null;
-                    binding.errorbox.setText("Phone number missing 1 digit");
+                    binding.errorbox.setText("Phone number invalid");
                     binding.errorbox.setVisibility(View.VISIBLE);
-                }
-                else{
-                    assert binding.errorbox != null;
-                    binding.errorbox.setText("Phone number missing "+String.valueOf(10-phonenumber.length()) +"digits");
-                    binding.errorbox.setVisibility(View.VISIBLE);
-                }
-                    Toast.makeText(getApplicationContext(), 10 - phonenumber.length() + " digits are missing", Toast.LENGTH_SHORT).show();
             }else{
                 sendotp();
             }

@@ -73,7 +73,8 @@ public class ProfilePic extends Fragment {
                    Registration.details.setName(name);
                    Registration.details.setPassyear(passing_year);
                    //Sending Data
-                   if(imgUrl!=null)
+                   if(imgUrl == null)
+                       Registration.details.setImgUri("");
                    sendProfileData.sendImg();
                    sendProfileData.sendName();
                    sendProfileData.sendpassyear();

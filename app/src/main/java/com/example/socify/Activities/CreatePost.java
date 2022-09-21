@@ -142,6 +142,7 @@ public class CreatePost extends AppCompatActivity {
         String time = saveDate;
 
         if(TextUtils.isEmpty(binding.desc.getText()) || selectedUri!=null) {
+            finish();
             final StorageReference reference = storageReference.child(System.currentTimeMillis()+ ":" + getFileExt(selectedUri));
             uploadTask = reference.putFile(selectedUri);
 
@@ -149,10 +150,12 @@ public class CreatePost extends AppCompatActivity {
                 if(!task.isSuccessful()) {
                     throw task.getException();
                 }
+
                 return reference.getDownloadUrl();
             }).addOnCompleteListener(task -> {
 
                 if (task.isSuccessful()) {
+
                     Uri downloaduri = task.getResult();
 
                     if (type.equals("image")) {

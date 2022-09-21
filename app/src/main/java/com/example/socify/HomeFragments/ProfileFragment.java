@@ -86,7 +86,7 @@ public class ProfileFragment extends Fragment {
 
         home = (Home) getActivity();
         //Loading data into profile fragment
-        if(home.imgurl!="No Image") {
+        if(home.imgurl!="") {
             Picasso.get().load(Uri.parse(home.imgurl)).placeholder(R.drawable.user).into(binding.profilePic);
         }
         binding.passyear.setText(home.passyear);

@@ -62,7 +62,7 @@ public class SendProfileData {
     }
 
         public void sendImg() {
-            if(!Registration.details.getImgUri().equals("No Image")) {
+            if(!Registration.details.getImgUri().equals("")) {
                 final StorageReference reference = storageReference.child(Registration.details.getImgUri());
             uploadTask = reference.putFile(Uri.parse(Registration.details.getImgUri()));
             uploadTask.continueWithTask(task -> {

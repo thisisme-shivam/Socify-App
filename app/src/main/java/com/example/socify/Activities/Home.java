@@ -17,6 +17,7 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.socify.HelperClasses.OptimizedSearchAll;
 import com.example.socify.HomeFragments.DiscoverFragment;
 import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.HomeFragments.ProfileFragment;
@@ -43,7 +44,7 @@ public class Home extends AppCompatActivity {
     ProfileFragment profileFragment;
     BottomNavigationView navigationView;
     int[] drawables;
-    public  static String name, college_name, passyear, branch, imgurl, username, age, bio,uid;
+    public  static String name, college_name, passyear, branch, imgurl ="", username, age, bio,uid;
     Map<String, Object> tagmap;
     public ArrayList<String> tags;
 
@@ -228,11 +229,15 @@ public class Home extends AppCompatActivity {
                         college_name = task.getResult().getString("CollegeName");
                         passyear = task.getResult().getString("Passing Year");
                         branch = task.getResult().getString("Course");
-                        imgurl = task.getResult().getString("ImgUrl");
+                        try {
+                            imgurl = task.getResult().getString("ImgUrl");
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                         username = task.getResult().getString("Username");
                         age = task.getResult().getString("Age");
                         bio = task.getResult().getString("Bio");
-                        Log.e("asd", imgurl);
+
 
                         Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
@@ -279,6 +284,8 @@ public class Home extends AppCompatActivity {
                 }
             }
         });
+
+
 
     }
     @Override

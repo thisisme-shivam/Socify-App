@@ -96,6 +96,7 @@ public class NewsFeedFragment extends Fragment {
         layoutManager.setStackFromEnd(true);
 
         firebaseRecyclerAdapter.startListening();
+        
         rec = getView().findViewById(R.id.postsRV);
         rec.setLayoutManager(layoutManager);
         rec.setAdapter(firebaseRecyclerAdapter);
