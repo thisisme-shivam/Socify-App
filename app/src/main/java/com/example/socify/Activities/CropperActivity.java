@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.socify.ClubFragments.CreateClubFragment;
 import com.example.socify.databinding.ActivityCroppperBinding;
 import com.yalantis.ucrop.UCrop;
 
@@ -55,15 +56,20 @@ public class CropperActivity extends AppCompatActivity {
             setResult(-1, returnintent);
             assert resultUri != null;
             Log.i("URI", resultUri.toString());
-
+            finish();
         }
         else if(resultCode==UCrop.RESULT_ERROR) {
             final Throwable cropError = UCrop.getError(data);
             Toast.makeText(this, cropError.toString(), Toast.LENGTH_SHORT).show();
         }
-
-        finish();
-
+        else{
+            if(CreateClubFragment.cropperFlag == 1) {
+                startActivity(new Intent(getApplicationContext(), clubs.class));
+            }
+            else {
+                startActivity(new Intent(getApplicationContext(), Registration.class));
+            }
+        }
     }
 
     private void readintent() {
