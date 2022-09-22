@@ -211,7 +211,7 @@ public class Home extends AppCompatActivity {
         profileFragment = new ProfileFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,newsFeedFragment).commit();
         itemselectedfromnavbar();
-
+        navigationView.getMenu().getItem(0).setIcon(drawables[4]);
         Dialog otpDialog = new Dialog(Home.this);
         otpDialog.setCancelable(false);
         otpDialog.setContentView(R.layout.post_creation_popup);
