@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.Classes.College;
+import com.example.socify.HelperClasses.CurrentUser;
 import com.example.socify.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,31 +32,19 @@ public class SplashActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-
-        if(auth.getCurrentUser() !=null)
-        {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    startActivity(new Intent(getApplicationContext(),Home.class));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (auth.getCurrentUser() != null) {
+                    startActivity(new Intent(getApplicationContext(), Home.class));
                     finish();
-                }
-            },1600);
-        }else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
+                    CurrentUser currentUser  = new CurrentUser();
+                } else {
                     startActivity(new Intent(SplashActivity.this, SlideScreen.class));
                     finish();
                 }
-            }, 1600);
-        }
-
+            }
+        }, 1600);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
 }

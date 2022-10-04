@@ -1,6 +1,6 @@
 package com.example.socify.Classes;
 
-public class Course {
+ public class Course {
     String course;
 
     public Course() {

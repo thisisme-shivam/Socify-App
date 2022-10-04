@@ -108,6 +108,10 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

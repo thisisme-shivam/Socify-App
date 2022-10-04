@@ -5,9 +5,11 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.load.data.DataFetcher;
 import com.example.socify.Classes.College;
 import com.example.socify.Classes.Course;
 import com.example.socify.FireBaseClasses.UserDetails;
@@ -56,6 +58,7 @@ public class Registration extends AppCompatActivity {
         courses = new ArrayList<>();
         colleges = new ArrayList<>();
         ref = FirebaseDatabase.getInstance().getReference("CollegeNames");
+
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

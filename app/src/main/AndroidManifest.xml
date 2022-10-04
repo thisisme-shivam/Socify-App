@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.socify">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -25,43 +26,44 @@
             
         <activity
             android:name=".Activities.CreatePost"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="false" />
         <activity
             android:name=".Activities.QnA"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="true" />
         <activity
             android:name=".Activities.CropperActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="false" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activities.Home"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:screenOrientation="fullSensor"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
 
 
         <activity
             android:name=".Activities.Registration"
             android:exported="true"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.SlideScreen"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="true" />
         <activity
             android:name=".Activities.Login"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="true" />
         <activity
             android:name=".Activities.SplashActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -72,14 +74,14 @@
         <activity
             android:name=".Activities.VerificationActivity"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".Activities.MainActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="false" />
         <activity
             android:name=".Activities.AllChat"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:exported="true" />
 
         <meta-data

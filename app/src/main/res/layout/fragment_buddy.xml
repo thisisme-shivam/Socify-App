@@ -41,7 +41,7 @@
         android:fontFamily="sans-serif-light"
         android:includeFontPadding="false"
         android:letterSpacing="-0.01"
-        android:text="College"
+        android:text="SISTec College"
         android:textColor="@color/palette_grey"
         android:textSize="41sp"
         app:layout_constraintBottom_toTopOf="@+id/textView6"

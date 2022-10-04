@@ -132,13 +132,12 @@ public class ProfilePic extends Fragment {
         }
     }
 
-    int i=1;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         onclicklisteners();
-        Log.i("YEs", "Entering");
+
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         binding.profileImage.setImageURI(imgUrl);
         bar.setProgress(20);
@@ -148,7 +147,6 @@ public class ProfilePic extends Fragment {
             years.add(String.valueOf(curr_year + i));
         }
         binding.graduationYear.setItems(years);
-        i=0;
 
     }
 

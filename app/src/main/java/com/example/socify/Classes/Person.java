@@ -1,6 +1,7 @@
 package com.example.socify.Classes;
 
 public class Person {
+    String uid;
     String name;
     String username;
     String follow_status;
@@ -8,17 +9,19 @@ public class Person {
 
     public Person(){}
 
-    public Person(String name, String username,String follow_status,String uri){
+    public Person(String name, String username,String follow_status,String uri, String uid){
         this.name = name;
         this.username = username;
         this.follow_status = follow_status;
         this.uri = uri;
+        this.uid = uid;
     }
 
     public String getUsername() {
         return username;
     }
 
+    public String getUid(){return uid;}
 
 
     public String getName(){

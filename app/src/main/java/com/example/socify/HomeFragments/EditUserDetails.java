@@ -56,19 +56,16 @@ public class EditUserDetails extends Fragment {
 
         final DocumentReference sfDoc = db.collection("Profiles").document(currentUID);
 
-        db.runTransaction(new Transaction.Function<Void>() {
-                    @Override
-                    public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                        DocumentSnapshot snapshot = transaction.get(sfDoc);
-                        //Code to be update more (BIO and DOB to be added while registration)
-                        transaction.update(sfDoc, "Name", binding.nameEditEt.getText().toString());
-                        transaction.update(sfDoc, "Passing Year", binding.passyearEt.getText().toString());
-                        transaction.update(sfDoc, "Bio", binding.bioEt.getText().toString());
-                        transaction.update(sfDoc, "Age", binding.ageEt.getText().toString());
-                        // Success
-                        return null;
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<Void>() {
+        db.runTransaction((Transaction.Function<Void>) transaction -> {
+            DocumentSnapshot snapshot = transaction.get(sfDoc);
+            //Code to be update more (BIO and DOB to be added while registration)
+            transaction.update(sfDoc, "Name", binding.nameEditEt.getText().toString());
+            transaction.update(sfDoc, "Passing Year", binding.passyearEt.getText().toString());
+            transaction.update(sfDoc, "Bio", binding.bioEt.getText().toString());
+            transaction.update(sfDoc, "Age", binding.ageEt.getText().toString());
+            // Success
+            return null;
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                     }

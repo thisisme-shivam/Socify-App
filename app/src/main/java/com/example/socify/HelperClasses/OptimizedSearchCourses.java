@@ -44,7 +44,6 @@ public class OptimizedSearchCourses {
 
          if(hashMap.get(newText) != null) {
             filterlist = hashMap.get(newText);
-            Log.i("this entering","yes");
         }else if(newText.contains(oldtext) && !oldtext.isEmpty())
             filterlist = newfilterlist;
         else
@@ -58,7 +57,6 @@ public class OptimizedSearchCourses {
                 for(Course course : filterlist ){
                     if(stopthread)
                         break;
-
 
                     String[] keywords = newText.split(" ");
                     String[] collegewords = course.getcoursename().split(" ");
@@ -75,7 +73,6 @@ public class OptimizedSearchCourses {
                         @Override
                         public void run() {
                             oldtext = newText;
-
                             getCollegeFragment.adapter.filterlist(newfilterlist);
                             getCollegeFragment.shimmerFrameLayout.setVisibility(View.GONE);
                             getCollegeFragment.rec.setVisibility(View.VISIBLE);

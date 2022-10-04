@@ -1,17 +1,13 @@
 package com.example.socify.Adapters;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -30,6 +26,7 @@ public class PersonAdapter  extends RecyclerView.Adapter<PersonAdapter.PersonVie
          this.context =  context;
          this.persons = persons;
     }
+    @NonNull
     @Override
     public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.displaypersonrecyclerview,parent,false);
@@ -45,11 +42,11 @@ public class PersonAdapter  extends RecyclerView.Adapter<PersonAdapter.PersonVie
         if(person.getFollow_status().equals("YES"))
             holder.binding.following.setVisibility(View.VISIBLE);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.itemView.setOnClickListener(view -> {
+            AppCompatActivity activity = (AppCompatActivity) context;
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile()).commit();
 
-            }
+
         });
     }
 
@@ -59,9 +56,8 @@ public class PersonAdapter  extends RecyclerView.Adapter<PersonAdapter.PersonVie
         return persons.size();
     }
 
-    public void filterlist(ArrayList<Person> filterlist) {
-        persons = filterlist;
-
+    public void filterlist(ArrayList<Person> filteredlist) {
+        persons = filteredlist;
         notifyDataSetChanged();
     }
 

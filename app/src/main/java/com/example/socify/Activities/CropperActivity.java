@@ -59,6 +59,7 @@ public class CropperActivity extends AppCompatActivity {
             finish();
         }
         else if(resultCode==UCrop.RESULT_ERROR) {
+            assert data != null;
             final Throwable cropError = UCrop.getError(data);
             Toast.makeText(this, cropError.toString(), Toast.LENGTH_SHORT).show();
         }

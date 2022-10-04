@@ -48,6 +48,7 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
     CountDownTimer cntr;
     Integer waitingTime =200;
     boolean clickd = false;
+
     public void setonclicklisteners() {
 
         binding.next3btn.setOnClickListener(v -> {

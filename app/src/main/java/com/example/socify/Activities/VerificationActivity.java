@@ -54,9 +54,8 @@ public class VerificationActivity extends AppCompatActivity {
              window = otpDialog.getWindow();
              window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
              window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-
-
          });
+         
         binding.getOtpButton.setOnClickListener(view -> {
             phonenumber = binding.phoneInput.getText().toString();
             if (phonenumber.isEmpty()){

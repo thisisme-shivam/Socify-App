@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,15 +27,16 @@ import java.util.ArrayList;
 public class SearchAll extends Fragment {
 
     FragmentSearchAllBinding binding;
-    boolean first = true;
     RecyclerView rec;
     public PersonAdapter personAdapter;
     public ArrayList<Person> arrayList;
-    SearchView searchView;
     OptimizedSearchAll searchALl;
     CountDownTimer cntr;
     public Handler hand = new Handler();
-    private int  waitingTime = 200 ;
+
+    public SearchAll(){
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,6 @@ public class SearchAll extends Fragment {
         arrayList = new ArrayList<>();
         personAdapter = new PersonAdapter(requireActivity(),arrayList);
         searchALl = new OptimizedSearchAll(this);
-        Log.i("gbvjhfghj","vghfghf");
     }
 
 
@@ -52,11 +51,17 @@ public class SearchAll extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         rec = getView().findViewById(R.id.personsrecyclerview);
         rec.setHasFixedSize(true);
         rec.setLayoutManager(new LinearLayoutManager(getContext()));
         rec.setAdapter(personAdapter);
-        first = false;
+
+        setSearchTextListener();
+
+    }
+
+    private void setSearchTextListener() {
         binding.searchAll.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -68,7 +73,7 @@ public class SearchAll extends Fragment {
                 if(cntr != null){
                     cntr.cancel();
                 }
-                cntr = new CountDownTimer(waitingTime, 500) {
+                cntr = new CountDownTimer(200, 500) {
 
                     public void onTick(long millisUntilFinished) {
                     }
@@ -82,9 +87,6 @@ public class SearchAll extends Fragment {
 
             }
         });
-
-
-
     }
 
     private void filter(String newtext){

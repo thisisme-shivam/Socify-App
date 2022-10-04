@@ -1,15 +1,10 @@
 package com.example.socify.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,22 +12,22 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.socify.HelperClasses.OptimizedSearchAll;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.socify.HomeFragments.DiscoverFragment;
 import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.HomeFragments.ProfileFragment;
-import com.example.socify.PostFragments.PostLoaderFragment;
+import com.example.socify.HomeFragments.VisitProfile;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityHomeBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -40,15 +35,18 @@ import java.util.Map;
 public class Home extends AppCompatActivity {
 
     ActivityHomeBinding binding;
-    NewsFeedFragment newsFeedFragment;
-    ProfileFragment profileFragment;
+    NewsFeedFragment newsFeedFragment = new NewsFeedFragment();
+    ProfileFragment profileFragment  = new ProfileFragment();
     BottomNavigationView navigationView;
+    DiscoverFragment discoverFragment = new DiscoverFragment();
     int[] drawables;
     public  static String name, college_name, passyear, branch, imgurl ="", username, age, bio,uid;
     Map<String, Object> tagmap;
     public ArrayList<String> tags;
 
     int lastSelected;
+
+
     public void setIcon(int i){
         if(lastSelected == i ){
             return;
@@ -68,12 +66,13 @@ public class Home extends AppCompatActivity {
 
         binding.bottomnavigationview.setOnItemSelectedListener(item -> {
 
+
             if (item.getItemId() == R.id.newsfeed) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,newsFeedFragment).commitNowAllowingStateLoss();
                 setIcon(0);
                 lastSelected = 0;
             }else if(item.getItemId() == R.id.discover){
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new DiscoverFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,discoverFragment).commitAllowingStateLoss();
                 setIcon(1);
                 lastSelected =1;
             }
@@ -81,13 +80,12 @@ public class Home extends AppCompatActivity {
                 showDialog();
             }
             else if(item.getItemId() == R.id.clubs){
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
                 setIcon(3);
                 lastSelected = 3;
                 showDialogAccess();
             }
             else if(item.getItemId() == R.id.profile){
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, profileFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,profileFragment).commitNowAllowingStateLoss();
                 setIcon(4);
                 lastSelected = 4;
             }
@@ -207,8 +205,8 @@ public class Home extends AppCompatActivity {
                 R.drawable.profileicon
         };
         binding.bottomnavigationview.setItemIconTintList(null);
-        newsFeedFragment = new NewsFeedFragment();
-        profileFragment = new ProfileFragment();
+
+
         getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,newsFeedFragment).commit();
         itemselectedfromnavbar();
         navigationView.getMenu().getItem(0).setIcon(drawables[4]);
@@ -216,13 +214,11 @@ public class Home extends AppCompatActivity {
         otpDialog.setCancelable(false);
         otpDialog.setContentView(R.layout.post_creation_popup);
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
-        Intent intent = getIntent();
 
         //Loading User Profile Data
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String currentUID = user.getUid();
-        DocumentReference documentReference;
-        documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
 
         documentReference.get()
                 .addOnCompleteListener(task -> {
@@ -243,13 +239,7 @@ public class Home extends AppCompatActivity {
                         bio = task.getResult().getString("Bio");
 
 
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
 
-                            }
-                        }, 2000);
 
                     } else{
                         try {
@@ -265,41 +255,36 @@ public class Home extends AppCompatActivity {
         tags = new ArrayList<>();
         documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID).collection("Interests").document("UserTags");
 
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                DocumentSnapshot documentSnapshot = task.getResult();
-                if(documentSnapshot.exists()) {
-                    tagmap = documentSnapshot.getData();
-                    assert tagmap != null;
-                    String toadd = "";
-                    String s = tagmap.get("Tags").toString();
-                    for(int i=1;i<s.length();i++){
-                        if(s.charAt(i)==',' || s.charAt(i) == ']'){
-                            System.out.println(toadd);
-                            tags.add(toadd.trim());
-                            toadd = "";
-                        }else{
-                            toadd = toadd.concat(String.valueOf(s.charAt(i)));
-                        }
+        documentReference.get().addOnCompleteListener(task -> {
+            DocumentSnapshot documentSnapshot = task.getResult();
+            if(documentSnapshot.exists()) {
+                tagmap = documentSnapshot.getData();
+                assert tagmap != null;
+                String toadd = "";
+                String s = tagmap.get("Tags").toString();
+                for(int i=1;i<s.length();i++){
+                    if(s.charAt(i)==',' || s.charAt(i) == ']'){
+                        System.out.println(toadd);
+                        tags.add(toadd.trim());
+                        toadd = "";
+                    }else{
+                        toadd = toadd.concat(String.valueOf(s.charAt(i)));
                     }
-                    System.out.println(s);
-
                 }
+                System.out.println(s);
+
             }
         });
 
 
 
     }
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        newsFeedFragment = new NewsFeedFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,newsFeedFragment).commit();
-        navigationView.getMenu().getItem(0).setIcon(drawables[4]);
-        lastSelected = 0;
-        itemselectedfromnavbar();
+
 
     }
 }

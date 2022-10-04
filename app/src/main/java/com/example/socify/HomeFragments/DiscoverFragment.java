@@ -39,7 +39,7 @@ public class DiscoverFragment extends Fragment {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if(b){
-                    getParentFragmentManager().beginTransaction().replace(R.id.FragmentView, searchAll).commit();
+                    getParentFragmentManager().beginTransaction().replace(R.id.FragmentView, searchAll).commitAllowingStateLoss();
                 }
             }
         });

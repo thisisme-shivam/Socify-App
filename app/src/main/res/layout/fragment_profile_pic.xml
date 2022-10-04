@@ -96,9 +96,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="20sp"
         android:background="@drawable/profile_pic_select_year_background"
         android:elevation="5dp"
-        android:layout_marginTop="20sp"
         android:hint="Your Graduation Year"
         android:padding="15dp"
         android:textColor="@color/black"
@@ -106,9 +106,11 @@
         android:textSize="14.5sp"
         android:textStyle="bold"
         app:fontFamily="@font/osr"
+        app:layout_constraintEnd_toEndOf="@+id/nametextlayout"
+        app:layout_constraintStart_toStartOf="@+id/nametextlayout"
+
         app:layout_constraintTop_toBottomOf="@+id/nametextlayout"
         app:spinner_arrow_drawable="@drawable/downarrow"
-
         app:spinner_arrow_gravity="end"
         app:spinner_arrow_padding="8dp"
         app:spinner_divider_color="@color/black"
@@ -118,8 +120,7 @@
         app:spinner_popup_animation="dropdown"
         app:spinner_popup_background="@color/white"
         app:spinner_popup_elevation="14dp"
-        app:spinner_popup_height="250dp"
-        tools:layout_editor_absoluteX="40dp" />
+        app:spinner_popup_height="250dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/nextbtn"
