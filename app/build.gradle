@@ -87,6 +87,11 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-hls:2.18.1'
     implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.18.1'
 
+    //Scalable Size Unit (support for different screen sizes)
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    implementation 'com.intuit.ssp:ssp-android:1.1.0'
+
+
 
 
 }

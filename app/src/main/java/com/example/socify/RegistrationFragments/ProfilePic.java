@@ -21,20 +21,7 @@ import com.example.socify.Activities.CropperActivity;
 import com.example.socify.Activities.Registration;
 import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
-import com.example.socify.databinding.FragmentProfilePicBinding;
-import com.example.socify.Classes.College;
-import com.example.socify.R;
-import com.example.socify.databinding.FragmentProfilePicBinding;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.example.socify.databinding.FragmentVisiteProfileBinding;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,7 +29,7 @@ import java.util.Calendar;
 
 public class ProfilePic extends Fragment {
 
-    FragmentProfilePicBinding binding;
+    FragmentVisiteProfileBinding binding;
     Uri imgUrl;
 
     ActivityResultLauncher<String> mTakePhoto;
@@ -154,7 +141,7 @@ public class ProfilePic extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentProfilePicBinding.inflate(inflater, container, false);
+        binding = FragmentVisiteProfileBinding.inflate(inflater, container, false);
         onclicklisteners();
         return binding.getRoot();
     }

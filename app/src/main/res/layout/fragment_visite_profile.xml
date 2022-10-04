@@ -10,25 +10,25 @@
         android:id="@+id/details"
         android:layout_width="411dp"
         android:layout_height="147dp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/request"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35">
+        app:layout_constraintTop_toBottomOf="@+id/profile_actionbar">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_pic"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="8dp"
             android:elevation="20dp"
             android:src="@drawable/doge"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.048"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile1_actionbar"
+            app:layout_constraintTop_toTopOf="@+id/gridLayout2"
             tools:ignore="UnknownId" />
 
         <LinearLayout
@@ -37,10 +37,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_pic"
-            android:orientation="horizontal">
+            app:layout_constraintTop_toBottomOf="@+id/profile_pic">
 
 
         </LinearLayout>
@@ -191,20 +191,21 @@
         android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:scrollbars="none"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="10dp"
         android:hint="Enter your name"
+        android:scrollbars="none"
         android:textColorHint="@color/text_grey"
         app:boxStrokeColor="@color/black"
         app:endIconMode="clear_text"
         app:endIconTint="@color/black"
         app:hintTextColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/private1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/request">
+        app:layout_constraintTop_toBottomOf="@+id/materialTextView4">
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_group"
@@ -274,24 +275,25 @@
         android:id="@+id/private1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="13dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/horizontalScrollView"
-        tools:layout_editor_absoluteX="13dp">
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_lock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/padlock" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="This Account is Private"
-            android:textSize="20sp"
-            android:textColor="@color/black" />
-
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -342,29 +344,35 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView4"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="27dp"
+
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="193dp"
+        android:layout_marginBottom="1dp"
         android:text="Interests"
         android:textColor="@color/black"
         android:textSize="20dp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="270dp" />
-
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/request"
+        tools:ignore="MissingConstraints" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView3"
         android:layout_width="424dp"
         android:layout_height="278dp"
+        android:layout_marginTop="37dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
-        app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/profile_posts" />
+        app:layout_constraintTop_toBottomOf="@+id/private1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
