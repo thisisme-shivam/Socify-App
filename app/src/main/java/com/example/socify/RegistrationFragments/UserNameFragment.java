@@ -44,7 +44,6 @@ public class UserNameFragment extends Fragment {
     FragmentNameFragementBinding binding;
     String username, Password;
     SendProfileData sendProfileData = new SendProfileData();
-    DocumentReference doc;
     public void onclicklisteners() {
         binding.nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,21 +111,7 @@ public class UserNameFragment extends Fragment {
 
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(40);
-        binding.usernametext.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
     }
 
     @Override

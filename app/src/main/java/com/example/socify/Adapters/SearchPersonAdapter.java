@@ -1,6 +1,5 @@
 package com.example.socify.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.socify.Activities.Home;
 import com.example.socify.Classes.Person;
 import com.example.socify.HomeFragments.VisitProfile;
 import com.example.socify.R;
@@ -19,10 +17,10 @@ import com.example.socify.databinding.DisplaypersonrecyclerviewBinding;
 
 import java.util.ArrayList;
 
-public class PersonAdapter  extends RecyclerView.Adapter<PersonAdapter.PersonViewHolder> {
+public class SearchPersonAdapter extends RecyclerView.Adapter<SearchPersonAdapter.PersonViewHolder> {
     Context context;
     ArrayList<Person> persons;
-    public PersonAdapter(Context context , ArrayList<Person> persons){
+    public SearchPersonAdapter(Context context , ArrayList<Person> persons){
          this.context =  context;
          this.persons = persons;
     }
@@ -44,9 +42,7 @@ public class PersonAdapter  extends RecyclerView.Adapter<PersonAdapter.PersonVie
 
         holder.itemView.setOnClickListener(view -> {
             AppCompatActivity activity = (AppCompatActivity) context;
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile()).commit();
-
-
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(person.getUid())).commit();
         });
     }
 

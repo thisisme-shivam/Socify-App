@@ -31,31 +31,32 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/username_profile"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="10dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:gravity="center"
                 android:onClick="showPopup"
                 android:text="@string/profile_username"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/line"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/three_dots"
-                android:layout_width="30dp"
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/threeDots"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="2dp"
-                android:background="@drawable/flag_transparent"
-                android:text="@string/dots"
-                android:textColor="@color/black"
-                android:textSize="24sp"
+                android:backgroundTint="@color/white"
+                android:elevation="5dp"
+                android:src="@drawable/threedotss"
+                app:borderWidth="0dp"
+                app:fabSize="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/line" />
 
             <View
                 android:id="@+id/line"
@@ -84,10 +85,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/passyear"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/profile_pic">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/profile_batch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Batch"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"
+                tools:layout_editor_absoluteX="157dp"
+                tools:layout_editor_absoluteY="224dp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/name"
@@ -97,6 +111,19 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:layout_marginLeft="40dp"
+                tools:layout_editor_absoluteX="157dp"
+                tools:layout_editor_absoluteY="224dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/profile_branch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Branch"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="50dp"
                 tools:layout_editor_absoluteX="157dp"
                 tools:layout_editor_absoluteY="224dp" />
 
@@ -178,15 +205,19 @@
                 tools:layout_editor_absoluteY="99dp" />
         </GridLayout>
 
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/passyear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="94dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="96dp"
             android:text="2024"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/materialTextView4"
             app:layout_constraintEnd_toStartOf="@+id/gridLayout3"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/gridLayout2"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
@@ -194,20 +225,18 @@
             android:id="@+id/materialTextView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginEnd="60dp"
             android:text="Interests"
             android:textColor="@color/black"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/gridLayout3"
-            app:layout_constraintStart_toEndOf="@+id/gridLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passyear" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
+        android:id="@+id/horizontalScrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none"
@@ -216,7 +245,7 @@
         app:layout_constraintTop_toBottomOf="@+id/details">
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chip_group"
+            android:id="@+id/chip_group1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="fill"
@@ -228,6 +257,74 @@
         </com.google.android.material.chip.ChipGroup>
 
     </HorizontalScrollView>
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Enter your name"
+        android:scrollbars="none"
+        android:textColorHint="@color/text_grey"
+        app:boxStrokeColor="@color/black"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/black"
+        app:hintTextColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/private1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView1">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill"
+            android:layout_marginHorizontal="10dp"
+            app:singleLine="true"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="374dp">
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/palette_light_teal"
+                android:elevation="5dp"
+                android:text="Android Development"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/private1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_lock"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/padlock" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This Account is Private"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/postloader"
@@ -235,8 +332,9 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/private1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

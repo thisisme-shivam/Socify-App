@@ -29,22 +29,22 @@ public class OptimizedSearchAll {
     SearchAll searchAll ;
     boolean stop;
 
+
     public OptimizedSearchAll(SearchAll searchAll){
         allusers = new ArrayList<>();
         following_list = new ArrayList<>();
         this.searchAll = searchAll;
-
         // checking the user following list
         checkstatus();
-        ref = FirebaseDatabase.getInstance().getReference("College").child(Home.college_name).child("Profiles");
-        new Thread(() -> ref.get().addOnCompleteListener(task -> {
+        ref = FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Profiles");
+        ref.get().addOnCompleteListener(task -> {
 
             for(DataSnapshot s: task.getResult().getChildren()){
-                if( !s.getKey().equals(Home.uid))
+                if( !s.getKey().equals(Home.getUserData.uid))
                     getOtherdata(s.getKey());
             }
 
-        })).start();
+        });
 
 
 
@@ -71,7 +71,7 @@ public class OptimizedSearchAll {
     }
 
     private void checkstatus() {
-        ref2 = FirebaseFirestore.getInstance().collection("Profiles").document(Home.uid).collection("Following").document("following");
+        ref2 = FirebaseFirestore.getInstance().collection("Profiles").document(Home.getUserData.uid).collection("Following").document("following");
         ref2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -90,6 +90,7 @@ public class OptimizedSearchAll {
                     }
 
                 }
+
             }
         });
     }

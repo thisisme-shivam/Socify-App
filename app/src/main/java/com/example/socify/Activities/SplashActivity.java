@@ -38,7 +38,6 @@ public class SplashActivity extends AppCompatActivity {
                 if (auth.getCurrentUser() != null) {
                     startActivity(new Intent(getApplicationContext(), Home.class));
                     finish();
-                    CurrentUser currentUser  = new CurrentUser();
                 } else {
                     startActivity(new Intent(SplashActivity.this, SlideScreen.class));
                     finish();

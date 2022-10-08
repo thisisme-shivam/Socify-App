@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.HomeFragments.DiscoverFragment;
 import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.HomeFragments.ProfileFragment;
@@ -40,10 +41,8 @@ public class Home extends AppCompatActivity {
     BottomNavigationView navigationView;
     DiscoverFragment discoverFragment = new DiscoverFragment();
     int[] drawables;
-    public  static String name, college_name, passyear, branch, imgurl ="", username, age, bio,uid;
-    Map<String, Object> tagmap;
     public ArrayList<String> tags;
-
+    public static  GetUserData getUserData;
     int lastSelected;
 
 
@@ -150,32 +149,23 @@ public class Home extends AppCompatActivity {
         LinearLayout mygroups = dialog.findViewById(R.id.mygroups);
         LinearLayout myclubs = dialog.findViewById(R.id.mycommunities);
 
-        myquery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Code for query creation to be written here
-                Toast.makeText(Home.this, "MYQuery selected", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(Home.this, QnA.class));
-                QnA.fragwitch =1;
-            }
+        myquery.setOnClickListener(v -> {
+            //Code for query creation to be written here
+            Toast.makeText(Home.this, "MYQuery selected", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(Home.this, QnA.class));
+            QnA.fragwitch =1;
         });
 
-        mygroups.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Code for post creation to be written here
-                Toast.makeText(Home.this, "Groups selected", Toast.LENGTH_SHORT).show();
-            }
+        mygroups.setOnClickListener(v -> {
+            //Code for post creation to be written here
+            Toast.makeText(Home.this, "Groups selected", Toast.LENGTH_SHORT).show();
         });
 
-        myclubs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Code for community creation to be written here
-                Toast.makeText(Home.this, "my clubs selected", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(Home.this, clubs.class));
-                clubs.clubFragSwitch = 1;
-            }
+        myclubs.setOnClickListener(v -> {
+            //Code for community creation to be written here
+            Toast.makeText(Home.this, "my clubs selected", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(Home.this, clubs.class));
+            clubs.clubFragSwitch = 1;
         });
 
         dialog.show();
@@ -216,65 +206,8 @@ public class Home extends AppCompatActivity {
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
 
         //Loading User Profile Data
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String currentUID = user.getUid();
-        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
+        getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-        documentReference.get()
-                .addOnCompleteListener(task -> {
-
-                    if(task.getResult().exists()) {
-                        uid = task.getResult().getString("UID");
-                        name = task.getResult().getString("Name");
-                        college_name = task.getResult().getString("CollegeName");
-                        passyear = task.getResult().getString("Passing Year");
-                        branch = task.getResult().getString("Course");
-                        try {
-                            imgurl = task.getResult().getString("ImgUrl");
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-                        username = task.getResult().getString("Username");
-                        age = task.getResult().getString("Age");
-                        bio = task.getResult().getString("Bio");
-
-
-
-
-                    } else{
-                        try {
-                            throw new Exception("User doesn't exist");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                });
-
-        //Loading Tags
-        tags = new ArrayList<>();
-        documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID).collection("Interests").document("UserTags");
-
-        documentReference.get().addOnCompleteListener(task -> {
-            DocumentSnapshot documentSnapshot = task.getResult();
-            if(documentSnapshot.exists()) {
-                tagmap = documentSnapshot.getData();
-                assert tagmap != null;
-                String toadd = "";
-                String s = tagmap.get("Tags").toString();
-                for(int i=1;i<s.length();i++){
-                    if(s.charAt(i)==',' || s.charAt(i) == ']'){
-                        System.out.println(toadd);
-                        tags.add(toadd.trim());
-                        toadd = "";
-                    }else{
-                        toadd = toadd.concat(String.valueOf(s.charAt(i)));
-                    }
-                }
-                System.out.println(s);
-
-            }
-        });
 
 
 
@@ -284,7 +217,5 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-
     }
 }

@@ -86,15 +86,14 @@ public class ProfileFragment extends Fragment {
 
         home = (Home) getActivity();
         //Loading data into profile fragment
-        if(home.imgurl!="") {
-            Picasso.get().load(Uri.parse(home.imgurl)).placeholder(R.drawable.user).into(binding.profilePic);
+        if(home.getUserData.imgurl!="") {
+            Picasso.get().load(Uri.parse(home.getUserData.imgurl)).placeholder(R.drawable.user).into(binding.profilePic);
         }
-        binding.passyear.setText(home.passyear);
-        Log.i("BATCH", home.passyear);
-        binding.name.setText(home.name);
-        binding.usernameProfile.setText("@"+home.username);
+        binding.passyear.setText(home.getUserData.passyear);
+        binding.name.setText(home.getUserData.name);
+        binding.usernameProfile.setText("@"+home.getUserData.username);
 
-        ArrayList<String> t = home.tags;
+        ArrayList<String> t = home.getUserData.tags;
 
         //Adding Chips
         for(String s: t){

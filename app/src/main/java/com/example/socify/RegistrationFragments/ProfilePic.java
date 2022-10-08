@@ -81,7 +81,7 @@ public class ProfilePic extends Fragment {
                    sendProfileData.sendCurrentUID();
 
                    //Switching to new fragment
-                   getActivity().findViewById(R.id.back_icon).setVisibility(View.VISIBLE);
+
                    Registration.fragment_curr_pos++;
                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.userNameFragment).commit();
                    getActivity().findViewById(R.id.back_icon).setVisibility(View.VISIBLE);

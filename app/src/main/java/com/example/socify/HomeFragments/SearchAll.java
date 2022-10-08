@@ -15,7 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.socify.Adapters.PersonAdapter;
+import com.example.socify.Adapters.SearchPersonAdapter;
 import com.example.socify.Classes.Person;
 import com.example.socify.HelperClasses.OptimizedSearchAll;
 import com.example.socify.R;
@@ -28,7 +28,7 @@ public class SearchAll extends Fragment {
 
     FragmentSearchAllBinding binding;
     RecyclerView rec;
-    public PersonAdapter personAdapter;
+    public SearchPersonAdapter personAdapter;
     public ArrayList<Person> arrayList;
     OptimizedSearchAll searchALl;
     CountDownTimer cntr;
@@ -42,7 +42,7 @@ public class SearchAll extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         arrayList = new ArrayList<>();
-        personAdapter = new PersonAdapter(requireActivity(),arrayList);
+        personAdapter = new SearchPersonAdapter(requireActivity(),arrayList);
         searchALl = new OptimizedSearchAll(this);
     }
 

@@ -3,10 +3,39 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable-v24/circle_filled.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/backgroundsplashscreen.xml" value="0.164" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/bgtag.xml" value="0.2045" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/bordered_whitebtn.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/button_rounds.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/button_rounds_whitecolor.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/chatboxbg.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/circle_blank.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/club_chat_edttext_bg.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/club_edtext_bg.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/color_changale_button.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/custom_progress_background.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/dialog_close_icon.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/dialogbg.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/discover_text_bg.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/discover_text_bg2.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/done_icon.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/editextborder.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/ic_baseline_phone_24.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/ic_eye.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/ic_eye_close.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/popup_bg.xml" value="0.164" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/profile_pic_select_year_background.xml" value="0.2045" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/rounded_dropdown.xml" value="0.2045" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/search_view_bg.xml" value="0.139" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/send_chat_icon.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/verification_bg.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/verification_button_bg.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/verification_input_bg.xml" value="0.164" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout-large/activity_verification.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout-large/fragment_profile_pic.xml" value="0.1778537836682343" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout-long/fragment_profile_pic.xml" value="0.1925925925925926" />
@@ -45,7 +74,7 @@
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_courses.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_create_club.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_discover.xml" value="0.23229166666666667" />
-        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_edit_user_details.xml" value="0.11296859169199595" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_edit_user_details.xml" value="0.16799999999999998" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_events.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_follow_.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_following_.xml" value="0.19067977768277042" />
@@ -56,7 +85,7 @@
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_name_fragement.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_news_feed.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_open_club.xml" value="0.19067977768277042" />
-        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_profile_pic.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_query_list.xml" value="0.1876870457460453" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_questions.xml" value="0.23229166666666667" />
@@ -64,7 +93,7 @@
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_search_all.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_user_queries.xml" value="0.1876870457460453" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_video_post.xml" value="0.19067977768277042" />
-        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_visit_profile.xml" value="0.1" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_visit_profile.xml" value="0.2" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/list_all_query_layout.xml" value="0.1876870457460453" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/list_query_layout.xml" value="0.1876870457460453" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/list_user_query_layout.xml" value="0.19067977768277042" />
@@ -85,6 +114,7 @@
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/verification_toolbar.xml" value="0.21603260869565216" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/menu/bottomnavbarmenu.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/menu/threedotsprofile.xml" value="0.19067977768277042" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.164" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable-v24/circle_filled.xml" value="0.275" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.197" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable/backgroundsplashscreen.xml" value="0.197" />
@@ -168,7 +198,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.23229166666666667" />
+        <option name="scale" value="0.4" />
       </ProjectState>
     </option>
   </component>
