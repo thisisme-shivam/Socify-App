@@ -209,10 +209,6 @@ public class Home extends AppCompatActivity {
         //Loading User Profile Data
         getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid());
         getUserData.loadFollowingList();
-
-
-
-
     }
 
 
