@@ -10,6 +10,25 @@ public class PostMember {
     String desc;
     String username;
 
+    public String getPostiduser() {
+        return postiduser;
+    }
+
+    public void setPostiduser(String postiduser) {
+        this.postiduser = postiduser;
+    }
+
+    public String getPostidall() {
+        return postidall;
+    }
+
+    public void setPostidall(String postidall) {
+        this.postidall = postidall;
+    }
+
+    String postiduser;
+    String postidall;
+
     public PostMember() {
 
     }
