@@ -4,12 +4,12 @@ public class Person {
     String uid;
     String name;
     String username;
-    String follow_status;
+    boolean follow_status;
     String uri;
 
     public Person(){}
 
-    public Person(String name, String username,String follow_status,String uri, String uid){
+    public Person(String name, String username,boolean follow_status,String uri, String uid){
         this.name = name;
         this.username = username;
         this.follow_status = follow_status;
@@ -32,7 +32,7 @@ public class Person {
         return uri;
     }
 
-    public String getFollow_status(){
+    public boolean getFollow_status(){
         return follow_status;
     }
 

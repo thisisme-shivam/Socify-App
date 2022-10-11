@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 public class SearchAll extends Fragment {
 
+
     FragmentSearchAllBinding binding;
     RecyclerView rec;
     public SearchPersonAdapter personAdapter;

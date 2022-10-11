@@ -28,44 +28,36 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/username_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="4dp"
                 android:gravity="center"
                 android:onClick="showPopup"
                 android:text="@string/profile_username"
                 android:textColor="@color/black"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
-
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/threeDots"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:elevation="5dp"
+                android:layout_width="46dp"
+                android:layout_height="47dp"
+                android:layout_marginRight="5dp"
+                android:backgroundTint="@color/transparent"
+                android:outlineProvider="none"
                 android:src="@drawable/threedotss"
                 app:borderWidth="0dp"
                 app:fabSize="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line" />
-
-            <View
-                android:id="@+id/line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/three_dots" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -85,45 +77,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:gravity="center"
             app:layout_constraintBottom_toTopOf="@+id/passyear"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/profile_pic"
+            app:layout_constraintStart_toStartOf="@+id/profile_pic"
             app:layout_constraintTop_toBottomOf="@+id/profile_pic">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/profile_batch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Batch"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginRight="10dp"
-                tools:layout_editor_absoluteX="157dp"
-                tools:layout_editor_absoluteY="224dp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Shivam Kumar"
+                android:text="name"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginLeft="40dp"
-                tools:layout_editor_absoluteX="157dp"
-                tools:layout_editor_absoluteY="224dp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/profile_branch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Branch"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="50dp"
                 tools:layout_editor_absoluteX="157dp"
                 tools:layout_editor_absoluteY="224dp" />
 
@@ -210,28 +177,21 @@
             android:id="@+id/passyear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="94dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="96dp"
-            android:text="2024"
+            android:layout_marginTop="2dp"
+            android:text="year"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/materialTextView4"
-            app:layout_constraintEnd_toStartOf="@+id/gridLayout3"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/gridLayout2"
+            app:layout_constraintEnd_toEndOf="@+id/profile_pic"
+            app:layout_constraintHorizontal_bias="0.088"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout2"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Interests"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passyear" />
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/profile_actionbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -307,6 +267,7 @@
         android:layout_marginTop="13dp"
         android:orientation="horizontal"
         android:gravity="center"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
@@ -320,6 +281,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:text="This Account is Private"
             android:textColor="@color/black"
             android:textSize="20sp" />

@@ -57,12 +57,10 @@ public class EditUserDetails extends Fragment {
         final DocumentReference sfDoc = db.collection("Profiles").document(currentUID);
 
         db.runTransaction((Transaction.Function<Void>) transaction -> {
-            DocumentSnapshot snapshot = transaction.get(sfDoc);
             //Code to be update more (BIO and DOB to be added while registration)
             transaction.update(sfDoc, "Name", binding.nameEditEt.getText().toString());
             transaction.update(sfDoc, "Passing Year", binding.passyearEt.getText().toString());
-            transaction.update(sfDoc, "Bio", binding.bioEt.getText().toString());
-            transaction.update(sfDoc, "Age", binding.ageEt.getText().toString());
+
             // Success
             return null;
         }).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -101,8 +99,6 @@ public class EditUserDetails extends Fragment {
                 if(task.getResult().exists()) {
                     binding.nameEditEt.setText(task.getResult().getString("Name"));
                     binding.passyearEt.setText(task.getResult().getString("Passing Year"));
-                    binding.ageEt.setText(task.getResult().getString("Age"));
-                    binding.bioEt.setText(task.getResult().getString("Bio"));
                 }
                 else{
                     Toast.makeText(requireActivity(), "FAILED", Toast.LENGTH_SHORT).show();

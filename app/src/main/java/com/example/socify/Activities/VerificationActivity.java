@@ -19,11 +19,14 @@ import android.widget.Toast;
 import com.chaos.view.PinView;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityVerificationBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.auth.SignInMethodQueryResult;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -111,6 +114,7 @@ public class VerificationActivity extends AppCompatActivity {
 
     private void sendotp(){
 
+
         fcallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             @Override
@@ -148,6 +152,9 @@ public class VerificationActivity extends AppCompatActivity {
 
 
     }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,7 +179,7 @@ public class VerificationActivity extends AppCompatActivity {
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressBar = (ProgressBar) progressDialog.findViewById(R.id.spin_kit);
         binding.phoneInput.requestFocus();
-         vie = (PinView) otpDialog.findViewById(R.id.otpInput);
+         vie =  otpDialog.findViewById(R.id.otpInput);
 
     }
 

@@ -35,7 +35,6 @@ public class OptimizedSearchAll {
         following_list = new ArrayList<>();
         this.searchAll = searchAll;
         // checking the user following list
-        checkstatus();
         ref = FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Profiles");
         ref.get().addOnCompleteListener(task -> {
 
@@ -54,46 +53,25 @@ public class OptimizedSearchAll {
     // getting user details from like name , username , photo using uid
     private void getOtherdata(String uid) {
         documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(uid);
+        Log.i("myuid", Home.getUserData.uid);
 
         documentReference.get().addOnCompleteListener(task -> {
             if(task.getResult().exists()) {
                 String name = task.getResult().getString("Name");
                 String username = task.getResult().getString("Username");
                 imguri = task.getResult().getString("ImgUrl");
-                Log.i("values",name + " " + username + " " + imguri);
-                if(following_list.contains(uid)){
-                    allusers.add(new Person(name,username,"YES",imguri,uid));
+                Log.i("values",uid);
+
+                if(Home.getUserData.followinglistuids.contains(uid)){
+                    allusers.add(new Person(name,username,true,imguri,uid));
                 }else{
-                    allusers.add(new Person(name,username,"NO",imguri,uid));
+                    allusers.add(new Person(name,username,false,imguri,uid));
                 }
             }
         });
     }
 
-    private void checkstatus() {
-        ref2 = FirebaseFirestore.getInstance().collection("Profiles").document(Home.getUserData.uid).collection("Following").document("following");
-        ref2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                Map<String,Object> has =  task.getResult().getData();
-                if(has != null){
-                    StringBuilder s = new StringBuilder();
-                    for(int i=2;i<has.values().toString().length()-2;i++){
-                        char c = has.values().toString().charAt(i);
-                        if(c == ','){
-                            following_list.add(s.toString());
-                            Log.i("String is " , s.toString());
-                            s = new StringBuilder();
-                        }else{
-                            s.append(c);
-                        }
-                    }
 
-                }
-
-            }
-        });
-    }
 
 
     public void stopSearch() {
@@ -109,7 +87,7 @@ public class OptimizedSearchAll {
         else {
             new Thread(() -> {
                 for (Person p : allusers) {
-                    if(p.getUsername().toLowerCase().contains(newtext.toLowerCase()))
+                    if(p.getUsername().toLowerCase().startsWith(newtext.toLowerCase()))
                         filteredlist.add(p);
                 }
 

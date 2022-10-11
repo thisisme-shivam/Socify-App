@@ -20,6 +20,9 @@ import com.example.socify.RegistrationFragments.InterestsFragment;
 import com.example.socify.RegistrationFragments.ProfilePic;
 import com.example.socify.RegistrationFragments.UserNameFragment;
 import com.example.socify.databinding.ActivityRegistrationBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -125,5 +128,9 @@ public class Registration extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
+    }
 }

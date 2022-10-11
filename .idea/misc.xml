@@ -36,6 +36,7 @@
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/verification_bg.xml" value="0.164" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/verification_button_bg.xml" value="0.164" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/drawable/verification_input_bg.xml" value="0.164" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/font/kufam.xml" value="0.21547669944420692" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout-large/activity_verification.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout-large/fragment_profile_pic.xml" value="0.1778537836682343" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout-long/fragment_profile_pic.xml" value="0.1925925925925926" />
@@ -85,7 +86,7 @@
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_name_fragement.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_news_feed.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_open_club.xml" value="0.19067977768277042" />
-        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_profile_pic.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_query_list.xml" value="0.1876870457460453" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_questions.xml" value="0.23229166666666667" />

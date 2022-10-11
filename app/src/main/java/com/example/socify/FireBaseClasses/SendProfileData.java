@@ -40,7 +40,6 @@ public class SendProfileData {
     StorageReference storageReference;
     DocumentReference documentReference;
     DatabaseReference reference;
-    CollectionReference collectionReference;
     public static HashMap<String, String> profile = new HashMap<>();
     HashMap<String, String> mpPhoneUser = new HashMap<>();
     public static HashMap<String, ArrayList<String>> interests = new HashMap<>();
@@ -58,6 +57,7 @@ public class SendProfileData {
     }
 
     public void uploadtoCloud() {
+
         documentReference.set(profile);
     }
 
@@ -146,6 +146,9 @@ public class SendProfileData {
     }
     public void sendCourse() {
         profile.put("Course", Registration.details.getCourse());
+        profile.put("FollowersCount", "0");
+        profile.put("FollowingCount","0");
+        profile.put("ProfileStatus", "public");
         uploadtoCloud();
     }
 
@@ -153,6 +156,7 @@ public class SendProfileData {
         currentUID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
         interests.put("Tags", Registration.details.getTags());
+
         documentReference.collection("Interests").document("UserTags").set(interests);
     }
 

@@ -37,12 +37,12 @@ public class SearchPersonAdapter extends RecyclerView.Adapter<SearchPersonAdapte
         holder.binding.personusername.setText(person.getUsername());
         Glide.with(context).load(person.getUri()).placeholder(R.drawable.person_login).into(holder.binding.personimgage);
         holder.binding.personname.setText(person.getName());
-        if(person.getFollow_status().equals("YES"))
+        if(person.getFollow_status())
             holder.binding.following.setVisibility(View.VISIBLE);
 
         holder.itemView.setOnClickListener(view -> {
             AppCompatActivity activity = (AppCompatActivity) context;
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(person.getUid())).commit();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(person.getUid(),person.getFollow_status())).commit();
         });
     }
 

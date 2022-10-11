@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -207,6 +208,7 @@ public class Home extends AppCompatActivity {
 
         //Loading User Profile Data
         getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        getUserData.loadFollowingList();
 
 
 
@@ -217,5 +219,6 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
     }
 }
