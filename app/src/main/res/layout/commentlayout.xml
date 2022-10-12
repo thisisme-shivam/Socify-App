@@ -21,74 +21,42 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/osr"
-            android:text="Answered by @saurav.bauddh"
+            android:text="saurav.bauddh"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="5dp"
             android:fontFamily="@font/osr"
             android:text="3 September 2022"
             android:textColor="@color/black"
             android:textSize="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/usernametv"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintEnd_toEndOf="@+id/usernametv"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/usernametv"
+            app:layout_constraintTop_toBottomOf="@+id/usernametv" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/commenttv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="20dp"
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/osr"
-            android:text="It is a NoSql Database"
+            android:text="Amazing video, loved it soo much, thank you."
             android:textAlignment="viewStart"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernametv" />
+            app:layout_constraintStart_toEndOf="@+id/usernametv"
+            app:layout_constraintTop_toTopOf="@+id/usernametv" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/approveTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:text="Approve"
-            android:textColor="@color/palette_teal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/commenttv" />
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/ApprovecountTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="0 Approvals"
-            android:textColor="@color/palette_teal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/approveTV"
-            app:layout_constraintTop_toBottomOf="@+id/commenttv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

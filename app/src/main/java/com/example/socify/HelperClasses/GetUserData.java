@@ -21,6 +21,7 @@ public class GetUserData {
     VisitProfile.ChagneView changeview;
     public DocumentReference profileinforef,followStatusRef;
     public DocumentSnapshot snap;
+
     public GetUserData(String uid){
         this.uid = uid;
         loadData();
@@ -30,7 +31,6 @@ public class GetUserData {
         this.changeview = changeview;
         loadData();
     }
-
 
     // this function laads all data of the uid provieded following list too.
     private void loadData(){

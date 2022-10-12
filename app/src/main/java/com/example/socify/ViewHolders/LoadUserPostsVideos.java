@@ -25,7 +25,7 @@ public class LoadUserPostsVideos extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public void setPost(Activity activity, String name, String url, String postUri, String time, String uid, String type, String desc, String username) {
+    public void setPost(Activity activity, String name, String url, String postUri, String time, String uid, String type, String desc, String username, String postiduser, String postidall) {
 
         playerView = itemView.findViewById(R.id.userpostvv);
         exoplayer = new ExoPlayer.Builder(activity).build();

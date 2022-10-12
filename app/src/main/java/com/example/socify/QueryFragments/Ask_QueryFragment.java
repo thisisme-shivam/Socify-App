@@ -39,16 +39,15 @@ public class Ask_QueryFragment extends Fragment {
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     String currentUID = firebaseUser.getUid();
     String name, url, UID;
-    //Fragment after successful question
-    QueryListFragment queriesFragment = new QueryListFragment();
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //Fragment after successful question
     DocumentReference documentReference;
     QuestionsMember member;
 
     public void setonclicklisteners() {
         binding.askbtn.setOnClickListener(v -> {
             String question = binding.questiontext.getText().toString().trim();
+            binding.questiontext.setText("");
             String tag = binding.categories.getText().toString();
 
             Calendar cdate = Calendar.getInstance();
@@ -61,7 +60,7 @@ public class Ask_QueryFragment extends Fragment {
 
             String time = saveDate + ":" + saveTime;
 
-            if(!question.isEmpty()) {
+            if(!question.isEmpty() && !tag.isEmpty()) {
                 member.setName(name);
                 member.setQuestion(question);
                 member.setTime(time);
@@ -76,10 +75,13 @@ public class Ask_QueryFragment extends Fragment {
 
                 Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
                 QnA.fragwitch=1;
-                startActivity(new Intent(requireActivity(), QnA.class));
+                startActivity(new Intent(requireActivity(), Home.class));
             }
-            else{
+            else if(question.isEmpty()){
                 Toast.makeText(requireActivity(), "Please enter the question", Toast.LENGTH_SHORT).show();
+            }
+            else if(tag.isEmpty()) {
+                Toast.makeText(requireActivity(), "Please select a tag", Toast.LENGTH_SHORT).show();
             }
 
         });

@@ -36,6 +36,8 @@ public class OptimizedSearchAll {
         this.searchAll = searchAll;
         // checking the user following list
         ref = FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Profiles");
+
+
         ref.get().addOnCompleteListener(task -> {
 
             for(DataSnapshot s: task.getResult().getChildren()){

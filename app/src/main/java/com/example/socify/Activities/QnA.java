@@ -41,7 +41,6 @@ public class QnA extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, replyFragment).commit();
             }
             break;
-
         }
 
         setContentView(binding.getRoot());

@@ -1,20 +1,30 @@
 package com.example.socify.Adapters;
 
+import static com.example.socify.HomeFragments.NewsFeedFragment.commentsFragment;
+
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.socify.Activities.Home;
 import com.example.socify.Classes.PostMember;
+import com.example.socify.HomeFragments.CommentsFragment;
+import com.example.socify.HomeFragments.VisitProfile;
 import com.example.socify.R;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
+import com.google.android.exoplayer2.util.Log;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -84,10 +94,13 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
 
             }
 
-            isLiked(member.getPostiduser(), holder.like);
-            isLiked(member.getPostidall(), holder.like);
-            nrlikes(holder.likescount, member.getPostiduser());
-            nrlikes(holder.likescount, member.getPostidall());
+            holder.comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, commentsFragment).addToBackStack(null).commit();
+                }
+            });
 
             holder.like.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -103,6 +116,22 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                 }
             });
 
+
+        holder.profilepic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatActivity activity = (AppCompatActivity) context;
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(member.getUid(), false)).commit();
+            }
+        });
+
+        isLiked(member.getPostiduser(), holder.like);
+        isLiked(member.getPostidall(), holder.like);
+        nrlikes(holder.likescount, member.getPostiduser());
+        nrlikes(holder.likescount, member.getPostidall());
+
+
+
     }
 
     @Override
@@ -116,11 +145,9 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
         MaterialTextView namepost, usernamepost, date,likescount;
         public ImageView like, comment;
         ReadMoreTextView description;
-        DatabaseReference likesref;
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        int likecount;
         StyledPlayerView playerView;
         ExoPlayer exoplayer;
+        CircleImageView profile;
 
         public NewsFeedViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -129,6 +156,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
             namepost = itemView.findViewById(R.id.picadded);
             date = itemView.findViewById(R.id.time);
             like = itemView.findViewById(R.id.like);
+            comment = itemView.findViewById(R.id.commentbtn);
 //        comment = itemView.findViewById(R.id.comment);
             likescount = itemView.findViewById(R.id.likecount);
             description = itemView.findViewById(R.id.caption);
