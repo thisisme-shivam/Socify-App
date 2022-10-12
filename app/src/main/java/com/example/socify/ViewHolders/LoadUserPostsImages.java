@@ -26,7 +26,7 @@ public class LoadUserPostsImages extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public void setPost(Activity activity, String name, String url, String postUri, String time, String uid, String type, String desc, String username) {
+    public void setPost(Activity activity, String name, String url, String postUri, String time, String uid, String type, String desc, String username, String postiduser, String postidall) {
 
         userpostiv = itemView.findViewById(R.id.userpostiv);
         playerView = itemView.findViewById(R.id.userpostvv);

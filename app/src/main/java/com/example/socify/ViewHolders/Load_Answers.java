@@ -2,7 +2,6 @@ package com.example.socify.ViewHolders;
 
 import android.app.Application;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +28,7 @@ public class Load_Answers extends RecyclerView.ViewHolder {
 
     public void setAnswer(Application application, String name, String uid, String answer, String time) {
         namereplier = itemView.findViewById(R.id.usernametv);
-        Answer = itemView.findViewById(R.id.answertv);
+        Answer = itemView.findViewById(R.id.commenttv);
         timestamp = itemView.findViewById(R.id.timestamp);
 
         namereplier.setText("Answered by: "+name);

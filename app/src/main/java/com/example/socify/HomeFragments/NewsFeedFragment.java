@@ -42,9 +42,9 @@ public class NewsFeedFragment extends Fragment {
     FragmentNewsFeedBinding binding;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference, likeref;
-    Boolean likechecker = false;
     GetNewsFeedAdapter getNewsFeed;
     ArrayList<PostMember> postMemberArrayList;
+    public static CommentsFragment commentsFragment = new CommentsFragment();
     RecyclerView rec;
 
     @Override
@@ -59,7 +59,7 @@ public class NewsFeedFragment extends Fragment {
         rec = getView().findViewById(R.id.postsRV);
         rec.setLayoutManager(layoutManager);
         postMemberArrayList = new ArrayList<>();
-        getNewsFeed = new GetNewsFeedAdapter(getContext(),postMemberArrayList);
+        getNewsFeed = new GetNewsFeedAdapter(getActivity(),postMemberArrayList);
         rec.setAdapter(getNewsFeed);
 
         reference.addValueEventListener(new ValueEventListener() {

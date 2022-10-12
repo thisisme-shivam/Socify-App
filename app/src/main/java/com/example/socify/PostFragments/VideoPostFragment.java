@@ -52,7 +52,7 @@ public class VideoPostFragment extends Fragment {
                     @Override
                     protected void onBindViewHolder(@NonNull LoadUserPostsVideos holder, int position, @NonNull PostMember model) {
                         final String postkey = getRef(position).getKey();
-                        holder.setPost(requireActivity(), model.getName(), model.getUrl(), model.getPostUri(), model.getTime(), model.getUid(), model.getType(), model.getDesc(), model.getUsername());
+                        holder.setPost(requireActivity(), model.getName(), model.getUrl(), model.getPostUri(), model.getTime(), model.getUid(), model.getType(), model.getDesc(), model.getUsername(), model.getPostiduser(), model.getPostidall());
                     }
 
                     @NonNull

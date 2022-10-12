@@ -51,13 +51,10 @@ public class SearchAll extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
         rec = getView().findViewById(R.id.personsrecyclerview);
         rec.setHasFixedSize(true);
         rec.setLayoutManager(new LinearLayoutManager(getContext()));
         rec.setAdapter(personAdapter);
-
         setSearchTextListener();
 
     }

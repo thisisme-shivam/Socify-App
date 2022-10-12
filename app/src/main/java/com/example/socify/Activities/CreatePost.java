@@ -50,7 +50,7 @@ public class CreatePost extends AppCompatActivity {
     String name, url, username;
     StorageReference storageReference;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference db1,db2,db3;
+    DatabaseReference db1,db2,db3,db4;
     DocumentReference documentReference;
     MediaController mediaController;
     String type;
@@ -68,6 +68,7 @@ public class CreatePost extends AppCompatActivity {
         db1 = database.getReference("Posts").child("All Images").child(currentUID);
         db2 = database.getReference("Posts").child("All Videos").child(currentUID);
         db3 = database.getReference("Posts").child("All Posts");
+        db4 = database.getReference("Posts").child("User's Posts").child(currentUID);
         storageReference = FirebaseStorage.getInstance().getReference("Posts").child("User's Posts").child(currentUID);;
         setonclicklisteners();
     }
@@ -86,7 +87,6 @@ public class CreatePost extends AppCompatActivity {
                 chooseFile();
             }
         });
-
     }
 
     @SuppressLint("IntentReset")
@@ -169,12 +169,15 @@ public class CreatePost extends AppCompatActivity {
                         postMember.setUsername(username);
 
                         //Storing ImagePost
+                        String id2 = db3.push().getKey();
                         String id1 = db1.push().getKey();
+                        postMember.setPostiduser(id1);
+                        postMember.setPostidall(id2);
                         assert id1 != null;
                         db1.child(id1).setValue(postMember);
-
+                        db4.child(id1).setValue(postMember);
                         //Storing Allpost Image
-                        String id2 = db3.push().getKey();
+
                         db3.child(id2).setValue(postMember);
                         Toast.makeText(this, "Post Uploaded", Toast.LENGTH_SHORT).show();
 
@@ -191,11 +194,13 @@ public class CreatePost extends AppCompatActivity {
 
                         //Storing VideoPost
                         String id3 = db1.push().getKey();
+                        String id4 = db3.push().getKey();
+                        postMember.setPostiduser(id3);
+                        postMember.setPostidall(id4);
                         assert id3 != null;
                         db2.child(id3).setValue(postMember);
-
+                        db4.child(id3).setValue(postMember);
                         //Storing Allpost VideoPost
-                        String id4 = db3.push().getKey();
                         db3.child(id4).setValue(postMember);
                         Toast.makeText(this, "Post Uploaded", Toast.LENGTH_SHORT).show();
                     }
