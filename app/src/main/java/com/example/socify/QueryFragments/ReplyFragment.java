@@ -3,14 +3,17 @@ package com.example.socify.QueryFragments;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.socify.Activities.Home;
 import com.example.socify.Classes.AnswerMember;
 import com.example.socify.R;
 import com.example.socify.ViewHolders.Load_Answers;
@@ -18,6 +21,7 @@ import com.example.socify.databinding.FragmentReplyBinding;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -35,92 +39,75 @@ import java.util.Calendar;
 public class ReplyFragment extends Fragment {
 
     FragmentReplyBinding binding;
-    String uid, question, postkey, name, tag, replier_name;
+    String uid, question, postkey, name, tag, replier_name,time;
     DocumentReference reference, reference2;
     DatabaseReference databaseReferenceall, databaseReferenceuser;
     AnswerMember member = new AnswerMember();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference approvals, allquestions;
+    DatabaseReference questionref;
+    String currTag,useruid,questionid;
     //Flag to use for approval checking
     Boolean approvalchecker;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Bundle extra = this.getArguments();
 
         if(extra!=null) {
             uid = extra.getString("uid");
             question = extra.getString("question");
             postkey = extra.getString("postkey");
-            name = extra.getString("name");
+            name = extra.getString("username");
             tag = extra.getString("tag");
+            time = extra.getString("time");
 
-            System.out.println(uid);
-            System.out.println(question);
-            System.out.println(tag);
-            System.out.println(postkey);
-            System.out.println(name);
         }
         else{
             Toast.makeText(requireActivity(), "Error", Toast.LENGTH_SHORT).show();
         }
+        questionref = FirebaseDatabase.getInstance()
+                .getReference("College")
+                .child(Home.getUserData.college_name)
+                .child("Questions")
+                .child(tag.replaceAll("[^A-Za-z]+", "").toLowerCase())
+                .child(uid)
+                .child(postkey)
+                .child("Answers");
 
-        reference = db.collection("Profiles").document(uid);
-        reference2 = db.collection("Profiles").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        binding.question.setText(question);
+        binding.username.setText("Posted by " +  name);
+        binding.tag.setText(tag);
+        binding.timestamp.setText(time);
+        binding.replylayout.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postAnswer();
+            }
+        });
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        //Asker's Details
-        reference.get()
-                .addOnCompleteListener(task -> {
-                    if(task.getResult().exists()) {
-                        String name = task.getResult().getString("Name");
-                        binding.question.setText(question);
-                        binding.username.setText("Posted by " +  name);
-                        binding.tag.setText(tag);
-                    }
-                });
 
-        //Replier's Details
-        reference2.get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.getResult().exists()) {
-                            replier_name = task.getResult().getString("Name");
-                        }
-                    }
-                });
-
-
-        //Storing Replies into the database
-        binding.replylayout.setEndIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!binding.replytxt.equals("")) {
-                    saveAnswer();
-                    Toast.makeText(requireActivity(), "Submission Successful", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(requireActivity(), "Please type an answer", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
 
         //Fetching the replies from database into the recyclerview
-        approvals = database.getReference("Questions").child("Approvals");
-        allquestions = FirebaseDatabase.getInstance().getReference("Questions").child("All Questions").child(postkey).child("Answers");
-
         FirebaseRecyclerOptions<AnswerMember> options =
                 new FirebaseRecyclerOptions.Builder<AnswerMember>()
-                        .setQuery(allquestions, AnswerMember.class)
+                        .setQuery(questionref, AnswerMember.class)
                         .build();
 
         FirebaseRecyclerAdapter<AnswerMember, Load_Answers> firebaseRecyclerAdapter =
@@ -131,33 +118,7 @@ public class ReplyFragment extends Fragment {
                         final String postkey = getRef(position).getKey();
 
                         holder.setAnswer(requireActivity().getApplication(), model.getName(), model.getUid(), model.getAnswer(), model.getTime());
-                        holder.approvalchecker(postkey);
 
-                        holder.approvaltv.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                approvalchecker = true;
-                                approvals.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if(approvalchecker.equals(true)) {
-                                            if(snapshot.child(postkey).hasChild(currenUID)) {
-                                                approvals.child(postkey).child(currenUID).removeValue();
-                                            }
-                                            else{
-                                                approvals.child(postkey).child(currenUID).setValue(true);
-                                            }
-                                            approvalchecker = false;
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
-                            }
-                        });
 
                     }
 
@@ -174,30 +135,33 @@ public class ReplyFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
-
         firebaseRecyclerAdapter.startListening();
         binding.repliesRV.setLayoutManager(layoutManager);
         binding.repliesRV.setAdapter(firebaseRecyclerAdapter);
-
-
-
     }
 
-    private void saveAnswer() {
-
-        databaseReferenceall = FirebaseDatabase.getInstance().getReference("Questions").child("All Questions").child(postkey).child("Answers");
-        databaseReferenceuser = FirebaseDatabase.getInstance().getReference("Questions").child("User's Questions").child(uid).child(postkey).child("Answers");
+    private void postAnswer() {
+        String answer = binding.replytxt.getText().toString().trim();
+        if(answer.equals("")) {
+            Toast.makeText(getContext(), "Field is empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Calendar cdate = Calendar.getInstance();
         SimpleDateFormat currenDate = new SimpleDateFormat("dd-MMMM-yy");
         final String saveDate = currenDate.format(cdate.getTime());
-        member.setAnswer(binding.replytxt.getText().toString());
+        member.setAnswer(answer);
         member.setTime(saveDate);
-        member.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        member.setName(replier_name);
-        String id = databaseReferenceall.push().getKey();
-        databaseReferenceall.child(id).setValue(member);
-        databaseReferenceuser.child(id).setValue(member);
+        member.setUid(Home.getUserData.uid);
+        member.setName(Home.getUserData.username);
+        String id = questionref.push().getKey();
+        questionref.child(id).setValue(member).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                binding.replytxt.setText("");
+            }
+        });
+
 
     }
 

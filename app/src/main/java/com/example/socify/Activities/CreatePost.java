@@ -32,7 +32,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -47,14 +49,11 @@ public class CreatePost extends AppCompatActivity {
     private static final int PICK_FILE=1;
     private Uri selectedUri;
     UploadTask uploadTask;
-    String name, url, username;
     StorageReference storageReference;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference db1,db2,db3,db4;
-    DocumentReference documentReference;
+    DatabaseReference userimagesref,uservideosref;
     MediaController mediaController;
     String type;
-    String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     PostMember postMember;
 
     @Override
@@ -65,11 +64,9 @@ public class CreatePost extends AppCompatActivity {
 
         mediaController = new MediaController(this);
         postMember = new PostMember();
-        db1 = database.getReference("Posts").child("All Images").child(currentUID);
-        db2 = database.getReference("Posts").child("All Videos").child(currentUID);
-        db3 = database.getReference("Posts").child("All Posts");
-        db4 = database.getReference("Posts").child("User's Posts").child(currentUID);
-        storageReference = FirebaseStorage.getInstance().getReference("Posts").child("User's Posts").child(currentUID);;
+        userimagesref = database.getReference("College").child(Home.getUserData.college_name).child("Posts").child(Home.getUserData.uid).child("All Images");
+        uservideosref = database.getReference("College").child(Home.getUserData.college_name).child("Posts").child(Home.getUserData.uid).child("All Videos");
+        storageReference = FirebaseStorage.getInstance().getReference("Posts").child("User's Posts").child(Home.getUserData.uid);;
         setonclicklisteners();
     }
 
@@ -146,62 +143,46 @@ public class CreatePost extends AppCompatActivity {
             final StorageReference reference = storageReference.child(System.currentTimeMillis()+ ":" + getFileExt(selectedUri));
             uploadTask = reference.putFile(selectedUri);
 
-            Task<Uri> uriTask = uploadTask.continueWithTask(task -> {
+            uploadTask.continueWithTask(task -> {
                 if(!task.isSuccessful()) {
                     throw task.getException();
                 }
-
                 return reference.getDownloadUrl();
+
             }).addOnCompleteListener(task -> {
 
                 if (task.isSuccessful()) {
 
                     Uri downloaduri = task.getResult();
 
+                    postMember.setName(Home.getUserData.name);
+                    postMember.setDesc(description);
+                    postMember.setTime(saveDate);
+                    postMember.setPostUri(downloaduri.toString());
+                    postMember.setUid(Home.getUserData.uid);
+                    postMember.setUrl(Home.getUserData.imgurl);
+                    postMember.setUsername(Home.getUserData.username);
+
                     if (type.equals("image")) {
-                        postMember.setName(name);
-                        postMember.setDesc(description);
-                        postMember.setTime(saveDate);
                         postMember.setType("image");
-                        postMember.setPostUri(downloaduri.toString());
-                        postMember.setUid(currentUID);
-                        postMember.setUrl(url);
-                        postMember.setUsername(username);
 
                         //Storing ImagePost
-                        String id2 = db3.push().getKey();
-                        String id1 = db1.push().getKey();
-                        postMember.setPostiduser(id1);
-                        postMember.setPostidall(id2);
-                        assert id1 != null;
-                        db1.child(id1).setValue(postMember);
-                        db4.child(id1).setValue(postMember);
+                        String id1 = userimagesref.push().getKey();
+                        Log.e("ID", id1);
+                        postMember.setPostid(id1);
+
+                        userimagesref.child(id1).setValue(postMember);
                         //Storing Allpost Image
-
-                        db3.child(id2).setValue(postMember);
                         Toast.makeText(this, "Post Uploaded", Toast.LENGTH_SHORT).show();
-
                     }
                     else if(type.equals("video")) {
-                        postMember.setName(name);
-                        postMember.setDesc(description);
-                        postMember.setTime(saveDate);
                         postMember.setType("video");
-                        postMember.setPostUri(downloaduri.toString());
-                        postMember.setUid(currentUID);
-                        postMember.setUrl(url);
-                        postMember.setUsername(username);
-
                         //Storing VideoPost
-                        String id3 = db1.push().getKey();
-                        String id4 = db3.push().getKey();
-                        postMember.setPostiduser(id3);
-                        postMember.setPostidall(id4);
+                        String id3 = uservideosref.push().getKey();
+                        postMember.setPostid(id3);
                         assert id3 != null;
-                        db2.child(id3).setValue(postMember);
-                        db4.child(id3).setValue(postMember);
+                        uservideosref.child(id3).setValue(postMember);
                         //Storing Allpost VideoPost
-                        db3.child(id4).setValue(postMember);
                         Toast.makeText(this, "Post Uploaded", Toast.LENGTH_SHORT).show();
                     }
                     else{
@@ -217,28 +198,6 @@ public class CreatePost extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
-
-        documentReference.get()
-                .addOnCompleteListener(task -> {
-                    if(task.getResult().exists()) {
-                        name = task.getResult().getString("Name");
-                        url = task.getResult().getString("ImgUrl");
-                        username = task.getResult().getString("Username");
-                        Picasso.get().load(url).into(binding.profilepic);
-                        binding.name.setText(name);
-                    }
-                    else{
-                        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                    }
-
-                });
-    }
 
 
 

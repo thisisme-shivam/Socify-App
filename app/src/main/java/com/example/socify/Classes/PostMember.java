@@ -9,28 +9,19 @@ public class PostMember {
     String type;
     String desc;
     String username;
+    String postid;
 
-    public String getPostiduser() {
-        return postiduser;
-    }
-
-    public void setPostiduser(String postiduser) {
-        this.postiduser = postiduser;
-    }
-
-    public String getPostidall() {
-        return postidall;
-    }
-
-    public void setPostidall(String postidall) {
-        this.postidall = postidall;
-    }
-
-    String postiduser;
-    String postidall;
 
     public PostMember() {
 
+    }
+
+    public String getPostid() {
+        return postid;
+    }
+
+    public void setPostid(String postid) {
+        this.postid = postid;
     }
 
     public void setUsername(String username) {

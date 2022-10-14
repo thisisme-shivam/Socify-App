@@ -44,9 +44,14 @@ public class NewsFeedFragment extends Fragment {
     DatabaseReference reference, likeref;
     GetNewsFeedAdapter getNewsFeed;
     ArrayList<PostMember> postMemberArrayList;
-    public static CommentsFragment commentsFragment = new CommentsFragment();
     RecyclerView rec;
 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -55,7 +60,6 @@ public class NewsFeedFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
-        reference = database.getReference("Posts").child("All Posts");
         rec = getView().findViewById(R.id.postsRV);
         rec.setLayoutManager(layoutManager);
         postMemberArrayList = new ArrayList<>();
@@ -82,14 +86,11 @@ public class NewsFeedFragment extends Fragment {
             }
         });
 
+      
     }
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,

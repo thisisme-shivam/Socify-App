@@ -1,17 +1,22 @@
 package com.example.socify.QueryFragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.socify.Activities.Home;
 import com.example.socify.Activities.QnA;
+import com.example.socify.Adapters.QuesitonLoadAdapter;
 import com.example.socify.Classes.QuestionsMember;
 import com.example.socify.R;
 import com.example.socify.ViewHolders.Load_Questions;
@@ -26,61 +31,72 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class UserQueriesFragment extends Fragment {
 
     FragmentUserQueriesBinding binding;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference;
+    DatabaseReference uidreference;
     ReplyFragment replyFragment;
+    FirebaseRecyclerAdapter<QuestionsMember, Load_Questions> firebaseRecyclerAdapter;
+    ArrayList<QuestionsMember> questionsMembers;
+    QuesitonLoadAdapter adapter;
+    String tag;
+    public UserQueriesFragment(String tag) {
+        this.tag = tag;
+    }
 
-
-    //Deleting User's Questions from the database when delete button is tapped
-    public void delete(String time) {
-
-        //Deleting from 'User's Questions' node
-        databaseReference = database.getReference("Questions").child("User's Questions").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        Query query = databaseReference.orderByChild("time").equalTo(time);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    dataSnapshot.getRef().removeValue();
-                    Log.i("Question Deleted", "YES");
-                    Toast.makeText(requireActivity(), "Deleted", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        //Deleting from 'All Questions' node
-        databaseReference = database.getReference("Questions").child("All Questions");
-        Query query1 = databaseReference.orderByChild("time").equalTo(time);
-        query1.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
-                    dataSnapshot.getRef().removeValue();
-                    Toast.makeText(requireActivity(), "Deleted", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
-        });
+    public UserQueriesFragment() {
 
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        questionsMembers = new ArrayList<>();
+        adapter = new QuesitonLoadAdapter(getActivity(),questionsMembers);
+        uidreference = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("College")
+                .child(Home.getUserData.college_name)
+                .child("Questions")
+                .child(tag.replaceAll("[^A-Za-z]+", "").toLowerCase())
+                .child(Home.getUserData.uid);
+
+        uidreference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    QuestionsMember question = dataSnapshot.getValue(QuestionsMember.class);
+                    questionsMembers.add(question);
+                }
+
+                adapterStart();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+    private void adapterStart() {
+
+        adapter.userFragent = true;
+        Context context  = getContext();
+        if(context!=null)
+            binding.userqueriesRV.setLayoutManager(new LinearLayoutManager(context));
+        binding.userqueriesRV.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override
@@ -91,56 +107,6 @@ public class UserQueriesFragment extends Fragment {
 
 
         //Creating Adapter to Load the data in the RecyclerView
-        databaseReference = database.getReference("Questions").child("User's Questions").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        FirebaseRecyclerOptions<QuestionsMember> options =
-                new FirebaseRecyclerOptions.Builder<QuestionsMember>()
-                        .setQuery(databaseReference,QuestionsMember.class)
-                        .build();
-
-
-        FirebaseRecyclerAdapter<QuestionsMember, Load_Questions> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<QuestionsMember, Load_Questions>(options) {
-                    @Override
-                    protected void onBindViewHolder(@NonNull Load_Questions holder, int position, @NonNull QuestionsMember model) {
-
-                        holder.deleteitem(getActivity(), model.getName(),model.getUrl(),model.getUserid(),model.getKey(),model.getQuestion(),model.getTime(),model.getTag());
-                        final String time = getItem(position).getTime();
-                        String postkey = getItem(position).getKey();
-                        holder.delbtn.setOnClickListener(v -> delete(time));
-
-                        holder.userReplyBtn.setOnClickListener(v -> {
-
-                            Bundle bundle2 = new Bundle();
-                            //Passing data onto Reply Fragment
-                            bundle2.putString("uid", getItem(holder.getAbsoluteAdapterPosition()).getUserid());
-                            bundle2.putString("question", getItem(holder.getAbsoluteAdapterPosition()).getQuestion());
-                            bundle2.putString("name", getItem(holder.getAbsoluteAdapterPosition()).getName());
-                            bundle2.putString("postkey", getItem(holder.getAbsoluteAdapterPosition()).getKey());
-                            bundle2.putString("tag", getItem(holder.getAbsoluteAdapterPosition()).getTag());
-                            replyFragment = new ReplyFragment();
-                            replyFragment.setArguments(bundle2);
-                            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, replyFragment).commit();
-                            QnA.fragwitch =3;
-                        });
-                    }
-
-                    @NonNull
-                    @Override
-                    public Load_Questions onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        View view = LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.list_user_query_layout,parent,false);
-                        return new Load_Questions(view);
-                    }
-                };
-
-        //Ordering data from bottom to top
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setReverseLayout(true);
-        layoutManager.setStackFromEnd(true);
-
-        firebaseRecyclerAdapter.startListening();
-        binding.userqueriesRV.setLayoutManager(layoutManager);
-        binding.userqueriesRV.setAdapter(firebaseRecyclerAdapter);
         return binding.getRoot();
 
     }

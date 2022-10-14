@@ -44,7 +44,9 @@ public class InterestsFragment extends Fragment {
                 Toast.makeText(getContext(),"Select atleast 1 tag " , Toast.LENGTH_SHORT).show();
             }else {
                 for (ThemedButton but : str) {
-                    String newstr = but.getText().replaceAll("[^A-Za-z]+", "");
+                    String newstr = but.getText();
+                    Log.e("Tag", newstr);
+//                    .replaceAll("[^A-Za-z]+", "")
                     tags.add(newstr);
 
                     Log.i("string", newstr);

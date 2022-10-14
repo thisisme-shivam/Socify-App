@@ -18,7 +18,7 @@
 
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/allusernametv"
+            android:id="@+id/usernametv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -33,7 +33,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
-            android:id="@+id/alltimestamp"
+            android:id="@+id/timestamp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
@@ -41,11 +41,11 @@
             android:text="3 September 2022: 6:00:22"
             android:textColor="@color/black"
             android:textSize="10dp"
-            app:layout_constraintStart_toEndOf="@+id/allusernametv"
+            app:layout_constraintStart_toEndOf="@+id/usernametv"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/allquestiontag"
+            android:id="@+id/questiontag"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginStart="10dp"
@@ -56,10 +56,10 @@
             android:textSize="10dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/allusernametv" />
+            app:layout_constraintTop_toBottomOf="@+id/usernametv" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/allquestiontv"
+            android:id="@+id/questiontv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -69,11 +69,11 @@
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/allquestiontag" />
+            app:layout_constraintTop_toBottomOf="@+id/questiontag" />
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="80dp"
-            android:id="@+id/replyquerybtn"
+            android:id="@+id/repliesbtn"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
@@ -89,7 +89,7 @@
             app:backgroundTint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/allquestiontv" />
+            app:layout_constraintTop_toBottomOf="@+id/questiontv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

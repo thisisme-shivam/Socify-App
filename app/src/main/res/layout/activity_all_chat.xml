@@ -7,21 +7,62 @@
     android:background="@color/white"
     tools:context=".Activities.AllChat">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/chattoolbar"
-        android:layout_width="0dp"
-        android:textColor="@color/text_grey"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout9"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/teal_200"
-        android:drawableStart="@drawable/ic_baseline_search_24"
-        android:drawablePadding="10dp"
-        android:hint="Search"
-        android:padding="20sp"
-        android:textColorHint="@color/text_grey"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/chatfontbold"
+            android:text="Messages"
+            android:textColor="@color/palette_teal"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toTopOf="@+id/chattoolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/chatfontbold"
+            android:text="@string/threedots"
+            android:textColor="@color/palette_teal"
+            android:textSize="40dp"
+            app:layout_constraintBottom_toBottomOf="@+id/materialTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/materialTextView" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/chattoolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/chatboxbg"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/chatfontmedium"
+            android:hint="Search"
+            android:padding="20sp"
+            android:textColor="@color/text_grey"
+            android:textColorHint="@color/text_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialTextView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -30,7 +71,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chattoolbar"
-        tools:listitem="@layout/chatcontainer" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
+        tools:listitem="@layout/chatlistlayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

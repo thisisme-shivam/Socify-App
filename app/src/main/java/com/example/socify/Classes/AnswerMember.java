@@ -2,7 +2,7 @@ package com.example.socify.Classes;
 
 public class AnswerMember {
 
-    String name;
+    String username;
     String uid;
     String answer;
     String time;
@@ -11,11 +11,11 @@ public class AnswerMember {
     }
 
     public String getName() {
-        return name;
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String username) {
+        this.username = username;
     }
 
     public String getUid() {

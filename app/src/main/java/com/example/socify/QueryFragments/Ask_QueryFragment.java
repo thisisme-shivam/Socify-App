@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -35,19 +36,14 @@ public class Ask_QueryFragment extends Fragment {
 
     FragmentAskQueryBinding binding;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference AllQuestions, UserQuestions;
-    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-    String currentUID = firebaseUser.getUid();
-    String name, url, UID;
+    DatabaseReference Questions;
 
     //Fragment after successful question
-    DocumentReference documentReference;
     QuestionsMember member;
 
     public void setonclicklisteners() {
         binding.askbtn.setOnClickListener(v -> {
             String question = binding.questiontext.getText().toString().trim();
-            binding.questiontext.setText("");
             String tag = binding.categories.getText().toString();
 
             Calendar cdate = Calendar.getInstance();
@@ -61,21 +57,20 @@ public class Ask_QueryFragment extends Fragment {
             String time = saveDate + ":" + saveTime;
 
             if(!question.isEmpty() && !tag.isEmpty()) {
-                member.setName(name);
+                member.setUsername(Home.getUserData.username);
                 member.setQuestion(question);
                 member.setTime(time);
-                member.setUserid(UID);
-                member.setUrl(url);
+                member.setUserid(Home.getUserData.uid);
+                member.setUrl(Home.getUserData.imgurl);
                 member.setTag(tag);
 
-                String id = UserQuestions.push().getKey();
-                member.setKey(id);
-                UserQuestions.child(id).setValue(member);
-                AllQuestions.child(id).setValue(member);
+                String postid = Questions.push().getKey();
+                member.setKey(postid);
+                Questions.child(member.getTag().replaceAll("[^A-Za-z]+", "").toLowerCase()).child(Home.getUserData.uid).child(postid).setValue(member);
 
                 Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
-                QnA.fragwitch=1;
-                startActivity(new Intent(requireActivity(), Home.class));
+                QueryTagFragment queryTagFragment = new QueryTagFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, queryTagFragment).commit();
             }
             else if(question.isEmpty()){
                 Toast.makeText(requireActivity(), "Please enter the question", Toast.LENGTH_SHORT).show();
@@ -83,27 +78,16 @@ public class Ask_QueryFragment extends Fragment {
             else if(tag.isEmpty()) {
                 Toast.makeText(requireActivity(), "Please select a tag", Toast.LENGTH_SHORT).show();
             }
-
         });
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-        documentReference.get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.getResult().exists()) {
-                            name = task.getResult().getString("Name");
-                            url = task.getResult().getString("ImgUrl");
-                            UID = task.getResult().getString("UID");
-                        }
-                    }
-                });
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setonclicklisteners();
 
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,12 +99,9 @@ public class Ask_QueryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentAskQueryBinding.inflate(inflater, container, false);
-
-        documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
-        AllQuestions = database.getReference("Questions").child("All Questions");
-        UserQuestions = database.getReference("Questions").child("User's Questions").child(currentUID);
+        Questions = database.getReference("College").child(Home.getUserData.college_name).child("Questions");
         member = new QuestionsMember();
-        setonclicklisteners();
+
 
         return binding.getRoot();
     }

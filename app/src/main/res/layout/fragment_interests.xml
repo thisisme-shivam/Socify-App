@@ -72,7 +72,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
             app:toggle_horizontalSpacing="5dp"
-            app:toggle_requiredAmount="0"
+            app:toggle_requiredAmount="1"
             app:toggle_selectAnimation="horizontal_slide"
             app:toggle_selectableAmount="20">
 
@@ -343,7 +343,7 @@
                     app:toggle_fontFamily="/fonts/osr.ttf"
                     app:toggle_selectedBackgroundColor="@color/palette_light_teal"
                     app:toggle_selectedTextColor="@color/black"
-                    app:toggle_text="👨‍🔧 Mechianical Eng."
+                    app:toggle_text="👨‍🔧 Mechanical Eng."
                     app:toggle_textColor="@color/black"
                     app:toggle_textPadding="10dp"
                     app:toggle_textSize="15sp" />

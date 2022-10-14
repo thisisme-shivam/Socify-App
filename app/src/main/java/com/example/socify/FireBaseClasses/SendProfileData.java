@@ -163,8 +163,7 @@ public class SendProfileData {
     public void insertintocollege() {
         Log.i("uid",currentUID);
         reference = FirebaseDatabase.getInstance().getReference("College").child(Registration.details.getCollege_name()).child("Profiles");
-
-        reference.child(currentUID).setValue(currentUID);
+        reference.child(currentUID).child("uid").setValue(currentUID);
 
     }
 }

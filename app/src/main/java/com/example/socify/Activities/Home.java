@@ -43,7 +43,6 @@ public class Home extends AppCompatActivity {
     BottomNavigationView navigationView;
     DiscoverFragment discoverFragment = new DiscoverFragment();
     int[] drawables;
-    public ArrayList<String> tags;
     public static  GetUserData getUserData;
     int lastSelected;
 
