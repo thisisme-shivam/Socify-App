@@ -74,7 +74,7 @@ public class VisitProfile extends Fragment   {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        profilePhoto =getView().findViewById(R.id.profile_pic);
+        profilePhoto = getView().findViewById(R.id.profile_pic);
         username= getView().findViewById(R.id.username_profile);
         name = getView().findViewById(R.id.name);
         group = getView().findViewById(R.id.chip_group);
@@ -87,27 +87,29 @@ public class VisitProfile extends Fragment   {
             @Override
             public void dowork() {
 
-                Glide.with(getContext()).load(getUserData.imgurl).placeholder(R.drawable.user).into(profilePhoto);
-                username.setText(getUserData.username);
-                name.setText(getUserData.name);
-                followercountView.setText(getUserData.followerscount);
-                followingCountView.setText(getUserData.followingcount);
+                if (getContext() != null) {
+                    Glide.with(getContext()).load(getUserData.imgurl).placeholder(R.drawable.user).into(profilePhoto);
+                    username.setText(getUserData.username);
+                    name.setText(getUserData.name);
+                    followercountView.setText(getUserData.followerscount);
+                    followingCountView.setText(getUserData.followingcount);
 
-                for(String s: getUserData.tags){
-                    Chip chip = new Chip(requireActivity());
-                    chip.setText(s);
-                    chip.setElevation(5);
-                    chip.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.black)));
-                    chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.palette_light_teal)));
-                    group.addView(chip);
+                    for (String s : getUserData.tags) {
+                        Chip chip = new Chip(requireActivity());
+                        chip.setText(s);
+                        chip.setElevation(5);
+                        chip.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.black)));
+                        chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.palette_light_teal)));
+                        group.addView(chip);
 
-                }
+                    }
 
-                if(followstatus)
-                    followButton.setText("Following");
+                    if (followstatus)
+                        followButton.setText("Following");
 
-                if(getUserData.profilestatus.equals("private")){
-                    getView().findViewById(R.id.privatemessage).setVisibility(View.VISIBLE);
+                    if (getUserData.profilestatus.equals("private")) {
+                        getView().findViewById(R.id.privatemessage).setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });

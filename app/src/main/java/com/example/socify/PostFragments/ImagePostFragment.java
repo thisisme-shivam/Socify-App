@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.socify.Activities.Home;
 import com.example.socify.Classes.PostMember;
 import com.example.socify.R;
 import com.example.socify.ViewHolders.LoadUserPostsImages;
@@ -26,30 +27,31 @@ public class ImagePostFragment extends Fragment {
 
     FragmentImagePostBinding binding;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference;
+    DatabaseReference userimagesref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        databaseReference = database.getReference("Posts").child("All Images").child(currentUID);
+        userimagesref = database.getReference("College").child(Home.getUserData.college_name).child("Posts").child(Home.getUserData.uid).child("All Images");
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         FirebaseRecyclerOptions<PostMember> options =
                 new FirebaseRecyclerOptions.Builder<PostMember>()
-                        .setQuery(databaseReference, PostMember.class)
+                        .setQuery(userimagesref, PostMember.class)
                         .build();
 
         FirebaseRecyclerAdapter<PostMember, LoadUserPostsImages> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<PostMember, LoadUserPostsImages>(options) {
+
+
                     @Override
                     protected void onBindViewHolder(@NonNull LoadUserPostsImages holder, int position, @NonNull PostMember model) {
                         final String postkey = getRef(position).getKey();
-                        holder.setPost(requireActivity(), model.getName(), model.getUrl(), model.getPostUri(), model.getTime(), model.getUid(), model.getType(), model.getDesc(), model.getUsername(), model.getPostiduser(), model.getPostidall());
+                        holder.setPost(requireActivity(), model.getName(), model.getUrl(), model.getPostUri(), model.getTime(), model.getUid(), model.getType(), model.getDesc(), model.getUsername(), model.getPostid());
                     }
 
                     @NonNull

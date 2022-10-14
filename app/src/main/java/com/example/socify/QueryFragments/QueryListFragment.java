@@ -16,6 +16,10 @@ import com.example.socify.databinding.FragmentQueryListBinding;
 public class QueryListFragment extends Fragment {
 
     FragmentQueryListBinding binding;
+    String tag ;
+    public QueryListFragment(String tag) {
+        this.tag = tag;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,8 @@ public class QueryListFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        UserQueriesFragment userQueriesFragment = new UserQueriesFragment();
-        AllQueriesFragment allQueriesFragment = new AllQueriesFragment();
+        UserQueriesFragment userQueriesFragment = new UserQueriesFragment(tag);
+        AllQueriesFragment allQueriesFragment = new AllQueriesFragment(tag);
 
         binding.backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +50,6 @@ public class QueryListFragment extends Fragment {
         queryTabViewPagerAdapter.addfragment(userQueriesFragment, "My Queries");
         binding.ViewPagerQuery.setAdapter(queryTabViewPagerAdapter);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -1,6 +1,6 @@
 package com.example.socify.QueryFragments;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,96 +8,148 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.socify.Activities.Home;
-import com.example.socify.Activities.QnA;
+import com.example.socify.Adapters.QuesitonLoadAdapter;
 import com.example.socify.Classes.QuestionsMember;
-import com.example.socify.R;
-import com.example.socify.ViewHolders.Load_Questions;
 import com.example.socify.databinding.FragmentAllQueriesBinding;
-import com.example.socify.databinding.FragmentUserQueriesBinding;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class AllQueriesFragment extends Fragment {
 
     FragmentAllQueriesBinding binding;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference;
-    ReplyFragment replyFragment;
+    DatabaseReference uidreference;
+    QuesitonLoadAdapter adapter;
+    ArrayList<String> uidList;
+    ArrayList<QuestionsMember> questions;
+    String tag ;
+    int total = 0;
+    HashSet<String> questionsMemberHashSet;
+    public AllQueriesFragment(String tag) {
+        this.tag = tag.replaceAll("[^A-Za-z]+", "").toLowerCase();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        uidList = new ArrayList<>();
+        questions = new ArrayList<>();
+        questionsMemberHashSet = new HashSet<>();
+        uidreference = FirebaseDatabase.getInstance().getReference().child("College").child(Home.getUserData.college_name).child("Questions").child(tag);
+        Log.i("value",tag);
+        uidreference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                total = (int) snapshot.getChildrenCount();
+                for (DataSnapshot userid: snapshot.getChildren()){
+                    total--;
+                    if( !userid.getKey().equals(Home.getUserData.uid) ) {
+                        Log.i("value",userid.getKey());
+
+                        uidList.add(userid.getKey());
+                        fetchDataofUser(userid.getKey());
+                    }
+                }
+
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void adapterStart() {
+        adapter = new QuesitonLoadAdapter(getActivity(),questions);
+
+        Context context = getContext();
+        if(context!=null)
+            binding.allqueriesRV.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.allqueriesRV.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+//        for(String uid:uidList) {
+            //Creating Adapter to Load the data in the RecyclerView
+
+
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentAllQueriesBinding.inflate(inflater, container, false);
+    private void fetchDataofUser(String key) {
 
-
-        //Creating Adapter to Load the data in the RecyclerView
-        databaseReference = database.getReference("Questions").child("All Questions");
-        FirebaseRecyclerOptions<QuestionsMember> options =
-                new FirebaseRecyclerOptions.Builder<QuestionsMember>()
-                        .setQuery(databaseReference,QuestionsMember.class)
-                        .build();
-
-        FirebaseRecyclerAdapter<QuestionsMember, Load_Questions> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<QuestionsMember, Load_Questions>(options) {
+         FirebaseDatabase.getInstance()
+                .getReference()
+                .child("College")
+                .child(Home.getUserData.college_name)
+                .child("Questions")
+                .child(tag)
+                .child(key).addValueEventListener(new ValueEventListener() {
                     @Override
-                    protected void onBindViewHolder(@NonNull Load_Questions holder, int position, @NonNull QuestionsMember model) {
-                        holder.setallitem(getActivity(), model.getName(),model.getUrl(),model.getUserid(),model.getKey(),model.getQuestion(),model.getTime(),model.getTag());
-                        holder.replybtn.setOnClickListener(new View.OnClickListener() {
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        snapshot.getRef().addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onClick(View v) {
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    QuestionsMember question = new QuestionsMember();
 
-                                Bundle bundle = new Bundle();
-                                //Passing data onto Reply Fragment
-                                bundle.putString("uid", getItem(holder.getAbsoluteAdapterPosition()).getUserid());
-                                bundle.putString("question", getItem(holder.getAbsoluteAdapterPosition()).getQuestion());
-                                bundle.putString("name", getItem(holder.getAbsoluteAdapterPosition()).getName());
-                                bundle.putString("postkey", getItem(holder.getAbsoluteAdapterPosition()).getKey());
-                                bundle.putString("tag", getItem(holder.getAbsoluteAdapterPosition()).getTag());
+                                    question.setQuestion(String.valueOf(dataSnapshot.child("question").getValue()));
+                                    question.setUsername(String.valueOf(dataSnapshot.child("username").getValue()));
+                                    question.setKey(String.valueOf(dataSnapshot.child("key").getValue()));
+                                    question.setTag(String.valueOf(dataSnapshot.child("tag").getValue()));
+                                    question.setTime(String.valueOf(dataSnapshot.child("time").getValue()));
+                                    question.setUserid(String.valueOf(dataSnapshot.child("userid").getValue()));
+                                    Log.i("question",question.getQuestion());
 
-                                replyFragment = new ReplyFragment();
-                                replyFragment.setArguments(bundle);
-                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, replyFragment).commit();
-                                QnA.fragwitch =3;
+
+                                    if(!questionsMemberHashSet.contains(question.getKey())){
+                                        questionsMemberHashSet.add(question.getKey());
+                                        questions.add(question);
+                                    }
+
+                                }
+                                if(total == 0){
+                                    Log.i("value", String.valueOf(total));
+                                    adapterStart();
+                                }
+                            }
+
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
                             }
                         });
                     }
 
-                    @NonNull
                     @Override
-                    public Load_Questions onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                        View view = LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.list_all_query_layout,parent,false);
-                        return new Load_Questions(view);
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
-                };
-
-        //Ordering data from bottom to top
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setReverseLayout(true);
-        layoutManager.setStackFromEnd(true);
-
-        firebaseRecyclerAdapter.startListening();
-        binding.allqueriesRV.setLayoutManager(layoutManager);
-        binding.allqueriesRV.setAdapter(firebaseRecyclerAdapter);
+                });
+    }
+        @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        binding = FragmentAllQueriesBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }

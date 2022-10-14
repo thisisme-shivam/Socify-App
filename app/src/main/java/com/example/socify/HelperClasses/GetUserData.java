@@ -3,13 +3,16 @@ package com.example.socify.HelperClasses;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.socify.HomeFragments.VisitProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -38,41 +41,42 @@ public class GetUserData {
         followinglistuids = new ArrayList<>();
         followerslistuids = new ArrayList<>();
         profileinforef = FirebaseFirestore.getInstance().collection("Profiles").document(uid);
-        profileinforef.get()
-                .addOnCompleteListener(task -> {
-                    snap = task.getResult();
+        profileinforef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        snap = value;
+                        if(value != null) {
 
-                    if(snap.exists()) {
+                            name = value.getString("Name");
+                            Log.i("name",name);
+                            college_name = value.getString("CollegeName");
+                            passyear = value.getString("Passing Year");
+                            course = value.getString("Course");
+                            profilestatus = value.getString("ProfileStatus");
+                            try {
+                                imgurl = value.getString("ImgUrl");
+                                Log.i("image",imgurl);
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
 
-                        name = snap.getString("Name");
-                        college_name = snap.getString("CollegeName");
-                        passyear = snap.getString("Passing Year");
-                        course = snap.getString("Course");
-                        profilestatus = snap.getString("ProfileStatus");
-                        try {
-                            imgurl = snap.getString("ImgUrl");
-                            Log.i("image",imgurl);
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
+                            followerscount  = value.getString("FollowersCount");
+                            followingcount = (String) value.getString("FollowingCount");
+                            username = (String) value.getString("Username");
+                            // if visiting profile is being loaded
+                            if(changeview != null)
+                                changeview.dowork();
 
-                        followerscount  = snap.getString("FollowersCount");
-                        followingcount = snap.getString("FollowingCount");
-                        username = snap.getString("Username");
-                        profilestatus = snap.getString("ProfileStatus");
-                        // if visiting profile is being loaded
-                        if(changeview != null)
-                            changeview.dowork();
-
-                    } else{
-                        try {
-                            throw new Exception("User doesn't exist");
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        } else{
+                            try {
+                                throw new Exception("User doesn't exist");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
-
                 });
+
 
         //Loading Tags
 
@@ -96,26 +100,25 @@ public class GetUserData {
                 .document(uid)
                 .collection("AccountDetails")
                 .document("FollowingListDoc");
-        followStatusRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        followStatusRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    ArrayList<String> list = (ArrayList<String>) task.getResult().get("Followinglist");
-                    if(list!=null)
-                        followinglistuids.addAll(list);
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(value != null ){
+                    Map<String,Object> mp = value.getData();
+                    if(mp != null) {
+                        ArrayList<String> followinglist = (ArrayList<String>) mp.get("Followinglist");
+
+                        if (followinglist != null)
+                            followinglistuids = followinglist;
+                        ArrayList<String> followerlist = (ArrayList<String>) mp.get("FollowersList");
+
+                        if (followerlist != null)
+                            followerslistuids = followerlist;
+                    }
                 }
             }
         });
 
-        followStatusRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) { if(task.isSuccessful()){
-                ArrayList<String> list = (ArrayList<String>) task.getResult().get("FollowersList");
-                if(list!=null)
-                    followerslistuids.addAll(list);
-            }
 
-            }
-        });
     }
 }

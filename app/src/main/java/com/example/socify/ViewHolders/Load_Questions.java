@@ -24,15 +24,15 @@ public class Load_Questions extends RecyclerView.ViewHolder {
     }
 
     public void setallitem(FragmentActivity activity, String name, String url, String userid, String key, String question, String time, String tag) {
-        timeres = itemView.findViewById(R.id.alltimestamp);
-        nameres = itemView.findViewById(R.id.allusernametv);
-        questionsres = itemView.findViewById(R.id.allquestiontv);
-        tagres = itemView.findViewById(R.id.allquestiontag);
+        timeres = itemView.findViewById(R.id.timestamp);
+        nameres = itemView.findViewById(R.id.usernametv);
+        questionsres = itemView.findViewById(R.id.questiontv);
+        tagres = itemView.findViewById(R.id.questiontag);
         tagres.setText(tag);
         timeres.setText(time);
         nameres.setText("Posted by: "+name);
         questionsres.setText(question);
-        replybtn = itemView.findViewById(R.id.replyquerybtn);
+        replybtn = itemView.findViewById(R.id.repliesbtn);
     }
 
     public void deleteitem(FragmentActivity activity, String name, String url, String userid, String key, String question, String time, String tag) {

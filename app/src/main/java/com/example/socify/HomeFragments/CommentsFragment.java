@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.socify.R;
+import com.example.socify.Classes.PostIdGetter;
 import com.example.socify.databinding.FragmentCommentsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -17,9 +17,18 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CommentsFragment extends Fragment {
 
+    String postiduser, postidall;
+
+    public CommentsFragment(String postiduser) {
+        this.postiduser = postiduser;
+        this.postidall = postidall;
+    }
+
     FragmentCommentsBinding binding;
-    DatabaseReference ref1, ref2;
+    PostIdGetter postIdGetter = new PostIdGetter();
+    DatabaseReference ref1;
     String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference().child("Posts").child("User's Posts").child(currentUID);;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,8 +44,6 @@ public class CommentsFragment extends Fragment {
     }
 
     private void docomment() {
-        ref1 = FirebaseDatabase.getInstance().getReference().child("Posts").child("All Posts").child(currentUID);
-        ref2 = FirebaseDatabase.getInstance().getReference().child("Posts").child("User's Posts").child(currentUID);
 
     }
 

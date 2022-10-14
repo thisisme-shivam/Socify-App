@@ -1,7 +1,5 @@
 package com.example.socify.Adapters;
 
-import static com.example.socify.HomeFragments.NewsFeedFragment.commentsFragment;
-
 import android.content.Context;
 import android.media.Image;
 import android.view.LayoutInflater;
@@ -94,11 +92,16 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
 
             }
 
+            isLiked(member.getPostid(), holder.like);
+            nrlikes(holder.likescount, member.getPostid());
+
+
+
             holder.comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, commentsFragment).addToBackStack(null).commit();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new CommentsFragment(member.getPostid())).addToBackStack(null).commit();
                 }
             });
 
@@ -106,12 +109,10 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                 @Override
                 public void onClick(View v) {
                     if(holder.like.getTag().equals("Like")){
-                        FirebaseDatabase.getInstance().getReference().child("Likes").child(member.getPostiduser()).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(true);
-                        FirebaseDatabase.getInstance().getReference().child("Likes").child(member.getPostidall()).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(true);
+                        FirebaseDatabase.getInstance().getReference().child("Likes").child(member.getPostid()).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(true);
                     }
                     else{
-                        FirebaseDatabase.getInstance().getReference().child("Likes").child(member.getPostiduser()).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).removeValue();
-                        FirebaseDatabase.getInstance().getReference().child("Likes").child(member.getPostidall()).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).removeValue();
+                        FirebaseDatabase.getInstance().getReference().child("Likes").child(member.getPostid()).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).removeValue();
                     }
                 }
             });
@@ -124,13 +125,6 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(member.getUid(), false)).commit();
             }
         });
-
-        isLiked(member.getPostiduser(), holder.like);
-        isLiked(member.getPostidall(), holder.like);
-        nrlikes(holder.likescount, member.getPostiduser());
-        nrlikes(holder.likescount, member.getPostidall());
-
-
 
     }
 

@@ -37,40 +37,6 @@ public class Load_Answers extends RecyclerView.ViewHolder {
 
     }
 
-    public void approvalchecker(String postKey) {
-
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("Questions").child("Approvals");
-        approvaltv = itemView.findViewById(R.id.approveTV);
-        approvalcount = itemView.findViewById(R.id.ApprovecountTV);
-
-        String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                if (snapshot.child(postKey).hasChild(currentUID)) {
-                    approvaltv.setText("Approved");
-                    votecount = (int) snapshot.child(postKey).getChildrenCount();
-                    approvalcount.setText(Integer.toString(votecount) + " - Approvals");
-                }
-                else{
-                    approvaltv.setText("Approve");
-                    votecount = (int) snapshot.child(postKey).getChildrenCount();
-                    approvalcount.setText(Integer.toString(votecount) + " - Approvals");
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-    }
 
 
 }
