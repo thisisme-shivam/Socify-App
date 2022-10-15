@@ -192,10 +192,15 @@ public class Home extends AppCompatActivity {
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
 
         //Loading User Profile Data
+        final boolean[] first = {true};
         getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid(), new InterfaceClass.LoadDataInterface() {
             @Override
             public void onWorkDone() {
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,newsFeedFragment).commit();
+                if(first[0]) {
+                    Log.i("valueenetering","euys");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
+                    first[0] = false;
+                }
             }
         });
         getUserData.loadFollowingList();
