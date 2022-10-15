@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:fontFamily="@font/osr"
+            android:fontFamily="@font/chatfont"
             android:text="Posted by @vijay.sarkar"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/osr"
+            android:fontFamily="@font/chatfont"
             android:text="3 September 2022: 6:00:22"
             android:textColor="@color/black"
             android:textSize="10dp"
@@ -50,7 +50,7 @@
             android:layout_height="35dp"
             android:layout_marginStart="10dp"
             android:backgroundTint="@color/palette_light_teal"
-            android:fontFamily="@font/osr"
+            android:fontFamily="@font/chatfont"
             android:text="Android Development"
             android:textColor="@color/black"
             android:textSize="10dp"
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:fontFamily="@font/osr"
+            android:fontFamily="@font/chatfont"
             android:text="What is NoSQL database and how is Firebase a NoSQL database?"
             android:textColor="@color/black"
             android:textSize="20dp"
@@ -71,14 +71,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/questiontag" />
 
+        <ImageView
+            android:id="@+id/questionimg"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/dorime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/questiontv" />
+
         <com.google.android.material.button.MaterialButton
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/bordered_whitebtn"
-            android:fontFamily="@font/osr"
+            android:fontFamily="@font/chatfont"
             android:text="Reply"
             android:textAlignment="center"
             android:textAllCaps="false"
@@ -88,7 +98,8 @@
             app:backgroundTint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/questiontv" />
+            app:layout_constraintTop_toBottomOf="@+id/questionimg"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -77,7 +77,6 @@ public class NewsFeedFragment extends Fragment {
                     }
                 }
                 getNewsFeed.notifyDataSetChanged();
-
             }
 
             @Override
@@ -98,7 +97,6 @@ public class NewsFeedFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentNewsFeedBinding.inflate(inflater, container, false);
         String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        likeref = database.getReference("Likes");
         return binding.getRoot();
     }
 

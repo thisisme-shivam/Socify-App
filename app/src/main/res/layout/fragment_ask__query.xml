@@ -41,13 +41,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:text="Categories"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="14dp"
         android:textStyle="bold"
         app:fontFamily="@font/osr"
+        app:layout_constraintBottom_toTopOf="@+id/categories"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
@@ -88,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="5dp"
         android:text="Query"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -102,14 +104,16 @@
         android:id="@+id/questionlayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:elevation="14dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="2dp"
+        android:elevation="14dp"
         android:hint="Elaborate your query"
         android:textColorHint="@color/text_grey"
         app:boxStrokeColor="@color/black"
         app:hintTextColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/queryimg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialTextView7">
@@ -125,21 +129,55 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
+    <ImageView
+        android:id="@+id/queryimg"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="invisible"
+        android:src="@drawable/dorime"
+        app:layout_constraintBottom_toTopOf="@+id/askbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionlayout" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/addimgtv"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/chatfont"
+        android:gravity="center"
+        android:text="+ Add Image"
+        android:textAlignment="gravity"
+        android:textColor="@color/palette_teal"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/askbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionlayout"
+        app:layout_constraintVertical_bias="0.120000005" />
+
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/askbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="154dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="154dp"
-        android:id="@+id/askbtn"
         android:layout_marginBottom="32dp"
         android:background="@drawable/rounded_dropdown"
-        android:text="Ask Now"
         android:elevation="14dp"
+        android:text="Ask Now"
         android:textAllCaps="false"
         app:backgroundTint="@color/palette_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/queryimg" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

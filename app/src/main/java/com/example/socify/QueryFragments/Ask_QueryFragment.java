@@ -1,15 +1,21 @@
 package com.example.socify.QueryFragments;
 
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import com.example.socify.Activities.Home;
@@ -28,6 +34,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.auth.User;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,6 +42,9 @@ import java.util.Calendar;
 public class Ask_QueryFragment extends Fragment {
 
     FragmentAskQueryBinding binding;
+    private static final int PICK_FILE=1;
+    private Uri questionimgURI;
+    String type;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference Questions;
 
@@ -42,6 +52,15 @@ public class Ask_QueryFragment extends Fragment {
     QuestionsMember member;
 
     public void setonclicklisteners() {
+
+        binding.questiontext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseFile();
+            }
+        });
+
+
         binding.askbtn.setOnClickListener(v -> {
             String question = binding.questiontext.getText().toString().trim();
             String tag = binding.categories.getText().toString();
@@ -101,8 +120,36 @@ public class Ask_QueryFragment extends Fragment {
         binding = FragmentAskQueryBinding.inflate(inflater, container, false);
         Questions = database.getReference("College").child(Home.getUserData.college_name).child("Questions");
         member = new QuestionsMember();
-
-
         return binding.getRoot();
     }
+
+    @SuppressLint("IntentReset")
+    private void chooseFile() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        startActivityForResult(intent, PICK_FILE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if( requestCode == PICK_FILE && data != null) {
+            questionimgURI = data.getData();
+            Log.e("Selected URI", String.valueOf(questionimgURI));
+            if(questionimgURI.toString().contains("image")) {
+                Picasso.get().load(questionimgURI).into(binding.queryimg);
+                binding.queryimg.setVisibility(View.VISIBLE);
+                binding.questiontext.setVisibility(View.GONE);
+                type = "image";
+                Log.e("Selected URI", String.valueOf(questionimgURI));
+            }
+
+            else
+                Toast.makeText(requireActivity(), "No File Selected", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
 }
