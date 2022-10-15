@@ -54,7 +54,7 @@ public class GetUserData {
                         if(value != null) {
 
                             name = value.getString("Name");
-                            Log.i("name",name);
+//                            Log.i("name",name);
                             college_name = value.getString("CollegeName");
                             passyear = value.getString("Passing Year");
                             course = value.getString("Course");
