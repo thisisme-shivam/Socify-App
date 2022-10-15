@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.socify.Activities.Home;
 import com.example.socify.HelperClasses.GetUserData;
+import com.example.socify.InterfaceClass;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentVisitProfileBinding;
 import com.github.ybq.android.spinkit.style.Circle;
@@ -83,10 +84,9 @@ public class VisitProfile extends Fragment   {
         followButton = getView().findViewById(R.id.follow);
 
 
-        getUserData = new GetUserData(uid, new ChagneView() {
+        getUserData = new GetUserData(uid, new InterfaceClass.LoadDataInterface() {
             @Override
-            public void dowork() {
-
+            public void onWorkDone() {
                 if (getContext() != null) {
                     Glide.with(getContext()).load(getUserData.imgurl).placeholder(R.drawable.user).into(profilePhoto);
                     username.setText(getUserData.username);
@@ -113,8 +113,6 @@ public class VisitProfile extends Fragment   {
                 }
             }
         });
-
-        getUserData.loadFollowingList();
 
         setOnclickListeners();
     }
@@ -190,8 +188,6 @@ public class VisitProfile extends Fragment   {
         Home.getUserData.snap.getReference().update("FollowingCount",Home.getUserData.followingcount);
     }
 
-    public  interface ChagneView{
-        void dowork();
-    }
+
 
 }

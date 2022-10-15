@@ -64,7 +64,6 @@ public class OptimizedSearchAll {
     // getting user details  like name , username , photo using uid
     private void getOtherdata(String uid) {
         documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(uid);
-        Log.i("myuid", Home.getUserData.uid);
 
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
