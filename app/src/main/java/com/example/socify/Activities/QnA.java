@@ -38,6 +38,7 @@ public class QnA extends AppCompatActivity {
             case 1: {
                 getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, queryTagFragment).commit();
             }
+
             break;
             case 2: {
                 getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, replyFragment).commit();
