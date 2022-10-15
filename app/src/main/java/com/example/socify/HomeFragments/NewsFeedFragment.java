@@ -2,6 +2,7 @@ package com.example.socify.HomeFragments;
 
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class NewsFeedFragment extends Fragment {
         personPostsRef = FirebaseDatabase.getInstance().getReference().child("College")
                 .child(Home.getUserData.college_name)
                 .child("Posts");
+
         for(String personid:Home.getUserData.followinglistuids){
             personPostsRef.child(personid).child("All Images").addValueEventListener(new ValueEventListener() {
                 @Override

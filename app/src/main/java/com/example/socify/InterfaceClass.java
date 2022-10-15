@@ -2,7 +2,11 @@ package com.example.socify;
 
 public class InterfaceClass {
 
-    public static interface  LoadDataInterface{
+    public interface  LoadDataInterface{
+        void onWorkDone();
+    }
+
+    public interface  VisitProfileInterface{
         void onWorkDone();
     }
 }

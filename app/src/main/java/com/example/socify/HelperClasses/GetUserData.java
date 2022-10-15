@@ -26,6 +26,8 @@ public class GetUserData {
     public DocumentReference profileinforef,followStatusRef;
     public DocumentSnapshot snap;
 
+    InterfaceClass.VisitProfileInterface visitProfileinterface;
+
     public GetUserData(String uid){
         this.uid = uid;
         loadData();
@@ -33,6 +35,12 @@ public class GetUserData {
     public GetUserData(String uid, InterfaceClass.LoadDataInterface changeview) {
         this.uid = uid;
         this.changeview = changeview;
+        loadData();
+    }
+
+    public GetUserData(String uid,InterfaceClass.VisitProfileInterface visitProfileinterface){
+        this.uid = uid;
+        this.visitProfileinterface = visitProfileinterface;
         loadData();
     }
 
@@ -70,9 +78,9 @@ public class GetUserData {
                             followingcount = (String) value.getString("FollowingCount");
                             username = (String) value.getString("Username");
                             // if visiting profile is being loaded
-                            if(changeview != null)
-                                changeview.onWorkDone();
-
+                            if(visitProfileinterface!=null){
+                                visitProfileinterface.onWorkDone();
+                            }
                         } else{
                             try {
                                 throw new Exception("User doesn't exist");
@@ -110,18 +118,20 @@ public class GetUserData {
                     Map<String,Object> mp = value.getData();
                     if(mp != null) {
                         ArrayList<String> followinglist = (ArrayList<String>) mp.get("Followinglist");
+                        Log.i("vlaueof ",mp.toString());
+                        followinglistuids = followinglist;
 
-                        if (followinglist != null)
-                            followinglistuids = followinglist;
                         ArrayList<String> followerlist = (ArrayList<String>) mp.get("FollowersList");
 
-                        if (followerlist != null)
-                            followerslistuids = followerlist;
+                        followerslistuids = followerlist;
+
+                        if(changeview != null)
+                            changeview.onWorkDone();
+
                     }
                 }
             }
         });
-
 
     }
 }
