@@ -1,7 +1,6 @@
 package com.example.socify.HomeFragments;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.socify.Activities.Home;
 import com.example.socify.Adapters.GetNewsFeedAdapter;
 import com.example.socify.Classes.PostMember;
-import com.example.socify.InterfaceClass;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentNewsFeedBinding;
-import com.google.firebase.FirebaseError;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

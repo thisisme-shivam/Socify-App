@@ -22,10 +22,7 @@ import com.example.socify.databinding.FragmentInterestsBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 import nl.bryanderidder.themedtogglebuttongroup.SelectAnimation;
 import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
 

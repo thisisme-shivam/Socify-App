@@ -7,58 +7,13 @@
     tools:context=".PostFragments.ImagePostFragment"
     android:id="@+id/constrain">
 
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/imgsRV"
-    app:spanCount="3"
-    android:visibility="gone"
-    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-    tools:listitem="@layout/profile_postsimg"
-    />
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/imgsRV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
+        tools:listitem="@layout/profile_postsimg" />
 
-        >
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/to_post"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="25sp"
-            android:layout_marginBottom="10dp"
-            android:text="Profile"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
-            android:fontFamily="@font/osr"
-            android:letterSpacing="-0.01"
-            android:lineSpacingExtra="4sp"
-            android:paddingLeft="80dp"
-            android:paddingRight="30dp"
-            android:text="fdsfsf"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/to_post" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

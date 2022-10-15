@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/profilebg"
     android:layout_height="match_parent"
     tools:context=".HomeFragments.ProfileFragment">
 
@@ -38,7 +37,7 @@
                 android:gravity="center"
                 android:onClick="showPopup"
                 android:text="@string/profile_username"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +50,7 @@
                 android:layout_width="46dp"
                 android:layout_height="47dp"
                 android:background="@color/palette_black"
-                android:backgroundTint="@color/palette_black"
+                android:backgroundTint="@color/white"
                 android:layout_marginRight="5dp"
                 android:outlineProvider="none"
                 android:src="@drawable/threedotss"
@@ -117,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="0"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="22sp"
                 tools:layout_editor_absoluteX="172dp"
                 tools:layout_editor_absoluteY="99dp" />
@@ -129,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Followers"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="172dp"
@@ -155,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="0"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="22sp"
                 tools:layout_editor_absoluteX="172dp"
                 tools:layout_editor_absoluteY="99dp" />
@@ -167,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Following"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="172dp"
@@ -191,7 +190,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="8dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/profile_actionbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -246,16 +245,6 @@
             app:singleLine="true"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="374dp">
-
-            <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:backgroundTint="@color/palette_light_teal"
-                android:elevation="5dp"
-                android:text="Android Development"
-                android:textAlignment="center"
-                android:textColor="@color/black" />
 
         </com.google.android.material.chip.ChipGroup>
 

@@ -71,20 +71,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/questiontag" />
 
-        <ImageView
-            android:id="@+id/questionimg"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/dorime"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/questiontv" />
-
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/repliesbtn"
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:layout_marginTop="15dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/bordered_whitebtn"
@@ -98,8 +88,7 @@
             app:backgroundTint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/questionimg"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/questiontv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

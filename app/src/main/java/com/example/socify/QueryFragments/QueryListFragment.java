@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.socify.Activities.Home;
-import com.example.socify.Activities.QnA;
 import com.example.socify.Adapters.QueryTabViewPagerAdapter;
 import com.example.socify.databinding.FragmentQueryListBinding;
 

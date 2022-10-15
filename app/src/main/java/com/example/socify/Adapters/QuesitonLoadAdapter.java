@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.airbnb.lottie.L;
+import com.bumptech.glide.Glide;
 import com.example.socify.Activities.Home;
 import com.example.socify.Classes.QuestionsMember;
 import com.example.socify.QueryFragments.ReplyFragment;
@@ -20,16 +20,12 @@ import com.example.socify.R;
 import com.example.socify.databinding.ListAllQueryLayoutBinding;
 import com.example.socify.databinding.ListUserQueryLayoutBinding;
 import com.google.android.material.button.MaterialButton;
-import com.google.firebase.FirebaseError;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class QuesitonLoadAdapter extends RecyclerView.Adapter {
 
@@ -77,6 +73,7 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
         bundle.putString("username",member.getUsername());
         bundle.putString("tag",member.getTag());
         bundle.putString("time",member.getTime());
+        bundle.putString("QuestionURI", member.getQuestionURI());
         ReplyFragment replyFragment = new ReplyFragment();
         replyFragment.setArguments(bundle);
 
@@ -89,6 +86,10 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
             userViewHolder.binding.questiontv.setText(member.getQuestion());
             userViewHolder.binding.timestamp.setText(member.getTime());
             userViewHolder.binding.usernametv.setText(member.getUsername());
+            if(!member.getQuestionURI().equals("No Image")) {
+                userViewHolder.binding.questionimg.setVisibility(View.VISIBLE);
+                Glide.with(activity).load(member.getQuestionURI()).into(userViewHolder.binding.questionimg);
+            }
             userViewHolder.binding.repliesbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -132,6 +133,10 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
             userViewHolder.binding.questiontv.setText(member.getQuestion());
             userViewHolder.binding.timestamp.setText(member.getTime());
             userViewHolder.binding.usernametv.setText(member.getUsername());
+            if(!member.getQuestionURI().equals("No Image")) {
+                userViewHolder.binding.questionimg.setVisibility(View.VISIBLE);
+                Glide.with(activity).load(member.getQuestionURI()).into(userViewHolder.binding.questionimg);
+            }
             userViewHolder.binding.repliesbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

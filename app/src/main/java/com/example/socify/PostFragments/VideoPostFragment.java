@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +14,7 @@ import android.view.ViewGroup;
 import com.example.socify.Activities.Home;
 import com.example.socify.Classes.PostMember;
 import com.example.socify.R;
-import com.example.socify.ViewHolders.LoadUserPostsImages;
 import com.example.socify.ViewHolders.LoadUserPostsVideos;
-import com.example.socify.databinding.FragmentImagePostBinding;
 import com.example.socify.databinding.FragmentVideoPostBinding;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

@@ -9,11 +9,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.socify.R;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
-import com.squareup.picasso.Picasso;
 import java.util.Collections;
 
 public class LoadUserPostsImages extends RecyclerView.ViewHolder {
@@ -31,7 +31,7 @@ public class LoadUserPostsImages extends RecyclerView.ViewHolder {
         userpostiv = itemView.findViewById(R.id.userpostiv);
         playerView = itemView.findViewById(R.id.userpostvv);
 
-            Picasso.get().load(postUri).into(userpostiv);
+        Glide.with(activity).load(postUri).into(userpostiv);
             userpostiv.setVisibility(View.VISIBLE);
         Log.e("Image", postUri);
 

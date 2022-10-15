@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,20 +18,13 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.widget.SearchView;
 import com.example.socify.Activities.Registration;
-import com.example.socify.Activities.SplashActivity;
 import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.Adapters.GetCourseAdapter;
-import com.example.socify.Classes.Course;
 import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.HelperClasses.OptimizedSearchCourses;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentCoursesBinding;
-import com.facebook.shimmer.Shimmer;
 import com.facebook.shimmer.ShimmerFrameLayout;
-
-import java.util.ArrayList;
-import java.util.jar.JarEntry;
-
 
 
 public class CoursesFragment extends Fragment implements GetCollegeAdapter.CollegeViewHolder.Onitemclicked {

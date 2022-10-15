@@ -18,23 +18,16 @@ import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.socify.Activities.Home;
-import com.example.socify.Activities.QnA;
 import com.example.socify.Classes.QuestionsMember;
 import com.example.socify.R;
-import com.example.socify.databinding.ActivityQnBinding;
 import com.example.socify.databinding.FragmentAskQueryBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.auth.User;
-import com.squareup.picasso.Picasso;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,22 +36,24 @@ public class Ask_QueryFragment extends Fragment {
 
     FragmentAskQueryBinding binding;
     private static final int PICK_FILE=1;
-    private Uri questionimgURI;
+    Uri questionimgURI = Uri.parse("No Image");
     String type;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference Questions;
+    StorageReference storageReference;
 
     //Fragment after successful question
     QuestionsMember member;
 
+    private String getFileExt(Uri uri) {
+        ContentResolver contentResolver = requireActivity().getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
     public void setonclicklisteners() {
 
-        binding.questiontext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseFile();
-            }
-        });
+        binding.addimgtv.setOnClickListener(v -> chooseFile());
 
 
         binding.askbtn.setOnClickListener(v -> {
@@ -76,17 +71,44 @@ public class Ask_QueryFragment extends Fragment {
             String time = saveDate + ":" + saveTime;
 
             if(!question.isEmpty() && !tag.isEmpty()) {
+                if(questionimgURI.toString().equals("No Image")) {
+                    member.setQuestionURI("No Image");
+                }
                 member.setUsername(Home.getUserData.username);
                 member.setQuestion(question);
                 member.setTime(time);
                 member.setUserid(Home.getUserData.uid);
                 member.setUrl(Home.getUserData.imgurl);
                 member.setTag(tag);
-
                 String postid = Questions.push().getKey();
                 member.setKey(postid);
-                Questions.child(member.getTag().replaceAll("[^A-Za-z]+", "").toLowerCase()).child(Home.getUserData.uid).child(postid).setValue(member);
+//                Log.e("imgURI",member.getQuestionURI());
 
+                if(!questionimgURI.toString().equals("No Image")) {
+
+                    final StorageReference reference = storageReference.child(System.currentTimeMillis() + ":" + getFileExt(questionimgURI));
+                    UploadTask uploadTask = reference.putFile(questionimgURI);
+
+                    uploadTask.continueWithTask(task -> {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
+                        return reference.getDownloadUrl();
+                    }).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Uri downloaduri = task.getResult();
+                            member.setQuestionURI(downloaduri.toString());
+                            Questions.child(member.getTag().replaceAll("[^A-Za-z]+", "").toLowerCase()).child(Home.getUserData.uid).child(postid).setValue(member);
+                            Log.e("Done", "Donee");
+                        } else {
+                            Toast.makeText(getContext(), "Error Uploading", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else{
+                    Questions.child(member.getTag().replaceAll("[^A-Za-z]+", "").toLowerCase()).child(Home.getUserData.uid).child(postid).setValue(member);
+                    Log.e("Done", "Without Image");
+                }
                 Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
                 QueryTagFragment queryTagFragment = new QueryTagFragment();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, queryTagFragment).commit();
@@ -98,6 +120,7 @@ public class Ask_QueryFragment extends Fragment {
                 Toast.makeText(requireActivity(), "Please select a tag", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     @Override
@@ -119,15 +142,16 @@ public class Ask_QueryFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentAskQueryBinding.inflate(inflater, container, false);
         Questions = database.getReference("College").child(Home.getUserData.college_name).child("Questions");
+        storageReference = FirebaseStorage.getInstance().getReference().child("QueryImages").child(Home.getUserData.uid);
         member = new QuestionsMember();
         return binding.getRoot();
     }
 
     @SuppressLint("IntentReset")
     private void chooseFile() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/*");
-        startActivityForResult(intent, PICK_FILE);
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent.setType("image/*");
+            startActivityForResult(intent, PICK_FILE);
     }
 
     @Override
@@ -136,16 +160,15 @@ public class Ask_QueryFragment extends Fragment {
 
         if( requestCode == PICK_FILE && data != null) {
             questionimgURI = data.getData();
-            Log.e("Selected URI", String.valueOf(questionimgURI));
             if(questionimgURI.toString().contains("image")) {
-                Picasso.get().load(questionimgURI).into(binding.queryimg);
+                Glide.with(this).load(questionimgURI).into(binding.queryimg);
                 binding.queryimg.setVisibility(View.VISIBLE);
-                binding.questiontext.setVisibility(View.GONE);
+                binding.addimgtv.setVisibility(View.GONE);
                 type = "image";
                 Log.e("Selected URI", String.valueOf(questionimgURI));
             }
-
             else
+                questionimgURI = Uri.parse("No Image");
                 Toast.makeText(requireActivity(), "No File Selected", Toast.LENGTH_SHORT).show();
         }
 

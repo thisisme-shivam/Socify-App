@@ -1,6 +1,5 @@
 package com.example.socify.RegistrationFragments;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.ProgressBar;
 
 import androidx.activity.result.ActivityResultLauncher;

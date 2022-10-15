@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.socify.Activities.Registration;
-import com.example.socify.Activities.SplashActivity;
 import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.HelperClasses.OptimizedSearchCollege;

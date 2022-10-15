@@ -13,7 +13,6 @@ import com.example.socify.R;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
-import com.squareup.picasso.Picasso;
 import java.util.Collections;
 
 public class LoadUserPostsVideos extends RecyclerView.ViewHolder {

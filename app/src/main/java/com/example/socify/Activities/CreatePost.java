@@ -1,9 +1,5 @@
 package com.example.socify.Activities;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,25 +16,15 @@ import android.webkit.MimeTypeMap;
 import android.widget.MediaController;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.socify.Classes.PostMember;
-import com.example.socify.R;
 import com.example.socify.databinding.ActivityCreatePostBinding;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -64,9 +50,11 @@ public class CreatePost extends AppCompatActivity {
 
         mediaController = new MediaController(this);
         postMember = new PostMember();
+        binding.name.setText(Home.getUserData.name);
+        Glide.with(this).load(Home.getUserData.imgurl).into(binding.profilepic);
         userimagesref = database.getReference("College").child(Home.getUserData.college_name).child("Posts").child(Home.getUserData.uid).child("All Images");
         uservideosref = database.getReference("College").child(Home.getUserData.college_name).child("Posts").child(Home.getUserData.uid).child("All Videos");
-        storageReference = FirebaseStorage.getInstance().getReference("Posts").child("User's Posts").child(Home.getUserData.uid);;
+        storageReference = FirebaseStorage.getInstance().getReference("Posts").child("User's Posts").child(Home.getUserData.uid);
         setonclicklisteners();
     }
 
@@ -101,7 +89,7 @@ public class CreatePost extends AppCompatActivity {
             selectedUri = data.getData();
             Log.e("Selected URI", String.valueOf(selectedUri));
             if(selectedUri.toString().contains("image")) {
-                Picasso.get().load(selectedUri).into(binding.imageview);
+                Glide.with(this).load(selectedUri).into(binding.imageview);
                 binding.imageview.setVisibility(View.VISIBLE);
                 binding.videoview.setVisibility(View.INVISIBLE);
                 type = "image";

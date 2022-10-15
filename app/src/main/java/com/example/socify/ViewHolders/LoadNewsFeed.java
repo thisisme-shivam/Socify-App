@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.socify.R;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
@@ -19,7 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
 
@@ -57,8 +57,8 @@ public class LoadNewsFeed extends RecyclerView.ViewHolder {
         playerView = itemView.findViewById(R.id.videopost);
 
         if(type.equals("image")) {
-            Picasso.get().load(url).into(profilepic);
-            Picasso.get().load(postUri).into(post);
+            Glide.with(activity).load(url).into(profilepic);
+            Glide.with(activity).load(postUri).into(post);
             namepost.setText(name);
             date.setText(time);
             usernamepost.setText(username);
@@ -67,7 +67,7 @@ public class LoadNewsFeed extends RecyclerView.ViewHolder {
             post.setVisibility(View.VISIBLE);
         }
         else if(type.equals("video")) {
-            Picasso.get().load(url).into(profilepic);
+            Glide.with(activity).load(url).into(profilepic);
             namepost.setText(name);
             date.setText(time);
             usernamepost.setText(username);
@@ -88,32 +88,6 @@ public class LoadNewsFeed extends RecyclerView.ViewHolder {
 
         }
 
-    }
-
-    public void likechecker(final String postkey) {
-        like = itemView.findViewById(R.id.like);
-        likesref = database.getReference("Likes");
-        String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        likesref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child(postkey).hasChild(currentUID)) {
-                    like.setImageResource(R.drawable.ic_eye_close);
-                    likecount = (int) snapshot.child(postkey).getChildrenCount();
-                    likescount.setText(Integer.toString(likecount) + " thunders");
-                }
-                else{
-                    like.setImageResource(R.drawable.ic_eye);
-                    likecount = (int) snapshot.child(postkey).getChildrenCount();
-                    likescount.setText(Integer.toString(likecount) + " thunders");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
 }

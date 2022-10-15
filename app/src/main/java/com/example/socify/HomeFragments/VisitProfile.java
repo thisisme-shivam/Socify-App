@@ -1,7 +1,6 @@
 package com.example.socify.HomeFragments;
 
 import android.content.res.ColorStateList;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -23,25 +21,12 @@ import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.InterfaceClass;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentVisitProfileBinding;
-import com.github.ybq.android.spinkit.style.Circle;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.firestore.Transaction;
-import com.google.firestore.v1.WriteResult;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

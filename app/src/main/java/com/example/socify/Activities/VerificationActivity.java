@@ -19,14 +19,11 @@ import android.widget.Toast;
 import com.chaos.view.PinView;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityVerificationBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.auth.SignInMethodQueryResult;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;

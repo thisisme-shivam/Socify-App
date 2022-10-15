@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,27 +13,16 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.socify.HelperClasses.GetUserData;
-import com.example.socify.HomeFragments.CommentsFragment;
 import com.example.socify.HomeFragments.DiscoverFragment;
 import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.HomeFragments.ProfileFragment;
-import com.example.socify.HomeFragments.VisitProfile;
 import com.example.socify.InterfaceClass;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityHomeBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 public class Home extends AppCompatActivity {
 
@@ -43,6 +31,11 @@ public class Home extends AppCompatActivity {
     ProfileFragment profileFragment  = new ProfileFragment();
     BottomNavigationView navigationView;
     DiscoverFragment discoverFragment = new DiscoverFragment();
+    Dialog dialog;
+    LinearLayout myquery;
+    LinearLayout mygroups;
+    LinearLayout myclubs;
+
     int[] drawables;
     public static  GetUserData getUserData;
     int lastSelected;
@@ -143,13 +136,7 @@ public class Home extends AppCompatActivity {
     }
 
     private void showDialogAccess() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.my_popup);
 
-        LinearLayout myquery = dialog.findViewById(R.id.myqueries);
-        LinearLayout mygroups = dialog.findViewById(R.id.mygroups);
-        LinearLayout myclubs = dialog.findViewById(R.id.mycommunities);
 
         myquery.setOnClickListener(v -> {
             //Code for query creation to be written here
@@ -171,10 +158,7 @@ public class Home extends AppCompatActivity {
         });
 
         dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
+
     }
 
 
@@ -184,7 +168,7 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        dialog = new Dialog(this);
         navigationView = binding.bottomnavigationview;
         drawables = new int[]{
                 R.drawable.newsgrey,
@@ -215,6 +199,20 @@ public class Home extends AppCompatActivity {
             }
         });
         getUserData.loadFollowingList();
+
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.my_popup);
+
+        myquery = dialog.findViewById(R.id.myqueries);
+        mygroups = dialog.findViewById(R.id.mygroups);
+        myclubs = dialog.findViewById(R.id.mycommunities);
+
+
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
 
     }
 
