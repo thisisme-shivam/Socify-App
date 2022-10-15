@@ -5,8 +5,11 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:background="?selectableItemBackgroundBorderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -15,16 +18,22 @@
         <ImageView
             android:id="@+id/userpostiv"
             android:layout_width="80dp"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_height="120dp"
+            android:background="?selectableItemBackgroundBorderless"
             android:layout_margin="1dp"
             android:layout_weight="1"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@drawable/bagadbilla" />
 
         <com.google.android.exoplayer2.ui.StyledPlayerView
             android:id="@+id/userpostvv"
             android:layout_width="80dp"
             android:layout_height="120dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?selectableItemBackgroundBorderless"
             android:layout_margin="1dp"
             android:layout_weight="1"
             android:visibility="gone"

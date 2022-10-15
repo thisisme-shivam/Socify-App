@@ -122,13 +122,5 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        databaseReference = database.getReference("Posts").child("All Images").child(currentUID);
-
-//        binding.userpostsRV.setLayoutManager(new LinearLayoutManager(requireActivity()));
-
-
-    }
+        super.onViewCreated(view, savedInstanceState);}
 }

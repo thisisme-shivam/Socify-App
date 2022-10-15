@@ -1,5 +1,6 @@
 package com.example.socify.ClubFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 
+import com.example.socify.Activities.Home;
 import com.example.socify.Adapters.QueryTabViewPagerAdapter;
 import com.example.socify.Adapters.UserClubsRecyclerAdapter;
 import com.example.socify.Adapters.UserClubsViewPagerAdapter;
@@ -53,6 +55,12 @@ public class MyClubFragment extends Fragment{
 
         UserClubsRecyclerAdapter userClubsAdapter = new UserClubsRecyclerAdapter(this.getContext(), arrUserClubs);
         binding.userClubsRecyclerview.setAdapter(userClubsAdapter);
+        binding.backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), Home.class));
+            }
+        });
 
         return binding.getRoot();
     }

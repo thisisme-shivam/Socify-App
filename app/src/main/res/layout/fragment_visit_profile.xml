@@ -304,28 +304,40 @@
         android:id="@+id/profile_actionbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteY="3dp"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintBottom_toTopOf="@+id/details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:background="?selectableItemBackgroundBorderless"
+            android:id="@+id/backbtnvisit"
+            android:layout_width="25dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:rotation="180"
+            android:src="@drawable/arrowblack"
+            app:layout_constraintBottom_toTopOf="@+id/line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/username_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="25dp"
             android:onClick="showPopup"
             android:text="@string/profile_username"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/line"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/backbtnvisit"
+            app:layout_constraintStart_toEndOf="@+id/backbtnvisit"
+            app:layout_constraintTop_toTopOf="@+id/backbtnvisit" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/three_dots"
-            android:layout_width="30dp"
+            android:layout_width="25dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
             android:background="@drawable/flag_transparent"

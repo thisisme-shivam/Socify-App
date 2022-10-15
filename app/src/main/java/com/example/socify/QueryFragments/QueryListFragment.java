@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.socify.Activities.Home;
 import com.example.socify.Adapters.QueryTabViewPagerAdapter;
+import com.example.socify.R;
 import com.example.socify.databinding.FragmentQueryListBinding;
 
 public class QueryListFragment extends Fragment {
@@ -38,8 +39,7 @@ public class QueryListFragment extends Fragment {
         binding.backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(requireActivity(), Home.class);
-                startActivity(intent);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, new QueryTagFragment()).commit();
             }
         });
 

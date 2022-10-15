@@ -28,7 +28,7 @@ public class Home extends AppCompatActivity {
 
     ActivityHomeBinding binding;
     NewsFeedFragment newsFeedFragment = new NewsFeedFragment();
-    ProfileFragment profileFragment  = new ProfileFragment();
+    public ProfileFragment profileFragment  = new ProfileFragment();
     BottomNavigationView navigationView;
     DiscoverFragment discoverFragment = new DiscoverFragment();
     Dialog dialog;
@@ -40,6 +40,9 @@ public class Home extends AppCompatActivity {
     public static  GetUserData getUserData;
     int lastSelected;
 
+    @Override
+    public void onBackPressed() {
+    }
 
     public void setIcon(int i){
         if(lastSelected == i ){
@@ -197,7 +200,6 @@ public class Home extends AppCompatActivity {
             @Override
             public void onWorkDone() {
                 if(first[0]) {
-                    Log.i("valueenetering","euys");
                     getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
                     first[0] = false;
                 }

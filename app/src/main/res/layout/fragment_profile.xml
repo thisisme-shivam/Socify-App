@@ -196,32 +196,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <HorizontalScrollView
-        android:id="@+id/horizontalScrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/details">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chip_group1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill"
-            android:layout_marginHorizontal="10dp"
-            app:singleLine="true"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="374dp">
-
-        </com.google.android.material.chip.ChipGroup>
-
-    </HorizontalScrollView>
-    <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
+        android:layout_marginHorizontal="5dp"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="10dp"
         android:hint="Enter your name"
@@ -233,8 +211,7 @@
         app:hintTextColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/private1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView1">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_group"
@@ -245,7 +222,6 @@
             app:singleLine="true"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="374dp">
-
         </com.google.android.material.chip.ChipGroup>
 
     </HorizontalScrollView>

@@ -33,7 +33,7 @@ public class CreatePost extends AppCompatActivity {
 
     ActivityCreatePostBinding binding;
     private static final int PICK_FILE=1;
-    private Uri selectedUri;
+    private Uri selectedUri = null;
     UploadTask uploadTask;
     StorageReference storageReference;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -63,6 +63,7 @@ public class CreatePost extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Dopost();
+
             }
         });
 
@@ -72,6 +73,14 @@ public class CreatePost extends AppCompatActivity {
                 chooseFile();
             }
         });
+
+        binding.backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CreatePost.this, Home.class));
+            }
+        });
+
     }
 
     @SuppressLint("IntentReset")
@@ -125,7 +134,7 @@ public class CreatePost extends AppCompatActivity {
         final String saveDate = currenDate.format(cdate.getTime());
 
 
-        if(TextUtils.isEmpty(binding.desc.getText()) || selectedUri!=null) {
+        if(!TextUtils.isEmpty(binding.desc.getText()) && selectedUri!=null) {
             finish();
             final StorageReference reference = storageReference.child(System.currentTimeMillis()+ ":" + getFileExt(selectedUri));
             uploadTask = reference.putFile(selectedUri);

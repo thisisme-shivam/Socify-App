@@ -1,5 +1,6 @@
 package com.example.socify.QueryFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,14 @@ public class QueryTagFragment extends Fragment {
         adapter = new UserTagsLoaderAdapter(tags, getActivity());
         recyclerView = getActivity().findViewById(R.id.userTagsRV);
         recyclerView.setAdapter(adapter);
+
+        binding.backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), Home.class));
+            }
+        });
+
     }
 
     @Override
