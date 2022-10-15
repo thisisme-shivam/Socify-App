@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.socify.Activities.Home;
 import com.example.socify.HelperClasses.GetUserData;
+import com.example.socify.InterfaceClass;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentVisitProfileBinding;
 import com.github.ybq.android.spinkit.style.Circle;
@@ -31,6 +33,7 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.SetOptions;
@@ -58,6 +61,8 @@ public class VisitProfile extends Fragment   {
     ChipGroup group;
     TextView followercountView;
     TextView followingCountView;
+
+    CountDownTimer timer;
     public VisitProfile(String uid, boolean followstatus) {
         Log.i("person uid", uid);
         this.uid  = uid;
@@ -83,10 +88,9 @@ public class VisitProfile extends Fragment   {
         followButton = getView().findViewById(R.id.follow);
 
 
-        getUserData = new GetUserData(uid, new ChagneView() {
+        getUserData = new GetUserData(uid, new InterfaceClass.VisitProfileInterface() {
             @Override
-            public void dowork() {
-
+            public void onWorkDone() {
                 if (getContext() != null) {
                     Glide.with(getContext()).load(getUserData.imgurl).placeholder(R.drawable.user).into(profilePhoto);
                     username.setText(getUserData.username);
@@ -114,21 +118,52 @@ public class VisitProfile extends Fragment   {
             }
         });
 
-        getUserData.loadFollowingList();
-
         setOnclickListeners();
     }
 
     private void setOnclickListeners() {
+
         followButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!followstatus)
-                    followUser();
-                else
-                    unfollowuser();
+
+                if(followstatus){
+                    followstatus = false;
+                    followButton.setText("Follow");
+                    followercountView.setText(String.valueOf(Integer.parseInt(followercountView.getText().toString()) -1));
+                }else{
+                    followstatus = true;
+                    followButton.setText("Following");
+                    followercountView.setText(String.valueOf(Integer.parseInt(followercountView.getText().toString()) +1));
+                }
+                if(timer!=null){
+                    timer.cancel();
+                }else{
+                    timer = new CountDownTimer(500,500) {
+                        @Override
+                        public void onTick(long l) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            if(followstatus)
+                                followUser();
+                            else
+                                unfollowuser();
+                            timer = null;
+                        }
+                    }.start();
+                }
+
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getUserData = null;
     }
 
     private void unfollowuser() {
@@ -136,10 +171,9 @@ public class VisitProfile extends Fragment   {
         Home.getUserData.followinglistuids.remove(uid);
         getUserData.followerslistuids.remove(Home.getUserData.uid);
         followstatus = false;
-        followercountView.setText(String.valueOf(Integer.parseInt(followercountView.getText().toString()) -1));
 
-        Home.getUserData.followingcount = String.valueOf(Integer.parseInt(Home.getUserData.followingcount )- 1);
-        getUserData.followerscount = String.valueOf(Integer.parseInt(getUserData.followerscount )- 1);
+        getUserData.snap.getReference().update("FollowersCount",followercountView.getText());
+        Home.getUserData.snap.getReference().update("FollowingCount",String.valueOf(Integer.parseInt(Home.getUserData.followingcount) -1));
 
         updateStatus();
     }
@@ -156,22 +190,16 @@ public class VisitProfile extends Fragment   {
         getUserData.followStatusRef.set(mp);
         Home.getUserData.followStatusRef.set(currentusermp);
 
-        updatefirebase();
 
 
     }
 
     private void followUser() {
-        followButton.setText("Following");
         Home.getUserData.followinglistuids.add(uid);
-        getUserData.followerslistuids.add(Home.getUserData.uid);
         followstatus = true;
-
-        followercountView.setText(String.valueOf(Integer.parseInt(getUserData.followerscount)+1));
-
-        Home.getUserData.followingcount = String.valueOf(Integer.parseInt(Home.getUserData.followingcount )+1);
-        getUserData.followerscount = String.valueOf(Integer.parseInt(getUserData.followerscount ) + 1);
         updateStatus();
+        getUserData.snap.getReference().update("FollowersCount",followercountView.getText());
+        Home.getUserData.snap.getReference().update("FollowingCount",String.valueOf(Integer.parseInt(Home.getUserData.followingcount) +1));
 
     }
 
@@ -183,15 +211,7 @@ public class VisitProfile extends Fragment   {
         return binding.getRoot();
     }
 
-    private void updatefirebase(){
 
-        Log.i("valus is " , getUserData.followerscount);
-        getUserData.snap.getReference().update("FollowersCount", getUserData.followerscount);
-        Home.getUserData.snap.getReference().update("FollowingCount",Home.getUserData.followingcount);
-    }
 
-    public  interface ChagneView{
-        void dowork();
-    }
 
 }

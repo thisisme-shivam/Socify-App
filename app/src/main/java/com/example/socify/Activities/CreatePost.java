@@ -136,7 +136,6 @@ public class CreatePost extends AppCompatActivity {
         SimpleDateFormat currenDate = new SimpleDateFormat("dd-MMMM-yy");
         final String saveDate = currenDate.format(cdate.getTime());
 
-        String time = saveDate;
 
         if(TextUtils.isEmpty(binding.desc.getText()) || selectedUri!=null) {
             finish();

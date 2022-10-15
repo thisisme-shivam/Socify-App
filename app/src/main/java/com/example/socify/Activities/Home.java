@@ -23,6 +23,7 @@ import com.example.socify.HomeFragments.DiscoverFragment;
 import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.HomeFragments.ProfileFragment;
 import com.example.socify.HomeFragments.VisitProfile;
+import com.example.socify.InterfaceClass;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityHomeBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -198,7 +199,7 @@ public class Home extends AppCompatActivity {
         binding.bottomnavigationview.setItemIconTintList(null);
 
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,newsFeedFragment).commit();
+
         itemselectedfromnavbar();
         navigationView.getMenu().getItem(0).setIcon(drawables[4]);
         Dialog otpDialog = new Dialog(Home.this);
@@ -207,8 +208,19 @@ public class Home extends AppCompatActivity {
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
 
         //Loading User Profile Data
-        getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        final boolean[] first = {true};
+        getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid(), new InterfaceClass.LoadDataInterface() {
+            @Override
+            public void onWorkDone() {
+                if(first[0]) {
+                    Log.i("valueenetering","euys");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
+                    first[0] = false;
+                }
+            }
+        });
         getUserData.loadFollowingList();
+
     }
 
 
@@ -217,4 +229,6 @@ public class Home extends AppCompatActivity {
         super.onDestroy();
 
     }
+
+
 }

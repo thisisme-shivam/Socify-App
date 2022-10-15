@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.socify.HomeFragments.VisitProfile;
+import com.example.socify.InterfaceClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -21,17 +22,25 @@ public class GetUserData {
     public String uid,  name, college_name, passyear, course, imgurl, username , followerscount , followingcount , profilestatus;
     public ArrayList<String> tags;
     public ArrayList<String> followinglistuids,followerslistuids;
-    VisitProfile.ChagneView changeview;
+    InterfaceClass.LoadDataInterface changeview;
     public DocumentReference profileinforef,followStatusRef;
     public DocumentSnapshot snap;
+
+    InterfaceClass.VisitProfileInterface visitProfileinterface;
 
     public GetUserData(String uid){
         this.uid = uid;
         loadData();
     }
-    public GetUserData(String uid, VisitProfile.ChagneView changeview) {
+    public GetUserData(String uid, InterfaceClass.LoadDataInterface changeview) {
         this.uid = uid;
         this.changeview = changeview;
+        loadData();
+    }
+
+    public GetUserData(String uid,InterfaceClass.VisitProfileInterface visitProfileinterface){
+        this.uid = uid;
+        this.visitProfileinterface = visitProfileinterface;
         loadData();
     }
 
@@ -41,6 +50,11 @@ public class GetUserData {
         followinglistuids = new ArrayList<>();
         followerslistuids = new ArrayList<>();
         profileinforef = FirebaseFirestore.getInstance().collection("Profiles").document(uid);
+
+        followStatusRef = FirebaseFirestore.getInstance().collection("Profiles")
+                .document(uid)
+                .collection("AccountDetails")
+                .document("FollowingListDoc");
         profileinforef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -64,9 +78,9 @@ public class GetUserData {
                             followingcount = (String) value.getString("FollowingCount");
                             username = (String) value.getString("Username");
                             // if visiting profile is being loaded
-                            if(changeview != null)
-                                changeview.dowork();
-
+                            if(visitProfileinterface!=null){
+                                visitProfileinterface.onWorkDone();
+                            }
                         } else{
                             try {
                                 throw new Exception("User doesn't exist");
@@ -96,10 +110,7 @@ public class GetUserData {
 
     public void loadFollowingList(){
         followinglistuids = new ArrayList<>();
-        followStatusRef = FirebaseFirestore.getInstance().collection("Profiles")
-                .document(uid)
-                .collection("AccountDetails")
-                .document("FollowingListDoc");
+
         followStatusRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -107,18 +118,20 @@ public class GetUserData {
                     Map<String,Object> mp = value.getData();
                     if(mp != null) {
                         ArrayList<String> followinglist = (ArrayList<String>) mp.get("Followinglist");
+                        Log.i("vlaueof ",mp.toString());
+                        followinglistuids = followinglist;
 
-                        if (followinglist != null)
-                            followinglistuids = followinglist;
                         ArrayList<String> followerlist = (ArrayList<String>) mp.get("FollowersList");
 
-                        if (followerlist != null)
-                            followerslistuids = followerlist;
+                        followerslistuids = followerlist;
+
+                        if(changeview != null)
+                            changeview.onWorkDone();
+
                     }
                 }
             }
         });
-
 
     }
 }

@@ -23,12 +23,16 @@
             android:id="@+id/profile_pic"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginStart="52dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="38dp"
             android:elevation="20dp"
             android:src="@drawable/doge"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/gridLayout2"
-            tools:ignore="UnknownId" />
+
+            app:layout_constraintBottom_toTopOf="@+id/name"
+            app:layout_constraintEnd_toStartOf="@+id/gridLayout3"
+            app:layout_constraintStart_toEndOf="@+id/gridLayout2"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -49,12 +53,14 @@
             android:id="@+id/gridLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="160dp"
-            android:layout_marginBottom="55dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="44dp"
             android:columnCount="1"
             android:rowCount="1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/followerscount"
@@ -121,18 +127,6 @@
         </GridLayout>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/passyear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="94dp"
-            android:layout_marginEnd="96dp"
-            android:text="2024"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/gridLayout3"
-            app:layout_constraintStart_toEndOf="@+id/gridLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -140,10 +134,23 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginTop="10sp"
             app:layout_constraintEnd_toEndOf="@+id/profile_pic"
             app:layout_constraintStart_toStartOf="@+id/profile_pic"
             app:layout_constraintTop_toBottomOf="@+id/profile_pic"
             tools:ignore="MissingConstraints" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/passyear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="189dp"
+            android:layout_marginEnd="190dp"
+            android:text="2024"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -164,6 +171,7 @@
             android:background="@drawable/button_rounds"
             android:fontFamily="@font/osr"
             android:letterSpacing="0.3"
+            android:elevation="8sp"
             android:padding="5dp"
             android:stateListAnimator="@null"
             android:text="FOLLOW"
@@ -177,6 +185,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_rounds"
             android:fontFamily="@font/osr"
+            android:elevation="8sp"
             android:letterSpacing="0.2"
             android:stateListAnimator="@null"
             android:text="MESSAGE"
@@ -202,7 +211,7 @@
         app:endIconMode="clear_text"
         app:endIconTint="@color/black"
         app:hintTextColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/private1"
+        app:layout_constraintBottom_toTopOf="@+id/privatemessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialTextView4">
@@ -216,39 +225,80 @@
             app:singleLine="true"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="374dp">
-
-
-
         </com.google.android.material.chip.ChipGroup>
 
     </HorizontalScrollView>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/privatemessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_lock"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/padlock" />
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10sp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/padlock"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/lock_profile"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
+            android:id="@+id/lock_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="This Account is Private"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/profile_lock" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0sp"
+            android:fontFamily="@font/osr"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="4sp"
+            android:paddingLeft="73dp"
+            android:paddingRight="40dp"
+            android:text="Follow account to see their interests and posts"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lock_profile" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/private2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profile_actionbar"
@@ -313,16 +363,19 @@
         app:layout_constraintTop_toBottomOf="@+id/request"
         tools:ignore="MissingConstraints" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView3"
-        android:layout_width="424dp"
+    <FrameLayout
+        android:id="@+id/postloader"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="37dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/private1" />
+        app:layout_constraintTop_toBottomOf="@+id/privatemessage"
+        app:layout_constraintVertical_bias="0.0">
+
+
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
