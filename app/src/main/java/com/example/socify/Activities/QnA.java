@@ -22,10 +22,6 @@ public class QnA extends AppCompatActivity {
     public static int fragwitch;
 
     @Override
-    public void onBackPressed() {
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityQnBinding.inflate(getLayoutInflater());

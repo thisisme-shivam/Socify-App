@@ -125,7 +125,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/replylayout"
-        android:layout_width="330dp"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:hint="Type your reply"

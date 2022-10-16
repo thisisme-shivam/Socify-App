@@ -136,7 +136,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity) context;
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(member.getUid(), false)).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(member.getUid())).commit();
             }
         });
 
