@@ -73,14 +73,14 @@ public class NewsFeedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        getNewsFeed.notifyDataSetChanged();
         //Ordering data from bottom to top
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
         rec = getView().findViewById(R.id.postsRV);
         rec.setLayoutManager(layoutManager);
-        postMemberArrayList = new ArrayList<>();
-        getNewsFeed = new GetNewsFeedAdapter(getActivity(),postMemberArrayList);
+
         rec.setAdapter(getNewsFeed);
 
 

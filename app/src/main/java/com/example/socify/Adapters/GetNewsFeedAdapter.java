@@ -109,10 +109,10 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                 @Override
                 public void onClick(View v) {
                     if(holder.like.getTag().equals("Like")){
-                        FirebaseDatabase.getInstance().getReference().child("Likes").child(member.getPostid()).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(true);
+                        FirebaseDatabase.getInstance().getReference().child("Likes").child(member.getPostid()).child(Home.getUserData.uid).setValue(true);
                     }
                     else{
-                        FirebaseDatabase.getInstance().getReference().child("Likes").child(member.getPostid()).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).removeValue();
+                        FirebaseDatabase.getInstance().getReference().child("Likes").child(member.getPostid()).child(Home.getUserData.uid).removeValue();
                     }
                 }
             });
@@ -122,7 +122,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity) context;
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(member.getUid(), false)).commit();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(member.getUid())).commit();
             }
         });
 
