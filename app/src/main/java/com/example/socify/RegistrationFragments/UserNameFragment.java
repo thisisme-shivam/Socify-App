@@ -7,9 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.os.PatternMatcher;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,26 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.socify.Activities.Registration;
-import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentNameFragementBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.intellij.lang.annotations.RegExp;
-
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.annotation.RegEx;
 
 
 public class UserNameFragment extends Fragment {

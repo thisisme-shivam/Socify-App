@@ -1,10 +1,6 @@
 package com.example.socify.ClubFragments;
 
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,20 +9,13 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 
 import com.example.socify.Activities.CropperActivity;
-import com.example.socify.Activities.Registration;
-import com.example.socify.R;
 import com.example.socify.databinding.FragmentCreateClubBinding;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 
 
 public class CreateClubFragment extends Fragment {

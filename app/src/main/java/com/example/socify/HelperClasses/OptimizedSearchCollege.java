@@ -1,14 +1,10 @@
 package com.example.socify.HelperClasses;
 
 import android.util.Log;
-import android.util.MonthDisplayHelper;
 import android.view.View;
 
 import com.example.socify.Activities.Registration;
-import com.example.socify.Activities.SplashActivity;
-import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.Classes.College;
-import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.RegistrationFragments.GetCollegeFragment;
 
 import java.util.ArrayList;

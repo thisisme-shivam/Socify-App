@@ -1,5 +1,6 @@
 package com.example.socify.HomeFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.socify.Activities.AllChat;
 import com.example.socify.Activities.Home;
 import com.example.socify.Adapters.GetNewsFeedAdapter;
 import com.example.socify.Classes.PostMember;
@@ -67,7 +69,16 @@ public class NewsFeedFragment extends Fragment {
 
     }
 
+    private void setonclicklisteners() {
 
+        binding.chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AllChat.class));
+            }
+        });
+
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -82,10 +93,7 @@ public class NewsFeedFragment extends Fragment {
         rec.setLayoutManager(layoutManager);
 
         rec.setAdapter(getNewsFeed);
-
-
-
-      
+        setonclicklisteners();
     }
 
 

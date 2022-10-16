@@ -1,28 +1,25 @@
 package com.example.socify.Adapters;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.socify.Activities.Home;
+import com.bumptech.glide.Glide;
 import com.example.socify.Classes.PostMember;
 import com.example.socify.HomeFragments.CommentsFragment;
 import com.example.socify.HomeFragments.VisitProfile;
 import com.example.socify.R;
+import com.example.socify.Activities.Home;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
-import com.google.android.exoplayer2.util.Log;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,7 +28,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,6 +39,8 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
 
     Context context;
     ArrayList<PostMember> postMembers;
+    String type;
+    PostMember member;
 
     public GetNewsFeedAdapter(Context context, ArrayList<PostMember> postMembers) {
         this.context = context;
@@ -60,18 +58,18 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull  NewsFeedViewHolder holder, int position) {
-        PostMember member = postMembers.get(position);
+        member = postMembers.get(position);
             if (member.getType().equals("image")) {
                 holder.playerView.setVisibility(View.INVISIBLE);
                 holder.post.setVisibility(View.VISIBLE);
-                Picasso.get().load(member.getUrl()).fit().into(holder.profilepic);
-                Picasso.get().load(member.getPostUri()).fit().into(holder.post);
+                Glide.with(context).load(member.getUrl()).into(holder.profilepic);
+                Glide.with(context).load(member.getPostUri()).into(holder.post);
                 holder.namepost.setText(member.getName());
                 holder.date.setText(member.getTime());
                 holder.usernamepost.setText(member.getUsername());
                 holder.description.setText(member.getDesc());
             } else if (member.getType().equals("video")) {
-                Picasso.get().load(member.getUrl()).into(holder.profilepic);
+                Glide.with(context).load(member.getUrl()).into(holder.profilepic);
                 holder.namepost.setText(member.getName());
                 holder.date.setText(member.getTime());
                 holder.usernamepost.setText(member.getUsername());
@@ -91,7 +89,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                 }
 
             }
-
+            type = member.getType();
             isLiked(member.getPostid(), holder.like);
             nrlikes(holder.likescount, member.getPostid());
 
@@ -109,10 +107,26 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                 @Override
                 public void onClick(View v) {
                     if(holder.like.getTag().equals("Like")){
-                        FirebaseDatabase.getInstance().getReference().child("Likes").child(member.getPostid()).child(Home.getUserData.uid).setValue(true);
+                        FirebaseDatabase.getInstance().getReference().child("College")
+                                .child(Home.getUserData.college_name)
+                                .child("Posts")
+                                .child(member.getUid())
+                                .child("All Images")
+                                .child(member.getPostid())
+                                .child("Likes")
+                                .child(Home.getUserData.uid)
+                                .setValue(true);
                     }
                     else{
-                        FirebaseDatabase.getInstance().getReference().child("Likes").child(member.getPostid()).child(Home.getUserData.uid).removeValue();
+                        FirebaseDatabase.getInstance().getReference().child("College")
+                                .child(Home.getUserData.college_name)
+                                .child("Posts")
+                                .child(member.getUid())
+                                .child("All Images")
+                                .child(member.getPostid())
+                                .child("Likes")
+                                .child(Home.getUserData.uid)
+                                .removeValue();
                     }
                 }
             });
@@ -164,7 +178,13 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
     private void isLiked(String postid, final ImageView imageView) {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Likes").child(postid);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("College")
+                .child(Home.getUserData.college_name)
+                .child("Posts")
+                .child(member.getUid())
+                .child("All Images")
+                .child(member.getPostid())
+                .child("Likes");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -190,7 +210,14 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
 
     private void nrlikes(MaterialTextView likescount, String postid) {
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Likes").child(postid);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("College")
+                .child(Home.getUserData.college_name)
+                .child("Posts")
+                .child(member.getUid())
+                .child("All Images")
+                .child(member.getPostid())
+                .child("Likes");
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

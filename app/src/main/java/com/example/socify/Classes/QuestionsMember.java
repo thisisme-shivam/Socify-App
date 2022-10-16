@@ -2,7 +2,15 @@ package com.example.socify.Classes;
 
 public class QuestionsMember {
 
-    String username,url,userid,key,question,time,tag;
+    String username,url,userid,key,question,time,tag, questionURI;
+
+    public String getQuestionURI() {
+        return questionURI;
+    }
+
+    public void setQuestionURI(String questionURI) {
+        this.questionURI = questionURI;
+    }
 
     public QuestionsMember() {
 

@@ -5,12 +5,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.load.resource.drawable.AnimatedWebpDecoder;
 import com.example.socify.Activities.Home;
 import com.example.socify.Classes.Person;
 import com.example.socify.HomeFragments.SearchAll;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +21,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Map;
 
 public class OptimizedSearchAll {
     public ArrayList<Person> allusers;

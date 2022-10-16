@@ -8,10 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,25 +16,15 @@ import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.socify.Activities.Home;
-import com.example.socify.Adapters.PostsViewPagerAdapter;
-import com.example.socify.Adapters.QueryTabViewPagerAdapter;
-import com.example.socify.Classes.PostMember;
-import com.example.socify.PostFragments.ImagePostFragment;
 import com.example.socify.PostFragments.PostLoaderFragment;
-import com.example.socify.PostFragments.VideoPostFragment;
-import com.example.socify.QueryFragments.AllQueriesFragment;
-import com.example.socify.QueryFragments.UserQueriesFragment;
 import com.example.socify.R;
-import com.example.socify.ViewHolders.LoadUserPostsImages;
 import com.example.socify.databinding.FragmentProfileBinding;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.chip.Chip;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -86,7 +73,7 @@ public class ProfileFragment extends Fragment {
 
         //putting data on views of profile fragment
         if(Home.getUserData.imgurl!=null) {
-            Picasso.get().load(Uri.parse(Home.getUserData.imgurl)).placeholder(R.drawable.user).into(binding.profilePic);
+            Glide.with(this).load(Uri.parse(Home.getUserData.imgurl)).placeholder(R.drawable.user).into(binding.profilePic);
         }
         binding.passyear.setText(Home.getUserData.passyear);
         binding.name.setText(Home.getUserData.name);
@@ -135,13 +122,5 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        databaseReference = database.getReference("Posts").child("All Images").child(currentUID);
-
-//        binding.userpostsRV.setLayoutManager(new LinearLayoutManager(requireActivity()));
-
-
-    }
+        super.onViewCreated(view, savedInstanceState);}
 }

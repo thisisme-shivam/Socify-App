@@ -39,8 +39,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.Transaction;
 import com.google.firestore.v1.WriteResult;
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -75,6 +73,7 @@ public class VisitProfile extends Fragment   {
 
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -85,6 +84,7 @@ public class VisitProfile extends Fragment   {
         followercountView = getView().findViewById(R.id.followerscount);
         followingCountView = getView().findViewById(R.id.followingcount);
         followButton = getView().findViewById(R.id.follow);
+
 
 
         getUserData = new GetUserData(uid, new InterfaceClass.VisitProfileInterface() {
@@ -124,6 +124,13 @@ public class VisitProfile extends Fragment   {
     }
 
     private void setOnclickListeners() {
+
+        binding.backbtnvisit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new DiscoverFragment()).commit();
+            }
+        });
 
         followButton.setOnClickListener(new View.OnClickListener() {
             @Override

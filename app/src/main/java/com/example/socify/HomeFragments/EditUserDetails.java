@@ -1,47 +1,29 @@
 package com.example.socify.HomeFragments;
 
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
-import com.example.socify.Activities.CropperActivity;
 import com.example.socify.Activities.Home;
-import com.example.socify.Activities.Registration;
-import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentEditUserDetailsBinding;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Transaction;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.util.HashMap;
 
 public class EditUserDetails extends Fragment {
 
@@ -114,44 +96,20 @@ public class EditUserDetails extends Fragment {
             @Override
             public void onClick(View v) {
                 updateProfile();
-                Toast.makeText(requireActivity(), "Restarting the app will reflect the new changes", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), Home.class);
-                startActivity(intent);
+                Toast.makeText(getActivity(), "Restarting the app will reflect the changes", Toast.LENGTH_LONG).show();
+                getParentFragmentManager().beginTransaction().replace(R.id.FragmentView, new ProfileFragment()).commit();
+            }
+        });
+
+        binding.backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                getParentFragmentManager().beginTransaction().replace(R.id.FragmentView, new ProfileFragment()).commit();
             }
         });
 
     }
-
-
-
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(resultCode==-1 && requestCode==101) {
-//            assert data != null;
-//            String result = data.getStringExtra("RESULT");
-//            Log.i("Result", result);
-//            Uri resultUri = null;
-//            if(result!=null) {
-//                resultUri = Uri.parse(result);
-////                imgUrl = resultUri;
-////                Registration.details.setImgUri(String.valueOf(Uri.parse(String.valueOf(imgUrl))));
-//            }
-////            binding.profileImage.setImageURI(imgUrl);
-//        }
-//
-//
-//        public String getFileExt(Uri uri) {
-//            ContentResolver contentResolver = requireContext().getContentResolver();
-//            MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-//            return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-//        }
-//
-//    }
-
-
-
 
 
 }

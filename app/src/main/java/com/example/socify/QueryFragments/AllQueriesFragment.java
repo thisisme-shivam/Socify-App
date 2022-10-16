@@ -115,6 +115,7 @@ public class AllQueriesFragment extends Fragment {
                                     question.setKey(String.valueOf(dataSnapshot.child("key").getValue()));
                                     question.setTag(String.valueOf(dataSnapshot.child("tag").getValue()));
                                     question.setTime(String.valueOf(dataSnapshot.child("time").getValue()));
+                                    question.setQuestionURI(String.valueOf(dataSnapshot.child("questionURI").getValue()));
                                     question.setUserid(String.valueOf(dataSnapshot.child("userid").getValue()));
                                     Log.i("question",question.getQuestion());
 

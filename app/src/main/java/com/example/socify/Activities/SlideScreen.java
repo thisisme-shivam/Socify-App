@@ -4,11 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.PowerManager;
 
 import com.example.socify.Adapters.SlideViewPagerAdapter;
-import com.example.socify.R;
 import com.example.socify.databinding.ActivitySlideScreenBinding;
 
 public class SlideScreen extends AppCompatActivity {
