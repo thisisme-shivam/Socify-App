@@ -61,10 +61,9 @@ public class VisitProfile extends Fragment   {
     TextView followingCountView;
 
     CountDownTimer timer;
-    public VisitProfile(String uid, boolean followstatus) {
+    public VisitProfile(String uid ){
         Log.i("person uid", uid);
         this.uid  = uid;
-        this.followstatus = followstatus;
     }
 
 
@@ -108,8 +107,11 @@ public class VisitProfile extends Fragment   {
 
                     }
 
-                    if (followstatus)
+                    if(Home.getUserData.followinglistuids.contains(uid)){
                         followButton.setText("Following");
+                        followstatus = true;
+                    }else
+                        followstatus = false;
 
                     if (getUserData.profilestatus.equals("private")) {
                         getView().findViewById(R.id.privatemessage).setVisibility(View.VISIBLE);
