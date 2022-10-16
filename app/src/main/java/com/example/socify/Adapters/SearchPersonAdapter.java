@@ -42,7 +42,7 @@ public class SearchPersonAdapter extends RecyclerView.Adapter<SearchPersonAdapte
 
         holder.itemView.setOnClickListener(view -> {
             AppCompatActivity activity = (AppCompatActivity) context;
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(person.getUid(),person.getFollow_status())).commit();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(person.getUid())).commit();
         });
     }
 
