@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -141,13 +142,28 @@ public class SendProfileData {
         profile.put("FollowersCount", "0");
         profile.put("FollowingCount","0");
         profile.put("ProfileStatus", "public");
-        uploadtoCloud();
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if(task.isSuccessful()) {
+                            // Get new FCM registration token
+                            String token = task.getResult();
+                            profile.put("token",token);
+                            uploadtoCloud();
+
+                            Log.i("token", token);
+                        }
+                    }
+                });
+
     }
 
     public void sendTags() {
         currentUID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(currentUID);
         interests.put("Tags", Registration.details.getTags());
+
 
         documentReference.collection("Interests").document("UserTags").set(interests);
     }

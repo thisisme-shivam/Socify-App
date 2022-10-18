@@ -1,7 +1,9 @@
 package com.example.socify.HomeFragments;
 
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,11 +40,14 @@ public class NewsFeedFragment extends Fragment {
     GetNewsFeedAdapter getNewsFeed;
     ArrayList<PostMember> postMemberArrayList;
     RecyclerView rec;
+    public static ArrayList<String> chattingusers;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        chattingusers = new ArrayList<>();
         postMemberArrayList = new ArrayList<>();
         getNewsFeed = new GetNewsFeedAdapter(getActivity(),postMemberArrayList);
         personPostsRef = FirebaseDatabase.getInstance().getReference().child("College")
@@ -91,13 +96,28 @@ public class NewsFeedFragment extends Fragment {
         layoutManager.setStackFromEnd(true);
         rec = getView().findViewById(R.id.postsRV);
         rec.setLayoutManager(layoutManager);
-
         rec.setAdapter(getNewsFeed);
         setonclicklisteners();
+
+
+
+        //Loading chatlist
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Chats")
+                        .child(Home.getUserData.uid)
+                        .get().addOnCompleteListener(task -> {
+                            if(task.isSuccessful()) {
+                                for (DataSnapshot userSnapshot : task.getResult().getChildren()) {
+                                    chattingusers.add(userSnapshot.getKey());
+                                    Log.e("UIDS", String.valueOf(chattingusers));
+                                }
+                            }
+                        });
+            }
+        }).start();
     }
-
-
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -107,4 +127,15 @@ public class NewsFeedFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Online Users").child(Home.getUserData.uid).setValue("Online");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Online Users").child(Home.getUserData.uid).setValue("Offline");
+    }
 }

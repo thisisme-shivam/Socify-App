@@ -17,12 +17,12 @@ public class Person {
         this.uid = uid;
     }
 
+
     public String getUsername() {
         return username;
     }
 
     public String getUid(){return uid;}
-
 
     public String getName(){
         return name;

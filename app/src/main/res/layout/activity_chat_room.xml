@@ -29,36 +29,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/queryhubText"
+            android:id="@+id/usernametxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="110dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="110dp"
             android:layout_marginBottom="15dp"
             android:fontFamily="@font/chatfontbold"
             android:text="@string/username"
             android:textColor="@color/palette_black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/circleImageView5"
-            app:layout_constraintHorizontal_bias="0.32"
-            app:layout_constraintStart_toEndOf="@+id/back_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
+            android:id="@+id/status"
             android:layout_height="wrap_content"
-            android:text="Online"
+            android:text="Offline"
             android:fontFamily="@font/chatfont"
             android:textColor="@color/palette_teal"
-            app:layout_constraintEnd_toEndOf="@+id/queryhubText"
-            app:layout_constraintStart_toStartOf="@+id/queryhubText"
-            app:layout_constraintTop_toBottomOf="@+id/queryhubText" />
+            app:layout_constraintEnd_toEndOf="@+id/usernametxt"
+            app:layout_constraintStart_toStartOf="@+id/usernametxt"
+            app:layout_constraintTop_toBottomOf="@+id/usernametxt" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleImageView5"
+            android:id="@+id/profilepicchatuser"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="5dp"
@@ -105,6 +103,7 @@
             android:id="@+id/cardView"
             android:layout_width="0dp"
             android:layout_height="50dp"
+            android:backgroundTint="@color/white"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
@@ -115,6 +114,8 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <LinearLayout
+                android:backgroundTint="@color/white"
+                android:background="@color/white"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -130,12 +131,15 @@
                     app:srcCompat="@drawable/emoji" />
 
                 <EditText
+                    android:backgroundTint="@color/white"
                     android:id="@+id/messagebox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:ems="12"
+                    android:textColor="#0B2F5B"
+                    android:textColorHint="@color/text_grey"
                     android:fontFamily="@font/chatfont"
                     android:hint="Type a message"
                     android:inputType="textPersonName"
@@ -167,14 +171,15 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
+        android:id="@+id/chatRV"
         android:layout_width="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout10"
-        tools:listitem="@layout/msgreceivedlayout" />
+        tools:listitem="@layout/sendmsgimglayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

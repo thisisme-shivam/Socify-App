@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.socify.Classes.PostMember;
+import com.example.socify.R;
 import com.example.socify.databinding.ActivityCreatePostBinding;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -98,7 +99,7 @@ public class CreatePost extends AppCompatActivity {
             selectedUri = data.getData();
             Log.e("Selected URI", String.valueOf(selectedUri));
             if(selectedUri.toString().contains("image")) {
-                Glide.with(this).load(selectedUri).into(binding.imageview);
+                Glide.with(this).load(selectedUri).placeholder(R.drawable.person_login).into(binding.imageview);
                 binding.imageview.setVisibility(View.VISIBLE);
                 binding.videoview.setVisibility(View.INVISIBLE);
                 type = "image";

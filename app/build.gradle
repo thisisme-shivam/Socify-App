@@ -34,11 +34,14 @@ android {
 
 dependencies {
     implementation 'com.google.firebase:firebase-database:20.0.5'
+    implementation platform('com.google.firebase:firebase-bom:31.0.0')
     ext.kotlin_version = '1.4.10'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     //Lottie Animation
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.airbnb.android:lottie:5.2.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
@@ -86,6 +89,9 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-hls:2.18.1'
     implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.18.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+
+    //IMage Zoom
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 
 
 

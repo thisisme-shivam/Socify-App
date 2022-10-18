@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class GetUserData {
-    public String uid,  name, college_name, passyear, course, imgurl, username , followerscount , followingcount , profilestatus;
+    public String uid,  name, college_name,token, passyear, course, imgurl, username , followerscount , followingcount , profilestatus;
     public ArrayList<String> tags;
     public ArrayList<String> followinglistuids,followerslistuids;
     InterfaceClass.LoadDataInterface changeview;
@@ -60,9 +60,7 @@ public class GetUserData {
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                         snap = value;
                         if(value != null) {
-
                             name = value.getString("Name");
-//                            Log.i("name",name);
                             college_name = value.getString("CollegeName");
                             passyear = value.getString("Passing Year");
                             course = value.getString("Course");
@@ -73,14 +71,12 @@ public class GetUserData {
                             }catch (Exception e){
                                 e.printStackTrace();
                             }
-
+                            token = value.getString("token");
                             followerscount  = value.getString("FollowersCount");
                             followingcount = (String) value.getString("FollowingCount");
                             username = (String) value.getString("Username");
                             // if visiting profile is being loaded
-                            if(visitProfileinterface!=null){
-                                visitProfileinterface.onWorkDone();
-                            }
+
                         } else{
                             try {
                                 throw new Exception("User doesn't exist");
@@ -92,6 +88,7 @@ public class GetUserData {
                 });
 
 
+        loadFollowingList();
         //Loading Tags
 
         profileinforef = FirebaseFirestore.getInstance().collection("Profiles").document(uid).collection("Interests").document("UserTags");
@@ -109,7 +106,6 @@ public class GetUserData {
 
 
     public void loadFollowingList(){
-        followinglistuids = new ArrayList<>();
 
         followStatusRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -117,19 +113,23 @@ public class GetUserData {
                 if(value != null ){
                     Map<String,Object> mp = value.getData();
                     if(mp != null) {
-                        ArrayList<String> followinglist = (ArrayList<String>) mp.get("Followinglist");
+                        ArrayList<String> followinglist = (ArrayList<String>) mp.get("FollowingList");
                         Log.i("vlaueof ",mp.toString());
                         followinglistuids = followinglist;
 
-                        ArrayList<String> followerlist = (ArrayList<String>) mp.get("FollowersList");
+                        ArrayList<String> followerlist = (ArrayList<String>) mp.get("FollowerList");
 
                         followerslistuids = followerlist;
 
-                        if(changeview != null)
-                            changeview.onWorkDone();
+                        if(visitProfileinterface!=null){
+                            visitProfileinterface.onWorkDone();
+                        }
+
 
                     }
                 }
+                if(changeview != null)
+                    changeview.onWorkDone();
             }
         });
 

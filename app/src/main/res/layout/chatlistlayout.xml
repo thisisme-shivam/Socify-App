@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout11"
+        android:id="@+id/listchat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -37,7 +37,7 @@
             android:fontFamily="@font/chatfont"
             android:text="BagadBilla"
             android:textColor="#0B2F5B"
-            android:textSize="18dp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/chatprofileimg"
             app:layout_constraintStart_toEndOf="@+id/chatprofileimg"
             app:layout_constraintTop_toTopOf="@+id/chatprofileimg"
@@ -53,7 +53,7 @@
             android:maxLength="24"
             android:text="Mera sandiwich kaha h.. afganistan me"
             android:textColor="#8B9DB2"
-            android:textSize="14dp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/chatprofileimg"
             app:layout_constraintStart_toEndOf="@+id/chatprofileimg"
             app:layout_constraintTop_toTopOf="@+id/chatprofileimg"

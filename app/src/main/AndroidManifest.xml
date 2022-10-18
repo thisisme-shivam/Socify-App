@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.socify">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,39 +16,34 @@
         android:supportsRtl="true"
         android:theme="@style/SplashTheme"
         tools:targetApi="31">
-        <activity android:name=".Activities.clubs"
-            android:screenOrientation="portrait"
-            android:exported="false">
-
-        </activity>
-
+        <activity
+            android:name=".Activities.clubs"
+            android:exported="false"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".friend_list"
-            android:exported="false"/>
-            
+            android:exported="false" />
         <activity
             android:name=".Activities.CreatePost"
-            android:screenOrientation="fullSensor"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".Activities.QnA"
-            android:screenOrientation="fullSensor"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".Activities.CropperActivity"
-            android:screenOrientation="fullSensor"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="fullSensor"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activities.Home"
-            android:screenOrientation="fullSensor"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"/>
-
-
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.Registration"
             android:exported="true"
@@ -55,12 +51,12 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.SlideScreen"
-            android:screenOrientation="fullSensor"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".Activities.Login"
-            android:screenOrientation="fullSensor"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".Activities.SplashActivity"
             android:exported="true"
@@ -78,12 +74,16 @@
             android:screenOrientation="fullSensor" />
         <activity
             android:name=".Activities.MainActivity"
-            android:screenOrientation="fullSensor"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".Activities.AllChat"
-            android:screenOrientation="fullSensor"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="fullSensor" />
+        <activity
+            android:name=".Activities.ChatRoom"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
 
         <meta-data
             android:name="preloaded_fonts"

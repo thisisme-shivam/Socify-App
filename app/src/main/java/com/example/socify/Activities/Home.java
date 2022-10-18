@@ -1,10 +1,12 @@
 package com.example.socify.Activities;
 
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.socify.HelperClasses.GetUserData;
@@ -21,8 +24,14 @@ import com.example.socify.HomeFragments.ProfileFragment;
 import com.example.socify.InterfaceClass;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityHomeBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 
 public class Home extends AppCompatActivity {
 
@@ -194,6 +203,8 @@ public class Home extends AppCompatActivity {
         otpDialog.setContentView(R.layout.post_creation_popup);
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
 
+
+
         //Loading User Profile Data
         final boolean[] first = {true};
         getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid(), new InterfaceClass.LoadDataInterface() {
@@ -203,6 +214,7 @@ public class Home extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
                     first[0] = false;
                 }
+
             }
         });
         getUserData.loadFollowingList();
@@ -221,6 +233,7 @@ public class Home extends AppCompatActivity {
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
+
     }
 
 
@@ -229,6 +242,7 @@ public class Home extends AppCompatActivity {
         super.onDestroy();
 
     }
+
 
 
 }
