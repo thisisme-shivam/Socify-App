@@ -1,5 +1,6 @@
 package com.example.socify.HomeFragments;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,7 +19,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.L;
 import com.bumptech.glide.Glide;
+import com.example.socify.Activities.ChatRoom;
 import com.example.socify.Activities.Home;
 import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.InterfaceClass;
@@ -110,8 +113,7 @@ public class VisitProfile extends Fragment   {
                     if(Home.getUserData.followinglistuids.contains(uid)){
                         followButton.setText("Following");
                         followstatus = true;
-                    }else
-                        followstatus = false;
+                    }
 
                     if (getUserData.profilestatus.equals("private")) {
                         getView().findViewById(R.id.privatemessage).setVisibility(View.VISIBLE);
@@ -124,6 +126,18 @@ public class VisitProfile extends Fragment   {
     }
 
     private void setOnclickListeners() {
+
+        binding.mesnsage1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), ChatRoom.class);
+                intent.putExtra("Name", getUserData.name);
+                intent.putExtra("Img", getUserData.imgurl);
+                intent.putExtra("UID", getUserData.uid);
+                startActivity(intent);
+            }
+        });
+
 
         binding.backbtnvisit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,11 +190,8 @@ public class VisitProfile extends Fragment   {
     }
 
     private void unfollowuser() {
-        followButton.setText("Follow");
         Home.getUserData.followinglistuids.remove(uid);
         getUserData.followerslistuids.remove(Home.getUserData.uid);
-        followstatus = false;
-
         getUserData.snap.getReference().update("FollowersCount",followercountView.getText());
         Home.getUserData.snap.getReference().update("FollowingCount",String.valueOf(Integer.parseInt(Home.getUserData.followingcount) -1));
 
@@ -188,24 +199,39 @@ public class VisitProfile extends Fragment   {
     }
 
     private void updateStatus(){
-        HashMap<String,ArrayList<String>> mp = new HashMap<>();
-        mp.put("Followinglist",getUserData.followinglistuids);
-        mp.put("FollowersList",getUserData.followerslistuids);
-
-        HashMap<String,ArrayList<String>> currentusermp = new HashMap<>();
-        currentusermp.put("Followinglist",Home.getUserData.followinglistuids);
-        currentusermp.put("FollowersList",Home.getUserData.followerslistuids);
-
-        getUserData.followStatusRef.set(mp);
-        Home.getUserData.followStatusRef.set(currentusermp);
 
 
+        getUserData.followStatusRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.getData() == null){
+                    Map<String,ArrayList<String>> mp  = new HashMap<>();
+                    mp.put("FollowingList",getUserData.followinglistuids);
+                    mp.put("FollowerList",getUserData.followerslistuids);
+                    documentSnapshot.getReference().set(mp);
+                }else
+                    documentSnapshot.getReference().update("FollowersList",getUserData.followerslistuids);
+            }
+        });
+
+       Home.getUserData.followStatusRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+           @Override
+           public void onSuccess(DocumentSnapshot documentSnapshot) {
+               if(documentSnapshot.getData() == null){
+                   Map<String,ArrayList<String>> mp  = new HashMap<>();
+                   mp.put("FollowingList",Home.getUserData.followinglistuids);
+                   mp.put("FollowerList",Home.getUserData.followerslistuids);
+                   documentSnapshot.getReference().set(mp);
+               }else
+                    documentSnapshot.getReference().update("Followinglist",Home.getUserData.followinglistuids);
+           }
+       });
 
     }
 
     private void followUser() {
         Home.getUserData.followinglistuids.add(uid);
-        followstatus = true;
+        getUserData.followerslistuids.add(Home.getUserData.uid);
         updateStatus();
         getUserData.snap.getReference().update("FollowersCount",followercountView.getText());
         Home.getUserData.snap.getReference().update("FollowingCount",String.valueOf(Integer.parseInt(Home.getUserData.followingcount) +1));

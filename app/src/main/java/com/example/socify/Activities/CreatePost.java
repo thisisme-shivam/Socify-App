@@ -98,7 +98,7 @@ public class CreatePost extends AppCompatActivity {
             selectedUri = data.getData();
             Log.e("Selected URI", String.valueOf(selectedUri));
             if(selectedUri.toString().contains("image")) {
-                Glide.with(this).load(selectedUri).into(binding.imageview);
+                Glide.with(this).load(selectedUri).placeholder(R.drawable.person_login).into(binding.imageview);
                 binding.imageview.setVisibility(View.VISIBLE);
                 binding.videoview.setVisibility(View.INVISIBLE);
                 type = "image";

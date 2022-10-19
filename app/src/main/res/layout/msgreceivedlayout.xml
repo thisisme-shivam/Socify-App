@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleImageView6"
+            android:id="@+id/recevierimg"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginStart="5dp"
@@ -28,20 +28,20 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
-            style="@style/CustomCardViewStyle"
-            android:layout_width="wrap_content"
+            style="@style/CustomCardViewStyle"            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:background="#E7EAED"
             android:backgroundTint="#E7EAED"
-            app:layout_constraintBottom_toBottomOf="@+id/circleImageView6"
+            app:layout_constraintBottom_toBottomOf="@+id/recevierimg"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/circleImageView6"
-            app:layout_constraintTop_toTopOf="@+id/circleImageView6">
+            app:layout_constraintStart_toEndOf="@+id/recevierimg"
+            app:layout_constraintTop_toTopOf="@+id/recevierimg">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/receivermsg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -50,8 +50,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="5dp"
                 android:fontFamily="@font/chatfontmedium"
-                android:text="Heyzcxcxzcxzxczcxzzcxvxcvcvxxcvxccxzcxzcxzcxzzcx..."
                 android:maxWidth="280dp"
+                android:text="Heyzcxcxzcxzxczcxzzcxvxcvcvxxcvxccxzcxzcxzcxzzcx..."
                 android:textColor="#0B2F5B"
                 android:textSize="14dp"
                 app:flow_horizontalAlign="center"
