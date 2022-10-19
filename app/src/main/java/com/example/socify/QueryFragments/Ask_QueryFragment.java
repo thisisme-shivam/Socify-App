@@ -166,10 +166,11 @@ public class Ask_QueryFragment extends Fragment {
                 binding.addimgtv.setVisibility(View.GONE);
                 type = "image";
                 Log.e("Selected URI", String.valueOf(questionimgURI));
-            }
-            else
+            }else {
                 questionimgURI = Uri.parse("No Image");
                 Toast.makeText(requireActivity(), "No File Selected", Toast.LENGTH_SHORT).show();
+            }
+
         }
 
     }

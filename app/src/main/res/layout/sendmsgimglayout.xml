@@ -29,27 +29,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/sendermsg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/chatfontmedium"
-                android:maxWidth="280dp"
-                android:text="hey..."
-                android:textColor="#0B2F5B"
-                android:textSize="14dp"
-                app:flow_horizontalAlign="center"
-                app:flow_verticalAlign="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+            <ImageView
+                android:id="@+id/chatimgsent"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/bagadbilla" />
 
         </com.google.android.material.card.MaterialCardView>
 
