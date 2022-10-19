@@ -127,7 +127,7 @@ public class VisitProfile extends Fragment   {
 
     private void setOnclickListeners() {
 
-        binding.message1.setOnClickListener(new View.OnClickListener() {
+        binding.mesnsage1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(requireActivity(), ChatRoom.class);

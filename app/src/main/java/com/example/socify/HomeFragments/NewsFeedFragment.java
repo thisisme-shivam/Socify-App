@@ -1,6 +1,5 @@
 package com.example.socify.HomeFragments;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -99,24 +98,6 @@ public class NewsFeedFragment extends Fragment {
         rec.setAdapter(getNewsFeed);
         setonclicklisteners();
 
-
-
-        //Loading chatlist
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Chats")
-                        .child(Home.getUserData.uid)
-                        .get().addOnCompleteListener(task -> {
-                            if(task.isSuccessful()) {
-                                for (DataSnapshot userSnapshot : task.getResult().getChildren()) {
-                                    chattingusers.add(userSnapshot.getKey());
-                                    Log.e("UIDS", String.valueOf(chattingusers));
-                                }
-                            }
-                        });
-            }
-        }).start();
     }
 
     @Override
