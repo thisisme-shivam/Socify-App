@@ -2,6 +2,7 @@ package com.example.socify.Activities;
 
 
 import android.app.Dialog;
+import android.app.Notification;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -20,10 +21,13 @@ import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.HomeFragments.DiscoverFragment;
 import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.HomeFragments.ProfileFragment;
+import com.example.socify.HomeFragments.SearchAll;
 import com.example.socify.InterfaceClass;
 import com.example.socify.R;
+import com.example.socify.SendNotification;
 import com.example.socify.databinding.ActivityHomeBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +35,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
+
 
 
 public class Home extends AppCompatActivity {
@@ -180,6 +185,7 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         dialog = new Dialog(this);
         navigationView = binding.bottomnavigationview;
         drawables = new int[]{
@@ -213,6 +219,8 @@ public class Home extends AppCompatActivity {
                 if(first[0]) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
                     first[0] = false;
+                    SendNotification.sendFollowNotification(getApplicationContext(),getUserData.uid,getUserData.username,getUserData.token);
+
                 }
 
             }
@@ -232,6 +240,7 @@ public class Home extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+
 
     }
 

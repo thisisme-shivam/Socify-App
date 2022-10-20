@@ -26,6 +26,7 @@ import com.example.socify.Activities.Home;
 import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.InterfaceClass;
 import com.example.socify.R;
+import com.example.socify.SendNotification;
 import com.example.socify.databinding.FragmentVisitProfileBinding;
 import com.github.ybq.android.spinkit.style.Circle;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -127,7 +128,7 @@ public class VisitProfile extends Fragment   {
 
     private void setOnclickListeners() {
 
-        binding.mesnsage1.setOnClickListener(new View.OnClickListener() {
+        binding.message1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(requireActivity(), ChatRoom.class);
@@ -210,7 +211,7 @@ public class VisitProfile extends Fragment   {
                     mp.put("FollowerList",getUserData.followerslistuids);
                     documentSnapshot.getReference().set(mp);
                 }else
-                    documentSnapshot.getReference().update("FollowersList",getUserData.followerslistuids);
+                    documentSnapshot.getReference().update("FollowerList",getUserData.followerslistuids);
             }
         });
 
@@ -223,7 +224,7 @@ public class VisitProfile extends Fragment   {
                    mp.put("FollowerList",Home.getUserData.followerslistuids);
                    documentSnapshot.getReference().set(mp);
                }else
-                    documentSnapshot.getReference().update("Followinglist",Home.getUserData.followinglistuids);
+                    documentSnapshot.getReference().update("FollowingList",Home.getUserData.followinglistuids);
            }
        });
 
