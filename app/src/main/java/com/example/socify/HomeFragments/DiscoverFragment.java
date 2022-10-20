@@ -39,14 +39,16 @@ public class DiscoverFragment extends Fragment {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if(b){
-                    getParentFragmentManager().beginTransaction().replace(R.id.FragmentView, searchAll).commitAllowingStateLoss();
+                    getParentFragmentManager().beginTransaction().replace(R.id.FragmentView, searchAll)
+                            .commitNow();
                 }
             }
         });
         binding.searchbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getParentFragmentManager().beginTransaction().replace(R.id.FragmentView, searchAll).commit();
+                getParentFragmentManager().beginTransaction().replace(R.id.FragmentView, searchAll)
+                        .commit();
             }
         });
     }

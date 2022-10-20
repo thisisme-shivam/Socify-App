@@ -67,6 +67,7 @@ public class CreatePost extends AppCompatActivity {
             }
         });
 
+
         binding.selectbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +78,7 @@ public class CreatePost extends AppCompatActivity {
         binding.backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CreatePost.this, Home.class));
+                finish();
             }
         });
 
@@ -194,7 +195,9 @@ public class CreatePost extends AppCompatActivity {
 
     }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

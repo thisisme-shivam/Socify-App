@@ -206,8 +206,8 @@ public class UserTagsLoaderAdapter extends RecyclerView.Adapter<UserTagsLoaderAd
         FloatingActionButton actionButton;
         public TagViewHolder(@NonNull View itemView) {
             super(itemView);
-            tagTitle =itemView.findViewById(R.id.tagtitletv);
-            actionButton = itemView.findViewById(R.id.actionbutton);
+            tagTitle =itemView.findViewById(R.id.tagtypetv);
+            actionButton = itemView.findViewById(R.id.actionbtn);
         }
     }
 

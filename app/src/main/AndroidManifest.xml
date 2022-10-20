@@ -32,6 +32,10 @@
             android:exported="true"
             android:screenOrientation="fullSensor" />
         <activity
+            android:name=".Activities.FullScreenImg"
+            android:exported="true"
+            android:screenOrientation="fullSensor" />
+        <activity
             android:name=".Activities.CropperActivity"
             android:exported="false"
             android:screenOrientation="fullSensor" />

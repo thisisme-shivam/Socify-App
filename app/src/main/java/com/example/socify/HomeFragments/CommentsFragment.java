@@ -4,11 +4,13 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.socify.Classes.PostIdGetter;
+import com.example.socify.R;
 import com.example.socify.databinding.FragmentCommentsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +23,7 @@ public class CommentsFragment extends Fragment {
 
     public CommentsFragment(String postiduser) {
         this.postiduser = postiduser;
+        Log.e("PostId", postiduser);
         this.postidall = postidall;
     }
 
@@ -28,7 +31,8 @@ public class CommentsFragment extends Fragment {
     PostIdGetter postIdGetter = new PostIdGetter();
     DatabaseReference ref1;
     String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference().child("Posts").child("User's Posts").child(currentUID);;
+    DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference().child("Posts").child("User's Posts").child(currentUID);
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,19 @@ public class CommentsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentCommentsBinding.inflate(inflater, container, false);
+
+
+        binding.backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
+
         return binding.getRoot();
+
+
     }
 
     private void docomment() {

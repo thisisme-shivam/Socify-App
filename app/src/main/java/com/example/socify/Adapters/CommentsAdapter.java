@@ -48,8 +48,6 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
     public static class CommentsViewHolder extends RecyclerView.ViewHolder {
 
         MaterialTextView comment, username, time;
-
-
         public CommentsViewHolder(@NonNull View itemView) {
             super(itemView);
             comment = itemView.findViewById(R.id.commenttv);

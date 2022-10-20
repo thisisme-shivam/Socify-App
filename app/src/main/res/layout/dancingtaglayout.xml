@@ -21,7 +21,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tagtitletv"
+                android:id="@+id/tagtypetv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -48,7 +48,7 @@
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tagtitletv" />
+                app:layout_constraintTop_toBottomOf="@+id/tagtypetv" />
 
             <ImageView
                 android:id="@+id/tagimg"
@@ -61,7 +61,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/actionbutton"
+                android:id="@+id/actionbtn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="70dp"
