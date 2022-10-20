@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.socify.Classes.PostMember;
+import com.example.socify.R;
 import com.example.socify.databinding.ActivityCreatePostBinding;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

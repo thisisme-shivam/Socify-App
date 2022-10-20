@@ -143,17 +143,11 @@ public class SendProfileData {
         profile.put("FollowingCount","0");
         profile.put("ProfileStatus", "public");
         FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
+                .addOnSuccessListener(new OnSuccessListener<String>() {
                     @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if(task.isSuccessful()) {
-                            // Get new FCM registration token
-                            String token = task.getResult();
-                            profile.put("token",token);
-                            uploadtoCloud();
-
-                            Log.i("token", token);
-                        }
+                    public void onSuccess(String s) {
+                        profile.put("token",s);
+                        uploadtoCloud();
                     }
                 });
 

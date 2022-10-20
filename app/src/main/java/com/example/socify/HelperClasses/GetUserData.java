@@ -8,12 +8,14 @@ import androidx.annotation.Nullable;
 import com.example.socify.HomeFragments.VisitProfile;
 import com.example.socify.InterfaceClass;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -59,6 +61,13 @@ public class GetUserData {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                         snap = value;
+                        FirebaseMessaging.getInstance().getToken()
+                                .addOnSuccessListener(new OnSuccessListener<String>() {
+                                    @Override
+                                    public void onSuccess(String s) {
+                                        snap.getReference().update("token",s);
+                                    }
+                                });
                         if(value != null) {
                             name = value.getString("Name");
                             college_name = value.getString("CollegeName");
