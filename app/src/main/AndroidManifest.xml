@@ -24,6 +24,10 @@
         <activity
             android:name=".friend_list"
             android:exported="false"/>
+        <activity
+            android:name=".Activities.ChatRoom"
+            android:screenOrientation="fullSensor"
+            android:exported="false" />
             
         <activity
             android:name=".Activities.CreatePost"

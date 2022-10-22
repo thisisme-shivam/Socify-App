@@ -2,26 +2,18 @@ package com.example.socify.Classes;
 
 public class CommentMember {
 
-    String comment, uid, username, time, commentkeyuser, commentkeyall;
+    String comment, uid, username, time, commentkey;
 
     public String getComment() {
         return comment;
     }
 
-    public String getCommentkeyuser() {
-        return commentkeyuser;
+    public String getCommentkey() {
+        return commentkey;
     }
 
-    public void setCommentkeyuser(String commentkeyuser) {
-        this.commentkeyuser = commentkeyuser;
-    }
-
-    public String getCommentkeyall() {
-        return commentkeyall;
-    }
-
-    public void setCommentkeyall(String commentkeyall) {
-        this.commentkeyall = commentkeyall;
+    public void setCommentkey(String commentkey) {
+        this.commentkey = commentkey;
     }
 
     public void setComment(String comment) {
