@@ -2,18 +2,19 @@ package com.example.socify.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.airbnb.lottie.L;
 import com.bumptech.glide.Glide;
-import com.example.socify.Activities.FullScreenImg;
 import com.example.socify.Activities.Home;
 import com.example.socify.Classes.Message;
+import com.example.socify.HomeFragments.FullScreenImgFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.MsgreceivedlayoutBinding;
 import com.example.socify.databinding.MsgsenderlayoutBinding;
@@ -93,18 +94,24 @@ public class MessagesLoaderAdapter extends RecyclerView.Adapter{
             ImgSentViewHolder viewHolder = (ImgSentViewHolder) holder;
             Glide.with(context).load(message.getImgUri()).placeholder(R.drawable.imgplaceholder).into(viewHolder.binding.chatimgsent);
             viewHolder.binding.chatimgsent.setOnClickListener(v -> {
-                Intent intent = new Intent(context, FullScreenImg.class);
-                intent.putExtra("imgurl", message.getImgUri());
-                context.startActivity(intent);
+                FullScreenImgFragment fragment = new FullScreenImgFragment();
+                Bundle img = new Bundle();
+                img.putString("imgurl", message.getImgUri());
+                fragment.setArguments(img);
+                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.FragmentView, fragment).commit();
             });
         }
         else{
             ImgReceivedViewHolder viewHolder = (ImgReceivedViewHolder) holder;
             Glide.with(context).load(message.getImgUri()).placeholder(R.drawable.imgplaceholder).into(viewHolder.binding.chatimgreceived);
             viewHolder.binding.chatimgreceived.setOnClickListener(v -> {
-                Intent intent = new Intent(context, FullScreenImg.class);
-                intent.putExtra("imgurl", message.getImgUri());
-                context.startActivity(intent);
+                FullScreenImgFragment fragment = new FullScreenImgFragment();
+                Bundle img = new Bundle();
+                img.putString("imgurl", message.getImgUri());
+                fragment.setArguments(img);
+                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.FragmentView, fragment).commit();
             });
         }
 

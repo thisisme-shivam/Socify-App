@@ -2,7 +2,6 @@ package com.example.socify.HomeFragments;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,37 +9,27 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.socify.Activities.ChatRoom;
 import com.example.socify.Activities.Home;
 import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.InterfaceClass;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentVisitProfileBinding;
-import com.github.ybq.android.spinkit.style.Circle;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.firestore.Transaction;
-import com.google.firestore.v1.WriteResult;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -126,14 +115,20 @@ public class VisitProfile extends Fragment   {
 
     private void setOnclickListeners() {
 
+
+
+
         binding.message1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(requireActivity(), ChatRoom.class);
-                intent.putExtra("Name", getUserData.name);
-                intent.putExtra("Img", getUserData.imgurl);
-                intent.putExtra("UID", getUserData.uid);
-                startActivity(intent);
+                ChatRoomFragment chatRoomFragment = new ChatRoomFragment();
+                Bundle chatdetails = new Bundle();
+                chatdetails.putString("Name", getUserData.name);
+                chatdetails.putString("Img", getUserData.imgurl);
+                chatdetails.putString("UID", getUserData.uid);
+                chatRoomFragment.setArguments(chatdetails);
+                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.FragmentView, chatRoomFragment).commit();
             }
         });
 

@@ -1,28 +1,27 @@
 package com.example.socify.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.socify.Activities.ChatRoom;
 import com.example.socify.Activities.Home;
 import com.example.socify.Classes.ChatListUser;
-import com.example.socify.Classes.Person;
+import com.example.socify.HomeFragments.AllChatFragment;
+import com.example.socify.HomeFragments.ChatRoomFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.ChatlistlayoutBinding;
-import com.google.android.exoplayer2.C;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,15 +76,20 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
                                                     }
                                                 });
 
+
+
         holder.binding.chatname.setText(chatListUser.getName());
         Glide.with(context).load(chatListUser.getImgUri()).placeholder(R.drawable.user).into(holder.binding.chatprofileimg);
 
         holder.binding.listchat.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ChatRoom.class);
-            intent.putExtra("Name", chatListUser.getName());
-            intent.putExtra("Img", chatListUser.getImgUri());
-            intent.putExtra("UID", chatListUser.getUid());
-            context.startActivity(intent);
+            ChatRoomFragment chatRoomFragment = new ChatRoomFragment();
+            Bundle chatdetails = new Bundle();
+            chatdetails.putString("Name", chatListUser.getName());
+            chatdetails.putString("Img", chatListUser.getImgUri());
+            chatdetails.putString("UID", chatListUser.getUid());
+            chatRoomFragment.setArguments(chatdetails);
+            ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.FragmentView, chatRoomFragment).commit();
         });
 
     }

@@ -62,7 +62,6 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
 
 
 
-
     @Override
     public void onBindViewHolder( RecyclerView.ViewHolder holder, int position) {
         QuestionsMember member = questionlist.get(position);

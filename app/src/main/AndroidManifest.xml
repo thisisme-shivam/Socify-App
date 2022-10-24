@@ -24,15 +24,7 @@
         <activity
             android:name=".friend_list"
             android:exported="false"/>
-        <activity
-            android:name=".Activities.ChatRoom"
-            android:screenOrientation="fullSensor"
-            android:exported="false" />
 
-        <activity
-            android:name=".Activities.FullScreenImg"
-            android:exported="true"
-            android:screenOrientation="fullSensor" />
         <activity
             android:name=".Activities.CropperActivity"
             android:screenOrientation="fullSensor"
@@ -80,10 +72,6 @@
             android:name=".Activities.MainActivity"
             android:screenOrientation="fullSensor"
             android:exported="false" />
-        <activity
-            android:name=".Activities.AllChat"
-            android:screenOrientation="fullSensor"
-            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
