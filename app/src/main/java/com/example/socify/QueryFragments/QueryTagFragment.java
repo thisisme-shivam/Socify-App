@@ -1,5 +1,7 @@
 package com.example.socify.QueryFragments;
 
+import static com.example.socify.Activities.Home.getUserData;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.socify.Activities.Home;
 import com.example.socify.Adapters.UserTagsLoaderAdapter;
+import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentQueryTagBinding;
 
@@ -23,7 +26,7 @@ public class QueryTagFragment extends Fragment {
 
     UserTagsLoaderAdapter adapter;
     RecyclerView recyclerView;
-    ArrayList<String> tags = Home.getUserData.tags;
+    public static ArrayList<String> tags;
     FragmentQueryTagBinding binding;
 
     @Override
@@ -35,7 +38,7 @@ public class QueryTagFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        adapter = new UserTagsLoaderAdapter(tags, getActivity());
+        adapter = new UserTagsLoaderAdapter(getUserData.tags, getActivity());
         recyclerView = getActivity().findViewById(R.id.userTagsRV);
         recyclerView.setAdapter(adapter);
 

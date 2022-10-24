@@ -54,6 +54,10 @@ public class GetUserData {
         followerslistuids = new ArrayList<>();
         profileinforef = FirebaseFirestore.getInstance().collection("Profiles").document(uid);
 
+
+
+
+
         followStatusRef = FirebaseFirestore.getInstance().collection("Profiles")
                 .document(uid)
                 .collection("AccountDetails")
@@ -97,10 +101,7 @@ public class GetUserData {
                     }
                 });
 
-
-        loadFollowingList();
         //Loading Tags
-
         profileinforef = FirebaseFirestore.getInstance().collection("Profiles").document(uid).collection("Interests").document("UserTags");
         profileinforef.get().addOnCompleteListener(task -> {
             DocumentSnapshot documentSnapshot = task.getResult();
@@ -110,6 +111,10 @@ public class GetUserData {
             }
         });
 
+
+
+
+        loadFollowingList();
 
 
     }

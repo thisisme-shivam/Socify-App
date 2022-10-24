@@ -28,15 +28,7 @@
             android:name=".Activities.ChatRoom"
             android:screenOrientation="fullSensor"
             android:exported="false" />
-            
-        <activity
-            android:name=".Activities.CreatePost"
-            android:screenOrientation="fullSensor"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.QnA"
-            android:exported="true"
-            android:screenOrientation="fullSensor" />
+
         <activity
             android:name=".Activities.FullScreenImg"
             android:exported="true"

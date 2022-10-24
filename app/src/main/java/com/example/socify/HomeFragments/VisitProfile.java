@@ -88,7 +88,6 @@ public class VisitProfile extends Fragment   {
         followButton = getView().findViewById(R.id.follow);
 
 
-
         getUserData = new GetUserData(uid, new InterfaceClass.VisitProfileInterface() {
             @Override
             public void onWorkDone() {

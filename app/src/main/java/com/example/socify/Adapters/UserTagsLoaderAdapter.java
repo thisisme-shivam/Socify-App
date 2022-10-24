@@ -188,8 +188,8 @@ public class UserTagsLoaderAdapter extends RecyclerView.Adapter<UserTagsLoaderAd
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity = (AppCompatActivity) context;
-                Log.i("value",tags.get(position));
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, new QueryListFragment(tags.get(position))).commit();
+                Log.i("value",tags.get(holder.getAdapterPosition()));
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new QueryListFragment(tags.get(holder.getAdapterPosition()))).commit();
             }
         });
     }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.socify.HelperClasses.GetUserData;
+import com.example.socify.HomeFragments.CreatePostFragment;
 import com.example.socify.HomeFragments.DiscoverFragment;
 import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.HomeFragments.ProfileFragment;
 import com.example.socify.InterfaceClass;
+import com.example.socify.QueryFragments.Ask_QueryFragment;
+import com.example.socify.QueryFragments.QueryTagFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityHomeBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,13 +50,18 @@ public class Home extends AppCompatActivity {
     public ProfileFragment profileFragment  = new ProfileFragment();
     BottomNavigationView navigationView;
     DiscoverFragment discoverFragment = new DiscoverFragment();
+    Ask_QueryFragment ask_queryFragment = new Ask_QueryFragment();
+    CreatePostFragment createPostFragment = new CreatePostFragment();
+    QueryTagFragment queryTagFragment = new QueryTagFragment();
+
     Dialog dialog;
     LinearLayout myquery;
     LinearLayout mygroups;
     LinearLayout myclubs;
 
+
     int[] drawables;
-    public static  GetUserData getUserData;
+    public static GetUserData getUserData;
     int lastSelected;
 
     @Override
@@ -121,8 +130,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 //Code for query creation to be written here
                 Toast.makeText(Home.this, "Query selected", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(Home.this, QnA.class));
-                QnA.fragwitch =0;
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, ask_queryFragment).addToBackStack(null).commit();
             }
         });
 
@@ -131,7 +139,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 //Code for post creation to be written here
                 Toast.makeText(Home.this, "Post selected", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(Home.this, CreatePost.class));
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, createPostFragment).addToBackStack(null).commit();
             }
         });
 
@@ -159,8 +167,7 @@ public class Home extends AppCompatActivity {
         myquery.setOnClickListener(v -> {
             //Code for query creation to be written here
             Toast.makeText(Home.this, "MYQuery selected", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(Home.this, QnA.class));
-            QnA.fragwitch =1;
+            getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, queryTagFragment).addToBackStack(null).commit();
         });
 
         mygroups.setOnClickListener(v -> {
@@ -211,15 +218,13 @@ public class Home extends AppCompatActivity {
 
         //Loading User Profile Data
         final boolean[] first = {true};
-        getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid(), new InterfaceClass.LoadDataInterface() {
-            @Override
-            public void onWorkDone() {
-                if(first[0]) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
-                    first[0] = false;
-                }
+        getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid(), (InterfaceClass.LoadDataInterface) () -> {
+            if(first[0]) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
+                first[0] = false;
             }
         });
+        QueryTagFragment.tags = getUserData.tags;
         getUserData.loadFollowingList();
 
 
@@ -237,7 +242,6 @@ public class Home extends AppCompatActivity {
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
     }
-
 
     @Override
     protected void onDestroy() {
