@@ -15,11 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/SplashTheme"
         tools:targetApi="31">
-        <activity android:name=".Activities.clubs"
-            android:screenOrientation="portrait"
-            android:exported="false">
-
-        </activity>
 
         <activity
             android:name=".friend_list"
@@ -68,10 +63,6 @@
             android:name=".Activities.VerificationActivity"
             android:exported="true"
             android:screenOrientation="fullSensor" />
-        <activity
-            android:name=".Activities.MainActivity"
-            android:screenOrientation="fullSensor"
-            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

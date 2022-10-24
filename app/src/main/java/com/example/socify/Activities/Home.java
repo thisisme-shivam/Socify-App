@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.socify.ClubFragments.CreateClubFragment;
+import com.example.socify.ClubFragments.MyClubFragment;
 import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.HomeFragments.CreatePostFragment;
 import com.example.socify.HomeFragments.DiscoverFragment;
@@ -53,6 +55,8 @@ public class Home extends AppCompatActivity {
     Ask_QueryFragment ask_queryFragment = new Ask_QueryFragment();
     CreatePostFragment createPostFragment = new CreatePostFragment();
     QueryTagFragment queryTagFragment = new QueryTagFragment();
+    CreateClubFragment createClubFragment = new CreateClubFragment();
+    MyClubFragment myClubFragment = new MyClubFragment();
 
     Dialog dialog;
     LinearLayout myquery;
@@ -148,8 +152,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 //Code for community creation to be written here
                 Toast.makeText(Home.this, "Club selected", Toast.LENGTH_SHORT).show();
-                clubs.clubFragSwitch = 0;
-                startActivity(new Intent(Home.this, clubs.class));
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, createClubFragment).addToBackStack(null).commit();
             }
         });
 
@@ -178,8 +181,7 @@ public class Home extends AppCompatActivity {
         myclubs.setOnClickListener(v -> {
             //Code for community creation to be written here
             Toast.makeText(Home.this, "my clubs selected", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(Home.this, clubs.class));
-            clubs.clubFragSwitch = 1;
+            getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, myClubFragment).addToBackStack(null).commit();
         });
 
         dialog.show();

@@ -65,7 +65,7 @@ public class CropperActivity extends AppCompatActivity {
         }
         else{
             if(CreateClubFragment.cropperFlag == 1) {
-                startActivity(new Intent(getApplicationContext(), clubs.class));
+//                startActivity(new Intent(getApplicationContext(), clubs.class));
             }
             else {
                 startActivity(new Intent(getApplicationContext(), Registration.class));

@@ -249,7 +249,7 @@ public class ChatRoomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentChatRoomBinding.inflate(inflater, container, false);
-        binding.chatRV.setAdapter(adapter);
+
 
         loaddetails();
         msgtext = binding.messagebox.getText().toString();
@@ -270,7 +270,6 @@ public class ChatRoomFragment extends Fragment {
                         }
                         adapter.notifyDataSetChanged();
                         binding.chatRV.smoothScrollToPosition(binding.chatRV.getAdapter().getItemCount());
-
                     }
 
                     @Override
@@ -279,10 +278,9 @@ public class ChatRoomFragment extends Fragment {
                     }
                 });
 
-
+        binding.chatRV.setAdapter(adapter);
         setonclicklisteners();
         checkStatus();
-
 
         return binding.getRoot();
     }
