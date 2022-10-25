@@ -34,6 +34,7 @@ public class GetUserData {
         this.uid = uid;
         loadData();
     }
+
     public GetUserData(String uid, InterfaceClass.LoadDataInterface changeview) {
         this.uid = uid;
         this.changeview = changeview;
@@ -53,6 +54,10 @@ public class GetUserData {
         followerslistuids = new ArrayList<>();
         profileinforef = FirebaseFirestore.getInstance().collection("Profiles").document(uid);
 
+
+
+
+
         followStatusRef = FirebaseFirestore.getInstance().collection("Profiles")
                 .document(uid)
                 .collection("AccountDetails")
@@ -61,13 +66,13 @@ public class GetUserData {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                         snap = value;
-                        FirebaseMessaging.getInstance().getToken()
-                                .addOnSuccessListener(new OnSuccessListener<String>() {
-                                    @Override
-                                    public void onSuccess(String s) {
-                                        snap.getReference().update("token",s);
-                                    }
-                                });
+//                        FirebaseMessaging.getInstance().getToken()
+//                                .addOnSuccessListener(new OnSuccessListener<String>() {
+//                                    @Override
+//                                    public void onSuccess(String s) {
+//                                        snap.getReference().update("token",s);
+//                                    }
+//                                });
                         if(value != null) {
                             name = value.getString("Name");
                             college_name = value.getString("CollegeName");
@@ -96,10 +101,7 @@ public class GetUserData {
                     }
                 });
 
-
-        loadFollowingList();
         //Loading Tags
-
         profileinforef = FirebaseFirestore.getInstance().collection("Profiles").document(uid).collection("Interests").document("UserTags");
         profileinforef.get().addOnCompleteListener(task -> {
             DocumentSnapshot documentSnapshot = task.getResult();
@@ -109,6 +111,10 @@ public class GetUserData {
             }
         });
 
+
+
+
+        loadFollowingList();
 
 
     }

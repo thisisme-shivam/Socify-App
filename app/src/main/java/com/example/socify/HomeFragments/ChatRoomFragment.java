@@ -1,29 +1,31 @@
-package com.example.socify.Activities;
+package com.example.socify.HomeFragments;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import com.bumptech.glide.Glide;
+import com.example.socify.Activities.Home;
 import com.example.socify.Adapters.MessagesLoaderAdapter;
 import com.example.socify.Classes.Message;
 import com.example.socify.R;
-import com.example.socify.databinding.ActivityChatRoomBinding;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.socify.databinding.FragmentChatRoomBinding;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,9 +38,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class ChatRoom extends AppCompatActivity {
+public class ChatRoomFragment extends Fragment {
 
-    ActivityChatRoomBinding binding;
+    FragmentChatRoomBinding binding;
     String name;
     String UID;
     String imgurl;
@@ -53,7 +55,7 @@ public class ChatRoom extends AppCompatActivity {
     ProgressDialog dialog;
 
     private void setonclicklisteners() {
-        binding.backIcon.setOnClickListener(v -> finish());
+        binding.backIcon.setOnClickListener(v -> Log.i("Back", "Back"));
 
         binding.attachment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +114,7 @@ public class ChatRoom extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode==1 && data!=null) {
@@ -184,7 +186,7 @@ public class ChatRoom extends AppCompatActivity {
     }
 
     private String getFileExt(Uri uri) {
-        ContentResolver contentResolver = getContentResolver();
+        ContentResolver contentResolver = getActivity().getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
@@ -205,19 +207,15 @@ public class ChatRoom extends AppCompatActivity {
                 Date date = new Date();
                 sendMsg(downloaduri.toString(),"photo");
             } else {
-                Toast.makeText(this, "Error Uploading", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Error Uploading", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
     private void loaddetails() {
-        name = getIntent().getStringExtra("Name");
-        UID = getIntent().getStringExtra("UID");
-        imgurl = getIntent().getStringExtra("Img");
         senderUID = Home.getUserData.uid;
         receiverUID = UID;
-
         senderRoom = senderUID + receiverUID;
         receiverRoom = receiverUID + senderUID;
         Log.i("receiverUID", UID);
@@ -226,22 +224,35 @@ public class ChatRoom extends AppCompatActivity {
     }
 
 
+
+
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityChatRoomBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+        name = getArguments().getString("Name");
+        UID = getArguments().getString("UID");
+        imgurl = getArguments().getString("Img");
+
         chatdb = FirebaseDatabase.getInstance();
 
-        dialog = new ProgressDialog(this);
+        dialog = new ProgressDialog(getActivity());
         dialog.setMessage("Uploading Image...");
         dialog.setCancelable(false);
 
         messages = new ArrayList<>();
-        adapter = new MessagesLoaderAdapter(this, messages);
-        binding.chatRV.setAdapter(adapter);
+        adapter = new MessagesLoaderAdapter(getActivity(), messages);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = FragmentChatRoomBinding.inflate(inflater, container, false);
+
 
         loaddetails();
+        msgtext = binding.messagebox.getText().toString();
 
         chatdb.getReference("College")
                 .child(Home.getUserData.college_name)
@@ -259,7 +270,6 @@ public class ChatRoom extends AppCompatActivity {
                         }
                         adapter.notifyDataSetChanged();
                         binding.chatRV.smoothScrollToPosition(binding.chatRV.getAdapter().getItemCount());
-
                     }
 
                     @Override
@@ -268,10 +278,10 @@ public class ChatRoom extends AppCompatActivity {
                     }
                 });
 
-        msgtext = binding.messagebox.getText().toString();
-
+        binding.chatRV.setAdapter(adapter);
         setonclicklisteners();
         checkStatus();
 
+        return binding.getRoot();
     }
 }

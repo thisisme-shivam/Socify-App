@@ -2,7 +2,6 @@ package com.example.socify.HomeFragments;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,39 +9,27 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.airbnb.lottie.L;
 import com.bumptech.glide.Glide;
-import com.example.socify.Activities.ChatRoom;
 import com.example.socify.Activities.Home;
 import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.InterfaceClass;
 import com.example.socify.R;
-import com.example.socify.SendNotification;
 import com.example.socify.databinding.FragmentVisitProfileBinding;
-import com.github.ybq.android.spinkit.style.Circle;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.firestore.Transaction;
-import com.google.firestore.v1.WriteResult;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,7 +77,6 @@ public class VisitProfile extends Fragment   {
         followButton = getView().findViewById(R.id.follow);
 
 
-
         getUserData = new GetUserData(uid, new InterfaceClass.VisitProfileInterface() {
             @Override
             public void onWorkDone() {
@@ -114,7 +100,8 @@ public class VisitProfile extends Fragment   {
                     if(Home.getUserData.followinglistuids.contains(uid)){
                         followButton.setText("Following");
                         followstatus = true;
-                    }
+                    }else
+                        followstatus = false;
 
                     if (getUserData.profilestatus.equals("private")) {
                         getView().findViewById(R.id.privatemessage).setVisibility(View.VISIBLE);
@@ -128,14 +115,20 @@ public class VisitProfile extends Fragment   {
 
     private void setOnclickListeners() {
 
+
+
+
         binding.message1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(requireActivity(), ChatRoom.class);
-                intent.putExtra("Name", getUserData.name);
-                intent.putExtra("Img", getUserData.imgurl);
-                intent.putExtra("UID", getUserData.uid);
-                startActivity(intent);
+                ChatRoomFragment chatRoomFragment = new ChatRoomFragment();
+                Bundle chatdetails = new Bundle();
+                chatdetails.putString("Name", getUserData.name);
+                chatdetails.putString("Img", getUserData.imgurl);
+                chatdetails.putString("UID", getUserData.uid);
+                chatRoomFragment.setArguments(chatdetails);
+                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.FragmentView, chatRoomFragment).commit();
             }
         });
 
@@ -191,8 +184,11 @@ public class VisitProfile extends Fragment   {
     }
 
     private void unfollowuser() {
+        followButton.setText("Follow");
         Home.getUserData.followinglistuids.remove(uid);
         getUserData.followerslistuids.remove(Home.getUserData.uid);
+        followstatus = false;
+
         getUserData.snap.getReference().update("FollowersCount",followercountView.getText());
         Home.getUserData.snap.getReference().update("FollowingCount",String.valueOf(Integer.parseInt(Home.getUserData.followingcount) -1));
 
@@ -200,7 +196,13 @@ public class VisitProfile extends Fragment   {
     }
 
     private void updateStatus(){
+        HashMap<String,ArrayList<String>> mp = new HashMap<>();
+        mp.put("Followinglist",getUserData.followinglistuids);
+        mp.put("FollowersList",getUserData.followerslistuids);
 
+        HashMap<String,ArrayList<String>> currentusermp = new HashMap<>();
+        currentusermp.put("Followinglist",Home.getUserData.followinglistuids);
+        currentusermp.put("FollowersList",Home.getUserData.followerslistuids);
 
         getUserData.followStatusRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -232,7 +234,7 @@ public class VisitProfile extends Fragment   {
 
     private void followUser() {
         Home.getUserData.followinglistuids.add(uid);
-        getUserData.followerslistuids.add(Home.getUserData.uid);
+        followstatus = true;
         updateStatus();
         getUserData.snap.getReference().update("FollowersCount",followercountView.getText());
         Home.getUserData.snap.getReference().update("FollowingCount",String.valueOf(Integer.parseInt(Home.getUserData.followingcount) +1));

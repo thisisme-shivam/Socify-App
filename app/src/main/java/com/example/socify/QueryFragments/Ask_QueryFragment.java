@@ -111,7 +111,7 @@ public class Ask_QueryFragment extends Fragment {
                 }
                 Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
                 QueryTagFragment queryTagFragment = new QueryTagFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, queryTagFragment).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, queryTagFragment).commit();
             }
             else if(question.isEmpty()){
                 Toast.makeText(requireActivity(), "Please enter the question", Toast.LENGTH_SHORT).show();
