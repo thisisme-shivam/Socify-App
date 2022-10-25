@@ -15,23 +15,24 @@ public class OptimizedSearchCourses {
     Thread th;
     boolean stopthread;
     Map<String,ArrayList<Course>> hashMap;
-    CoursesFragment getCollegeFragment;
+    CoursesFragment coursesFragment;
 
     public  ArrayList<Course> newfilterlist;
-    public OptimizedSearchCourses(CoursesFragment getCollegeFragment){
-        filterlist = Registration.courses;
+    public OptimizedSearchCourses(CoursesFragment coursesFragment){
+
         hashMap = new HashMap<>();
-        this.getCollegeFragment = getCollegeFragment;
+        this.coursesFragment = coursesFragment;
+        filterlist = coursesFragment.regActivity.courses;
     }
 
     String oldtext = "";
     public void startSearch(String newText){
 
         if(newText.isEmpty()){
-            newfilterlist = Registration.courses;
-            getCollegeFragment.adapter.filterlist(Registration.courses);
-            getCollegeFragment.shimmerFrameLayout.setVisibility(View.GONE);
-            getCollegeFragment.rec.setVisibility(View.VISIBLE);
+            newfilterlist = coursesFragment.regActivity.courses;
+            coursesFragment.adapter.filterlist(coursesFragment.regActivity.courses);
+            coursesFragment.shimmerFrameLayout.setVisibility(View.GONE);
+            coursesFragment.rec.setVisibility(View.VISIBLE);
             return;
         }
 
@@ -40,7 +41,7 @@ public class OptimizedSearchCourses {
         }else if(newText.contains(oldtext) && !oldtext.isEmpty())
             filterlist = newfilterlist;
         else
-            filterlist = Registration.courses;
+            filterlist = coursesFragment.regActivity.courses;
 
         stopthread  = false;
         newfilterlist = new ArrayList<>();
@@ -62,13 +63,13 @@ public class OptimizedSearchCourses {
                 if(!stopthread) {
                     hashMap.put(newText, newfilterlist);
 
-                    getCollegeFragment.hand.post(new Runnable() {
+                    coursesFragment.hand.post(new Runnable() {
                         @Override
                         public void run() {
                             oldtext = newText;
-                            getCollegeFragment.adapter.filterlist(newfilterlist);
-                            getCollegeFragment.shimmerFrameLayout.setVisibility(View.GONE);
-                            getCollegeFragment.rec.setVisibility(View.VISIBLE);
+                            coursesFragment.adapter.filterlist(newfilterlist);
+                            coursesFragment.shimmerFrameLayout.setVisibility(View.GONE);
+                            coursesFragment.rec.setVisibility(View.VISIBLE);
                         }
                     });
                 }

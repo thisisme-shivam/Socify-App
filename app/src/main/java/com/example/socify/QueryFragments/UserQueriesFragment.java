@@ -28,9 +28,7 @@ import java.util.ArrayList;
 public class UserQueriesFragment extends Fragment {
 
     FragmentUserQueriesBinding binding;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference uidreference;
-    ReplyFragment replyFragment;
     FirebaseRecyclerAdapter<QuestionsMember, Load_Questions> firebaseRecyclerAdapter;
     ArrayList<QuestionsMember> questionsMembers;
     QuesitonLoadAdapter adapter;
@@ -79,9 +77,9 @@ public class UserQueriesFragment extends Fragment {
     private void adapterStart() {
 
         adapter.userFragent = true;
-        Context context  = getContext();
-        if(context!=null)
-            binding.userqueriesRV.setLayoutManager(new LinearLayoutManager(context));
+
+        if(getContext()!=null)
+            binding.userqueriesRV.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.userqueriesRV.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

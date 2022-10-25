@@ -33,6 +33,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -186,6 +189,9 @@ public class Home extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+
+
         dialog = new Dialog(this);
         navigationView = binding.bottomnavigationview;
         drawables = new int[]{
@@ -213,19 +219,22 @@ public class Home extends AppCompatActivity {
 
         //Loading User Profile Data
         final boolean[] first = {true};
+        getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commitNowAllowingStateLoss();
+
         getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid(), new InterfaceClass.LoadDataInterface() {
             @Override
             public void onWorkDone() {
-                if(first[0]) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
+                if (first[0]) {
+                    newsFeedFragment.loadData();
                     first[0] = false;
-                    SendNotification.sendFollowNotification(getApplicationContext(),getUserData.uid,getUserData.username,getUserData.token);
-
                 }
-
+            }
+            @Override
+            public void onWorkNotDone() {
             }
         });
-        getUserData.loadFollowingList();
+
+
 
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

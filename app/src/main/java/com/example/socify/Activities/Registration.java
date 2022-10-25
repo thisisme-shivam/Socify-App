@@ -1,18 +1,22 @@
 package com.example.socify.Activities;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.load.data.DataFetcher;
 import com.example.socify.Classes.College;
 import com.example.socify.Classes.Course;
-import com.example.socify.FireBaseClasses.UserDetails;
+import com.example.socify.InterfaceClass;
 import com.example.socify.R;
 import com.example.socify.RegistrationFragments.CoursesFragment;
 import com.example.socify.RegistrationFragments.GetCollegeFragment;
@@ -21,47 +25,59 @@ import com.example.socify.RegistrationFragments.ProfilePic;
 import com.example.socify.RegistrationFragments.UserNameFragment;
 import com.example.socify.databinding.ActivityRegistrationBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
-
-import io.grpc.InternalServer;
 
 public class Registration extends AppCompatActivity {
 
-    ArrayList<Fragment> gotoFragment;
+
     ActivityRegistrationBinding binding;
     DatabaseReference ref;
-    public static ArrayList<College> colleges;
-    public static UserDetails details = new UserDetails();
-    public static ArrayList<Course> courses;
-    public static ProfilePic profilePic ;
-    public static UserNameFragment userNameFragment;
-    public static GetCollegeFragment getCollegeFragment;
-    public static CoursesFragment coursesFragment;
-    public static InterestsFragment interestsFragment;
-    public static int fragment_curr_pos =0;
+    public  ArrayList<College> colleges;
+    public HashMap<String,String> profiledetails;
+    public HashMap<String,ArrayList<String>> tagMap;
+    public  ArrayList<Course> courses;
+    Dialog progressDialog;
+    InterfaceClass.InterestInterface interestInterface;
+    String currentuid,phonenumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRegistrationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        phonenumber = getIntent().getStringExtra("PhoneNumber");
         courses = new ArrayList<>();
         colleges = new ArrayList<>();
         ref = FirebaseDatabase.getInstance().getReference("CollegeNames");
-
+        tagMap = new HashMap<>();
+        profiledetails = new HashMap<>();
+        currentuid = FirebaseAuth.getInstance().getUid();
+        FirebaseMessaging.getInstance().getToken()
+                .addOnSuccessListener(new OnSuccessListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+                        profiledetails.put("token",s);
+                    }
+                });
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -103,34 +119,151 @@ public class Registration extends AppCompatActivity {
 
             }
         });
-        profilePic = new ProfilePic();
-        userNameFragment = new UserNameFragment();
-        getCollegeFragment = new GetCollegeFragment();
-        coursesFragment = new CoursesFragment();
-        interestsFragment = new InterestsFragment();
-        gotoFragment = new ArrayList<>();
-        gotoFragment.add(profilePic);
-        gotoFragment.add(userNameFragment);
-        gotoFragment.add(getCollegeFragment);
-        gotoFragment.add(coursesFragment);
-        gotoFragment.add(interestsFragment);
 
 
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_registration, profilePic).commit();
-        binding.backIcon.setOnClickListener(new View.OnClickListener() {
+
+
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_registration, new ProfilePic()).commit();
+
+    }
+
+
+    public void sendToDatabase(InterfaceClass.InterestInterface interestInterface){
+
+
+        this.interestInterface = interestInterface;
+
+        if(uri!= null) {
+            Log.i("uri", String.valueOf(uri));
+            final StorageReference reference = FirebaseStorage.getInstance().getReference("Profile Images").child(String.valueOf(uri));
+            UploadTask uploadTask = reference.putFile(uri);
+            uploadTask.continueWithTask(task -> {
+
+                if (!task.isSuccessful()) {
+                    throw Objects.requireNonNull(task.getException());
+                }
+                return reference.getDownloadUrl();
+            }).addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    profiledetails.put("ImgUrl", uri.toString());
+                    putOtherData();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    interestInterface.onWorkNotDone();
+                    Log.i("photo added","true");
+                    Toast.makeText(getApplicationContext(),"Sorry,something went wrong",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        else{
+            profiledetails.put("ImgUrl", "No Image");
+            putOtherData();
+        }
+
+
+    }
+
+
+    private void putOtherData(){
+        profiledetails.put("UID", currentuid);
+        profiledetails.put("FollowersCount",String.valueOf(0));
+        profiledetails.put("FollowingCount",String.valueOf(0));
+        profiledetails.put("ProfileStatus","public");
+
+        FirebaseFirestore.getInstance().collection("Profiles").document(currentuid)
+                .set(profiledetails).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        setUserAccountDetails();
+                        send_uid_toCollege();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        interestInterface.onWorkNotDone();
+
+                    }
+                });
+    }
+
+
+    private void setUserAccountDetails(){
+        FirebaseFirestore.getInstance().collection("Profiles").document(currentuid)
+                .collection("AccountDetails").document("UserTags").set(tagMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                             mapPhoneUsername();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        interestInterface.onWorkNotDone();
+                    }
+                });
+    }
+
+    private void send_uid_toCollege(){
+        FirebaseDatabase.getInstance().getReference()
+                .child("College")
+                .child(profiledetails.get("College"))
+                .child("Profiles")
+                .child(currentuid)
+                .setValue("UID",currentuid).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        interestInterface.onWorkNotDone();
+                    }
+                });
+
+    }
+
+    private void mapPhoneUsername(){
+        Log.i("mapped","true");
+        HashMap<String,String> mp = new HashMap<>();
+        mp.put(profiledetails.get("Username"), phonenumber);
+        FirebaseFirestore.getInstance()
+                .collection("MapPhoneUsername")
+                .document(profiledetails.get("Username"))
+                .set(mp);
+
+            AuthCredential credential = EmailAuthProvider.getCredential(phonenumber+"@gmail.com",password);
+            FirebaseAuth.getInstance().getCurrentUser()
+                    .linkWithCredential(credential)
+                    .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            signInUser();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            interestInterface.onWorkNotDone();
+                        }
+                    });
+
+    }
+
+    private void signInUser() {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(phonenumber+"@gmail.com",password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
-            public void onClick(View view) {
-                fragment_curr_pos--;
-                if(fragment_curr_pos == 0)
-                    binding.backIcon.setVisibility(View.GONE);
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_registration, gotoFragment.get(fragment_curr_pos)).commit();
+            public void onSuccess(AuthResult authResult) {
+                interestInterface.onWorkDone();
+                startActivity(new Intent(getApplicationContext(),Home.class));
+                finish();
             }
         });
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    String password;
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
+    public Uri uri;
+    public void setImgUri(Uri uri){
+        this.uri =uri;
     }
 }

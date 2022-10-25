@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.socify.Activities.AllChat;
 import com.example.socify.Activities.Home;
+import com.example.socify.Activities.SplashActivity;
 import com.example.socify.Adapters.GetNewsFeedAdapter;
 import com.example.socify.Classes.PostMember;
 import com.example.socify.InterfaceClass;
@@ -49,10 +50,14 @@ public class NewsFeedFragment extends Fragment {
         chattingusers = new ArrayList<>();
         postMemberArrayList = new ArrayList<>();
         getNewsFeed = new GetNewsFeedAdapter(getActivity(),postMemberArrayList);
+
+
+    }
+
+    public void loadData(){
         personPostsRef = FirebaseDatabase.getInstance().getReference().child("College")
                 .child(Home.getUserData.college_name)
                 .child("Posts");
-
         for(String personid:Home.getUserData.followinglistuids){
             personPostsRef.child(personid).child("All Images").addValueEventListener(new ValueEventListener() {
                 @Override
@@ -70,9 +75,7 @@ public class NewsFeedFragment extends Fragment {
                 }
             });
         }
-
     }
-
     private void setonclicklisteners() {
 
         binding.chat.setOnClickListener(new View.OnClickListener() {
@@ -111,12 +114,10 @@ public class NewsFeedFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Online Users").child(Home.getUserData.uid).setValue("Online");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Online Users").child(Home.getUserData.uid).setValue("Offline");
     }
 }

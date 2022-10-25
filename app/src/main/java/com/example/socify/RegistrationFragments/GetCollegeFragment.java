@@ -16,9 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.load.data.DataFetcher;
 import com.example.socify.Activities.Registration;
 import com.example.socify.Adapters.GetCollegeAdapter;
-import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.HelperClasses.OptimizedSearchCollege;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentGetCollegeBinding;
@@ -35,6 +35,8 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
     public ShimmerFrameLayout layout;
     public Handler hand = new Handler();
     SearchView searchview;
+    public Registration regActivity;
+    CoursesFragment coursesFragment;
     CountDownTimer cntr;
     private Integer waitingTime = 200;
     private void filter(String newText){
@@ -50,7 +52,11 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        coursesFragment = new CoursesFragment();
+        optimizedSearch = new OptimizedSearchCollege(this);
+        regActivity = (Registration) getActivity();
+        adapter = new GetCollegeAdapter(requireContext(),regActivity.colleges,this);
+        
     }
 
     int i=1;
@@ -61,19 +67,18 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(60);
 
-        Log.i("made again", "uyes");
         rec = view.findViewById(R.id.CollegeListRV);
         rec.setHasFixedSize(true);
         rec.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new GetCollegeAdapter(getContext(),Registration.colleges,this);
         rec.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
         layout = getView().findViewById(R.id.shimmer_view_container);
 
         searchview = getView().findViewById(R.id.search_college);
-        optimizedSearch = new OptimizedSearchCollege(this);
+
+
         searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -109,16 +114,14 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
         return binding.getRoot();
     }
 
-
-
     @Override
     public void onclick(int position) {
-        Registration.fragment_curr_pos++;
-        Registration.details.setCollege_name(optimizedSearch.newfilterlist.get(position).getCollege_name());
-        SendProfileData data = new SendProfileData();
+        String college = optimizedSearch.newfilterlist.get(position).getCollege_name();
+        college = college.replaceAll("[^A-Za-z]+", "");
+        Log.i("Name",college);
+        regActivity.profiledetails.put("College",college);
         searchview.setQuery(optimizedSearch.newfilterlist.get(position).getCollege_name(),true);
-        data.sendCollegeName();
-        getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.coursesFragment).commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, coursesFragment).commitNowAllowingStateLoss();
 
     }
 

@@ -19,11 +19,14 @@ import android.widget.Toast;
 import com.chaos.view.PinView;
 import com.example.socify.R;
 import com.example.socify.databinding.ActivityVerificationBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.auth.SignInMethodQueryResult;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -68,7 +71,7 @@ public class VerificationActivity extends AppCompatActivity {
                     binding.errorbox.setText("Phone number invalid");
                     binding.errorbox.setVisibility(View.VISIBLE);
             }else{
-                sendotp();
+                verifyNumber();
             }
         });
         close_dialog.setOnClickListener(view -> {
@@ -86,7 +89,8 @@ public class VerificationActivity extends AppCompatActivity {
                 progressDialog.show();
                 fauth.signInWithCredential(credential).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        startActivity(new Intent(getApplicationContext(), Registration.class));
+                        startActivity(new Intent(getApplicationContext(), Registration.class).putExtra("PhoneNumber",phonenumber));
+                        fauth.signOut();
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "Incorrect Otp", Toast.LENGTH_SHORT).show();
@@ -100,6 +104,28 @@ public class VerificationActivity extends AppCompatActivity {
         otpDialog.findViewById(R.id.resendText).setOnClickListener(view -> sendotp());
 
 
+    }
+
+    private void verifyNumber() {
+        Log.i("phonenumber",phonenumber);
+        FirebaseAuth.getInstance().fetchSignInMethodsForEmail(phonenumber+"@gmail.com").addOnSuccessListener(new OnSuccessListener<SignInMethodQueryResult>() {
+            @Override
+            public void onSuccess(SignInMethodQueryResult signInMethodQueryResult) {
+
+                int size = signInMethodQueryResult.getSignInMethods().size();
+                Log.i("size", String.valueOf(size));
+                if(size == 1)
+                    Toast.makeText(getApplicationContext(),"Phone already Registered",Toast.LENGTH_SHORT).show();
+                else
+                    sendotp();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(),"Sorry something went wrong",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private boolean validateotp() {
@@ -176,7 +202,7 @@ public class VerificationActivity extends AppCompatActivity {
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressBar = (ProgressBar) progressDialog.findViewById(R.id.spin_kit);
         binding.phoneInput.requestFocus();
-         vie =  otpDialog.findViewById(R.id.otpInput);
+        vie =  otpDialog.findViewById(R.id.otpInput);
 
     }
 

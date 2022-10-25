@@ -1,6 +1,8 @@
 package com.example.socify.RegistrationFragments;
 
-import android.content.Intent;
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,63 +16,70 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.socify.Activities.Home;
 import com.example.socify.Activities.Registration;
-import com.example.socify.FireBaseClasses.SendProfileData;
+import com.example.socify.Activities.VerificationActivity;
+import com.example.socify.InterfaceClass;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentInterestsBinding;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import nl.bryanderidder.themedtogglebuttongroup.SelectAnimation;
-import nl.bryanderidder.themedtogglebuttongroup.ThemedButton;
 
 public class InterestsFragment extends Fragment {
 
-    SendProfileData sendProfileData = new SendProfileData();
     ArrayList<String> tags;
     FragmentInterestsBinding binding;
-    List<ThemedButton> str;
-
-
+    Registration regActivity;
+    Dialog progressDialog;
     public void onclicklisteners() {
-        binding.finishbtn.setOnClickListener(v -> {
-            //Getting text from tapped tags
-            if(str.isEmpty()){
-                Toast.makeText(getContext(),"Select atleast 1 tag " , Toast.LENGTH_SHORT).show();
-            }else {
-                for (ThemedButton but : str) {
-                    String newstr = but.getText();
-                    Log.e("Tag", newstr);
-//                    .replaceAll("[^A-Za-z]+", "")
-                    tags.add(newstr);
 
-                    Log.i("string", newstr);
-                }
-                Registration.details.setTags(tags);
-                //Uploading Tags
-                sendProfileData.insertintocollege();
-                sendProfileData.sendTags();
-                startActivity(new Intent(requireActivity(), Home.class));
-                requireActivity().finish();
+         binding.finishbtn.setOnClickListener(v -> {
+                     //Getting text from tapped tags
+             if (tags.isEmpty() || tags.size() < 3)
+                 Toast.makeText(getContext(), "Select atleast 3 tag ", Toast.LENGTH_SHORT).show();
+             else
+                 sendData();
+
+
+         });
+
+         binding.groupedtags.setOnSelectListener(themedButton -> {
+             tags.add(themedButton.getText());
+             return null;
+         });
+    }
+
+    private void sendData() {
+
+        progressDialog.show();
+        Log.i("entering", "true");
+        regActivity.tagMap.put("Tags", tags);
+        //Uploading Tags
+        regActivity.sendToDatabase(new InterfaceClass.InterestInterface() {
+            @Override
+            public void onWorkDone() {
+                progressDialog.show();
+                Toast.makeText(getContext(),"Registration Successful",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onWorkNotDone() {
+                progressDialog.dismiss();
+                Toast.makeText(getContext(),"Sorry something went wrong",Toast.LENGTH_SHORT).show();
             }
         });
-
-        binding.groupedtags.setOnSelectListener(themedButton -> {
-            str.add(themedButton);
-            Log.i("button selected", themedButton.getText());
-            return null;
-        });
-
-
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        str = new ArrayList<>();
-
+        regActivity = (Registration) getActivity();
+        progressDialog = new Dialog(getContext());
+        progressDialog.setCancelable(false);
+        progressDialog.setContentView(R.layout.progressdialogotp);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
     @Override

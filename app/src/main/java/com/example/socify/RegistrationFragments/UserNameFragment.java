@@ -1,20 +1,17 @@
 package com.example.socify.RegistrationFragments;
 
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.socify.Activities.Registration;
-import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentNameFragementBinding;
 
@@ -27,24 +24,18 @@ public class UserNameFragment extends Fragment {
 
     FragmentNameFragementBinding binding;
     String username, Password;
-    SendProfileData sendProfileData = new SendProfileData();
+    Registration regActivity;
+    GetCollegeFragment getCollegeFragment;
     public void onclicklisteners() {
         binding.nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(FieldValidation()) {
-                    Registration.details.setUsername(username);
-                    Registration.details.setPassword(Password);
-                    Log.i("Name", Registration.details.getName());
-                    Log.i("YOP", Registration.details.getPassyear());
-                    Log.e("username", username);
 
+                    regActivity.profiledetails.put("Username",username);
+                    regActivity.setPassword(Password);
                     //Uploading username & Password and mapping username with phone number
-                    sendProfileData.sendUsername();
-                    sendProfileData.sendPassword();
-                    sendProfileData.mapUserwithPhone(username);
-                    Registration.fragment_curr_pos++;
-                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.getCollegeFragment).commit();
+                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, getCollegeFragment).commit();
                 }
             }
         });
@@ -85,7 +76,8 @@ public class UserNameFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        regActivity = (Registration) getActivity();
+        getCollegeFragment  = new GetCollegeFragment();
     }
 
 
@@ -96,6 +88,13 @@ public class UserNameFragment extends Fragment {
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(40);
 
+        onclicklisteners();
+        if(regActivity.uri !=null) {
+            binding.ProfilePic.setImageURI(regActivity.uri);
+        }
+        else{
+            binding.picadded.setText("No Image Added");
+        }
     }
 
     @Override
@@ -103,13 +102,7 @@ public class UserNameFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentNameFragementBinding.inflate(inflater, container, false);
-        onclicklisteners();
-        if(!Objects.equals(Registration.details.getImgUri(), "")) {
-            binding.ProfilePic.setImageURI(Uri.parse(Registration.details.getImgUri()));
-        }
-        else{
-            binding.picadded.setText("No Image Selected");
-        }
+
 
         return binding.getRoot();
     }
