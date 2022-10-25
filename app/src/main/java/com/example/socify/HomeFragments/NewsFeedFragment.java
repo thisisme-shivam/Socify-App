@@ -2,8 +2,6 @@ package com.example.socify.HomeFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.socify.Activities.AllChat;
 import com.example.socify.Activities.Home;
 import com.example.socify.Activities.SplashActivity;
 import com.example.socify.Adapters.GetNewsFeedAdapter;
 import com.example.socify.Classes.PostMember;
-import com.example.socify.InterfaceClass;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentNewsFeedBinding;
-import com.google.firebase.FirebaseError;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -81,7 +78,7 @@ public class NewsFeedFragment extends Fragment {
         binding.chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), AllChat.class));
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new AllChatFragment()).commit();
             }
         });
 
@@ -100,6 +97,23 @@ public class NewsFeedFragment extends Fragment {
         rec.setLayoutManager(layoutManager);
         rec.setAdapter(getNewsFeed);
         setonclicklisteners();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Chats")
+                        .child(Home.getUserData.uid)
+                        .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                for(DataSnapshot userSnapshot : task.getResult().getChildren()) {
+                                    chattingusers.add(userSnapshot.getKey());
+                                    Log.i("UIDS", String.valueOf(chattingusers));
+                                }
+                            }
+                        });
+            }
+        }).start();
 
     }
 

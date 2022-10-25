@@ -39,7 +39,7 @@ public class QueryListFragment extends Fragment {
         binding.backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader, new QueryTagFragment()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new QueryTagFragment()).commit();
             }
         });
 

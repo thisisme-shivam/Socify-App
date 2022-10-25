@@ -37,6 +37,12 @@ public class ProfileFragment extends Fragment {
     DatabaseReference databaseReference;
     PostLoaderFragment postLoaderFragment = new PostLoaderFragment();
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
+
     public void setonclicklisteners() {
 
         binding.threeDots.setOnClickListener(new View.OnClickListener() {

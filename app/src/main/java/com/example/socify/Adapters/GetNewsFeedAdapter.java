@@ -99,7 +99,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                 @Override
                 public void onClick(View v) {
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new CommentsFragment(member.getPostid())).addToBackStack(null).commit();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new CommentsFragment(member.getPostid(), member.getUid())).addToBackStack(null).commit();
                 }
             });
 

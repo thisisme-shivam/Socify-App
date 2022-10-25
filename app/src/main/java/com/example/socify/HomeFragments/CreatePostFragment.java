@@ -1,38 +1,41 @@
-package com.example.socify.Activities;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.socify.HomeFragments;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.MediaController;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.socify.Activities.Home;
 import com.example.socify.Classes.PostMember;
 import com.example.socify.R;
-import com.example.socify.databinding.ActivityCreatePostBinding;
+import com.example.socify.databinding.FragmentCreatePostBinding;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class CreatePost extends AppCompatActivity {
 
-    ActivityCreatePostBinding binding;
+public class CreatePostFragment extends Fragment {
+
     private static final int PICK_FILE=1;
     private Uri selectedUri = null;
     UploadTask uploadTask;
@@ -42,45 +45,27 @@ public class CreatePost extends AppCompatActivity {
     MediaController mediaController;
     String type;
     PostMember postMember;
+    FragmentCreatePostBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityCreatePostBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        mediaController = new MediaController(this);
+        mediaController = new MediaController(getActivity());
         postMember = new PostMember();
-        binding.name.setText(Home.getUserData.name);
-        Glide.with(this).load(Home.getUserData.imgurl).into(binding.profilepic);
         userimagesref = database.getReference("College").child(Home.getUserData.college_name).child("Posts").child(Home.getUserData.uid).child("All Images");
         uservideosref = database.getReference("College").child(Home.getUserData.college_name).child("Posts").child(Home.getUserData.uid).child("All Videos");
         storageReference = FirebaseStorage.getInstance().getReference("Posts").child("User's Posts").child(Home.getUserData.uid);
-        setonclicklisteners();
     }
 
-    private void setonclicklisteners() {
-        binding.share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dopost();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-            }
-        });
-
-        binding.selectbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseFile();
-            }
-        });
-
-        binding.backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CreatePost.this, Home.class));
-            }
-        });
+        binding = FragmentCreatePostBinding.inflate(inflater, container, false);
+        binding.name.setText(Home.getUserData.name);
+        Glide.with(this).load(Home.getUserData.imgurl).into(binding.profilepic);
+        setonclicklisteners();
+        return binding.getRoot();
 
     }
 
@@ -92,7 +77,7 @@ public class CreatePost extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if( requestCode == PICK_FILE && data != null) {
@@ -115,17 +100,16 @@ public class CreatePost extends AppCompatActivity {
                 Log.e("Selected URI", String.valueOf(selectedUri));
             }
             else
-                Toast.makeText(this, "No File Selected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "No File Selected", Toast.LENGTH_SHORT).show();
         }
 
     }
 
     private String getFileExt(Uri uri) {
-        ContentResolver contentResolver = getContentResolver();
+        ContentResolver contentResolver = getActivity().getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
-
 
     private void Dopost() {
         String description = binding.desc.getText().toString();
@@ -136,7 +120,6 @@ public class CreatePost extends AppCompatActivity {
 
 
         if(!TextUtils.isEmpty(binding.desc.getText()) && selectedUri!=null) {
-            finish();
             final StorageReference reference = storageReference.child(System.currentTimeMillis()+ ":" + getFileExt(selectedUri));
             uploadTask = reference.putFile(selectedUri);
 
@@ -170,7 +153,7 @@ public class CreatePost extends AppCompatActivity {
 
                         userimagesref.child(id1).setValue(postMember);
                         //Storing Allpost Image
-                        Toast.makeText(this, "Post Uploaded", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Post Uploaded", Toast.LENGTH_SHORT).show();
                     }
                     else if(type.equals("video")) {
                         postMember.setType("video");
@@ -180,22 +163,45 @@ public class CreatePost extends AppCompatActivity {
                         assert id3 != null;
                         uservideosref.child(id3).setValue(postMember);
                         //Storing Allpost VideoPost
-                        Toast.makeText(this, "Post Uploaded", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Post Uploaded", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(this, "Error Uploading", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Error Uploading", Toast.LENGTH_SHORT).show();
                     }
                 }
 
             });
         }
         else{
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
         }
 
     }
 
+    private void setonclicklisteners() {
+        binding.share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dopost();
+
+            }
+        });
 
 
+        binding.selectbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseFile();
+            }
+        });
+
+        binding.backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
+    }
 
 }

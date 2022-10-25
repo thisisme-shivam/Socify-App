@@ -62,7 +62,6 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
 
 
 
-
     @Override
     public void onBindViewHolder( RecyclerView.ViewHolder holder, int position) {
         QuestionsMember member = questionlist.get(position);
@@ -93,7 +92,7 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
             userViewHolder.binding.repliesbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader,replyFragment).commit();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,replyFragment).commit();
                 }
             });
 
@@ -140,7 +139,7 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
             userViewHolder.binding.repliesbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.queryFragmentLoader,replyFragment).commit();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,replyFragment).commit();
 
                 }
             });

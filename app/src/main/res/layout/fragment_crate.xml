@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragments.CreateFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView5"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_margin="10dp"
+        android:elevation="100dp"
+        app:cardBackgroundColor="#E0EDEC"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/askquery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/chatfontbold"
+                android:text="Ask a query"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/askquerydesc"
+                android:layout_width="250dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/chatfont"
+                android:text="Have a query? Ask it and get it solved by your seniors, faculties and peers. Experience query solving like never before and take advantage of the great minds of your college. Select your tag and ask your query."
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/askqueryimg"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/askquery" />
+
+            <ImageView
+                android:id="@+id/askqueryimg"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:src="@drawable/createquery"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/askquerybtn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                app:backgroundTint="@color/white"
+                app:fabCustomSize="60dp"
+                app:fabSize="normal"
+                app:layout_constraintStart_toEndOf="@+id/askquerydesc"
+                app:layout_constraintTop_toBottomOf="@+id/askqueryimg"
+                app:srcCompat="@drawable/forwardarrow" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView6"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="9dp"
+        android:elevation="100dp"
+        app:cardBackgroundColor="#E0EDEC"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView5">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/createposttv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/chatfontbold"
+                android:text="Create a post"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/creatpostdesc"
+                android:layout_width="250dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/chatfont"
+                android:text="Want to be famous among your college students. Start being so by creating and uploading a post. Get likes and comments from your colleagues, senior and faculties and become the next influencer of your college."
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/createpostimg"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createposttv" />
+
+            <ImageView
+                android:id="@+id/createpostimg"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:src="@drawable/createpost"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/createpostbtn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                app:backgroundTint="@color/white"
+                app:fabCustomSize="60dp"
+                app:fabSize="normal"
+                app:layout_constraintStart_toEndOf="@+id/creatpostdesc"
+                app:layout_constraintTop_toBottomOf="@+id/createpostimg"
+                app:srcCompat="@drawable/forwardarrow" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:elevation="100dp"
+        app:cardBackgroundColor="#E0EDEC"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView6">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/createclubtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/chatfontbold"
+                android:text="Create a club"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/createclubdesc"
+                android:layout_width="250dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/chatfont"
+                android:text="Have a group of friends in college but can't talk to all of them after college. Create a club and start chatting and sharing images and talk your heart out with your friends."
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/createclubimg"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createclubtv" />
+
+            <ImageView
+                android:id="@+id/createclubimg"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
+                android:src="@drawable/createclub"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/createclubbtn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                app:backgroundTint="@color/white"
+                app:fabCustomSize="60dp"
+                app:fabSize="normal"
+                app:layout_constraintStart_toEndOf="@+id/createclubdesc"
+                app:layout_constraintTop_toBottomOf="@+id/createclubimg"
+                app:srcCompat="@drawable/forwardarrow" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,9 @@ import com.example.socify.Classes.CommentMember;
 import com.example.socify.R;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder> {
 
@@ -37,7 +39,12 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         CommentMember commentMember = commentMembers.get(position);
         holder.comment.setText(commentMember.getComment());
         holder.username.setText(commentMember.getuserName());
-        holder.time.setText(commentMember.getTime());
+        long time = Long.valueOf(commentMember.getTime());
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+
+        holder.time.setText(dateFormat.format(new Date(time)));
+
     }
 
     @Override
@@ -48,8 +55,6 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
     public static class CommentsViewHolder extends RecyclerView.ViewHolder {
 
         MaterialTextView comment, username, time;
-
-
         public CommentsViewHolder(@NonNull View itemView) {
             super(itemView);
             comment = itemView.findViewById(R.id.commenttv);
@@ -58,6 +63,5 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
 
         }
     }
-
 
 }

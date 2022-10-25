@@ -17,12 +17,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.socify.ClubFragments.CreateClubFragment;
+import com.example.socify.ClubFragments.MyClubFragment;
 import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.HomeFragments.DiscoverFragment;
 import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.HomeFragments.ProfileFragment;
 import com.example.socify.HomeFragments.SearchAll;
 import com.example.socify.InterfaceClass;
+import com.example.socify.QueryFragments.Ask_QueryFragment;
+import com.example.socify.QueryFragments.QueryTagFragment;
 import com.example.socify.R;
 import com.example.socify.SendNotification;
 import com.example.socify.databinding.ActivityHomeBinding;
@@ -33,9 +37,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -52,7 +53,11 @@ public class Home extends AppCompatActivity {
     LinearLayout myquery;
     LinearLayout mygroups;
     LinearLayout myclubs;
-
+    Ask_QueryFragment ask_queryFragment = new Ask_QueryFragment();
+    CreatePostFragment createPostFragment = new CreatePostFragment();
+    QueryTagFragment queryTagFragment = new QueryTagFragment();
+    CreateClubFragment createClubFragment = new CreateClubFragment();
+    MyClubFragment myClubFragment = new MyClubFragment();
     int[] drawables;
     public static  GetUserData getUserData;
     int lastSelected;
@@ -123,8 +128,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 //Code for query creation to be written here
                 Toast.makeText(Home.this, "Query selected", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(Home.this, QnA.class));
-                QnA.fragwitch =0;
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, ask_queryFragment).addToBackStack(null).commit();
             }
         });
 
@@ -133,7 +137,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 //Code for post creation to be written here
                 Toast.makeText(Home.this, "Post selected", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(Home.this, CreatePost.class));
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, createPostFragment).addToBackStack(null).commit();
             }
         });
 
@@ -142,8 +146,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 //Code for community creation to be written here
                 Toast.makeText(Home.this, "Club selected", Toast.LENGTH_SHORT).show();
-                clubs.clubFragSwitch = 0;
-                startActivity(new Intent(Home.this, clubs.class));
+                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, createClubFragment).addToBackStack(null).commit();
             }
         });
 
@@ -161,8 +164,7 @@ public class Home extends AppCompatActivity {
         myquery.setOnClickListener(v -> {
             //Code for query creation to be written here
             Toast.makeText(Home.this, "MYQuery selected", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(Home.this, QnA.class));
-            QnA.fragwitch =1;
+            getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, queryTagFragment).addToBackStack(null).commit();
         });
 
         mygroups.setOnClickListener(v -> {
@@ -173,8 +175,7 @@ public class Home extends AppCompatActivity {
         myclubs.setOnClickListener(v -> {
             //Code for community creation to be written here
             Toast.makeText(Home.this, "my clubs selected", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(Home.this, clubs.class));
-            clubs.clubFragSwitch = 1;
+            getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, myClubFragment).addToBackStack(null).commit();
         });
 
         dialog.show();
@@ -188,9 +189,6 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
-
 
         dialog = new Dialog(this);
         navigationView = binding.bottomnavigationview;
@@ -219,21 +217,19 @@ public class Home extends AppCompatActivity {
 
         //Loading User Profile Data
         final boolean[] first = {true};
-        getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commitNowAllowingStateLoss();
-
         getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid(), new InterfaceClass.LoadDataInterface() {
             @Override
             public void onWorkDone() {
-                if (first[0]) {
-                    newsFeedFragment.loadData();
+                if(first[0]) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
                     first[0] = false;
+                    SendNotification.sendFollowNotification(getApplicationContext(),getUserData.uid,getUserData.username,getUserData.token);
+
                 }
-            }
-            @Override
-            public void onWorkNotDone() {
+
             }
         });
-
+        QueryTagFragment.tags = getUserData.tags;
 
 
 
