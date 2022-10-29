@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ClubFragments.CreateClubFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -23,12 +24,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/backbtn"
-                android:layout_width="40dp"
-                android:layout_height="35dp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_baseline_arrow_back_24" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/back_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="61dp"
+                android:backgroundTint="@color/white"
+                app:elevation="0dp"
+                app:borderWidth="0dp"
+                android:src="@drawable/ic_baseline_arrow_back_24"
+                app:tint="@null" />
 
             <TextView
                 android:id="@+id/appbar_title"
@@ -37,6 +42,7 @@
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/osr"
                 android:text="Create a Club"
+                android:layout_centerVertical="true"
                 android:textColor="@color/palette_black"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -64,10 +70,11 @@
         app:layout_constraintWidth_percent=".25" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/addProfText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Club Profile"
+        android:textColor="@color/text_grey"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,7 +88,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter Group Subject..."
+        android:hint="Enter Club Subject"
         android:textColorHint="@color/text_grey"
         app:hintTextColor="@color/palette_teal"
         app:layout_constraintWidth_percent=".7"
@@ -89,7 +96,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" >
+        app:layout_constraintTop_toBottomOf="@+id/addProfText" >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/club_subject"
@@ -100,28 +107,54 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView11"/>
+            app:layout_constraintTop_toBottomOf="@+id/addProfText"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/club_description_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Club Description..."
+        android:textColorHint="@color/text_grey"
+        app:hintTextColor="@color/palette_teal"
+        app:layout_constraintVertical_bias=".05"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/club_subject_layout"
+        app:layout_constraintWidth_percent=".7">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/club_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/palette_black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addProfText" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_add_members"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/verification_button_bg"
         android:text="Add Members"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintWidth_percent=".4"
-        android:background="@drawable/verification_button_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/club_subject_layout"
-        app:layout_constraintVertical_bias=".1" />
+        app:layout_constraintTop_toBottomOf="@+id/club_description_layout"
+        app:layout_constraintVertical_bias=".1"
+        app:layout_constraintWidth_percent=".4" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_create_club"
