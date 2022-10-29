@@ -8,9 +8,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.NavOptions;
+import androidx.navigation.NavOptionsBuilderKt;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.socify.QueryFragments.QueryListFragment;
+import com.example.socify.QueryFragments.QueryListFragmentDirections;
+import com.example.socify.QueryFragments.QueryTagFragmentDirections;
 import com.example.socify.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
@@ -187,9 +194,12 @@ public class UserTagsLoaderAdapter extends RecyclerView.Adapter<UserTagsLoaderAd
         holder.actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppCompatActivity activity = (AppCompatActivity) context;
-                Log.i("value",tags.get(holder.getAdapterPosition()));
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new QueryListFragment(tags.get(holder.getAdapterPosition()))).commit();
+                NavController controller = Navigation.findNavController(v);
+                NavDirections directions = QueryTagFragmentDirections.actionQueryTagFragmentToQueryListFragment(tags.get(holder.getAdapterPosition()));
+                controller.navigate(directions);
+//                AppCompatActivity activity = (AppCompatActivity) context;
+//                Log.i("value",tags.get(holder.getAdapterPosition()));
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new QueryListFragment(tags.get(holder.getAdapterPosition()))).commit();
             }
         });
     }

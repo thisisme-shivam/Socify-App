@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/newsFeedFragment">
+
+    <fragment
+        android:id="@+id/newsFeedFragment"
+        android:name="com.example.socify.HomeFragments.NewsFeedFragment"
+        android:label="fragment_news_feed"
+        tools:layout="@layout/fragment_news_feed" >
+        <action
+            android:id="@+id/action_newsFeedFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_newsFeedFragment_to_allChatFragment"
+            app:destination="@id/allChatFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/allChatFragment"
+        android:name="com.example.socify.HomeFragments.AllChatFragment"
+        android:label="fragment_all_chat"
+        tools:layout="@layout/fragment_all_chat" >
+        <action
+            android:id="@+id/action_allChatFragment_to_chatRoomFragment"
+            app:destination="@id/chatRoomFragment" />
+        <action
+            android:id="@+id/action_allChatFragment_to_newsFeedFragment"
+            app:destination="@id/newsFeedFragment"
+            app:popUpTo="@id/newsFeedFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.socify.HomeFragments.NotificationFragment"
+        android:label="NotificationFragment" >
+        <action
+            android:id="@+id/action_notificationFragment_to_newsFeedFragment"
+            app:destination="@id/newsFeedFragment"
+            app:popUpTo="@id/newsFeedFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatRoomFragment"
+        android:name="com.example.socify.HomeFragments.ChatRoomFragment"
+        android:label="fragment_chat_room"
+        tools:layout="@layout/fragment_chat_room" >
+        <action
+            android:id="@+id/action_chatRoomFragment_to_allChatFragment"
+            app:destination="@id/allChatFragment"
+            app:popUpTo="@id/allChatFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_chatRoomFragment_to_fullScreenImgFragment"
+            app:destination="@id/fullScreenImgFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.socify.HomeFragments.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_editUserDetails"
+            app:destination="@id/editUserDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/discoverFragment"
+        android:name="com.example.socify.HomeFragments.DiscoverFragment"
+        android:label="fragment_discover"
+        tools:layout="@layout/fragment_discover" >
+        <action
+            android:id="@+id/action_discoverFragment_to_searchAll2"
+            app:destination="@id/searchAll2" />
+    </fragment>
+    <fragment
+        android:id="@+id/accessMyFragment"
+        android:name="com.example.socify.HomeFragments.AccessMyFragment"
+        android:label="fragment_access_my"
+        tools:layout="@layout/fragment_access_my" >
+        <action
+            android:id="@+id/action_accessMyFragment_to_queryTagFragment"
+            app:destination="@id/queryTagFragment" />
+        <action
+            android:id="@+id/action_accessMyFragment_to_myClubFragment"
+            app:destination="@id/myClubFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createFragment"
+        android:name="com.example.socify.HomeFragments.CreateFragment"
+        android:label="fragment_create"
+        tools:layout="@layout/fragment_create" >
+        <action
+            android:id="@+id/action_createFragment_to_createPostFragment"
+            app:destination="@id/createPostFragment" />
+        <action
+            android:id="@+id/action_createFragment_to_ask_QueryFragment"
+            app:destination="@id/ask_QueryFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_createFragment_to_createClubFragment"
+            app:destination="@id/createClubFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchAll2"
+        android:name="com.example.socify.HomeFragments.SearchAll"
+        android:label="fragment_search_all"
+        tools:layout="@layout/fragment_search_all" >
+        <action
+            android:id="@+id/action_searchAll2_to_discoverFragment"
+            app:destination="@id/discoverFragment"
+            app:popUpTo="@id/discoverFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_searchAll2_to_visitProfile"
+            app:destination="@id/visitProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/visitProfile"
+        android:name="com.example.socify.HomeFragments.VisitProfile"
+        android:label="VisitProfile" >
+        <action
+            android:id="@+id/action_visitProfile_to_searchAll2"
+            app:destination="@id/searchAll2"
+            app:popUpTo="@id/searchAll2"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/queryTagFragment"
+        android:name="com.example.socify.QueryFragments.QueryTagFragment"
+        android:label="fragment_query_tag"
+        tools:layout="@layout/fragment_query_tag" >
+        <action
+            android:id="@+id/action_queryTagFragment_to_queryListFragment"
+            app:destination="@id/queryListFragment" />
+        <action
+            android:id="@+id/action_queryTagFragment_to_newsFeedFragment2"
+            app:destination="@id/newsFeedFragment"
+            app:popUpTo="@id/newsFeedFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_queryTagFragment_to_accessMyFragment"
+            app:destination="@id/accessMyFragment"
+            app:popUpTo="@id/accessMyFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/myClubFragment"
+        android:name="com.example.socify.ClubFragments.MyClubFragment"
+        android:label="fragment_my_club"
+        tools:layout="@layout/fragment_my_club" >
+        <action
+            android:id="@+id/action_myClubFragment_to_accessMyFragment"
+            app:destination="@id/accessMyFragment"
+            app:popUpTo="@id/accessMyFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_myClubFragment_to_newsFeedFragment"
+            app:destination="@id/newsFeedFragment"
+            app:popUpTo="@id/newsFeedFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="com.example.socify.HomeFragments.CreatePostFragment"
+        android:label="fragment_create_post"
+        tools:layout="@layout/fragment_create_post" >
+        <action
+            android:id="@+id/action_createPostFragment_to_newsFeedFragment"
+            app:destination="@id/newsFeedFragment"
+            app:popUpTo="@id/newsFeedFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_createPostFragment_to_createFragment3"
+            app:destination="@id/createFragment"
+            app:popUpTo="@id/createFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/ask_QueryFragment"
+        android:name="com.example.socify.QueryFragments.Ask_QueryFragment"
+        android:label="fragment_ask__query"
+        tools:layout="@layout/fragment_ask__query" >
+        <action
+            android:id="@+id/action_ask_QueryFragment_to_createFragment"
+            app:destination="@id/createFragment" />
+        <action
+            android:id="@+id/action_ask_QueryFragment_to_queryTagFragment"
+            app:destination="@id/queryTagFragment"
+            app:popUpTo="@id/ask_QueryFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/createClubFragment"
+        android:name="com.example.socify.ClubFragments.CreateClubFragment"
+        android:label="fragment_create_club"
+        tools:layout="@layout/fragment_create_club" >
+        <action
+            android:id="@+id/action_createClubFragment_to_createFragment"
+            app:destination="@id/createFragment"
+            app:popUpTo="@id/createFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_createClubFragment_to_myClubFragment"
+            app:destination="@id/myClubFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/queryListFragment"
+        android:name="com.example.socify.QueryFragments.QueryListFragment"
+        android:label="fragment_query_list"
+        tools:layout="@layout/fragment_query_list" >
+        <action
+            android:id="@+id/action_queryListFragment_to_replyFragment"
+            app:destination="@id/replyFragment" />
+        <action
+            android:id="@+id/action_queryListFragment_to_queryTagFragment"
+            app:destination="@id/queryTagFragment"
+            app:popUpTo="@id/queryTagFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="tag"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/replyFragment"
+        android:name="com.example.socify.QueryFragments.ReplyFragment"
+        android:label="fragment_reply"
+        tools:layout="@layout/fragment_reply" >
+        <action
+            android:id="@+id/action_replyFragment_to_queryListFragment"
+            app:destination="@id/queryListFragment"
+            app:popUpToInclusive="false" />
+        <argument
+            android:name="uid"
+            app:argType="string" />
+        <argument
+            android:name="question"
+            app:argType="string" />
+        <argument
+            android:name="postkey"
+            app:argType="string" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument
+            android:name="tag"
+            app:argType="string" />
+        <argument
+            android:name="time"
+            app:argType="string" />
+        <argument android:name="questionURI" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullScreenImgFragment"
+        android:name="com.example.socify.HomeFragments.FullScreenImgFragment"
+        android:label="fragment_full_screen_img"
+        tools:layout="@layout/fragment_full_screen_img" >
+        <action
+            android:id="@+id/action_fullScreenImgFragment_to_chatRoomFragment"
+            app:destination="@id/chatRoomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editUserDetails"
+        android:name="com.example.socify.HomeFragments.EditUserDetails"
+        android:label="fragment_edit_user_details"
+        tools:layout="@layout/fragment_edit_user_details" >
+        <action
+            android:id="@+id/action_editUserDetails_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>

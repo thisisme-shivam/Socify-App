@@ -7,13 +7,19 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.socify.ClubFragments.CreateClubFragment;
 import com.example.socify.ClubFragments.MyClubFragment;
@@ -33,6 +39,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
@@ -48,29 +55,13 @@ import com.google.firebase.messaging.RemoteMessage;
 public class Home extends AppCompatActivity {
 
     ActivityHomeBinding binding;
-    NewsFeedFragment newsFeedFragment = new NewsFeedFragment();
-    public ProfileFragment profileFragment  = new ProfileFragment();
     BottomNavigationView navigationView;
-    DiscoverFragment discoverFragment = new DiscoverFragment();
-    Ask_QueryFragment ask_queryFragment = new Ask_QueryFragment();
-    CreatePostFragment createPostFragment = new CreatePostFragment();
-    QueryTagFragment queryTagFragment = new QueryTagFragment();
-    CreateClubFragment createClubFragment = new CreateClubFragment();
-    MyClubFragment myClubFragment = new MyClubFragment();
-
-    Dialog dialog;
-    LinearLayout myquery;
-    LinearLayout mygroups;
-    LinearLayout myclubs;
+    NavController navController;
 
 
     int[] drawables;
     public static GetUserData getUserData;
     int lastSelected;
-
-    @Override
-    public void onBackPressed() {
-    }
 
     public void setIcon(int i){
         if(lastSelected == i ){
@@ -87,116 +78,13 @@ public class Home extends AppCompatActivity {
 
     }
 
-    public void itemselectedfromnavbar() {
-
-        binding.bottomnavigationview.setOnItemSelectedListener(item -> {
-
-
-            if (item.getItemId() == R.id.newsfeed) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,newsFeedFragment).commitNowAllowingStateLoss();
-                setIcon(0);
-                lastSelected = 0;
-            }else if(item.getItemId() == R.id.discover){
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,discoverFragment).commitAllowingStateLoss();
-                setIcon(1);
-                lastSelected =1;
-            }
-            else if(item.getItemId() == R.id.addpost){
-                showDialog();
-            }
-            else if(item.getItemId() == R.id.clubs){
-                setIcon(3);
-                lastSelected = 3;
-                showDialogAccess();
-            }
-            else if(item.getItemId() == R.id.profile){
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,profileFragment).commitNowAllowingStateLoss();
-                setIcon(4);
-                lastSelected = 4;
-            }
-
-            return false;
-        });
-
-    }
-
-    private void showDialog() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.post_popup);
-
-        LinearLayout query = dialog.findViewById(R.id.askquery);
-        LinearLayout post = dialog.findViewById(R.id.createpost);
-        LinearLayout club = dialog.findViewById(R.id.mycommunities);
-
-        query.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Code for query creation to be written here
-                Toast.makeText(Home.this, "Query selected", Toast.LENGTH_SHORT).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, ask_queryFragment).addToBackStack(null).commit();
-            }
-        });
-
-        post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Code for post creation to be written here
-                Toast.makeText(Home.this, "Post selected", Toast.LENGTH_SHORT).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, createPostFragment).addToBackStack(null).commit();
-            }
-        });
-
-        club.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Code for community creation to be written here
-                Toast.makeText(Home.this, "Club selected", Toast.LENGTH_SHORT).show();
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, createClubFragment).addToBackStack(null).commit();
-            }
-        });
-
-        dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-
-    }
-
-    private void showDialogAccess() {
-
-
-        myquery.setOnClickListener(v -> {
-            //Code for query creation to be written here
-            Toast.makeText(Home.this, "MYQuery selected", Toast.LENGTH_SHORT).show();
-            getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, queryTagFragment).addToBackStack(null).commit();
-        });
-
-        mygroups.setOnClickListener(v -> {
-            //Code for post creation to be written here
-            Toast.makeText(Home.this, "Groups selected", Toast.LENGTH_SHORT).show();
-        });
-
-        myclubs.setOnClickListener(v -> {
-            //Code for community creation to be written here
-            Toast.makeText(Home.this, "my clubs selected", Toast.LENGTH_SHORT).show();
-            getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, myClubFragment).addToBackStack(null).commit();
-        });
-
-        dialog.show();
-
-    }
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        dialog = new Dialog(this);
         navigationView = binding.bottomnavigationview;
+
         drawables = new int[]{
                 R.drawable.newsgrey,
                 R.drawable.discovergrey,
@@ -207,11 +95,9 @@ public class Home extends AppCompatActivity {
                 R.drawable.clubicon,
                 R.drawable.profileicon
         };
+
         binding.bottomnavigationview.setItemIconTintList(null);
 
-
-
-        itemselectedfromnavbar();
         navigationView.getMenu().getItem(0).setIcon(drawables[4]);
         Dialog otpDialog = new Dialog(Home.this);
         otpDialog.setCancelable(false);
@@ -222,27 +108,21 @@ public class Home extends AppCompatActivity {
         final boolean[] first = {true};
         getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid(), (InterfaceClass.LoadDataInterface) () -> {
             if(first[0]) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
                 first[0] = false;
             }
         });
         QueryTagFragment.tags = getUserData.tags;
         getUserData.loadFollowingList();
 
-
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.my_popup);
-
-        myquery = dialog.findViewById(R.id.myqueries);
-        mygroups = dialog.findViewById(R.id.mygroups);
-        myclubs = dialog.findViewById(R.id.mycommunities);
+    }
 
 
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        navController = Navigation.findNavController(this, R.id.FragmentView);
+        NavigationUI.setupWithNavController(binding.bottomnavigationview, navController);
     }
 
     @Override
