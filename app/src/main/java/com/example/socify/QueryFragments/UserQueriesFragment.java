@@ -43,10 +43,23 @@ public class UserQueriesFragment extends Fragment {
 
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);}
+
+    private void adapterStart() {
+
+        adapter.userFragent = true;
+        Context context  = getContext();
+        if(context!=null)
+            binding.userqueriesRV.setLayoutManager(new LinearLayoutManager(context));
+        binding.userqueriesRV.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         questionsMembers = new ArrayList<>();
         adapter = new QuesitonLoadAdapter(getActivity(),questionsMembers);
         uidreference = FirebaseDatabase.getInstance()
@@ -74,21 +87,6 @@ public class UserQueriesFragment extends Fragment {
 
             }
         });
-
-    }
-    private void adapterStart() {
-
-        adapter.userFragent = true;
-        Context context  = getContext();
-        if(context!=null)
-            binding.userqueriesRV.setLayoutManager(new LinearLayoutManager(context));
-        binding.userqueriesRV.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-    }
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
     }
 
     @Override
@@ -96,7 +94,6 @@ public class UserQueriesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentUserQueriesBinding.inflate(inflater, container, false);
-
 
         //Creating Adapter to Load the data in the RecyclerView
         return binding.getRoot();

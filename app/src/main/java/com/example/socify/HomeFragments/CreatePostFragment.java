@@ -6,8 +6,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -46,6 +50,7 @@ public class CreatePostFragment extends Fragment {
     String type;
     PostMember postMember;
     FragmentCreatePostBinding binding;
+    NavController controller;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,12 @@ public class CreatePostFragment extends Fragment {
         setonclicklisteners();
         return binding.getRoot();
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        controller = Navigation.findNavController(view);
     }
 
     @SuppressLint("IntentReset")
@@ -154,6 +165,8 @@ public class CreatePostFragment extends Fragment {
                         userimagesref.child(id1).setValue(postMember);
                         //Storing Allpost Image
                         Toast.makeText(getActivity(), "Post Uploaded", Toast.LENGTH_SHORT).show();
+                        NavDirections action = CreatePostFragmentDirections.actionCreatePostFragmentToNewsFeedFragment();
+                        controller.navigate(action);
                     }
                     else if(type.equals("video")) {
                         postMember.setType("video");
@@ -164,6 +177,8 @@ public class CreatePostFragment extends Fragment {
                         uservideosref.child(id3).setValue(postMember);
                         //Storing Allpost VideoPost
                         Toast.makeText(getActivity(), "Post Uploaded", Toast.LENGTH_SHORT).show();
+                        NavDirections action = CreatePostFragmentDirections.actionCreatePostFragmentToNewsFeedFragment();
+                        controller.navigate(action);
                     }
                     else{
                         Toast.makeText(getActivity(), "Error Uploading", Toast.LENGTH_SHORT).show();
@@ -175,7 +190,6 @@ public class CreatePostFragment extends Fragment {
         else{
             Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void setonclicklisteners() {
@@ -198,7 +212,8 @@ public class CreatePostFragment extends Fragment {
         binding.backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
+                NavDirections action = CreatePostFragmentDirections.actionCreatePostFragmentToCreateFragment3();
+                controller.navigate(action);
             }
         });
 

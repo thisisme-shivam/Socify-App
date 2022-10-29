@@ -36,8 +36,13 @@ public class AllQueriesFragment extends Fragment {
     String tag ;
     int total = 0;
     HashSet<String> questionsMemberHashSet;
+
     public AllQueriesFragment(String tag) {
         this.tag = tag.replaceAll("[^A-Za-z]+", "").toLowerCase();
+    }
+
+    public AllQueriesFragment() {
+
     }
 
     @Override

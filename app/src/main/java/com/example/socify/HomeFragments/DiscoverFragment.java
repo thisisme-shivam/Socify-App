@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.socify.Adapters.RecyclerClubAdapter;
@@ -26,6 +29,7 @@ public class DiscoverFragment extends Fragment {
     ArrayList<DiscoverClubModel> arrClubs = new ArrayList<>();
     ArrayList<DiscoverCommunityModel> arrCommunities = new ArrayList<>();
     private SearchAll searchAll = new SearchAll();
+    NavController controller;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,20 +39,23 @@ public class DiscoverFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        controller = Navigation.findNavController(view);
+
         binding.searchbar.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if(b){
-                    getParentFragmentManager().beginTransaction().replace(R.id.FragmentView, searchAll)
-                            .commitNow();
+                    NavDirections action = DiscoverFragmentDirections.actionDiscoverFragmentToSearchAll2();
+                    controller.navigate(action);
                 }
             }
         });
         binding.searchbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getParentFragmentManager().beginTransaction().replace(R.id.FragmentView, searchAll)
-                        .commit();
+                NavDirections action = DiscoverFragmentDirections.actionDiscoverFragmentToSearchAll2();
+                controller.navigate(action);
             }
         });
     }

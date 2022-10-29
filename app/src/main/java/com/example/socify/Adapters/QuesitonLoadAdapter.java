@@ -10,11 +10,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.socify.Activities.Home;
 import com.example.socify.Classes.QuestionsMember;
+import com.example.socify.QueryFragments.QueryListFragmentDirections;
 import com.example.socify.QueryFragments.ReplyFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.ListAllQueryLayoutBinding;
@@ -42,10 +46,8 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
         if(userFragent){
             return 0;
         }
-
         return 1;
     }
-
 
     @NonNull
     @Override
@@ -59,23 +61,9 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
         return new  UserQuestionViewHolder(view);
     }
 
-
-
-
     @Override
     public void onBindViewHolder( RecyclerView.ViewHolder holder, int position) {
         QuestionsMember member = questionlist.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putString("uid",member.getUserid());
-        bundle.putString("question",member.getQuestion());
-        bundle.putString("postkey",member.getKey());
-        bundle.putString("username",member.getUsername());
-        bundle.putString("tag",member.getTag());
-        bundle.putString("time",member.getTime());
-        bundle.putString("QuestionURI", member.getQuestionURI());
-        ReplyFragment replyFragment = new ReplyFragment();
-        replyFragment.setArguments(bundle);
-
 
         if(userFragent){
             UserQuestionViewHolder userViewHolder = (UserQuestionViewHolder) holder;
@@ -92,19 +80,21 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
             userViewHolder.binding.repliesbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,replyFragment).commit();
+                    NavController controller = Navigation.findNavController(v);
+                    NavDirections directions = QueryListFragmentDirections.actionQueryListFragmentToReplyFragment(member.getUserid(),member.getQuestion(),member.getKey(),member.getUsername(),member.getTag(),member.getTime(),member.getQuestionURI());
+                    controller.navigate(directions);
                 }
             });
 
             userViewHolder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.i("ys","yes");
+                    Log.i("Tag", member.getTag());
                     FirebaseDatabase.getInstance()
                             .getReference("College")
                             .child(Home.getUserData.college_name)
                             .child("Questions")
-                            .child(member.getTag())
+                            .child(member.getTag().replaceAll("[^A-Za-z]+", "").toLowerCase())
                             .child(Home.getUserData.uid)
                             .child(member.getKey())
                             .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -127,7 +117,6 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
         }else{
             QuestionViewHolder userViewHolder = (QuestionViewHolder) holder;
             Log.i("ues","fjdsklfj");
-
             userViewHolder.binding.questiontag.setText(member.getTag());
             userViewHolder.binding.questiontv.setText(member.getQuestion());
             userViewHolder.binding.timestamp.setText(member.getTime());
@@ -139,8 +128,9 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
             userViewHolder.binding.repliesbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,replyFragment).commit();
-
+                    NavController controller = Navigation.findNavController(v);
+                    NavDirections directions = QueryListFragmentDirections.actionQueryListFragmentToReplyFragment(member.getUserid(),member.getQuestion(),member.getKey(),member.getUsername(),member.getTag(),member.getTime(),member.getQuestionURI());
+                    controller.navigate(directions);
                 }
             });
 

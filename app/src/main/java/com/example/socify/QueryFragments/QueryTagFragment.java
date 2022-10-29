@@ -8,6 +8,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -28,7 +31,7 @@ public class QueryTagFragment extends Fragment {
     RecyclerView recyclerView;
     public static ArrayList<String> tags;
     FragmentQueryTagBinding binding;
-
+    NavController controller;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,15 +40,25 @@ public class QueryTagFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         adapter = new UserTagsLoaderAdapter(getUserData.tags, getActivity());
         recyclerView = getActivity().findViewById(R.id.userTagsRV);
         recyclerView.setAdapter(adapter);
-
-        binding.backbtn.setOnClickListener(new View.OnClickListener() {
+        controller = Navigation.findNavController(view);
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), Home.class));
+//                if(Ask_QueryFragment.flag==true) {
+//                    NavDirections directions = QueryTagFragmentDirections.actionQueryTagFragmentToNewsFeedFragment2();
+//                    Ask_QueryFragment.flag=false;
+//                    controller.navigate(directions);
+//                }
+//                else {
+//                    NavDirections directions = QueryTagFragmentDirections.actionQueryTagFragmentToAccessMyFragment();
+//                    controller.navigate(directions);
+//                }
+                NavDirections directions = QueryTagFragmentDirections.actionQueryTagFragmentToNewsFeedFragment2();
+                Ask_QueryFragment.flag=false;
+                controller.navigate(directions);
             }
         });
 
@@ -57,7 +70,5 @@ public class QueryTagFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentQueryTagBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
-
     }
 }

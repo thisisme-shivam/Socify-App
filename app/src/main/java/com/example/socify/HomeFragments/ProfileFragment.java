@@ -8,6 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -36,6 +39,7 @@ public class ProfileFragment extends Fragment {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference;
     PostLoaderFragment postLoaderFragment = new PostLoaderFragment();
+    NavController controller;
 
     @Override
     public void onPause() {
@@ -55,8 +59,8 @@ public class ProfileFragment extends Fragment {
                         switch (item.getItemId()) {
                             case R.id.edit_details:
                                 //Switching to new fragment
-                                EditUserDetails editUserDetails = new EditUserDetails();
-                                getParentFragmentManager().beginTransaction().replace(R.id.FragmentView,editUserDetails).commit();
+                                NavDirections action = ProfileFragmentDirections.actionProfileFragmentToEditUserDetails();
+                                controller.navigate(action);
                                 return true;
                             case R.id.privacy:
                                 Toast.makeText(requireActivity(), "Privacy", Toast.LENGTH_SHORT).show();
@@ -128,5 +132,8 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);}
+        super.onViewCreated(view, savedInstanceState);
+        controller = Navigation.findNavController(view);
+
+    }
 }

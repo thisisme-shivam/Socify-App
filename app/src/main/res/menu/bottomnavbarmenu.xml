@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/newsfeed"
+    <item android:id="@+id/newsFeedFragment"
         android:icon="@drawable/newsgrey"
         android:title="News" />
-    <item android:id="@+id/discover"
+    <item android:id="@+id/discoverFragment"
         android:icon="@drawable/discovergrey"
         android:title="Discover" />
-    <item android:id="@+id/addpost"
+    <item android:id="@+id/createFragment"
         android:icon="@drawable/plusicongrey"
-        android:title="Post"/>
-    <item android:id="@+id/clubs"
+        android:title="Create"/>
+    <item android:id="@+id/accessMyFragment"
         android:icon="@drawable/clubicongrey"
-        android:title="Clubs" />
-    <item android:id="@+id/profile"
+        android:title="Access" />
+    <item android:id="@+id/profileFragment"
         android:icon="@drawable/profilegrey"
         android:title="Profile" />
 

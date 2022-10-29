@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".ClubFragments.CreateClubFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -25,6 +24,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/backbtn"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
                 android:layout_centerVertical="true"
