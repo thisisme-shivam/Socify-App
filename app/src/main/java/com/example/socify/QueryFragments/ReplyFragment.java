@@ -34,36 +34,23 @@ public class ReplyFragment extends Fragment {
 
     FragmentReplyBinding binding;
     String uid, question, postkey, name, tag, queryUrl,time;
-    DocumentReference reference, reference2;
-    DatabaseReference databaseReferenceall, databaseReferenceuser;
     AnswerMember member = new AnswerMember();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference questionref;
-    String currTag,useruid,questionid;
-    //Flag to use for approval checking
-    Boolean approvalchecker;
-
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        ReplyFragmentArgs args = ReplyFragmentArgs.fromBundle(getArguments());
+        uid = args.getUid();
+        question = args.getQuestion();
+        postkey = args.getPostkey();
+        name = args.getUsername();
+        tag = args.getTag();
+        queryUrl = args.getQuestionURI();
+        time = args.getTime();
+
         super.onCreate(savedInstanceState);
-        Bundle extra = this.getArguments();
-
-        if(extra!=null) {
-            uid = extra.getString("uid");
-            question = extra.getString("question");
-            postkey = extra.getString("postkey");
-            name = extra.getString("username");
-            tag = extra.getString("tag");
-            time = extra.getString("time");
-            queryUrl = extra.getString("QuestionURI");
-
-        }
-        else{
-            Toast.makeText(requireActivity(), "Error", Toast.LENGTH_SHORT).show();
-        }
         questionref = FirebaseDatabase.getInstance()
                 .getReference("College")
                 .child(Home.getUserData.college_name)
@@ -92,14 +79,6 @@ public class ReplyFragment extends Fragment {
                 postAnswer();
             }
         });
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-
-
 
         //Fetching the replies from database into the recyclerview
         FirebaseRecyclerOptions<AnswerMember> options =
@@ -111,12 +90,7 @@ public class ReplyFragment extends Fragment {
                 new FirebaseRecyclerAdapter<AnswerMember, Load_Answers>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull Load_Answers holder, int position, @NonNull AnswerMember model) {
-                        String currenUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                        final String postkey = getRef(position).getKey();
-
                         holder.setAnswer(requireActivity().getApplication(), model.getName(), model.getUid(), model.getAnswer(), model.getTime());
-
-
                     }
 
                     @NonNull
@@ -135,6 +109,8 @@ public class ReplyFragment extends Fragment {
         firebaseRecyclerAdapter.startListening();
         binding.repliesRV.setLayoutManager(layoutManager);
         binding.repliesRV.setAdapter(firebaseRecyclerAdapter);
+
+
     }
 
     private void postAnswer() {

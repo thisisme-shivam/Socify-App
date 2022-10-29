@@ -6,7 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.example.socify.Activities.Home;
 import com.example.socify.Adapters.QueryTabViewPagerAdapter;
@@ -17,39 +22,37 @@ public class QueryListFragment extends Fragment {
 
     FragmentQueryListBinding binding;
     String tag ;
-    public QueryListFragment(String tag) {
-        this.tag = tag;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        QueryListFragmentArgs args = QueryListFragmentArgs.fromBundle(getArguments());
+        tag = args.getTag();
         UserQueriesFragment userQueriesFragment = new UserQueriesFragment(tag);
         AllQueriesFragment allQueriesFragment = new AllQueriesFragment(tag);
-
-        binding.backIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new QueryTagFragment()).commit();
-            }
-        });
+        NavController controller = Navigation.findNavController(view);
 
         binding.tablayout.setupWithViewPager(binding.ViewPagerQuery);
         QueryTabViewPagerAdapter queryTabViewPagerAdapter = new QueryTabViewPagerAdapter(getChildFragmentManager(), 0);
         queryTabViewPagerAdapter.addfragment(allQueriesFragment, "All Queries");
         queryTabViewPagerAdapter.addfragment(userQueriesFragment, "My Queries");
         binding.ViewPagerQuery.setAdapter(queryTabViewPagerAdapter);
-    }
 
+        binding.backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections directions = QueryListFragmentDirections.actionQueryListFragmentToQueryTagFragment();
+                controller.navigate(directions);
+            }
+        });
+
+
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

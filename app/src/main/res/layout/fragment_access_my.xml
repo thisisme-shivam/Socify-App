@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/accessmylayout"
     android:layout_height="wrap_content"
+    tools:context=".HomeFragments.AccessMyFragment"
     android:background="@drawable/popup_bg">
 
     <com.google.android.material.textview.MaterialTextView
@@ -92,7 +94,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/createclub"
+        android:id="@+id/myclubs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"

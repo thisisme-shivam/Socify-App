@@ -6,8 +6,12 @@ import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +27,7 @@ public class CreateClubFragment extends Fragment {
     public static int cropperFlag;
     FragmentCreateClubBinding binding;
     Uri image;
-
+    NavController controller;
     ActivityResultLauncher<String> takePhoto;
 
 
@@ -77,9 +81,23 @@ public class CreateClubFragment extends Fragment {
             public void onClick(View view) {
                 validation();
                 String clubSubject = binding.clubSubject.getText().toString();
-
             }
         });
+
+        binding.backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections directions = CreateClubFragmentDirections.actionCreateClubFragmentToCreateFragment();
+                controller.navigate(directions);
+            }
+        });
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        controller = Navigation.findNavController(view);
     }
 
     @Override
@@ -87,8 +105,6 @@ public class CreateClubFragment extends Fragment {
         binding = FragmentCreateClubBinding.inflate(inflater, container, false);
 
         onClickListeners();
-
-
         return binding.getRoot();
     }
 }

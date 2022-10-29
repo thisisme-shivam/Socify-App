@@ -4,7 +4,12 @@ import static com.example.socify.HomeFragments.NewsFeedFragment.chattingusers;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +33,7 @@ public class AllChatFragment extends Fragment {
     ChatListAdapter chatListAdapter;
     FirebaseDatabase firebaseDatabase;
     FirebaseFirestore firebaseFirestore;
+    NavController navController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,20 @@ public class AllChatFragment extends Fragment {
         chatListAdapter = new ChatListAdapter(getActivity(), chatListUsers);
 
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        navController = Navigation.findNavController(view);
+        binding.backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = AllChatFragmentDirections.actionAllChatFragmentToNewsFeedFragment();
+                navController.navigate(action);
+            }
+        });
     }
 
     @Override

@@ -9,6 +9,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -41,6 +44,8 @@ public class Ask_QueryFragment extends Fragment {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference Questions;
     StorageReference storageReference;
+    NavController controller;
+    public static Boolean flag=false;
 
     //Fragment after successful question
     QuestionsMember member;
@@ -110,8 +115,10 @@ public class Ask_QueryFragment extends Fragment {
                     Log.e("Done", "Without Image");
                 }
                 Toast.makeText(requireActivity(), "Success", Toast.LENGTH_SHORT).show();
-                QueryTagFragment queryTagFragment = new QueryTagFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, queryTagFragment).commit();
+                //Navigation Code
+                flag = true;
+                NavDirections action = Ask_QueryFragmentDirections.actionAskQueryFragmentToQueryTagFragment();
+                controller.navigate(action);
             }
             else if(question.isEmpty()){
                 Toast.makeText(requireActivity(), "Please enter the question", Toast.LENGTH_SHORT).show();
@@ -126,8 +133,8 @@ public class Ask_QueryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        controller = Navigation.findNavController(view);
         setonclicklisteners();
-
     }
 
 
