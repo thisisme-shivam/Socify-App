@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity {
     String username ="",password="";
     FirebaseAuth auth;
     Dialog progressDialog;
-    ProgressBar progressBar;
+
     private  void setListeners(){
         binding.passwordshow.setOnClickListener(v -> showpass());
 
@@ -134,7 +134,6 @@ public class Login extends AppCompatActivity {
                 else {
                     binding.setErrorUsername.setText("Wrong Credentials");
                     binding.setErrorUsername.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(),"fjdsk",Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             }

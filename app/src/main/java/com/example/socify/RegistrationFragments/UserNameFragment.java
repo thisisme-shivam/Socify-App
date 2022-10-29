@@ -6,6 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +19,9 @@ import android.widget.ProgressBar;
 import com.example.socify.Activities.Registration;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentNameFragementBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -26,6 +34,8 @@ public class UserNameFragment extends Fragment {
     String username, Password;
     Registration regActivity;
     GetCollegeFragment getCollegeFragment;
+
+    CountDownTimer cnt;
     public void onclicklisteners() {
         binding.nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +45,7 @@ public class UserNameFragment extends Fragment {
                     regActivity.profiledetails.put("Username",username);
                     regActivity.setPassword(Password);
                     //Uploading username & Password and mapping username with phone number
-                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, getCollegeFragment).commit();
+                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, getCollegeFragment).commitNowAllowingStateLoss();
                 }
             }
         });
@@ -89,13 +99,69 @@ public class UserNameFragment extends Fragment {
         bar.setProgress(40);
 
         onclicklisteners();
-        if(regActivity.uri !=null) {
+        onTextChangeListerner();
+        if(regActivity != null) {
             binding.ProfilePic.setImageURI(regActivity.uri);
         }
         else{
             binding.picadded.setText("No Image Added");
         }
     }
+
+    private void onTextChangeListerner() {
+        binding.usernametext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String username = String.valueOf(charSequence).toLowerCase();
+
+                if(cnt != null){
+                    cnt.cancel();
+                    cnt = null;
+                }else{
+                    cnt = new CountDownTimer(200,500) {
+                        @Override
+                        public void onTick(long l) {
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            Log.i("yes","yes");
+                            if(!username.equals("")) {
+                                FirebaseFirestore.getInstance().collection("MapPhoneUsername").document(username)
+                                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                if (documentSnapshot.getData() != null) {
+                                                    Log.i("Username", username);
+                                                    binding.usernametextlayout.setError("Username already taken");
+                                                    binding.usernametextlayout.setErrorEnabled(true);
+                                                }
+                                            }
+                                        });
+                            }
+                            cnt = null;
+                        }
+                    };
+                    cnt.start();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
+
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

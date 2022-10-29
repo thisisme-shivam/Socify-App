@@ -56,9 +56,9 @@ public class Registration extends AppCompatActivity {
     public HashMap<String,String> profiledetails;
     public HashMap<String,ArrayList<String>> tagMap;
     public  ArrayList<Course> courses;
-    Dialog progressDialog;
     InterfaceClass.InterestInterface interestInterface;
     String currentuid,phonenumber;
+    boolean registrationComplete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,10 +128,7 @@ public class Registration extends AppCompatActivity {
     }
 
 
-    public void sendToDatabase(InterfaceClass.InterestInterface interestInterface){
-
-
-        this.interestInterface = interestInterface;
+    public void putImage(){
 
         if(uri!= null) {
             Log.i("uri", String.valueOf(uri));
@@ -146,8 +143,8 @@ public class Registration extends AppCompatActivity {
             }).addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
+                    Log.i("uri",uri.toString());
                     profiledetails.put("ImgUrl", uri.toString());
-                    putOtherData();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -160,7 +157,7 @@ public class Registration extends AppCompatActivity {
         }
         else{
             profiledetails.put("ImgUrl", "No Image");
-            putOtherData();
+
         }
 
 
@@ -184,7 +181,7 @@ public class Registration extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         interestInterface.onWorkNotDone();
-
+                        Log.i("failed","faild");
                     }
                 });
     }
@@ -195,7 +192,10 @@ public class Registration extends AppCompatActivity {
                 .collection("AccountDetails").document("UserTags").set(tagMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                             mapPhoneUsername();
+                        interestInterface.onWorkDone();
+                        registrationComplete = true;
+                        startActivity(new Intent(getApplicationContext(),Home.class));
+                        finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -235,7 +235,7 @@ public class Registration extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            signInUser();
+                            putOtherData();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -246,16 +246,12 @@ public class Registration extends AppCompatActivity {
 
     }
 
-    private void signInUser() {
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(phonenumber+"@gmail.com",password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                interestInterface.onWorkDone();
-                startActivity(new Intent(getApplicationContext(),Home.class));
-                finish();
-            }
-        });
+    public void registerUser(InterfaceClass.InterestInterface interestInterface) {
+        this.interestInterface = interestInterface;
+        mapPhoneUsername();
     }
+
+
 
     String password;
     public void setPassword(String password) {
@@ -265,5 +261,15 @@ public class Registration extends AppCompatActivity {
     public Uri uri;
     public void setImgUri(Uri uri){
         this.uri =uri;
+    }
+
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(!registrationComplete){
+            FirebaseAuth.getInstance().signOut();
+        }
     }
 }

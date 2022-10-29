@@ -24,6 +24,7 @@ import com.example.socify.Activities.Home;
 import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.InterfaceClass;
 import com.example.socify.R;
+import com.example.socify.SendNotification;
 import com.example.socify.databinding.FragmentVisitProfileBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;

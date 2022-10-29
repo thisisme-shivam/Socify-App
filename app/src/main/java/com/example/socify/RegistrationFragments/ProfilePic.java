@@ -3,6 +3,7 @@ package com.example.socify.RegistrationFragments;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.socify.Activities.CropperActivity;
 import com.example.socify.Activities.Registration;
+import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfilePicBinding;
 
@@ -45,7 +47,6 @@ public class ProfilePic extends Fragment {
        else
            return true;
 
-
         return false;
     }
 
@@ -69,11 +70,9 @@ public class ProfilePic extends Fragment {
 
                    setData();
                    //Switching to next fragment
-
                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, userNameFragment).commitNowAllowingStateLoss();
                    regActivity.findViewById(R.id.back_icon).setVisibility(View.VISIBLE);
                }
-
             }
         });
 
@@ -86,9 +85,10 @@ public class ProfilePic extends Fragment {
         regActivity.profiledetails.put("Name",name);
         regActivity.profiledetails.put("Passing Year",passing_year);
 
-
-        if(imgUrl != null)
+        if(imgUrl != null) {
             regActivity.setImgUri(imgUrl);
+        }
+        regActivity.putImage();
 
     }
 

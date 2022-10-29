@@ -90,7 +90,6 @@ public class VerificationActivity extends AppCompatActivity {
                 fauth.signInWithCredential(credential).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         startActivity(new Intent(getApplicationContext(), Registration.class).putExtra("PhoneNumber",phonenumber));
-                        fauth.signOut();
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "Incorrect Otp", Toast.LENGTH_SHORT).show();
@@ -108,6 +107,7 @@ public class VerificationActivity extends AppCompatActivity {
 
     private void verifyNumber() {
         Log.i("phonenumber",phonenumber);
+        sendotp();
         FirebaseAuth.getInstance().fetchSignInMethodsForEmail(phonenumber+"@gmail.com").addOnSuccessListener(new OnSuccessListener<SignInMethodQueryResult>() {
             @Override
             public void onSuccess(SignInMethodQueryResult signInMethodQueryResult) {
@@ -142,14 +142,12 @@ public class VerificationActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationCompleted(PhoneAuthCredential credential) {
-                Toast.makeText(getApplicationContext(),"fjalskdjf",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
                 progressDialog.dismiss();
-                Log.i("country code",binding.countryCode.getSelectedCountryCode()+phonenumber);
-
+                Toast.makeText(getApplicationContext(),"Sorry something went wrong",Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -98,22 +98,22 @@ public class NewsFeedFragment extends Fragment {
         rec.setAdapter(getNewsFeed);
         setonclicklisteners();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Chats")
-                        .child(Home.getUserData.uid)
-                        .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                for(DataSnapshot userSnapshot : task.getResult().getChildren()) {
-                                    chattingusers.add(userSnapshot.getKey());
-                                    Log.i("UIDS", String.valueOf(chattingusers));
-                                }
-                            }
-                        });
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Chats")
+//                        .child(Home.getUserData.uid)
+//                        .get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                                for(DataSnapshot userSnapshot : task.getResult().getChildren()) {
+//                                    chattingusers.add(userSnapshot.getKey());
+//                                    Log.i("UIDS", String.valueOf(chattingusers));
+//                                }
+//                            }
+//                        });
+//            }
+//        }).start();
 
     }
 

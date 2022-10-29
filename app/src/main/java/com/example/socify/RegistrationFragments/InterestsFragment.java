@@ -56,10 +56,10 @@ public class InterestsFragment extends Fragment {
         Log.i("entering", "true");
         regActivity.tagMap.put("Tags", tags);
         //Uploading Tags
-        regActivity.sendToDatabase(new InterfaceClass.InterestInterface() {
+        regActivity.registerUser(new InterfaceClass.InterestInterface() {
             @Override
             public void onWorkDone() {
-                progressDialog.show();
+                progressDialog.dismiss();
                 Toast.makeText(getContext(),"Registration Successful",Toast.LENGTH_SHORT).show();
             }
 

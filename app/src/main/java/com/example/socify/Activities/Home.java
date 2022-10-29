@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.socify.ClubFragments.CreateClubFragment;
 import com.example.socify.ClubFragments.MyClubFragment;
 import com.example.socify.HelperClasses.GetUserData;
+import com.example.socify.HomeFragments.CreatePostFragment;
 import com.example.socify.HomeFragments.DiscoverFragment;
 import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.HomeFragments.ProfileFragment;
@@ -62,9 +63,7 @@ public class Home extends AppCompatActivity {
     public static  GetUserData getUserData;
     int lastSelected;
 
-    @Override
-    public void onBackPressed() {
-    }
+
 
     public void setIcon(int i){
         if(lastSelected == i ){
@@ -213,6 +212,7 @@ public class Home extends AppCompatActivity {
         otpDialog.setContentView(R.layout.post_creation_popup);
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
 
 
         //Loading User Profile Data
@@ -221,14 +221,20 @@ public class Home extends AppCompatActivity {
             @Override
             public void onWorkDone() {
                 if(first[0]) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
+                    newsFeedFragment.loadData();
                     first[0] = false;
                     SendNotification.sendFollowNotification(getApplicationContext(),getUserData.uid,getUserData.username,getUserData.token);
 
                 }
 
             }
+
+            @Override
+            public void onWorkNotDone() {
+
+            }
         });
+        getUserData.loadFollowingList();
         QueryTagFragment.tags = getUserData.tags;
 
 
