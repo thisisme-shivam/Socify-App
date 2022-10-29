@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.socify">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,26 +16,25 @@
         android:supportsRtl="true"
         android:theme="@style/SplashTheme"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ForgotPassword"
+            android:exported="false" />
         <activity
             android:name=".friend_list"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Activities.CropperActivity"
-            android:screenOrientation="fullSensor"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="fullSensor"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activities.Home"
-            android:screenOrientation="fullSensor"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"/>
-
-
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.Registration"
             android:exported="true"
@@ -42,12 +42,12 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.SlideScreen"
-            android:screenOrientation="fullSensor"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".Activities.Login"
-            android:screenOrientation="fullSensor"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="fullSensor" />
         <activity
             android:name=".Activities.SplashActivity"
             android:exported="true"
@@ -74,16 +74,13 @@
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
+        </service> <!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/person_login" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming -->
+            android:resource="@drawable/person_login" /> <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/teal_700" />
-
     </application>
 
 </manifest>
