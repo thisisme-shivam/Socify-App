@@ -45,7 +45,7 @@
             android:layout_marginEnd="81dp"
             android:background="@drawable/search_view_bg"
             android:elevation="5dp"
-
+            android:theme="@style/SearchViewTheme"
             app:iconifiedByDefault="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.336"
@@ -67,8 +67,8 @@
             app:layout_constraintVertical_bias="0.0" >
 
 
-           <include
-               layout="@layout/shimmercollege"/>
+            <include
+                layout="@layout/shimmercollege"/>
         </com.facebook.shimmer.ShimmerFrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
