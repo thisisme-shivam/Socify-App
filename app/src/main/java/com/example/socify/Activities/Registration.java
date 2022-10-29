@@ -268,8 +268,6 @@ public class Registration extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if(!registrationComplete){
-            FirebaseAuth.getInstance().signOut();
-        }
+
     }
 }

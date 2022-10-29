@@ -107,7 +107,7 @@ public class VerificationActivity extends AppCompatActivity {
 
     private void verifyNumber() {
         Log.i("phonenumber",phonenumber);
-        sendotp();
+
         FirebaseAuth.getInstance().fetchSignInMethodsForEmail(phonenumber+"@gmail.com").addOnSuccessListener(new OnSuccessListener<SignInMethodQueryResult>() {
             @Override
             public void onSuccess(SignInMethodQueryResult signInMethodQueryResult) {

@@ -1,6 +1,7 @@
 package com.example.socify.Activities;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -50,6 +52,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
 
+import io.reactivex.rxjava3.internal.schedulers.NewThreadWorker;
 
 
 public class Home extends AppCompatActivity {
@@ -63,20 +66,7 @@ public class Home extends AppCompatActivity {
     public static GetUserData getUserData;
     int lastSelected;
 
-    public void setIcon(int i){
-        if(lastSelected == i ){
-            return;
-        }
-        if(lastSelected > 2 )
-            navigationView.getMenu().getItem(lastSelected).setIcon(drawables[lastSelected-1]);
-        else
-            navigationView.getMenu().getItem(lastSelected).setIcon(drawables[lastSelected]);
-        if(i > 2 )
-            navigationView.getMenu().getItem(i).setIcon(drawables[i+3]);
-        else
-            navigationView.getMenu().getItem(i).setIcon(drawables[i+4]);
 
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,16 +94,20 @@ public class Home extends AppCompatActivity {
         otpDialog.setContentView(R.layout.post_creation_popup);
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
 
-        //Loading User Profile Data
-        final boolean[] first = {true};
-        getUserData = new GetUserData(FirebaseAuth.getInstance().getCurrentUser().getUid(), (InterfaceClass.LoadDataInterface) () -> {
-            if(first[0]) {
-                //getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, newsFeedFragment).commit();
-                first[0] = false;
+        getUserData = new GetUserData(FirebaseAuth.getInstance().getUid(), new InterfaceClass.LoadDataInterface() {
+            @Override
+            public void onWorkDone() {
+                Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.FragmentView);
+                NewsFeedFragment fragment = (NewsFeedFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                fragment.loadData();
+
+            }
+
+            @Override
+            public void onWorkNotDone() {
+
             }
         });
-        QueryTagFragment.tags = getUserData.tags;
-        getUserData.loadFollowingList();
 
     }
 
@@ -125,11 +119,7 @@ public class Home extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.bottomnavigationview, navController);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
 
-    }
 
 
 }

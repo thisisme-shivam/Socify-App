@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,6 +54,7 @@ public class NewsFeedFragment extends Fragment {
     }
 
     public void loadData(){
+        Log.i("newsfeeedfragment","accessible");
         personPostsRef = FirebaseDatabase.getInstance().getReference().child("College")
                 .child(Home.getUserData.college_name)
                 .child("Posts");
@@ -80,6 +84,8 @@ public class NewsFeedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        NavController controller = Navigation.findNavController(view);
+
         getNewsFeed.notifyDataSetChanged();
         //Ordering data from bottom to top
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -88,10 +94,23 @@ public class NewsFeedFragment extends Fragment {
         rec = getView().findViewById(R.id.postsRV);
         rec.setLayoutManager(layoutManager);
         rec.setAdapter(getNewsFeed);
-        setonclicklisteners();
 
-      
+        binding.chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                @NonNull NavDirections action = NewsFeedFragmentDirections.actionNewsFeedFragmentToAllChatFragment();
+                controller.navigate(action);
+            }
+        });
+
+        binding.btnNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavDirections action = NewsFeedFragmentDirections.actionNewsFeedFragmentToNotificationFragment();
+                controller.navigate(action);
+            }
+        });
     }
 
     @Override
