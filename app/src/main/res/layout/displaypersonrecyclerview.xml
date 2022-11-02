@@ -31,11 +31,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="username"
+            android:fontFamily="@font/chatfontmedium"
             android:textColor="@color/black"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/personname"
+            android:fontFamily="@font/chatfontmedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

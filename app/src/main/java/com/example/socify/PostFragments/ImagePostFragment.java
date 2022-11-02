@@ -31,7 +31,6 @@ public class ImagePostFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         userimagesref = database.getReference("College").child(Home.getUserData.college_name).child("Posts").child(Home.getUserData.uid).child("All Images");
     }
     @Override

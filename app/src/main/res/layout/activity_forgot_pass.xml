@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
+                android:fontFamily="@font/chatfontmedium"
                 android:layout_toRightOf="@id/back_icon"
                 android:text="Forgot Password"
                 android:textColor="@color/palette_black"

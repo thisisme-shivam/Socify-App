@@ -25,6 +25,7 @@
         android:text="@string/enter_otp_info"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:fontFamily="@font/chatfont"
         android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_margin="20dp"
@@ -70,6 +71,7 @@
             android:layout_height="wrap_content"
             android:text="@string/otp_sent_info"
             android:textSize="15sp"
+            android:fontFamily="@font/chatfont"
             android:textColor="@color/black"
             android:layout_gravity="center"
             app:layout_constraintVertical_bias=".5"
@@ -80,6 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/resend_text"
+            android:fontFamily="@font/chatfont"
             android:textColor="@color/teal_700"
             android:textSize="15sp"
             android:layout_gravity="center" />
@@ -95,6 +98,7 @@
         android:background="@drawable/verification_button_bg"
         android:text="Verify and register"
         android:textColor="@color/white"
+        android:fontFamily="@font/chatfontmedium"
         android:textSize="15sp"
         android:layout_gravity="center"
         android:layout_margin="20dp"/>

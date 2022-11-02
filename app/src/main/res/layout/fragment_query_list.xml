@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/osr"
+                        android:fontFamily="@font/chatfontmedium"
                         android:text="QueryHub"
                         android:textColor="@color/palette_black"
                         android:textSize="20sp"

@@ -121,7 +121,7 @@ public class NewsFeedFragment extends Fragment {
             }
         });
 
-        binding.notification.setOnClickListener(new View.OnClickListener() {
+        binding.btnNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavDirections action = NewsFeedFragmentDirections.actionNewsFeedFragmentToNotificationFragment();

@@ -117,11 +117,11 @@ public class Home extends AppCompatActivity {
 
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
         navController = Navigation.findNavController(this, R.id.FragmentView);
+
         NavigationUI.setupWithNavController(binding.bottomnavigationview, navController);
     }
 

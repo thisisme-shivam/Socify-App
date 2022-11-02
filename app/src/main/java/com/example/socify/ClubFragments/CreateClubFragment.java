@@ -84,7 +84,7 @@ public class CreateClubFragment extends Fragment {
             }
         });
 
-        binding.backbtn.setOnClickListener(new View.OnClickListener() {
+        binding.backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavDirections directions = CreateClubFragmentDirections.actionCreateClubFragmentToCreateFragment();

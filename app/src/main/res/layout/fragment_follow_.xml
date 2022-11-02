@@ -15,6 +15,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:text="Follow"
+        android:fontFamily="@font/chatfont"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintHorizontal_bias=".07"
