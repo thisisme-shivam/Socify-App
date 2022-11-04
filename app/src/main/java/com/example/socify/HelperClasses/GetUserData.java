@@ -1,6 +1,7 @@
 package com.example.socify.HelperClasses;
 
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,6 +11,7 @@ import com.example.socify.InterfaceClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseError;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -24,39 +26,82 @@ public class GetUserData {
     public String uid,  name, college_name,token, passyear, course, imgurl, username , followerscount , followingcount , profilestatus;
     public ArrayList<String> tags;
     public ArrayList<String> followinglistuids,followerslistuids;
-    InterfaceClass.LoadDataInterface changeview;
-    public DocumentReference profileinforef,followStatusRef;
+    public DocumentReference profileinforef,followerListRef,followingListRef;
     public DocumentSnapshot snap;
 
     InterfaceClass.VisitProfileInterface visitProfileinterface;
+    InterfaceClass.LoadDataInterface currentUserInterface;
 
-    public GetUserData(String uid){
-        this.uid = uid;
-        loadData();
-    }
+
     public GetUserData(String uid, InterfaceClass.LoadDataInterface changeview) {
         this.uid = uid;
-        this.changeview = changeview;
-        loadData();
+        this.currentUserInterface = changeview;
+        initialize();
+        loadDataForCurrentUser();
     }
 
     public GetUserData(String uid,InterfaceClass.VisitProfileInterface visitProfileinterface){
         this.uid = uid;
         this.visitProfileinterface = visitProfileinterface;
-        loadData();
+        initialize();
+        loadDataVisitUser();
     }
 
-    // this function laads all data of the uid provieded following list too.
-    private void loadData(){
+    private void initialize() {
         tags = new ArrayList<>();
         followinglistuids = new ArrayList<>();
         followerslistuids = new ArrayList<>();
         profileinforef = FirebaseFirestore.getInstance().collection("Profiles").document(uid);
 
-        followStatusRef = FirebaseFirestore.getInstance().collection("Profiles")
+        followingListRef = FirebaseFirestore.getInstance().collection("Profiles")
                 .document(uid)
                 .collection("AccountDetails")
-                .document("FollowingListDoc");
+                .document("FollowingList");
+
+        followerListRef = FirebaseFirestore.getInstance().collection("Profiles")
+                .document(uid)
+                .collection("AccountDetails")
+                .document("FollowerList");
+    }
+
+    private void loadDataVisitUser() {
+        profileinforef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot value) {
+                snap = value;
+
+                if(value != null) {
+                    name = value.getString("Name");
+                    college_name = value.getString("College");
+                    passyear = value.getString("Passing Year");
+                    course = value.getString("Course");
+                    profilestatus = value.getString("ProfileStatus");
+                    imgurl = value.getString("ImgUrl");
+                    token = value.getString("token");
+                    followerscount  = value.getString("FollowersCount");
+                    followingcount =  value.getString("FollowingCount");
+                    username = value.getString("Username");
+
+                    if(visitProfileinterface!=null){
+                        visitProfileinterface.onWorkDone();
+                    }
+                } else{
+                    if(visitProfileinterface != null)
+                        visitProfileinterface.onWorkNotDone();
+                    try {
+                        throw new Exception("User doesn't exist");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    // this function laads all data of the uid provided following list too.
+    private void loadDataForCurrentUser(){
+
+
         profileinforef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -68,22 +113,16 @@ public class GetUserData {
                             passyear = value.getString("Passing Year");
                             course = value.getString("Course");
                             profilestatus = value.getString("ProfileStatus");
-                            try {
-                                imgurl = value.getString("ImgUrl");
-                                Log.i("image",imgurl);
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
+                            imgurl = value.getString("ImgUrl");
                             token = value.getString("token");
                             followerscount  = value.getString("FollowersCount");
                             followingcount =  value.getString("FollowingCount");
                             username = value.getString("Username");
                             // if visiting profile is being loaded
-                            if(changeview != null)
-                                changeview.onWorkDone();
+
                         } else{
-                            if(changeview != null)
-                                changeview.onWorkNotDone();
+                            if(currentUserInterface != null)
+                                currentUserInterface.onWorkNotDone();
                             try {
                                 throw new Exception("User doesn't exist");
                             } catch (Exception e) {
@@ -95,42 +134,31 @@ public class GetUserData {
 
 
         loadFollowingList();
-        //Loading Tags
+        loadTags();
+    }
 
+    public void loadTags(){
         profileinforef = FirebaseFirestore.getInstance().collection("Profiles").document(uid).collection("AccountDetails").document("UserTags");
         profileinforef.get().addOnCompleteListener(task -> {
             DocumentSnapshot documentSnapshot = task.getResult();
             if(documentSnapshot.exists()) {
                 tags  = (ArrayList<String>)  documentSnapshot.getData().get("Tags");
-
             }
         });
-
-
-
     }
 
 
     public void loadFollowingList(){
 
-        followStatusRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        followingListRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(value != null ){
+                if(value.getData() != null ){
                     Map<String,Object> mp = value.getData();
-                    if(mp != null) {
-                        ArrayList<String> followinglist = (ArrayList<String>) mp.get("FollowingList");
-                        Log.i("vlaueof ",mp.toString());
-                        followinglistuids = followinglist;
-
-                        ArrayList<String> followerlist = (ArrayList<String>) mp.get("FollowerList");
-
-                        followerslistuids = followerlist;
-
-                        if(visitProfileinterface!=null){
-                            visitProfileinterface.onWorkDone();
-                        }
-
+                    if(mp.get("FollowingList") != null) {
+                        followinglistuids = (ArrayList<String>) mp.get("FollowingList");
+                        if(currentUserInterface != null)
+                            currentUserInterface.onWorkDone();
 
                     }
                 }
@@ -138,5 +166,18 @@ public class GetUserData {
             }
         });
 
+    }
+
+    public void loadFollowersList(){
+        followerListRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(value.getData() != null ){
+                    Map<String,Object> mp = value.getData();
+                    if(mp.get("FollowersList") != null)
+                        followerslistuids = (ArrayList<String>) mp.get("FollowersList");
+                }
+            }
+        });
     }
 }

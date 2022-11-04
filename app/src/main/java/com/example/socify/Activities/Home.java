@@ -111,25 +111,15 @@ public class Home extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
         navController = Navigation.findNavController(this, R.id.FragmentView);
-
         NavigationUI.setupWithNavController(binding.bottomnavigationview, navController);
     }
 
 
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Online Users").child(Home.getUserData.uid).setValue("Online");
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Online Users").child(Home.getUserData.uid).setValue("Offline");
-//    }
+
 }

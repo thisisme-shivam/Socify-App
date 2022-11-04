@@ -16,10 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.load.data.DataFetcher;
 import com.example.socify.Activities.Registration;
 import com.example.socify.Adapters.GetCollegeAdapter;
-import com.example.socify.HelperClasses.OptimizedSearchCollege;
+import com.example.socify.HelperClasses.OptimizedCollegeSearch;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentGetCollegeBinding;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -28,7 +27,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.CollegeViewHolder.Onitemclicked {
 
     FragmentGetCollegeBinding binding;
-    OptimizedSearchCollege optimizedSearch;
+    OptimizedCollegeSearch optimizedSearch;
     public GetCollegeAdapter adapter;
     boolean notstopped  ;
     public RecyclerView rec;
@@ -53,7 +52,7 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         coursesFragment = new CoursesFragment();
-        optimizedSearch = new OptimizedSearchCollege(this);
+        optimizedSearch = new OptimizedCollegeSearch(this);
         regActivity = (Registration) getActivity();
         adapter = new GetCollegeAdapter(requireContext(),regActivity.colleges,this);
         

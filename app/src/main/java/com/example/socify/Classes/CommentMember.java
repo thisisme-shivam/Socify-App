@@ -1,23 +1,28 @@
 package com.example.socify.Classes;
 
+import com.example.socify.HomeFragments.CommentsFragment;
+import com.google.android.exoplayer2.C;
+
 public class CommentMember {
-
-    String comment, uid, username, time, commentkey;
-
+    String comment;
+    String token;
+    String uid;
+    String username;
+    String time;
     public String getComment() {
         return comment;
     }
 
-    public String getCommentkey() {
-        return commentkey;
-    }
-
-    public void setCommentkey(String commentkey) {
-        this.commentkey = commentkey;
-    }
-
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getUid() {
@@ -28,11 +33,11 @@ public class CommentMember {
         this.uid = uid;
     }
 
-    public String getuserName() {
+    public String getUsername() {
         return username;
     }
 
-    public void setuserName(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -43,4 +48,8 @@ public class CommentMember {
     public void setTime(String time) {
         this.time = time;
     }
+
+
+
+
 }

@@ -22,7 +22,9 @@ import com.example.socify.Adapters.CommentsAdapter;
 import com.example.socify.Classes.CommentMember;
 import com.example.socify.Classes.PostIdGetter;
 import com.example.socify.R;
+import com.example.socify.SendNotification;
 import com.example.socify.databinding.FragmentCommentsBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,13 +40,17 @@ import java.util.HashMap;
 public class CommentsFragment extends Fragment {
 
     String postid, posteruid;
-    String commentkey = FirebaseDatabase.getInstance().getReference().push().getKey();
     ArrayList<CommentMember> commentMembers;
     CommentsAdapter commentsAdapter;
 
     FragmentCommentsBinding binding;
 
     DatabaseReference commentreference;
+
+    public CommentsFragment(String postid, String uid) {
+        this.postid = postid;
+        this.posteruid = uid;
+    }
 
     private void setonclicklisteners() {
 
@@ -81,7 +87,7 @@ public class CommentsFragment extends Fragment {
         commentMembers = new ArrayList<>();
         commentsAdapter = new CommentsAdapter(getActivity(), commentMembers);
         commentreference = FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Posts").child(posteruid).child("All Images").child(postid);
-        fetch_comment();
+        fetchComment();
         binding.commentlistRV.setAdapter(commentsAdapter);
         setonclicklisteners();
 
@@ -108,16 +114,20 @@ public class CommentsFragment extends Fragment {
         CommentMember commentMember = new CommentMember();
         commentMember.setComment(binding.commentbox.getText().toString());
         binding.commentbox.setText("");
-        commentMember.setCommentkey(commentkey);
         commentMember.setTime(String.valueOf(new Date().getTime()));
         commentMember.setUid(Home.getUserData.uid);
-        commentMember.setuserName(Home.getUserData.username);
-
-        commentreference.child("Comments").child(commentkey).setValue(commentMember);
+        commentMember.setUsername(Home.getUserData.username);
+        commentMember.setToken(Home.getUserData.token);
+        commentreference.child("Comments").push().setValue(commentMember).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                SendNotification.sendCommentNotification(requireContext(),commentMember.getToken(),posteruid,postid);
+            }
+        });
         hideSoftKeyboard(requireActivity(), binding.commentbox);
     }
 
-    private void fetch_comment() {
+    private void fetchComment() {
         commentreference.child("Comments").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

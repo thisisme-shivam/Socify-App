@@ -11,23 +11,104 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.socify.Activities.Home;
+import com.example.socify.Classes.NotificationMember;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SendNotification {
 
     private static String url = "https://fcm.googleapis.com/fcm/send";
-    public static void sendFollowNotification(Context context, String uid, String username, String token){
+
+
+    private static void sendFollowNotification(String sendToUid,String message){
+        Calendar cdate = Calendar.getInstance();
+        SimpleDateFormat currenDate = new SimpleDateFormat("dd-MMMM-yy");
+        String date = currenDate.format(cdate.getTime());
+
+        Calendar ctime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
+        String time = currentTime.format(ctime.getTime());
+
+        NotificationMember notification = new NotificationMember();
+        notification.setUserUid(Home.getUserData.uid);
+        notification.setUsername(Home.getUserData.username);
+        notification.setType("follow");
+        notification.setImgurl(Home.getUserData.imgurl);
+        notification.setTime(time);
+        notification.setDate(date);
+        notification.setInfo(message);
+        FirebaseDatabase.getInstance().getReference()
+                .child("College").child(Home.getUserData.college_name)
+                .child("Notifications")
+                .child(sendToUid)
+                .push().setValue(notification).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.i("xax", "asas");
+                    }
+                });
+    }
+    public static void sendFollowNotification(Context context,  String token,String sendToUid){
+        sendFollowNotification(sendToUid,"has started following you.");
+        sendToFcm(context,token,"has started following you.");
+    }
+
+    public static void sendLikeNotification(Context context, String token, String sendToUid, String postid) {
+        sendPostNotification(sendToUid,postid,"has liked your post");
+        sendToFcm(context,token,"has liked your post");
+    }
+    public static void sendCommentNotification(Context context, String token, String sendToUid, String postid){
+        sendPostNotification(sendToUid,postid,"has commented on  your post");
+        sendToFcm(context,token,"has commented on  your post");
+    }
+
+    private static void sendPostNotification(String sendToUid,String postid, String message) {
+        Calendar cdate = Calendar.getInstance();
+        SimpleDateFormat currenDate = new SimpleDateFormat("dd-MMMM-yy");
+        String date = currenDate.format(cdate.getTime());
+
+        Calendar ctime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
+        String time = currentTime.format(ctime.getTime());
+
+        NotificationMember notification = new NotificationMember();
+        notification.setUserUid(postid);
+        notification.setUsername(Home.getUserData.username);
+        notification.setType("post");
+        notification.setImgurl(Home.getUserData.imgurl);
+        notification.setTime(time);
+        notification.setDate(date);
+        notification.setInfo(message);
+        FirebaseDatabase.getInstance().getReference()
+                .child("College").child(Home.getUserData.college_name)
+                .child("Notifications")
+                .child(sendToUid)
+                .push().setValue(notification).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.i("xax", "asas");
+                    }
+                });
+
+
+    }
+
+
+    static void sendToFcm(Context context,String token,String message){
         try {
             String url = "https://fcm.googleapis.com/fcm/send";
             RequestQueue queue = Volley.newRequestQueue(context);
             JSONObject data = new JSONObject();
-            data.put("title", username);
-            data.put("body",username +" "+"has started following you.");
+            data.put("title", "Socify");
+            data.put("body",Home.getUserData.username +" "+message);
 
             JSONObject notificationData = new JSONObject();
             notificationData.put("notification",data);
@@ -60,7 +141,5 @@ public class SendNotification {
             Log.i("Failed","at some point");
             e.printStackTrace();
         }
-
-
     }
 }

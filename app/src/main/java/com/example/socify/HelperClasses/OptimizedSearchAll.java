@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import com.example.socify.Activities.Home;
 import com.example.socify.Classes.Person;
 import com.example.socify.HomeFragments.SearchAll;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -60,15 +62,15 @@ public class OptimizedSearchAll {
     private void getOtherdata(String uid) {
         documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(uid);
 
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-
-                if(value != null){
+            public void onSuccess(DocumentSnapshot value) {
+                if(value.getData() != null){
+                    Log.i("Value",value.getData().toString());
                     String name = (String) value.get("Name");
                     String username = (String) value.get("Username");
                     String imguri =  (String) value.get("ImgUrl");
-                    Log.i("values",uid);
+                    Log.i("values",username);
 
                     if(Home.getUserData.followinglistuids.contains(uid)){
                         allusers.add(new Person(name,username,true,imguri,uid));
@@ -78,6 +80,7 @@ public class OptimizedSearchAll {
                 }
             }
         });
+
     }
 
     public void stopSearch() {

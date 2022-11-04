@@ -38,7 +38,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
     public void onBindViewHolder(@NonNull CommentsViewHolder holder, int position) {
         CommentMember commentMember = commentMembers.get(position);
         holder.comment.setText(commentMember.getComment());
-        holder.username.setText(commentMember.getuserName());
+        holder.username.setText(commentMember.getUsername());
         long time = Long.valueOf(commentMember.getTime());
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");

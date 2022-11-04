@@ -10,12 +10,18 @@ public class PostMember {
     String desc;
     String username;
     String postid;
+    String token;
 
 
     public PostMember() {
 
     }
 
+    public String getToken(){return token;}
+
+    public void setToken(String token){
+        this.token = token;
+    }
     public String getPostid() {
         return postid;
     }

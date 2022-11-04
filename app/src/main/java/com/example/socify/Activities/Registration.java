@@ -211,7 +211,7 @@ public class Registration extends AppCompatActivity {
                 .child(profiledetails.get("College"))
                 .child("Profiles")
                 .child(currentuid)
-                .setValue("UID",currentuid).addOnFailureListener(new OnFailureListener() {
+                .child("UID").setValue(currentuid).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         interestInterface.onWorkNotDone();

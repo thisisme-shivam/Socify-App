@@ -1,6 +1,5 @@
 package com.example.socify.HomeFragments;
 
-
 import android.app.Notification;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -8,16 +7,20 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.socify.Activities.Home;
@@ -29,11 +32,15 @@ import com.example.socify.SendNotification;
 import com.example.socify.databinding.FragmentVisitProfileBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class VisitProfile extends Fragment   {
@@ -45,13 +52,24 @@ public class VisitProfile extends Fragment   {
     NavController navController;
     PostLoaderFragment postLoaderFragment = new PostLoaderFragment();
 
+    AppCompatButton followButton;
+    CircleImageView profilePhoto;
+    MaterialTextView username,name;
+    ChipGroup group;
+    TextView followercountView,followingCountView;
     CountDownTimer timer;
+    public VisitProfile(String uid ){
+        Log.i("person uid", uid);
+        this.uid  = uid;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -105,10 +123,12 @@ public class VisitProfile extends Fragment   {
                     }else
                         followstatus = false;
 
-                    if (getUserData.profilestatus.equals("private")) {
-//                        getView().findViewById(R.id.privatemessage).setVisibility(View.VISIBLE);
-                    }
                 }
+            }
+
+            @Override
+            public void onWorkNotDone() {
+
             }
         });
 
@@ -117,7 +137,32 @@ public class VisitProfile extends Fragment   {
 
     private void setOnclickListeners() {
 
-        binding.follow.setOnClickListener(new View.OnClickListener() {
+
+
+
+        binding.message1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChatRoomFragment chatRoomFragment = new ChatRoomFragment();
+                Bundle chatdetails = new Bundle();
+                chatdetails.putString("Name", getUserData.name);
+                chatdetails.putString("Img", getUserData.imgurl);
+                chatdetails.putString("UID", getUserData.uid);
+                chatRoomFragment.setArguments(chatdetails);
+                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.FragmentView, chatRoomFragment).commit();
+            }
+        });
+
+
+        binding.backbtnvisit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new DiscoverFragment()).commit();
+            }
+        });
+
+        followButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -154,19 +199,15 @@ public class VisitProfile extends Fragment   {
         });
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        getUserData = null;
-    }
+
 
     private void unfollowuser() {
-        binding.follow.setText("Follow");
+        followButton.setText("Follow");
         Home.getUserData.followinglistuids.remove(uid);
         getUserData.followerslistuids.remove(Home.getUserData.uid);
         followstatus = false;
 
-        getUserData.snap.getReference().update("FollowersCount",binding.followerscountvisit.getText());
+        getUserData.snap.getReference().update("FollowersCount",followercountView.getText());
         Home.getUserData.snap.getReference().update("FollowingCount",String.valueOf(Integer.parseInt(Home.getUserData.followingcount) -1));
 
         updateStatus();
@@ -174,44 +215,27 @@ public class VisitProfile extends Fragment   {
 
     private void updateStatus(){
         HashMap<String,ArrayList<String>> mp = new HashMap<>();
-        mp.put("Followinglist",getUserData.followinglistuids);
-        mp.put("FollowersList",getUserData.followerslistuids);
+        Log.i("Ref",getUserData.followerslistuids.toString());
+        mp.put("FollowerList",getUserData.followerslistuids);
 
         HashMap<String,ArrayList<String>> currentusermp = new HashMap<>();
-        currentusermp.put("Followinglist",Home.getUserData.followinglistuids);
-        currentusermp.put("FollowersList",Home.getUserData.followerslistuids);
+        currentusermp.put("FollowingList",Home.getUserData.followinglistuids);
 
-        getUserData.followStatusRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        getUserData.followerListRef.set(mp).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if(documentSnapshot.getData() == null){
-                    Map<String,ArrayList<String>> mp  = new HashMap<>();
-                    mp.put("FollowingList",getUserData.followinglistuids);
-                    mp.put("FollowerList",getUserData.followerslistuids);
-                    documentSnapshot.getReference().set(mp);
-                }else
-                    documentSnapshot.getReference().update("FollowerList",getUserData.followerslistuids);
+            public void onSuccess(Void unused) {
+                Log.i("ghk","hkjlgfjkfhih");
+                SendNotification.sendFollowNotification(requireContext(),getUserData.token,getUserData.uid);
             }
         });
-
-       Home.getUserData.followStatusRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-           @Override
-           public void onSuccess(DocumentSnapshot documentSnapshot) {
-               if(documentSnapshot.getData() == null){
-                   Map<String,ArrayList<String>> mp  = new HashMap<>();
-                   mp.put("FollowingList",Home.getUserData.followinglistuids);
-                   mp.put("FollowerList",Home.getUserData.followerslistuids);
-                   documentSnapshot.getReference().set(mp);
-               }else
-                    documentSnapshot.getReference().update("FollowingList",Home.getUserData.followinglistuids);
-           }
-       });
+        Home.getUserData.followingListRef.set(currentusermp);
 
     }
 
     private void followUser() {
-        SendNotification.sendFollowNotification(getContext(),Home.getUserData.uid,Home.getUserData.username, getUserData.token);
+        SendNotification.sendFollowNotification(getContext(),getUserData.token,getUserData.uid);
         Home.getUserData.followinglistuids.add(uid);
+        getUserData.followerslistuids.add(Home.getUserData.uid);
         followstatus = true;
         updateStatus();
         getUserData.snap.getReference().update("FollowersCount",binding.followerscountvisit.getText());
@@ -224,7 +248,6 @@ public class VisitProfile extends Fragment   {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentVisitProfileBinding.inflate(getLayoutInflater());
-        getChildFragmentManager().beginTransaction().replace(R.id.postloader,postLoaderFragment).commit();
         return binding.getRoot();
     }
 
