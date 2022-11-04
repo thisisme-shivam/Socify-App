@@ -3,6 +3,7 @@ package com.example.socify.RegistrationFragments;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.example.socify.AESEncryption;
 import com.example.socify.Activities.CropperActivity;
 import com.example.socify.Activities.Registration;
-import com.example.socify.FireBaseClasses.SendProfileData;
+import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfilePicBinding;
 
@@ -30,11 +31,10 @@ public class ProfilePic extends Fragment {
 
     FragmentProfilePicBinding binding;
     Uri imgUrl;
-
     ActivityResultLauncher<String> mTakePhoto;
     String name, passing_year;
-    static SendProfileData sendProfileData = new SendProfileData();
-
+    Registration regActivity;
+    UserNameFragment userNameFragment;
     public boolean FieldValidation() {
 
         AESEncryption aesEncryption = new AESEncryption();
@@ -50,7 +50,7 @@ public class ProfilePic extends Fragment {
        if(name.isEmpty())
            binding.nametextlayout.setError("Name cannot be empty");
        else if (name.length()<3)
-           binding.nametextlayout.setError("Name should be atleast 3 characters");
+           binding.nametextlayout.setError("Name should contain atleast 2 characters");
        else if (passing_year.isEmpty())
            binding.graduationYear.setError("Select your graduation year");
        else {
@@ -78,23 +78,12 @@ public class ProfilePic extends Fragment {
             @Override
             public void onClick(View v) {
                if(FieldValidation()) {
-                   Registration.details.setName(name);
-                   Registration.details.setPassyear(passing_year);
-                   //Sending Data
-                   if(imgUrl == null)
-                       Registration.details.setImgUri("");
-                   sendProfileData.sendImg();
-                   sendProfileData.sendName();
-                   sendProfileData.sendpassyear();
-                   sendProfileData.sendCurrentUID();
 
-                   //Switching to new fragment
-
-                   Registration.fragment_curr_pos++;
-                   getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.userNameFragment).commit();
-                   getActivity().findViewById(R.id.back_icon).setVisibility(View.VISIBLE);
+                   setData();
+                   //Switching to next fragment
+                   getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, userNameFragment).commitNowAllowingStateLoss();
+                   regActivity.findViewById(R.id.back_icon).setVisibility(View.VISIBLE);
                }
-
             }
         });
 
@@ -103,9 +92,22 @@ public class ProfilePic extends Fragment {
     }
 
 
+    private void setData(){
+        regActivity.profiledetails.put("Name",name);
+        regActivity.profiledetails.put("Passing Year",passing_year);
+
+        if(imgUrl != null) {
+            regActivity.setImgUri(imgUrl);
+        }
+        regActivity.putImage();
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        regActivity = (Registration) getActivity();
+        userNameFragment = new UserNameFragment();
         mTakePhoto = registerForActivityResult(
                 new ActivityResultContracts.GetContent(),
                 result -> {
@@ -127,14 +129,10 @@ public class ProfilePic extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode==-1 && requestCode==101 && data!= null ) {
-            assert data != null;
             String result = data.getStringExtra("RESULT");
             Log.i("Result", result);
-            Uri resultUri = null;
             if(result!=null) {
-                resultUri = Uri.parse(result);
-                imgUrl = resultUri;
-                Registration.details.setImgUri(String.valueOf(Uri.parse(String.valueOf(imgUrl))));
+                imgUrl = Uri.parse(result);
             }
             binding.profileImage.setImageURI(imgUrl);
         }

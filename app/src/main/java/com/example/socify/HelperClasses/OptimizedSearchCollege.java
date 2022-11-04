@@ -15,12 +15,14 @@ public class OptimizedSearchCollege {
     public  ArrayList<College> filterlist;
     public Thread th;
     boolean stopthread;
+    Registration regActivity;
     Map<String,ArrayList<College>> hashMap;
     GetCollegeFragment getCollegeFragment;
 
     public ArrayList<College> newfilterlist;
     public OptimizedSearchCollege(GetCollegeFragment getCollegeFragment){
-        filterlist = Registration.colleges;
+        regActivity = (Registration) getCollegeFragment.getActivity();
+        filterlist = regActivity.colleges;
         hashMap = new HashMap<>();
         this.getCollegeFragment = getCollegeFragment;
     }
@@ -30,7 +32,7 @@ public class OptimizedSearchCollege {
     public void startSearch(String newText){
         // if new text is empty no need to search colleges directly assign origin list to adapter
         if(newText.isEmpty()){
-            getCollegeFragment.adapter.filterlist(Registration.colleges);
+            getCollegeFragment.adapter.filterlist(regActivity.colleges);
             return;
         }
 
@@ -44,9 +46,9 @@ public class OptimizedSearchCollege {
         else if(newText.contains(oldtext) && !oldtext.isEmpty() )
             filterlist = newfilterlist;
         else
-            filterlist = Registration.colleges;
+            filterlist = regActivity.colleges;
 
-        final int[] i = {0};
+
 
         newfilterlist = new ArrayList<>();
 
@@ -57,9 +59,6 @@ public class OptimizedSearchCollege {
                 for(College college : filterlist ){
                     if(stopthread)
                         break;
-                    i[0] = i[0] +1;
-
-                    Log.i("change", String.valueOf(i[0]));
 
                     String[] collegewords = college.getCollege_name().split(" ");
 

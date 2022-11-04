@@ -34,7 +34,6 @@ public class GetUserData {
         this.uid = uid;
         loadData();
     }
-
     public GetUserData(String uid, InterfaceClass.LoadDataInterface changeview) {
         this.uid = uid;
         this.changeview = changeview;
@@ -54,10 +53,6 @@ public class GetUserData {
         followerslistuids = new ArrayList<>();
         profileinforef = FirebaseFirestore.getInstance().collection("Profiles").document(uid);
 
-
-
-
-
         followStatusRef = FirebaseFirestore.getInstance().collection("Profiles")
                 .document(uid)
                 .collection("AccountDetails")
@@ -66,16 +61,10 @@ public class GetUserData {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                         snap = value;
-//                        FirebaseMessaging.getInstance().getToken()
-//                                .addOnSuccessListener(new OnSuccessListener<String>() {
-//                                    @Override
-//                                    public void onSuccess(String s) {
-//                                        snap.getReference().update("token",s);
-//                                    }
-//                                });
+
                         if(value != null) {
                             name = value.getString("Name");
-                            college_name = value.getString("CollegeName");
+                            college_name = value.getString("College");
                             passyear = value.getString("Passing Year");
                             course = value.getString("Course");
                             profilestatus = value.getString("ProfileStatus");
@@ -87,11 +76,14 @@ public class GetUserData {
                             }
                             token = value.getString("token");
                             followerscount  = value.getString("FollowersCount");
-                            followingcount = (String) value.getString("FollowingCount");
-                            username = (String) value.getString("Username");
+                            followingcount =  value.getString("FollowingCount");
+                            username = value.getString("Username");
                             // if visiting profile is being loaded
-
+                            if(changeview != null)
+                                changeview.onWorkDone();
                         } else{
+                            if(changeview != null)
+                                changeview.onWorkNotDone();
                             try {
                                 throw new Exception("User doesn't exist");
                             } catch (Exception e) {
@@ -101,8 +93,11 @@ public class GetUserData {
                     }
                 });
 
+
+        loadFollowingList();
         //Loading Tags
-        profileinforef = FirebaseFirestore.getInstance().collection("Profiles").document(uid).collection("Interests").document("UserTags");
+
+        profileinforef = FirebaseFirestore.getInstance().collection("Profiles").document(uid).collection("AccountDetails").document("UserTags");
         profileinforef.get().addOnCompleteListener(task -> {
             DocumentSnapshot documentSnapshot = task.getResult();
             if(documentSnapshot.exists()) {
@@ -111,10 +106,6 @@ public class GetUserData {
             }
         });
 
-
-
-
-        loadFollowingList();
 
 
     }
@@ -143,8 +134,7 @@ public class GetUserData {
 
                     }
                 }
-                if(changeview != null)
-                    changeview.onWorkDone();
+
             }
         });
 

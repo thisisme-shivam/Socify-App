@@ -1,5 +1,8 @@
 package com.example.socify.HomeFragments;
 
+
+import android.app.Notification;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
@@ -22,6 +25,7 @@ import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.InterfaceClass;
 import com.example.socify.PostFragments.PostLoaderFragment;
 import com.example.socify.R;
+import com.example.socify.SendNotification;
 import com.example.socify.databinding.FragmentVisitProfileBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
@@ -206,6 +210,7 @@ public class VisitProfile extends Fragment   {
     }
 
     private void followUser() {
+        SendNotification.sendFollowNotification(getContext(),Home.getUserData.uid,Home.getUserData.username, getUserData.token);
         Home.getUserData.followinglistuids.add(uid);
         followstatus = true;
         updateStatus();

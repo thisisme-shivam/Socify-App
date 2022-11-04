@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.example.socify.HelperClasses.GetUserData;
+import com.example.socify.InterfaceClass;
 import com.example.socify.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+
 public class SplashActivity extends AppCompatActivity {
     FirebaseAuth auth;
+    public static GetUserData getCurrentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,18 +22,17 @@ public class SplashActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        new Handler().postDelayed(new Runnable() {
+         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (auth.getCurrentUser() != null) {
-                    startActivity(new Intent(getApplicationContext(), Home.class));
-                    finish();
-                } else {
-                    startActivity(new Intent(SplashActivity.this, SlideScreen.class));
-                    finish();
-                }
+                if(auth.getCurrentUser()!=null)
+                    startActivity(new Intent(getApplicationContext(),Home.class));
+                else
+                    startActivity(new Intent(getApplicationContext(),SlideScreen.class));
             }
-        }, 1600);
+        },1600);
+
+
     }
 
 }

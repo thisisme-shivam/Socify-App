@@ -20,7 +20,6 @@ import androidx.appcompat.widget.SearchView;
 import com.example.socify.Activities.Registration;
 import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.Adapters.GetCourseAdapter;
-import com.example.socify.FireBaseClasses.SendProfileData;
 import com.example.socify.HelperClasses.OptimizedSearchCourses;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentCoursesBinding;
@@ -30,7 +29,6 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 public class CoursesFragment extends Fragment implements GetCollegeAdapter.CollegeViewHolder.Onitemclicked {
 
     FragmentCoursesBinding binding;
-    SendProfileData sendProfileData = new SendProfileData();
     public GetCourseAdapter adapter;
     public ShimmerFrameLayout shimmerFrameLayout;
     public RecyclerView rec;
@@ -40,14 +38,14 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
     CountDownTimer cntr;
     Integer waitingTime =200;
     boolean clickd = false;
+    public Registration regActivity;
+    InterestsFragment interestsFragment;
 
     public void setonclicklisteners() {
 
         binding.next3btn.setOnClickListener(v -> {
-            Registration.details.setCourse("CSE");
 
             //Sending Course
-            sendProfileData.sendCourse();
 
             InterestsFragment interestsFragment = new InterestsFragment();
             getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, interestsFragment).commit();
@@ -57,8 +55,10 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        interestsFragment = new InterestsFragment();
+        regActivity = (Registration) getActivity();
         optimizedSearchCourses = new OptimizedSearchCourses(this);
-        Log.i("ejfdsalkfjdls;afjs;klaf","fjlasdkjflkds");
+
     }
 
     @Override
@@ -71,7 +71,7 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
         rec = view.findViewById(R.id.CoursesListRV);
         rec.setHasFixedSize(true);
         rec.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new GetCourseAdapter(getContext(),Registration.courses,this::onclick);
+        adapter = new GetCourseAdapter(getContext(),regActivity.courses,this::onclick);
         adapter.notifyDataSetChanged();
         rec.setAdapter(adapter);
         shimmerFrameLayout = getView().findViewById(R.id.shimmer_view_container);
@@ -129,13 +129,10 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
 
     @Override
     public void onclick(int position) {
-        Registration.fragment_curr_pos++;
-        Registration.details.setCourse(optimizedSearchCourses.newfilterlist.get(position).getcoursename());
-        SendProfileData data = new SendProfileData();
-        data.sendCourse();
+        regActivity.profiledetails.put("Course",optimizedSearchCourses.newfilterlist.get(position).getcoursename());
         clickd = true;
         searchView.setQuery(optimizedSearchCourses.newfilterlist.get(position).getcoursename(),false);
-        getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, Registration.interestsFragment).commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, interestsFragment).commit();
     }
 
 
