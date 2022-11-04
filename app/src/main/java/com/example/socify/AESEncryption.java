@@ -1,5 +1,9 @@
 package com.example.socify;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -25,6 +29,7 @@ public class AESEncryption {
         key = generator.generateKey();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public String encrypt(String message) {
         byte[] messageInBytes = message.getBytes();
         EncyptionCipher = null;
@@ -42,11 +47,11 @@ public class AESEncryption {
         try {
             EncrpytedBytes = EncyptionCipher.doFinal(messageInBytes);
         } catch (BadPaddingException | IllegalBlockSizeException e) {
-            e.printStackTrace();
         }
         return encode(EncrpytedBytes);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public String decrypt(String encryptedMsg) throws Exception {
 
         byte [] messageInBytes = decode(encryptedMsg);
@@ -57,10 +62,12 @@ public class AESEncryption {
         return new String(decryptedBytes);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private String encode(byte[] data) {
         return Base64.getEncoder().encodeToString(data);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private byte[] decode(String data) {
         return Base64.getDecoder().decode(data);
     }

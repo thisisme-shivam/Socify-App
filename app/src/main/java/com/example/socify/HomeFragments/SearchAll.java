@@ -1,11 +1,14 @@
 package com.example.socify.HomeFragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +17,9 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import com.example.socify.Adapters.SearchPersonAdapter;
 import com.example.socify.Classes.Person;
@@ -34,6 +40,8 @@ public class SearchAll extends Fragment {
     OptimizedSearchAll searchALl;
     CountDownTimer cntr;
     public Handler hand = new Handler();
+    Window window;
+
 
     public SearchAll(){
 
@@ -51,11 +59,16 @@ public class SearchAll extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        NavController controller = Navigation.findNavController(view);
+
         rec = getView().findViewById(R.id.personsrecyclerview);
         rec.setHasFixedSize(true);
         rec.setLayoutManager(new LinearLayoutManager(getContext()));
         rec.setAdapter(personAdapter);
         setSearchTextListener();
+
+        binding.backIcon.setOnClickListener(v -> controller.popBackStack());
 
     }
 

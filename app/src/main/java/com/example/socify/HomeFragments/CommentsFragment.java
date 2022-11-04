@@ -82,8 +82,7 @@ public class CommentsFragment extends Fragment {
         binding.backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavDirections directions = CommentsFragmentDirections.actionCommentsFragmentToNewsFeedFragment();
-                controller.navigate(directions);
+                controller.popBackStack();
             }
         });
 

@@ -12,13 +12,19 @@
         tools:layout="@layout/fragment_news_feed" >
         <action
             android:id="@+id/action_newsFeedFragment_to_notificationFragment"
-            app:destination="@id/notificationFragment" />
+            app:destination="@id/notificationFragment"
+            app:enterAnim="@anim/enter_fragment"
+            app:popExitAnim="@anim/exit_fragment" />
         <action
             android:id="@+id/action_newsFeedFragment_to_allChatFragment"
-            app:destination="@id/allChatFragment" />
+            app:destination="@id/allChatFragment"
+            app:enterAnim="@anim/enter_fragment"
+            app:popExitAnim="@anim/exit_fragment" />
         <action
             android:id="@+id/action_newsFeedFragment_to_commentsFragment"
-            app:destination="@id/commentsFragment" />
+            app:destination="@id/commentsFragment"
+            app:enterAnim="@anim/enter_fragment"
+            app:popExitAnim="@anim/exit_fragment" />
     </fragment>
 
     <fragment
@@ -84,7 +90,9 @@
         tools:layout="@layout/fragment_discover" >
         <action
             android:id="@+id/action_discoverFragment_to_searchAll2"
-            app:destination="@id/searchAll2" />
+            app:destination="@id/searchAll2"
+            app:enterAnim="@anim/enter_fragment"
+            app:popExitAnim="@anim/exit_fragment" />
     </fragment>
     <fragment
         android:id="@+id/accessMyFragment"
@@ -93,10 +101,14 @@
         tools:layout="@layout/fragment_access_my" >
         <action
             android:id="@+id/action_accessMyFragment_to_queryTagFragment"
-            app:destination="@id/queryTagFragment" />
+            app:destination="@id/queryTagFragment"
+            app:enterAnim="@anim/enter_fragment"
+            app:popExitAnim="@anim/exit_fragment" />
         <action
             android:id="@+id/action_accessMyFragment_to_myClubFragment"
-            app:destination="@id/myClubFragment" />
+            app:destination="@id/myClubFragment"
+            app:enterAnim="@anim/enter_fragment"
+            app:popExitAnim="@anim/exit_fragment" />
     </fragment>
     <fragment
         android:id="@+id/createFragment"
@@ -105,14 +117,20 @@
         tools:layout="@layout/fragment_create" >
         <action
             android:id="@+id/action_createFragment_to_createPostFragment"
-            app:destination="@id/createPostFragment" />
+            app:destination="@id/createPostFragment"
+            app:enterAnim="@anim/enter_right_fragment"
+            app:popExitAnim="@anim/exit_right_fragment" />
         <action
             android:id="@+id/action_createFragment_to_ask_QueryFragment"
             app:destination="@id/ask_QueryFragment"
+            app:enterAnim="@anim/enter_right_fragment"
+            app:popExitAnim="@anim/exit_right_fragment"
             app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_createFragment_to_createClubFragment"
-            app:destination="@id/createClubFragment" />
+            app:destination="@id/createClubFragment"
+            app:enterAnim="@anim/enter_right_fragment"
+            app:popExitAnim="@anim/exit_right_fragment" />
     </fragment>
     <fragment
         android:id="@+id/searchAll2"
@@ -135,7 +153,9 @@
         tools:layout="@layout/fragment_query_tag" >
         <action
             android:id="@+id/action_queryTagFragment_to_queryListFragment"
-            app:destination="@id/queryListFragment" />
+            app:destination="@id/queryListFragment"
+            app:enterAnim="@anim/enter_fragment"
+            app:popExitAnim="@anim/exit_fragment" />
         <action
             android:id="@+id/action_queryTagFragment_to_newsFeedFragment2"
             app:destination="@id/newsFeedFragment"
@@ -214,7 +234,9 @@
         tools:layout="@layout/fragment_query_list" >
         <action
             android:id="@+id/action_queryListFragment_to_replyFragment"
-            app:destination="@id/replyFragment" />
+            app:destination="@id/replyFragment"
+            app:enterAnim="@anim/enter_fragment"
+            app:popExitAnim="@anim/exit_fragment" />
         <action
             android:id="@+id/action_queryListFragment_to_queryTagFragment"
             app:destination="@id/queryTagFragment"
