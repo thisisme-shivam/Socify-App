@@ -20,7 +20,7 @@ import androidx.appcompat.widget.SearchView;
 import com.example.socify.Activities.Registration;
 import com.example.socify.Adapters.GetCollegeAdapter;
 import com.example.socify.Adapters.GetCourseAdapter;
-import com.example.socify.HelperClasses.OptimizedSearchCourses;
+import com.example.socify.HelperClasses.OptimizedCoursesSearch;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentCoursesBinding;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -33,7 +33,7 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
     public ShimmerFrameLayout shimmerFrameLayout;
     public RecyclerView rec;
     SearchView searchView;
-    OptimizedSearchCourses optimizedSearchCourses;
+    OptimizedCoursesSearch optimizedSearchCourses;
     public Handler hand = new Handler();
     CountDownTimer cntr;
     Integer waitingTime =200;
@@ -57,7 +57,7 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
         super.onCreate(savedInstanceState);
         interestsFragment = new InterestsFragment();
         regActivity = (Registration) getActivity();
-        optimizedSearchCourses = new OptimizedSearchCourses(this);
+        optimizedSearchCourses = new OptimizedCoursesSearch(this);
 
     }
 

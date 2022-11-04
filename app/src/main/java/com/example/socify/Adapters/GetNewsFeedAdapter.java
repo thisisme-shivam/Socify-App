@@ -1,6 +1,7 @@
 package com.example.socify.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +10,25 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.socify.Classes.PostMember;
 import com.example.socify.HomeFragments.CommentsFragment;
+import com.example.socify.HomeFragments.NewsFeedFragmentDirections;
+import com.example.socify.HomeFragments.SearchAllDirections;
 import com.example.socify.HomeFragments.VisitProfile;
 import com.example.socify.R;
 import com.example.socify.Activities.Home;
+import com.example.socify.SendNotification;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -58,7 +67,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull  NewsFeedViewHolder holder, int position) {
-        member = postMembers.get(position);
+        PostMember member = postMembers.get(position);
             if (member.getType().equals("image")) {
                 holder.playerView.setVisibility(View.INVISIBLE);
                 holder.post.setVisibility(View.VISIBLE);
@@ -90,16 +99,20 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
 
             }
             type = member.getType();
-            isLiked(member.getPostid(), holder.like);
-            nrlikes(holder.likescount, member.getPostid());
+            isLiked(member, holder.like);
+            nrlikes(holder.likescount, member);
 
 
 
             holder.comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.i("usenmae",member.getUsername());
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new CommentsFragment(member.getPostid(), member.getUid())).addToBackStack(null).commit();
+                    NavController controller = Navigation.findNavController(v);
+                    NavDirections directions = NewsFeedFragmentDirections.actionNewsFeedFragmentToCommentsFragment(member.getPostid(), member.getUid());
+                    controller.navigate(directions);
                 }
             });
 
@@ -115,7 +128,12 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                                 .child(member.getPostid())
                                 .child("Likes")
                                 .child(Home.getUserData.uid)
-                                .setValue(true);
+                                .setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        SendNotification.sendLikeNotification(context,member.getToken(),member.getUid(),member.getPostid());
+                                    }
+                                });
                     }
                     else{
                         FirebaseDatabase.getInstance().getReference().child("College")
@@ -132,13 +150,16 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
             });
 
 
-        holder.profilepic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppCompatActivity activity = (AppCompatActivity) context;
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(member.getUid())).commit();
-            }
-        });
+//        holder.profilepic.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NavController navController = Navigation.findNavController(v);
+//                NavDirections directions = SearchAllDirections.actionSearchAll2ToVisitProfile(member.getUid());
+//                navController.navigate(directions);
+//                AppCompatActivity activity = (AppCompatActivity) context;
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(member.getUid())).commit();
+//            }
+//        });
 
     }
 
@@ -151,7 +172,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
         CircleImageView profilepic;
         ImageView post;
         MaterialTextView namepost, usernamepost, date,likescount;
-        public ImageView like, comment;
+        ImageView like, comment;
         ReadMoreTextView description;
         StyledPlayerView playerView;
         ExoPlayer exoplayer;
@@ -164,7 +185,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
             namepost = itemView.findViewById(R.id.picadded);
             date = itemView.findViewById(R.id.time);
             like = itemView.findViewById(R.id.like);
-            comment = itemView.findViewById(R.id.commentbtn);
+            comment = itemView.findViewById(R.id.comment);
 //        comment = itemView.findViewById(R.id.comment);
             likescount = itemView.findViewById(R.id.likecount);
             description = itemView.findViewById(R.id.caption);
@@ -175,7 +196,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
 
     }
 
-    private void isLiked(String postid, final ImageView imageView) {
+    private void isLiked(PostMember member, ImageView imageView) {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("College")
@@ -186,7 +207,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                 .child(member.getPostid())
                 .child("Likes");
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(firebaseUser.getUid()).exists()) {
@@ -208,9 +229,9 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
 
     }
 
-    private void nrlikes(MaterialTextView likescount, String postid) {
+    private void nrlikes(MaterialTextView likescount,PostMember member) {
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("College")
+        DatabaseReference likeRef = FirebaseDatabase.getInstance().getReference().child("College")
                 .child(Home.getUserData.college_name)
                 .child("Posts")
                 .child(member.getUid())
@@ -218,7 +239,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                 .child(member.getPostid())
                 .child("Likes");
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        likeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 likescount.setText(snapshot.getChildrenCount()+ " Likes");

@@ -153,7 +153,7 @@ public class CreatePostFragment extends Fragment {
                     postMember.setUid(Home.getUserData.uid);
                     postMember.setUrl(Home.getUserData.imgurl);
                     postMember.setUsername(Home.getUserData.username);
-
+                    postMember.setToken(Home.getUserData.token);
                     if (type.equals("image")) {
                         postMember.setType("image");
 

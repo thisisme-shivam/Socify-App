@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.socify"
-        minSdk 24
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -34,8 +34,8 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.navigation:navigation-runtime:2.5.1'
-    def nav_version = "2.3.0"
+    implementation 'androidx.navigation:navigation-runtime:2.5.3'
+    def nav_version = "2.5.3"
 
     // Java language implementation
     implementation "androidx.navigation:navigation-fragment:$nav_version"

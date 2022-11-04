@@ -9,6 +9,8 @@ public class InterfaceClass {
 
     public interface  VisitProfileInterface{
         void onWorkDone();
+
+        void onWorkNotDone();
     }
 
     public interface InterestInterface{

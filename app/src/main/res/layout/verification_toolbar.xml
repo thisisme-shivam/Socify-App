@@ -32,7 +32,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:text="Phone Verificaton"
-
+            android:fontFamily="@font/chatfontmedium"
             android:textColor="@color/palette_black"
             android:textSize="20sp" />
 

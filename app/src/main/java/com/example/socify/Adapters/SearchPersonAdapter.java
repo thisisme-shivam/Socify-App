@@ -7,11 +7,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.socify.Classes.Person;
+import com.example.socify.HomeFragments.SearchAllDirections;
 import com.example.socify.HomeFragments.VisitProfile;
+import com.example.socify.HomeFragments.VisitProfileDirections;
 import com.example.socify.R;
 import com.example.socify.databinding.DisplaypersonrecyclerviewBinding;
 
@@ -34,15 +39,16 @@ public class SearchPersonAdapter extends RecyclerView.Adapter<SearchPersonAdapte
     @Override
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int position) {
         Person person = persons.get(position);
-        holder.binding.personusername.setText(person.getUsername());
+        holder.binding.personusername.setText("@" + person.getUsername());
         Glide.with(context).load(person.getUri()).placeholder(R.drawable.person_login).into(holder.binding.personimgage);
         holder.binding.personname.setText(person.getName());
         if(person.getFollow_status())
             holder.binding.following.setVisibility(View.VISIBLE);
 
         holder.itemView.setOnClickListener(view -> {
-            AppCompatActivity activity = (AppCompatActivity) context;
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(person.getUid())).commit();
+            NavController navController = Navigation.findNavController(view);
+            NavDirections directions = SearchAllDirections.actionSearchAll2ToVisitProfile(person.getUid());
+            navController.navigate(directions);
         });
     }
 

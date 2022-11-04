@@ -5,7 +5,11 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +22,9 @@ import com.example.socify.Adapters.CommentsAdapter;
 import com.example.socify.Classes.CommentMember;
 import com.example.socify.Classes.PostIdGetter;
 import com.example.socify.R;
+import com.example.socify.SendNotification;
 import com.example.socify.databinding.FragmentCommentsBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,29 +40,21 @@ import java.util.HashMap;
 public class CommentsFragment extends Fragment {
 
     String postid, posteruid;
-    String commentkey = FirebaseDatabase.getInstance().getReference().push().getKey();
     ArrayList<CommentMember> commentMembers;
     CommentsAdapter commentsAdapter;
-
-    public CommentsFragment(String postid, String posteruid) {
-        this.postid = postid;
-        this.posteruid = posteruid;
-        Log.e("PostId", postid);
-        Log.e("PosterID", posteruid);
-    }
 
     FragmentCommentsBinding binding;
 
     DatabaseReference commentreference;
 
+    public CommentsFragment(String postid, String uid) {
+        this.postid = postid;
+        this.posteruid = uid;
+    }
+
     private void setonclicklisteners() {
 
-        binding.backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
-            }
-        });
+
 
         binding.sendbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +65,33 @@ public class CommentsFragment extends Fragment {
 
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        NavController controller = Navigation.findNavController(view);
+
+        CommentsFragmentArgs args = CommentsFragmentArgs.fromBundle(getArguments());
+        postid = args.getPostid();
+        posteruid = args.getPosteruid();
+
+        binding.backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections directions = CommentsFragmentDirections.actionCommentsFragmentToNewsFeedFragment();
+                controller.navigate(directions);
+            }
+        });
+
+
+        commentMembers = new ArrayList<>();
+        commentsAdapter = new CommentsAdapter(getActivity(), commentMembers);
+        commentreference = FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Posts").child(posteruid).child("All Images").child(postid);
+        fetchComment();
+        binding.commentlistRV.setAdapter(commentsAdapter);
+        setonclicklisteners();
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,12 +103,6 @@ public class CommentsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentCommentsBinding.inflate(inflater, container, false);
-        commentMembers = new ArrayList<>();
-        commentsAdapter = new CommentsAdapter(getActivity(), commentMembers);
-        commentreference = FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Posts").child(posteruid).child("All Images").child(postid);
-        fetch_comment();
-        binding.commentlistRV.setAdapter(commentsAdapter);
-        setonclicklisteners();
 
         return binding.getRoot();
 
@@ -95,16 +114,20 @@ public class CommentsFragment extends Fragment {
         CommentMember commentMember = new CommentMember();
         commentMember.setComment(binding.commentbox.getText().toString());
         binding.commentbox.setText("");
-        commentMember.setCommentkey(commentkey);
         commentMember.setTime(String.valueOf(new Date().getTime()));
         commentMember.setUid(Home.getUserData.uid);
-        commentMember.setuserName(Home.getUserData.username);
-
-        commentreference.child("Comments").child(commentkey).setValue(commentMember);
+        commentMember.setUsername(Home.getUserData.username);
+        commentMember.setToken(Home.getUserData.token);
+        commentreference.child("Comments").push().setValue(commentMember).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                SendNotification.sendCommentNotification(requireContext(),commentMember.getToken(),posteruid,postid);
+            }
+        });
         hideSoftKeyboard(requireActivity(), binding.commentbox);
     }
 
-    private void fetch_comment() {
+    private void fetchComment() {
         commentreference.child("Comments").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
