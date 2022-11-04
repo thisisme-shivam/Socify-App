@@ -41,8 +41,8 @@ public class Login extends AppCompatActivity {
 
         binding.signup.setOnClickListener(v -> startActivity(new Intent(Login.this,VerificationActivity.class)));
 
-        binding.forgotpass.setOnClickListener(v -> {
-            Intent intent = new Intent(Login.this,VerificationActivity.class);
+        binding.forgotPass.setOnClickListener(v -> {
+            Intent intent = new Intent(Login.this, ForgotPasswordActivity.class);
             startActivity(intent);
         });
 
@@ -171,11 +171,11 @@ public class Login extends AppCompatActivity {
         if(i == 1) {
             binding.password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 
-            binding.passwordshow.setImageResource(R.drawable.ic_eye_close);
+            binding.passwordshow.setImageResource(R.drawable.hide_pass_icon);
             i=0;
         }else{
             binding.password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-            binding.passwordshow.setImageResource(R.drawable.ic_eye);
+            binding.passwordshow.setImageResource(R.drawable.show_pass_icon);
             i=1;
         }
         binding.password.setSelection(binding.password.getText().length());

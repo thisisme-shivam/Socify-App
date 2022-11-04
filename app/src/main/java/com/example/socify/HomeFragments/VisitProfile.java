@@ -67,7 +67,6 @@ public class VisitProfile extends Fragment   {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
 
@@ -155,7 +154,7 @@ public class VisitProfile extends Fragment   {
         });
 
 
-        binding.backbtnvisit.setOnClickListener(new View.OnClickListener() {
+        binding.backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new DiscoverFragment()).commit();

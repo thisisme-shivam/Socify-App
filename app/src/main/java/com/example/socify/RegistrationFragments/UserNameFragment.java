@@ -77,7 +77,7 @@ public class UserNameFragment extends Fragment {
         return false;
     }
 
-    private boolean checkstrength() {
+    public boolean checkstrength() {
         Pattern p = Pattern.compile("^(?=(.*[a-z])+)(?=(.*[A-Z])+)(?=(.*[0-9])+)(?=(.*[!@#$%^&*()\\-_+.])+)(?=\\S+$).{8,20}$");
         Matcher m = p.matcher(Password);
         return m.find();
