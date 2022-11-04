@@ -35,7 +35,7 @@ public class NotificationFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         notifications = new ArrayList<>();
-
+        getActivity().findViewById(R.id.bottomnavigationview).setVisibility(View.GONE);
         notificationAdapter = new NotificationAdapter(requireContext(),notifications);
         notificationRef = FirebaseDatabase.getInstance().getReference()
                 .child("College")

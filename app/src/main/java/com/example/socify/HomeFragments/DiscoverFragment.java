@@ -93,4 +93,10 @@ public class DiscoverFragment extends Fragment {
 
         return binding.getRoot();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().findViewById(R.id.bottomnavigationview).setVisibility(View.VISIBLE);
+    }
 }

@@ -109,7 +109,6 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                 public void onClick(View v) {
                     Log.i("usenmae",member.getUsername());
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new CommentsFragment(member.getPostid(), member.getUid())).addToBackStack(null).commit();
                     NavController controller = Navigation.findNavController(v);
                     NavDirections directions = NewsFeedFragmentDirections.actionNewsFeedFragmentToCommentsFragment(member.getPostid(), member.getUid());
                     controller.navigate(directions);

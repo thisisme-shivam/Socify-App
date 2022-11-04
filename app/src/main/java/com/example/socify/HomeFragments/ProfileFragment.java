@@ -131,4 +131,9 @@ public class ProfileFragment extends Fragment {
         controller = Navigation.findNavController(view);
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().findViewById(R.id.bottomnavigationview).setVisibility(View.VISIBLE);
+    }
 }

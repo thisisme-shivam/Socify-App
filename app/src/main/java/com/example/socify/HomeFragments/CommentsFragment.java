@@ -47,9 +47,13 @@ public class CommentsFragment extends Fragment {
 
     DatabaseReference commentreference;
 
+    public CommentsFragment(){
+
+    }
     public CommentsFragment(String postid, String uid) {
         this.postid = postid;
         this.posteruid = uid;
+
     }
 
     private void setonclicklisteners() {
@@ -96,6 +100,7 @@ public class CommentsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().findViewById(R.id.bottomnavigationview).setVisibility(View.GONE);
     }
 
     @Override

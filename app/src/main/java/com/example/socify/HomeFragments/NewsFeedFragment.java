@@ -50,6 +50,7 @@ public class NewsFeedFragment extends Fragment {
 
     }
 
+
     public void loadData(){
         Log.i("newsfeeedfragment","accessible");
         personPostsRef = FirebaseDatabase.getInstance().getReference().child("College")
@@ -120,5 +121,9 @@ public class NewsFeedFragment extends Fragment {
         return binding.getRoot();
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().findViewById(R.id.bottomnavigationview).setVisibility(View.VISIBLE);
+    }
 }

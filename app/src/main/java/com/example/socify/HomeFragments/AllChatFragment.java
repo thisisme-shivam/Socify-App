@@ -41,7 +41,7 @@ public class AllChatFragment extends Fragment {
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         chatListUsers = new ArrayList<>();
-
+        getActivity().findViewById(R.id.bottomnavigationview).setVisibility(View.GONE);
         for(String chatlist: chattingusers) {
             firebaseFirestore.collection("Profiles").document(chatlist).addSnapshotListener((value, error) -> {
                 if (value!=null) {

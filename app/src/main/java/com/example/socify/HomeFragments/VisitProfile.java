@@ -58,6 +58,10 @@ public class VisitProfile extends Fragment   {
     ChipGroup group;
     TextView followercountView,followingCountView;
     CountDownTimer timer;
+
+    public VisitProfile(){
+
+    }
     public VisitProfile(String uid ){
         Log.i("person uid", uid);
         this.uid  = uid;
@@ -87,7 +91,7 @@ public class VisitProfile extends Fragment   {
         });
 
 
-        binding.backbtnvisit.setOnClickListener(new View.OnClickListener() {
+        binding.backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavDirections directions = VisitProfileDirections.actionVisitProfileToDiscoverFragment();
@@ -100,11 +104,11 @@ public class VisitProfile extends Fragment   {
             @Override
             public void onWorkDone() {
                 if (getContext() != null) {
-                    Glide.with(getContext()).load(getUserData.imgurl).placeholder(R.drawable.user).into(binding.profilePicVisit);
-                    binding.usernameProfileVisit.setText("@" + getUserData.username);
-                    binding.namevisit.setText(getUserData.name);
-                    binding.followerscountvisit.setText(getUserData.followerscount);
-                    binding.followingcountvisit.setText(getUserData.followingcount);
+                    Glide.with(getContext()).load(getUserData.imgurl).placeholder(R.drawable.user).into(binding.profilePic);
+                    binding.usernameProfile.setText("@" + getUserData.username);
+                    binding.name.setText(getUserData.name);
+                    binding.followerscount.setText(getUserData.followerscount);
+                    binding.followingcount.setText(getUserData.followingcount);
 
                     for (String s : getUserData.tags) {
                         Chip chip = new Chip(requireActivity());
@@ -137,8 +141,6 @@ public class VisitProfile extends Fragment   {
     private void setOnclickListeners() {
 
 
-
-
         binding.message1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,18 +163,18 @@ public class VisitProfile extends Fragment   {
             }
         });
 
-        followButton.setOnClickListener(new View.OnClickListener() {
+        binding.follow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(followstatus){
                     followstatus = false;
                     binding.follow.setText("Follow");
-                    binding.followerscountvisit.setText(String.valueOf(Integer.parseInt(binding.followerscountvisit.getText().toString()) -1));
+                    binding.followingcount.setText(String.valueOf(Integer.parseInt(binding.followingcount.getText().toString()) -1));
                 }else{
                     followstatus = true;
                     binding.follow.setText("Following");
-                    binding.followerscountvisit.setText(String.valueOf(Integer.parseInt(binding.followerscountvisit.getText().toString()) +1));
+                    binding.followerscount.setText(String.valueOf(Integer.parseInt(binding.followerscount.getText().toString()) +1));
                 }
                 if(timer!=null){
                     timer.cancel();
@@ -237,7 +239,7 @@ public class VisitProfile extends Fragment   {
         getUserData.followerslistuids.add(Home.getUserData.uid);
         followstatus = true;
         updateStatus();
-        getUserData.snap.getReference().update("FollowersCount",binding.followerscountvisit.getText());
+        getUserData.snap.getReference().update("FollowersCount",binding.followingcount.getText());
         Home.getUserData.snap.getReference().update("FollowingCount",String.valueOf(Integer.parseInt(Home.getUserData.followingcount) +1));
 
     }
