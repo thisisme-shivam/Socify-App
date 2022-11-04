@@ -25,9 +25,6 @@ import com.example.socify.PostFragments.PostLoaderFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfileBinding;
 import com.google.android.material.chip.Chip;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -36,8 +33,6 @@ public class ProfileFragment extends Fragment {
 
     public FragmentProfileBinding binding;
     public Home home;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference;
     PostLoaderFragment postLoaderFragment = new PostLoaderFragment();
     NavController controller;
 
@@ -87,7 +82,7 @@ public class ProfileFragment extends Fragment {
         }
         binding.passyear.setText(Home.getUserData.passyear);
         binding.name.setText(Home.getUserData.name);
-        binding.usernameProfile.setText(Home.getUserData.username);
+        binding.usernameProfile.setText("@" + Home.getUserData.username);
         binding.followerscount.setText(Home.getUserData.followerscount);
         binding.followingcount.setText(Home.getUserData.followingcount);
 

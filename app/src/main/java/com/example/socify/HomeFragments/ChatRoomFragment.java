@@ -9,6 +9,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.os.Handler;
 import android.text.Editable;
@@ -55,7 +58,6 @@ public class ChatRoomFragment extends Fragment {
     ProgressDialog dialog;
 
     private void setonclicklisteners() {
-        binding.backIcon.setOnClickListener(v -> Log.i("Back", "Back"));
 
         binding.attachment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,9 +233,11 @@ public class ChatRoomFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        name = getArguments().getString("Name");
-        UID = getArguments().getString("UID");
-        imgurl = getArguments().getString("Img");
+        ChatRoomFragmentArgs args = ChatRoomFragmentArgs.fromBundle(getArguments());
+
+        name = args.getName();
+        UID = args.getUid();
+        imgurl = args.getImage();
 
         chatdb = FirebaseDatabase.getInstance();
 
@@ -243,6 +247,16 @@ public class ChatRoomFragment extends Fragment {
 
         messages = new ArrayList<>();
         adapter = new MessagesLoaderAdapter(getActivity(), messages);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        NavController controller = Navigation.findNavController(view);
+        binding.backIcon.setOnClickListener(v -> {
+            NavDirections directions = ChatRoomFragmentDirections.actionChatRoomFragmentToAllChatFragment();
+            controller.navigate(directions);
+        });
     }
 
     @Override

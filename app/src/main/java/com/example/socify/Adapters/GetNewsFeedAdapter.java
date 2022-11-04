@@ -9,11 +9,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.socify.Classes.PostMember;
 import com.example.socify.HomeFragments.CommentsFragment;
+import com.example.socify.HomeFragments.NewsFeedFragmentDirections;
+import com.example.socify.HomeFragments.SearchAllDirections;
 import com.example.socify.HomeFragments.VisitProfile;
 import com.example.socify.R;
 import com.example.socify.Activities.Home;
@@ -66,7 +71,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                 Glide.with(context).load(member.getPostUri()).into(holder.post);
                 holder.namepost.setText(member.getName());
                 holder.date.setText(member.getTime());
-                holder.usernamepost.setText(member.getUsername());
+                holder.usernamepost.setText("@" + member.getUsername());
                 holder.description.setText(member.getDesc());
             } else if (member.getType().equals("video")) {
                 Glide.with(context).load(member.getUrl()).into(holder.profilepic);
@@ -98,8 +103,9 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
             holder.comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new CommentsFragment(member.getPostid(), member.getUid())).addToBackStack(null).commit();
+                    NavController controller = Navigation.findNavController(v);
+                    NavDirections directions = NewsFeedFragmentDirections.actionNewsFeedFragmentToCommentsFragment(member.getPostid(), member.getUid());
+                    controller.navigate(directions);
                 }
             });
 
@@ -132,13 +138,16 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
             });
 
 
-        holder.profilepic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppCompatActivity activity = (AppCompatActivity) context;
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(member.getUid())).commit();
-            }
-        });
+//        holder.profilepic.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                NavController navController = Navigation.findNavController(v);
+//                NavDirections directions = SearchAllDirections.actionSearchAll2ToVisitProfile(member.getUid());
+//                navController.navigate(directions);
+//                AppCompatActivity activity = (AppCompatActivity) context;
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(member.getUid())).commit();
+//            }
+//        });
 
     }
 

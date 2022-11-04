@@ -18,7 +18,6 @@ import com.example.socify.ViewHolders.LoadUserPostsImages;
 import com.example.socify.databinding.FragmentImagePostBinding;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -62,8 +61,6 @@ public class ImagePostFragment extends Fragment {
                 };
 
         firebaseRecyclerAdapter.startListening();
-//        GridLayoutManager glm = new GridLayoutManager(requireActivity(), 3, GridLayoutManager.VERTICAL, false);
-//        binding.imgsRV.setLayoutManager(glm);
         binding.imgsRV.setAdapter(firebaseRecyclerAdapter);
         Log.e("Loading", "Yes");
 
@@ -72,9 +69,6 @@ public class ImagePostFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
-
 
         binding = FragmentImagePostBinding.inflate(inflater, container, false);
         return binding.getRoot();

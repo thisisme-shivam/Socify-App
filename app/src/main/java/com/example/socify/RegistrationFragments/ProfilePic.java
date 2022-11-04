@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.socify.AESEncryption;
 import com.example.socify.Activities.CropperActivity;
 import com.example.socify.Activities.Registration;
 import com.example.socify.FireBaseClasses.SendProfileData;
@@ -35,6 +36,14 @@ public class ProfilePic extends Fragment {
     static SendProfileData sendProfileData = new SendProfileData();
 
     public boolean FieldValidation() {
+
+        AESEncryption aesEncryption = new AESEncryption();
+        try {
+            aesEncryption.init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //Field Validation
         name = binding.nametext.getText().toString().trim();
         passing_year = binding.graduationYear.getText().toString();
@@ -44,10 +53,11 @@ public class ProfilePic extends Fragment {
            binding.nametextlayout.setError("Name should be atleast 3 characters");
        else if (passing_year.isEmpty())
            binding.graduationYear.setError("Select your graduation year");
-       else
+       else {
+           aesEncryption.encrypt(name);
+           aesEncryption.encrypt(passing_year);
            return true;
-
-
+       }
         return false;
     }
 
