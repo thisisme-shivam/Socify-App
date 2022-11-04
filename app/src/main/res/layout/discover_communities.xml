@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Community Name"
             android:padding="5dp"
+            android:fontFamily="@font/chatfontmedium"
             android:textColor="@color/palette_black"
             android:textSize="15sp"
             android:textStyle="bold"

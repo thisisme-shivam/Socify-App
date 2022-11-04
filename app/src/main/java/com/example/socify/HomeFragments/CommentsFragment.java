@@ -5,7 +5,11 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,25 +42,13 @@ public class CommentsFragment extends Fragment {
     ArrayList<CommentMember> commentMembers;
     CommentsAdapter commentsAdapter;
 
-    public CommentsFragment(String postid, String posteruid) {
-        this.postid = postid;
-        this.posteruid = posteruid;
-        Log.e("PostId", postid);
-        Log.e("PosterID", posteruid);
-    }
-
     FragmentCommentsBinding binding;
 
     DatabaseReference commentreference;
 
     private void setonclicklisteners() {
 
-        binding.backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
-            }
-        });
+
 
         binding.sendbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +59,33 @@ public class CommentsFragment extends Fragment {
 
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        NavController controller = Navigation.findNavController(view);
+
+        CommentsFragmentArgs args = CommentsFragmentArgs.fromBundle(getArguments());
+        postid = args.getPostid();
+        posteruid = args.getPosteruid();
+
+        binding.backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections directions = CommentsFragmentDirections.actionCommentsFragmentToNewsFeedFragment();
+                controller.navigate(directions);
+            }
+        });
+
+
+        commentMembers = new ArrayList<>();
+        commentsAdapter = new CommentsAdapter(getActivity(), commentMembers);
+        commentreference = FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Posts").child(posteruid).child("All Images").child(postid);
+        fetch_comment();
+        binding.commentlistRV.setAdapter(commentsAdapter);
+        setonclicklisteners();
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,12 +97,6 @@ public class CommentsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentCommentsBinding.inflate(inflater, container, false);
-        commentMembers = new ArrayList<>();
-        commentsAdapter = new CommentsAdapter(getActivity(), commentMembers);
-        commentreference = FirebaseDatabase.getInstance().getReference("College").child(Home.getUserData.college_name).child("Posts").child(posteruid).child("All Images").child(postid);
-        fetch_comment();
-        binding.commentlistRV.setAdapter(commentsAdapter);
-        setonclicklisteners();
 
         return binding.getRoot();
 

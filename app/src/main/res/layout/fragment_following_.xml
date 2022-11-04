@@ -14,6 +14,7 @@
         android:background="@drawable/discover_text_bg"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
+        android:fontFamily="@font/chatfont"
         android:text="Following"
         android:textColor="@color/white"
         android:textSize="15sp"

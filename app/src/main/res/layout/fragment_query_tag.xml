@@ -40,6 +40,7 @@
             android:layout_marginEnd="151dp"
             android:layout_marginBottom="12dp"
             android:text="QueryHub"
+            android:fontFamily="@font/chatfontmedium"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold"

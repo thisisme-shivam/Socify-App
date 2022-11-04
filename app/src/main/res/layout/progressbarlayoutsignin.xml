@@ -25,10 +25,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/chatfontmedium"
         android:text="Please Wait"
         android:textColor="@color/text_grey"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/spin_kit"
+        app:layout_constraintEnd_toStartOf="@+id/spin_kit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/spin_kit" />
 </androidx.constraintlayout.widget.ConstraintLayout>

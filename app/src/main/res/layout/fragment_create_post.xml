@@ -10,14 +10,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/white"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <RelativeLayout
             android:id="@+id/relativeLayout2"
@@ -46,8 +43,7 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/osr"
-                android:layout_centerVertical="true"
+                android:fontFamily="@font/chatfontmedium"
                 android:text="Create Post"
                 android:textColor="@color/palette_black"
                 android:textSize="20sp"
@@ -55,13 +51,14 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/share"
+                android:fontFamily="@font/chatfontmedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="5dp"
                 android:text="Share"
-                android:layout_centerVertical="true"
                 android:textColor="@color/palette_teal"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -107,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:fontFamily="@font/osr"
+            android:fontFamily="@font/chatfontmedium"
             android:text="Saurav Bauddh"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -126,6 +123,7 @@
         android:layout_marginEnd="10dp"
         android:hint="Type something."
         android:maxLength="150"
+        android:fontFamily="@font/chatfont"
         android:maxLines="1"
         android:textColor="@color/black"
         android:textColorHint="@color/text_grey"
@@ -184,7 +182,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="132dp"
         android:layout_marginBottom="20dp"
-        android:fontFamily="@font/osr"
+        android:fontFamily="@font/chatfontmedium"
         android:text="Choose a File"
         android:textAllCaps="false"
         android:textColor="@color/white"

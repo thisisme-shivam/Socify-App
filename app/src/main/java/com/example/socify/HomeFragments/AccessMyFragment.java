@@ -21,6 +21,7 @@ import com.example.socify.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class AccessMyFragment extends BottomSheetDialogFragment {
@@ -28,7 +29,7 @@ public class AccessMyFragment extends BottomSheetDialogFragment {
     BottomSheetDialog dialog;
     View rootView;
     NavController controller;
-    LinearLayout myqueries, mygroups, myclubs;
+    FloatingActionButton myqueries, mygroups, myclubs;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,8 +55,8 @@ public class AccessMyFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         controller = Navigation.findNavController(rootView);
-        myclubs = rootView.findViewById(R.id.myclubs);
-        myqueries = rootView.findViewById(R.id.myqueries);
+        myclubs = rootView.findViewById(R.id.myclubsbtn);
+        myqueries = rootView.findViewById(R.id.myqueriesbtn);
 
         myqueries.setOnClickListener(new View.OnClickListener() {
             @Override

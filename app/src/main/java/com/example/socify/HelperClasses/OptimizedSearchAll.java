@@ -56,7 +56,6 @@ public class OptimizedSearchAll {
 
     }
 
-
     // getting user details  like name , username , photo using uid
     private void getOtherdata(String uid) {
         documentReference = FirebaseFirestore.getInstance().collection("Profiles").document(uid);
@@ -80,9 +79,6 @@ public class OptimizedSearchAll {
             }
         });
     }
-
-
-
 
     public void stopSearch() {
         stop = true;

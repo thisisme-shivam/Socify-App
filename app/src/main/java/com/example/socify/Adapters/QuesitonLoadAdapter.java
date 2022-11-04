@@ -72,7 +72,7 @@ public class QuesitonLoadAdapter extends RecyclerView.Adapter {
             userViewHolder.binding.questiontag.setText(member.getTag());
             userViewHolder.binding.questiontv.setText(member.getQuestion());
             userViewHolder.binding.timestamp.setText(member.getTime());
-            userViewHolder.binding.usernametv.setText(member.getUsername());
+            userViewHolder.binding.usernametv.setText("@" + member.getUsername());
             if(!member.getQuestionURI().equals("No Image")) {
                 userViewHolder.binding.questionimg.setVisibility(View.VISIBLE);
                 Glide.with(activity).load(member.getQuestionURI()).into(userViewHolder.binding.questionimg);

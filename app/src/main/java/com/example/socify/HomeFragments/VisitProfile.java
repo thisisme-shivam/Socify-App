@@ -1,5 +1,6 @@
 package com.example.socify.HomeFragments;
 
+
 import android.app.Notification;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -7,36 +8,32 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.socify.Activities.Home;
 import com.example.socify.HelperClasses.GetUserData;
 import com.example.socify.InterfaceClass;
+import com.example.socify.PostFragments.PostLoaderFragment;
 import com.example.socify.R;
 import com.example.socify.SendNotification;
 import com.example.socify.databinding.FragmentVisitProfileBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class VisitProfile extends Fragment   {
@@ -45,20 +42,10 @@ public class VisitProfile extends Fragment   {
     String uid ;
     boolean followstatus;
     FragmentVisitProfileBinding binding;
-    AppCompatButton followButton;
-
-    CircleImageView profilePhoto;
-    MaterialTextView username,name;
-    ChipGroup group;
-    TextView followercountView;
-    TextView followingCountView;
+    NavController navController;
+    PostLoaderFragment postLoaderFragment = new PostLoaderFragment();
 
     CountDownTimer timer;
-    public VisitProfile(String uid ){
-        Log.i("person uid", uid);
-        this.uid  = uid;
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,28 +53,41 @@ public class VisitProfile extends Fragment   {
 
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        profilePhoto = getView().findViewById(R.id.profile_pic);
-        username= getView().findViewById(R.id.username_profile);
-        name = getView().findViewById(R.id.name);
-        group = getView().findViewById(R.id.chip_group);
-        followercountView = getView().findViewById(R.id.followerscount);
-        followingCountView = getView().findViewById(R.id.followingcount);
-        followButton = getView().findViewById(R.id.follow);
+
+        uid = VisitProfileArgs.fromBundle(getArguments()).getUid();
+
+        navController = Navigation.findNavController(view);
+
+        binding.message1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections directions = VisitProfileDirections.actionVisitProfileToChatRoomFragment2(getUserData.name, getUserData.imgurl, getUserData.uid);
+                navController.navigate(directions);
+            }
+        });
+
+
+        binding.backbtnvisit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections directions = VisitProfileDirections.actionVisitProfileToDiscoverFragment();
+                navController.navigate(directions);
+            }
+        });
 
 
         getUserData = new GetUserData(uid, new InterfaceClass.VisitProfileInterface() {
             @Override
             public void onWorkDone() {
                 if (getContext() != null) {
-                    Glide.with(getContext()).load(getUserData.imgurl).placeholder(R.drawable.user).into(profilePhoto);
-                    username.setText(getUserData.username);
-                    name.setText(getUserData.name);
-                    followercountView.setText(getUserData.followerscount);
-                    followingCountView.setText(getUserData.followingcount);
+                    Glide.with(getContext()).load(getUserData.imgurl).placeholder(R.drawable.user).into(binding.profilePicVisit);
+                    binding.usernameProfileVisit.setText("@" + getUserData.username);
+                    binding.namevisit.setText(getUserData.name);
+                    binding.followerscountvisit.setText(getUserData.followerscount);
+                    binding.followingcountvisit.setText(getUserData.followingcount);
 
                     for (String s : getUserData.tags) {
                         Chip chip = new Chip(requireActivity());
@@ -95,18 +95,18 @@ public class VisitProfile extends Fragment   {
                         chip.setElevation(5);
                         chip.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.black)));
                         chip.setChipBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(requireActivity(), R.color.palette_light_teal)));
-                        group.addView(chip);
+                        binding.chipGroup.addView(chip);
 
                     }
 
                     if(Home.getUserData.followinglistuids.contains(uid)){
-                        followButton.setText("Following");
+                        binding.follow.setText("Following");
                         followstatus = true;
                     }else
                         followstatus = false;
 
                     if (getUserData.profilestatus.equals("private")) {
-                        getView().findViewById(R.id.privatemessage).setVisibility(View.VISIBLE);
+//                        getView().findViewById(R.id.privatemessage).setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -117,43 +117,18 @@ public class VisitProfile extends Fragment   {
 
     private void setOnclickListeners() {
 
-
-
-
-        binding.message1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ChatRoomFragment chatRoomFragment = new ChatRoomFragment();
-                Bundle chatdetails = new Bundle();
-                chatdetails.putString("Name", getUserData.name);
-                chatdetails.putString("Img", getUserData.imgurl);
-                chatdetails.putString("UID", getUserData.uid);
-                chatRoomFragment.setArguments(chatdetails);
-                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.FragmentView, chatRoomFragment).commit();
-            }
-        });
-
-
-        binding.backbtnvisit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView, new DiscoverFragment()).commit();
-            }
-        });
-
-        followButton.setOnClickListener(new View.OnClickListener() {
+        binding.follow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(followstatus){
                     followstatus = false;
-                    followButton.setText("Follow");
-                    followercountView.setText(String.valueOf(Integer.parseInt(followercountView.getText().toString()) -1));
+                    binding.follow.setText("Follow");
+                    binding.followerscountvisit.setText(String.valueOf(Integer.parseInt(binding.followerscountvisit.getText().toString()) -1));
                 }else{
                     followstatus = true;
-                    followButton.setText("Following");
-                    followercountView.setText(String.valueOf(Integer.parseInt(followercountView.getText().toString()) +1));
+                    binding.follow.setText("Following");
+                    binding.followerscountvisit.setText(String.valueOf(Integer.parseInt(binding.followerscountvisit.getText().toString()) +1));
                 }
                 if(timer!=null){
                     timer.cancel();
@@ -186,12 +161,12 @@ public class VisitProfile extends Fragment   {
     }
 
     private void unfollowuser() {
-        followButton.setText("Follow");
+        binding.follow.setText("Follow");
         Home.getUserData.followinglistuids.remove(uid);
         getUserData.followerslistuids.remove(Home.getUserData.uid);
         followstatus = false;
 
-        getUserData.snap.getReference().update("FollowersCount",followercountView.getText());
+        getUserData.snap.getReference().update("FollowersCount",binding.followerscountvisit.getText());
         Home.getUserData.snap.getReference().update("FollowingCount",String.valueOf(Integer.parseInt(Home.getUserData.followingcount) -1));
 
         updateStatus();
@@ -239,7 +214,7 @@ public class VisitProfile extends Fragment   {
         Home.getUserData.followinglistuids.add(uid);
         followstatus = true;
         updateStatus();
-        getUserData.snap.getReference().update("FollowersCount",followercountView.getText());
+        getUserData.snap.getReference().update("FollowersCount",binding.followerscountvisit.getText());
         Home.getUserData.snap.getReference().update("FollowingCount",String.valueOf(Integer.parseInt(Home.getUserData.followingcount) +1));
 
     }
@@ -249,6 +224,7 @@ public class VisitProfile extends Fragment   {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentVisitProfileBinding.inflate(getLayoutInflater());
+        getChildFragmentManager().beginTransaction().replace(R.id.postloader,postLoaderFragment).commit();
         return binding.getRoot();
     }
 
