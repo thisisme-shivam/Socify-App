@@ -1,68 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.VerificationActivity"
-    android:background="@color/white">
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/verification_toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="326dp"
-        android:layout_height="69dp"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginTop="-50dp"
-        android:padding="5dp"
-        android:text="@string/verification_info"
-        android:textAlignment="center"
-        android:textColor="@color/text_grey"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
+    android:background="@color/white"
+    tools:context=".Activities.ForgetPassOtpFragment">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enter_phone_text"
+        android:text="Enter your phone number to verify"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias=".97"
+        app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias=".07" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="61dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="62dp"
-        android:layout_marginBottom="22dp"
         android:background="@drawable/verification_input_bg"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/getOtpButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent=".7">
 
         <com.hbb20.CountryCodePicker
@@ -90,7 +61,7 @@
 
 
         <EditText
-            android:id="@+id/phoneInput"
+            android:id="@+id/phoneNumber"
             android:layout_width="171dp"
             android:layout_height="match_parent"
             android:layout_marginStart="5dp"
@@ -107,21 +78,18 @@
 
     </LinearLayout>
 
-
     <TextView
-        android:id="@+id/errorbox"
+        android:id="@+id/errorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:textColor="@color/red"
-
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/getOtpButton"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnGetOtp"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/getOtpButton"
+        android:id="@+id/btnGetOtp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
@@ -130,28 +98,12 @@
         android:text="@string/get_otp_btn"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:layout_marginTop="-20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView2"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.15"
         app:layout_constraintWidth_percent=".7" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="250dp"
-        android:layout_height="244dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="81dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:srcCompat="@drawable/otp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

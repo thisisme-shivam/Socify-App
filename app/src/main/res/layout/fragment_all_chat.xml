@@ -14,17 +14,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <ImageView
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/back_icon"
-            android:layout_width="32dp"
-            android:layout_height="33dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/arrow_teal_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:tint="@null"
+            android:backgroundTint="@android:color/transparent"
+            app:borderWidth="0dp"
+            app:elevation="0dp"
+            />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/materialTextView"
@@ -66,7 +65,7 @@
             android:drawablePadding="10dp"
             android:fontFamily="@font/chatfontmedium"
             android:hint="Search"
-            android:padding="20sp"
+            android:padding="10sp"
             android:textColor="@color/text_grey"
             android:textColorHint="@color/text_grey"
             app:layout_constraintBottom_toBottomOf="parent"

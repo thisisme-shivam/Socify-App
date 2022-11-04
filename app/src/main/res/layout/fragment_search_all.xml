@@ -7,24 +7,44 @@
     tools:context=".HomeFragments.SearchAll">
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/back_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/transparent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintHorizontal_bias="0"
+        app:borderWidth="0dp"
+        app:elevation="0dp"
+        android:layout_marginTop="5dp"
+        app:rippleColor="@null"
+        app:backgroundTint="@null"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchAll"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/search_view_bg"
         android:elevation="5dp"
         style="@style/SearchViewTheme"
         app:iconifiedByDefault="false"
         app:layout_constraintBottom_toTopOf="@+id/personsrecyclerview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_icon"
         app:layout_constraintTop_toTopOf="parent"
         app:queryHint="Search" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/personsrecyclerview"
+        android:layout_marginTop="15dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         tools:listitem="@layout/notificationcontainer"
