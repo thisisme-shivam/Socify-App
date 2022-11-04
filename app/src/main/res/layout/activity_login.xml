@@ -184,13 +184,13 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/passwordshow"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_below="@id/text2"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_eye" />
+                android:src="@drawable/show_pass_icon" />
 
             <View
                 android:id="@+id/line2"
@@ -229,7 +229,7 @@
         android:translationZ="5dp" />
 
     <TextView
-        android:id="@+id/forgotpass"
+        android:id="@+id/forgotPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/signinbutton"
@@ -242,9 +242,8 @@
         android:textStyle="bold" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/signup"
         android:layout_marginTop="10dp"
-        android:layout_below="@id/forgotpass"
+        android:layout_below="@id/forgotPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -265,15 +264,18 @@
                 />
 
             <TextView
-
-                android:layout_toRightOf="@id/text"
+                android:id="@+id/signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Create One"
-                android:fontFamily="@font/osr"
-                android:textStyle="bold"
+                android:layout_toRightOf="@id/text"
                 android:backgroundTint="@color/palette_light_teal"
-                android:textColor="@color/palette_teal"/>
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/osr"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:text=" Create One"
+                android:textColor="@color/palette_teal"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 

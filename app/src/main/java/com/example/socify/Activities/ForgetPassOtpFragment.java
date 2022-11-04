@@ -1,24 +1,27 @@
 package com.example.socify.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.example.socify.R;
-import com.example.socify.databinding.ActivityVerificationBinding;
+import com.example.socify.databinding.FragmentForgetPassOtpBinding;
+import com.example.socify.databinding.FragmentMyClubBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,13 +35,13 @@ import com.google.firebase.auth.SignInMethodQueryResult;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+public class ForgetPassOtpFragment extends Fragment {
 
-public class VerificationActivity extends AppCompatActivity {
-
-    ActivityVerificationBinding binding;
+    FragmentForgetPassOtpBinding binding;
+    FloatingActionButton closeOtpDialog;
     Dialog otpDialog;
     Dialog progressDialog;
-    FloatingActionButton close_dialog;
+    FloatingActionButton closeDialog;
     ProgressBar progressBar;
     FirebaseAuth fauth;
     String phonenumber;
@@ -49,40 +52,45 @@ public class VerificationActivity extends AppCompatActivity {
     PhoneAuthProvider.OnVerificationStateChangedCallbacks fcallbacks;
     Window window;
 
-    private void setOnclicklistners(){
+    void onClickListeners()
+    {
+        otpDialog.setOnShowListener(dialogInterface -> {
 
+            otpDialog.findViewById(R.id.otpInput).requestFocus();
+            window = otpDialog.getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        });
 
-         otpDialog.setOnShowListener(dialogInterface -> {
+        binding.btnGetOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                phonenumber = binding.phoneNumber.getText().toString();
 
-             otpDialog.findViewById(R.id.otpInput).requestFocus();
-             window = otpDialog.getWindow();
-             window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-         });
-         
-        binding.getOtpButton.setOnClickListener(view -> {
-            phonenumber = binding.phoneInput.getText().toString();
-            if (phonenumber.isEmpty()){
-                assert binding.errorbox != null;
-                binding.errorbox.setText("Phone number field is empty");
-                binding.errorbox.setVisibility(View.VISIBLE);
-            }
-            else if (phonenumber.length() < 10) {
-                    assert binding.errorbox != null;
-                    binding.errorbox.setText("Phone number invalid");
-                    binding.errorbox.setVisibility(View.VISIBLE);
-            }else{
-                verifyNumber();
+                if (phonenumber.isEmpty()){
+                    assert binding.errorText != null;
+                    binding.errorText.setText("Phone number field is empty");
+                    binding.errorText.setVisibility(View.VISIBLE);
+                }
+                else if (phonenumber.length() < 10) {
+                    assert binding.errorText != null;
+                    binding.errorText.setText("Phone number invalid");
+                    binding.errorText.setVisibility(View.VISIBLE);
+                }else{
+                    verifyNumber();
+                }
             }
         });
-        close_dialog.setOnClickListener(view -> {
+
+        closeDialog.setOnClickListener(v -> {    //closing OTP Dialog
             otpDialog.dismiss();
-            binding.phoneInput.requestFocus();
-
+            binding.phoneNumber.requestFocus();
         });
+
+
+
         otpDialog.findViewById(R.id.otpSubmitButton).setOnClickListener(view -> {
             if(validateotp()) {
-
                 window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(vid, Objects.requireNonNull(vie.getText()).toString());
@@ -90,26 +98,43 @@ public class VerificationActivity extends AppCompatActivity {
                 progressDialog.show();
                 fauth.signInWithCredential(credential).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        startActivity(new Intent(getApplicationContext(), Registration.class).putExtra("PhoneNumber",phonenumber));
-                        finish();
+                        fauth.signOut();
+                        otpDialog.dismiss();
+                        progressDialog.dismiss();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.forgetPassFrame, new NewPasswordFragment()).commit();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Incorrect Otp", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Incorrect Otp", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
 
                         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
                     }
+
                 });
             }
         });
+
+
         otpDialog.findViewById(R.id.resendText).setOnClickListener(view -> sendotp());
 
 
     }
 
+
+
+
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);}
+
+    private boolean validateotp() {
+        if(vie.getText().toString().isEmpty())
+            Toast.makeText(getActivity(),"please enter otp",Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
     private void verifyNumber() {
         Log.i("phonenumber",phonenumber);
-
-        progressDialog.show();
 
         FirebaseAuth.getInstance().fetchSignInMethodsForEmail(phonenumber+"@gmail.com").addOnSuccessListener(new OnSuccessListener<SignInMethodQueryResult>() {
             @Override
@@ -117,26 +142,18 @@ public class VerificationActivity extends AppCompatActivity {
 
                 int size = signInMethodQueryResult.getSignInMethods().size();
                 Log.i("size", String.valueOf(size));
-                if(size == 1) {
-                    Toast.makeText(getApplicationContext(), "Phone already Registered", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                }
-                else
+                if(size == 1)
                     sendotp();
+                else
+                Toast.makeText(getActivity(),"Phone is not Registered",Toast.LENGTH_SHORT).show();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(),"Sorry something went wrong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Sorry something went wrong",Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private boolean validateotp() {
-        if(vie.getText().toString().isEmpty())
-            Toast.makeText(getApplicationContext(),"please enter otp",Toast.LENGTH_SHORT).show();
-        return true;
     }
 
 
@@ -152,7 +169,7 @@ public class VerificationActivity extends AppCompatActivity {
             @Override
             public void onVerificationFailed(FirebaseException e) {
                 progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(),"Sorry something went wrong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Sorry something went wrong",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -168,51 +185,38 @@ public class VerificationActivity extends AppCompatActivity {
                 PhoneAuthOptions.newBuilder(fauth)
                         .setPhoneNumber( "+" + binding.countryCode.getSelectedCountryCode() + phonenumber)       // Phone number to verify
                         .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                        .setActivity(this)                 // Activity (for callback binding)
+                        .setActivity(this.getActivity())                 // Activity (for callback binding)
                         .setCallbacks(fcallbacks)
                         .setForceResendingToken(tok)
                         .build();
 
         PhoneAuthProvider.verifyPhoneNumber(options);
-
+        progressDialog.show();
 
 
     }
 
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityVerificationBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        //getting instatnce of firebase
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = FragmentForgetPassOtpBinding.inflate(inflater, container, false);
 
         fauth = FirebaseAuth.getInstance();
-        otpDialog = new Dialog(VerificationActivity.this);
+        otpDialog = new Dialog(this.getActivity());
         otpDialog.setCancelable(false);
         otpDialog.setContentView(R.layout.otp_verification);
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
         otpDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        close_dialog = otpDialog.findViewById(R.id.close_icon);
-        setOnclicklistners();
+        closeDialog = otpDialog.findViewById(R.id.close_icon);
+        onClickListeners();
 
-        progressDialog = new Dialog(VerificationActivity.this);
+        progressDialog = new Dialog(this.getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setContentView(R.layout.progressdialogotp);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         progressBar = (ProgressBar) progressDialog.findViewById(R.id.spin_kit);
-        binding.phoneInput.requestFocus();
+        binding.phoneNumber.requestFocus();
         vie =  otpDialog.findViewById(R.id.otpInput);
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        otpDialog.dismiss();
-        progressDialog.dismiss();
+        return binding.getRoot();
     }
 }

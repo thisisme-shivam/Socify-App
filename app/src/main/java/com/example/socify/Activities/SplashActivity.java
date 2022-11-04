@@ -26,9 +26,16 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(auth.getCurrentUser()!=null)
+                {
                     startActivity(new Intent(getApplicationContext(),Home.class));
+
+                    finish();
+                }
                 else
-                    startActivity(new Intent(getApplicationContext(),SlideScreen.class));
+                {
+                    startActivity(new Intent(getApplicationContext(), SlideScreen.class));
+                    finish();
+                }
             }
         },1600);
 
