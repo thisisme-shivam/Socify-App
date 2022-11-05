@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -210,11 +212,13 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(firebaseUser.getUid()).exists()) {
-                    imageView.setImageResource(R.drawable.likedpost);
+                    Animation liking = AnimationUtils.loadAnimation(context, R.anim.like_post);
+                    imageView.startAnimation(liking);
+                    imageView.setImageResource(R.drawable.liked_icon);
                     imageView.setTag("Liked");
                 }
                 else{
-                    imageView.setImageResource(R.drawable.likepost);
+                    imageView.setImageResource(R.drawable.like_icon);
                     imageView.setTag("Like");
                 }
 
