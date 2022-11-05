@@ -58,7 +58,7 @@ public class QueryTagFragment extends Fragment {
 //                }
                 NavDirections directions = QueryTagFragmentDirections.actionQueryTagFragmentToNewsFeedFragment2();
                 Ask_QueryFragment.flag=false;
-                controller.navigate(directions);
+                controller.popBackStack();
             }
         });
 

@@ -56,6 +56,7 @@ public class DiscoverFragment extends Fragment {
             public void onClick(View view) {
                 NavDirections action = DiscoverFragmentDirections.actionDiscoverFragmentToSearchAll2();
                 controller.navigate(action);
+
             }
         });
     }

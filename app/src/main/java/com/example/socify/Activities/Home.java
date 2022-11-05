@@ -100,7 +100,6 @@ public class Home extends AppCompatActivity {
                 Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.FragmentView);
                 NewsFeedFragment fragment = (NewsFeedFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 fragment.loadData();
-
             }
 
             @Override

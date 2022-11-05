@@ -33,14 +33,15 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-                    <ImageView
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/back_icon"
-                        android:layout_width="35dp"
-                        android:background="?selectableItemBackgroundBorderless"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
-                        android:src="@drawable/ic_baseline_arrow_back_24" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_arrow_back_24"
+                        app:backgroundTint="@color/white"
+                        app:borderWidth="0dp"
+                        app:elevation="0dp" />
+
 
                     <TextView
                         android:id="@+id/usernametxt"

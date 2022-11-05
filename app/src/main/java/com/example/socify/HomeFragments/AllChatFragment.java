@@ -69,6 +69,7 @@ public class AllChatFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 NavDirections action = AllChatFragmentDirections.actionAllChatFragmentToNewsFeedFragment();
+
                 navController.navigate(action);
             }
         });
