@@ -27,12 +27,21 @@ public class VideoPostFragment extends Fragment {
     FragmentVideoPostBinding binding;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference uservideosref;
+    String uid;
+    public VideoPostFragment(String uid) {
+        Log.i("value",uid);
+        this.uid = uid;
+        Log.i("value",Home.getUserData.college_name);
+        uservideosref = database.getReference("College").child(Home.getUserData.college_name).child("Posts").child(uid).child("All Videos");
+    }
 
+    public VideoPostFragment(){
+
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String currentUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        uservideosref = database.getReference("College").child(Home.getUserData.college_name).child("Posts").child(Home.getUserData.uid).child("All Videos");
     }
 
 

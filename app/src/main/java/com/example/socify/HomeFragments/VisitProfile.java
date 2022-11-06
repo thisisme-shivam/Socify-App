@@ -50,7 +50,7 @@ public class VisitProfile extends Fragment   {
     boolean followstatus;
     FragmentVisitProfileBinding binding;
     NavController navController;
-    PostLoaderFragment postLoaderFragment = new PostLoaderFragment();
+    PostLoaderFragment postLoaderFragment;
 
     AppCompatButton followButton;
     CircleImageView profilePhoto;
@@ -71,6 +71,7 @@ public class VisitProfile extends Fragment   {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
 
@@ -79,7 +80,7 @@ public class VisitProfile extends Fragment   {
         super.onViewCreated(view, savedInstanceState);
 
         uid = VisitProfileArgs.fromBundle(getArguments()).getUid();
-
+        postLoaderFragment = new PostLoaderFragment(uid);
         navController = Navigation.findNavController(view);
 
         binding.message1.setOnClickListener(new View.OnClickListener() {
@@ -144,14 +145,8 @@ public class VisitProfile extends Fragment   {
         binding.message1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChatRoomFragment chatRoomFragment = new ChatRoomFragment();
-                Bundle chatdetails = new Bundle();
-                chatdetails.putString("Name", getUserData.name);
-                chatdetails.putString("Img", getUserData.imgurl);
-                chatdetails.putString("UID", getUserData.uid);
-                chatRoomFragment.setArguments(chatdetails);
-                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.FragmentView, chatRoomFragment).commit();
+                NavDirections  direction = VisitProfileDirections.actionVisitProfileToChatRoomFragment2(getUserData.name,getUserData.imgurl,getUserData.uid);
+                navController.navigate(direction);
             }
         });
 
@@ -242,6 +237,12 @@ public class VisitProfile extends Fragment   {
         getUserData.snap.getReference().update("FollowersCount",binding.followingcount.getText());
         Home.getUserData.snap.getReference().update("FollowingCount",String.valueOf(Integer.parseInt(Home.getUserData.followingcount) +1));
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getChildFragmentManager().beginTransaction().replace(R.id.postloader,postLoaderFragment).commit();
     }
 
     @Override

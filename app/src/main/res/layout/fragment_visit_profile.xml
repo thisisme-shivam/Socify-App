@@ -295,6 +295,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".55"
         app:layout_constraintStart_toStartOf="parent">
+
         <FrameLayout
             android:id="@+id/postloader"
             android:layout_width="match_parent"

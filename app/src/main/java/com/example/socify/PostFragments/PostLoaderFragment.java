@@ -14,24 +14,30 @@ import com.example.socify.databinding.FragmentPostLoaderBinding;
 
 public class PostLoaderFragment extends Fragment {
 
+    String uid;
     FragmentPostLoaderBinding binding;
 
-    ImagePostFragment imagePostFragment = new ImagePostFragment();
-    VideoPostFragment videoPostFragment = new VideoPostFragment();
+    ImagePostFragment imagePostFragment ;
+    VideoPostFragment videoPostFragment ;
+    public PostLoaderFragment(){
 
+    }
+    public PostLoaderFragment(String uid){
+        this.uid=uid;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        imagePostFragment = new ImagePostFragment(uid);
+        videoPostFragment = new VideoPostFragment(uid);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        imagePostFragment = new ImagePostFragment(uid);
+        videoPostFragment = new VideoPostFragment(uid);
         binding.tablayoutposts.setupWithViewPager(binding.ViewPagerposts);
         PostsViewPagerAdapter postsViewPagerAdapter = new PostsViewPagerAdapter(getChildFragmentManager(), 0);
         postsViewPagerAdapter.addfragment(imagePostFragment, "Images");

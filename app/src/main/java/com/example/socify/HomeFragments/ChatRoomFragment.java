@@ -233,11 +233,6 @@ public class ChatRoomFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ChatRoomFragmentArgs args = ChatRoomFragmentArgs.fromBundle(getArguments());
-
-        name = args.getName();
-        UID = args.getUid();
-        imgurl = args.getImage();
 
         chatdb = FirebaseDatabase.getInstance();
 
@@ -252,6 +247,8 @@ public class ChatRoomFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
         NavController controller = Navigation.findNavController(view);
         binding.backIcon.setOnClickListener(v -> {
             NavDirections directions = ChatRoomFragmentDirections.actionChatRoomFragmentToAllChatFragment();
@@ -263,7 +260,11 @@ public class ChatRoomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentChatRoomBinding.inflate(inflater, container, false);
+        ChatRoomFragmentArgs args = ChatRoomFragmentArgs.fromBundle(getArguments());
 
+        name = args.getName();
+        UID = args.getUid();
+        imgurl = args.getImage();
 
         loaddetails();
         msgtext = binding.messagebox.getText().toString();

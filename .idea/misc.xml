@@ -66,6 +66,8 @@
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/discover_communities.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/displaypersonrecyclerview.xml" value="0.4" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/displayuserrecyclerview.xml" value="0.4" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/follow_list_layout.xml" value="0.18982471141513468" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/followlistrecyclerview.xml" value="0.18982471141513468" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_all_queries.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_ask__query.xml" value="0.17708333333333334" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_buddy.xml" value="0.1876870457460453" />
@@ -78,6 +80,7 @@
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_edit_user_details.xml" value="0.16799999999999998" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_events.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_follow_.xml" value="0.19067977768277042" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_follow_list.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_following_.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_get_college.xml" value="0.264" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/fragment_image_post.xml" value="0.19067977768277042" />
@@ -107,6 +110,7 @@
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/notificationcontainer.xml" value="0.2" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/otherstaglayout.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/otp_verification.xml" value="0.2151268115942029" />
+        <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/participants_list_layout.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/post_creation_popup.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/post_popup.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/LENOVO/StudioProjects/Socify-App/app/src/main/res/layout/profile_posts.xml" value="0.23229166666666667" />

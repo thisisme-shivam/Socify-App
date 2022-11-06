@@ -121,6 +121,7 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                 @Override
                 public void onClick(View v) {
                     if(holder.like.getTag().equals("Like")){
+                        holder.like.setImageResource(R.drawable.like_icon);
                         FirebaseDatabase.getInstance().getReference().child("College")
                                 .child(Home.getUserData.college_name)
                                 .child("Posts")
@@ -137,6 +138,9 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
                                 });
                     }
                     else{
+                        Animation liking = AnimationUtils.loadAnimation(context, R.anim.like_post);
+                        holder.like.startAnimation(liking);
+                        holder.like.setImageResource(R.drawable.liked_icon);
                         FirebaseDatabase.getInstance().getReference().child("College")
                                 .child(Home.getUserData.college_name)
                                 .child("Posts")
@@ -151,16 +155,14 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
             });
 
 
-//        holder.profilepic.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                NavController navController = Navigation.findNavController(v);
-//                NavDirections directions = SearchAllDirections.actionSearchAll2ToVisitProfile(member.getUid());
-//                navController.navigate(directions);
-//                AppCompatActivity activity = (AppCompatActivity) context;
-//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.FragmentView,new VisitProfile(member.getUid())).commit();
-//            }
-//        });
+        holder.profilepic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                NavDirections directions = NewsFeedFragmentDirections.actionNewsFeedFragmentToVisitProfileFragment(member.getUid());
+                navController.navigate(directions);
+            }
+        });
 
     }
 
@@ -177,10 +179,10 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
         ReadMoreTextView description;
         StyledPlayerView playerView;
         ExoPlayer exoplayer;
-        CircleImageView profile;
 
         public NewsFeedViewHolder(@NonNull View itemView) {
             super(itemView);
+
             profilepic = itemView.findViewById(R.id.ProfilePic);
             post = itemView.findViewById(R.id.post);
             namepost = itemView.findViewById(R.id.picadded);
@@ -212,8 +214,6 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(firebaseUser.getUid()).exists()) {
-                    Animation liking = AnimationUtils.loadAnimation(context, R.anim.like_post);
-                    imageView.startAnimation(liking);
                     imageView.setImageResource(R.drawable.liked_icon);
                     imageView.setTag("Liked");
                 }
@@ -233,7 +233,6 @@ public class GetNewsFeedAdapter extends RecyclerView.Adapter<GetNewsFeedAdapter.
     }
 
     private void nrlikes(MaterialTextView likescount,PostMember member) {
-
         DatabaseReference likeRef = FirebaseDatabase.getInstance().getReference().child("College")
                 .child(Home.getUserData.college_name)
                 .child("Posts")

@@ -26,11 +26,20 @@ public class ImagePostFragment extends Fragment {
     FragmentImagePostBinding binding;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference userimagesref;
+    String uid;
+    public ImagePostFragment(String uid){
+        this.uid=uid;
+        Log.i("college",Home.getUserData.college_name);
 
+    }
+    public ImagePostFragment(){
+
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userimagesref = database.getReference("College").child(Home.getUserData.college_name).child("Posts").child(Home.getUserData.uid).child("All Images");
+        userimagesref = database.getReference("College").child(Home.getUserData.college_name).child("Posts").child(uid).child("All Images");
+
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

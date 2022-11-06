@@ -83,8 +83,8 @@
             android:layout_height="match_parent"
             android:fontFamily="@font/osr"
             android:lines="1"
-            android:maxLength="35"
             android:maxLines="1"
+            android:digits=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:singleLine="true"
             android:textColor="@color/black"
             android:textStyle="bold" />
@@ -93,9 +93,8 @@
 
     <com.skydoves.powerspinner.PowerSpinnerView
         android:id="@+id/graduation_year"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
         android:layout_marginTop="20sp"
         android:background="@drawable/profile_pic_select_year_background"
         android:elevation="5dp"

@@ -8,11 +8,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -38,9 +39,9 @@ public class VerificationActivity extends AppCompatActivity {
     ActivityVerificationBinding binding;
     Dialog otpDialog;
     Dialog progressDialog;
-    FloatingActionButton close_dialog;
+    FloatingActionButton closeDialog;
     ProgressBar progressBar;
-    FirebaseAuth fauth;
+    FirebaseAuth firebaseAuth;
     String phonenumber;
     PhoneAuthProvider.ForceResendingToken tok;
     String vid;
@@ -75,7 +76,7 @@ public class VerificationActivity extends AppCompatActivity {
                 verifyNumber();
             }
         });
-        close_dialog.setOnClickListener(view -> {
+        closeDialog.setOnClickListener(view -> {
             otpDialog.dismiss();
             binding.phoneInput.requestFocus();
 
@@ -88,20 +89,25 @@ public class VerificationActivity extends AppCompatActivity {
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(vid, Objects.requireNonNull(vie.getText()).toString());
                 progressDialog.setContentView(R.layout.progressbarlayoutsignin);
                 progressDialog.show();
-                fauth.signInWithCredential(credential).addOnCompleteListener(task -> {
+                firebaseAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         startActivity(new Intent(getApplicationContext(), Registration.class).putExtra("PhoneNumber",phonenumber));
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "Incorrect Otp", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
-
                         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
                     }
                 });
             }
         });
-        otpDialog.findViewById(R.id.resendText).setOnClickListener(view -> sendotp());
+        otpDialog.findViewById(R.id.resendText).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendOtp();
+                progressDialog.show();
+            }
+        });
 
 
     }
@@ -122,27 +128,32 @@ public class VerificationActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                 }
                 else
-                    sendotp();
+                    sendOtp();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(),"Sorry something went wrong",Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private boolean validateotp() {
-        if(vie.getText().toString().isEmpty())
-            Toast.makeText(getApplicationContext(),"please enter otp",Toast.LENGTH_SHORT).show();
+        if(vie.getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "please enter otp", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(vie.getText().toString().length() <6 ){
+            Toast.makeText(getApplicationContext(),"Otp Incomplete",Toast.LENGTH_SHORT).show();
+            return false;
+        }
         return true;
     }
 
 
-    private void sendotp(){
-
-
+    private void sendOtp(){
         fcallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             @Override
@@ -165,7 +176,7 @@ public class VerificationActivity extends AppCompatActivity {
             }
         };
         options =
-                PhoneAuthOptions.newBuilder(fauth)
+                PhoneAuthOptions.newBuilder(firebaseAuth)
                         .setPhoneNumber( "+" + binding.countryCode.getSelectedCountryCode() + phonenumber)       // Phone number to verify
                         .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
                         .setActivity(this)                 // Activity (for callback binding)
@@ -174,9 +185,6 @@ public class VerificationActivity extends AppCompatActivity {
                         .build();
 
         PhoneAuthProvider.verifyPhoneNumber(options);
-
-
-
     }
 
 
@@ -190,13 +198,13 @@ public class VerificationActivity extends AppCompatActivity {
         //getting instatnce of firebase
 
 
-        fauth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
         otpDialog = new Dialog(VerificationActivity.this);
         otpDialog.setCancelable(false);
         otpDialog.setContentView(R.layout.otp_verification);
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
         otpDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        close_dialog = otpDialog.findViewById(R.id.close_icon);
+        closeDialog = otpDialog.findViewById(R.id.close_icon);
         setOnclicklistners();
 
         progressDialog = new Dialog(VerificationActivity.this);
@@ -207,7 +215,26 @@ public class VerificationActivity extends AppCompatActivity {
         binding.phoneInput.requestFocus();
         vie =  otpDialog.findViewById(R.id.otpInput);
 
+        binding.phoneInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                binding.errorbox.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
     }
+
 
     @Override
     protected void onDestroy() {

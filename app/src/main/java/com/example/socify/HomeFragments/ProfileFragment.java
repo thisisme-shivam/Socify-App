@@ -33,14 +33,8 @@ public class ProfileFragment extends Fragment {
 
     public FragmentProfileBinding binding;
     public Home home;
-    PostLoaderFragment postLoaderFragment = new PostLoaderFragment();
+    PostLoaderFragment  postLoaderFragment = new PostLoaderFragment(Home.getUserData.uid);
     NavController controller;
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-    }
 
     public void setonclicklisteners() {
 
@@ -100,20 +94,13 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container,false);
+
         setUserData();
         setonclicklisteners();
         return binding.getRoot();
@@ -122,15 +109,20 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        getChildFragmentManager().beginTransaction().replace(R.id.postloader,postLoaderFragment).commit();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         controller = Navigation.findNavController(view);
-
+        getChildFragmentManager().beginTransaction().replace(R.id.postloader,postLoaderFragment).commit();
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public void onResume() {
         super.onResume();

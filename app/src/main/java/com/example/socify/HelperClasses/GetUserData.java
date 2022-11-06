@@ -157,8 +157,11 @@ public class GetUserData {
                     Map<String,Object> mp = value.getData();
                     if(mp.get("FollowingList") != null) {
                         followinglistuids = (ArrayList<String>) mp.get("FollowingList");
-                        if(currentUserInterface != null)
+                        if(currentUserInterface != null) {
                             currentUserInterface.onWorkDone();
+                            currentUserInterface = null;
+                        }
+
 
                     }
                 }

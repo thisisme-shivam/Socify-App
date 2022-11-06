@@ -27,22 +27,25 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class NewsFeedFragment extends Fragment {
 
     FragmentNewsFeedBinding binding;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference personPostsRef, likeref;
+    DatabaseReference personPostsRef;
     GetNewsFeedAdapter getNewsFeed;
     ArrayList<PostMember> postMemberArrayList;
     RecyclerView rec;
+    boolean isloadedOnce;
+
+    HashSet<String> uniquePostId;
     public static ArrayList<String> chattingusers;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        uniquePostId = new HashSet<>();
         chattingusers = new ArrayList<>();
         postMemberArrayList = new ArrayList<>();
         getNewsFeed = new GetNewsFeedAdapter(getActivity(),postMemberArrayList);
@@ -52,6 +55,7 @@ public class NewsFeedFragment extends Fragment {
 
 
     public void loadData(){
+        isloadedOnce = true;
         Log.i("newsfeeedfragment","accessible");
         personPostsRef = FirebaseDatabase.getInstance().getReference().child("College")
                 .child(Home.getUserData.college_name)
@@ -60,9 +64,12 @@ public class NewsFeedFragment extends Fragment {
             personPostsRef.child(personid).child("All Images").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot post:snapshot.getChildren()){
-                        PostMember member = post.getValue(PostMember.class);
-                        postMemberArrayList.add(member);
+                    for(DataSnapshot post:snapshot.getChildren()) {
+                        if (!uniquePostId.contains(post.getKey())){
+                            PostMember member = post.getValue(PostMember.class);
+                            postMemberArrayList.add(member);
+                            uniquePostId.add(member.getPostid());
+                        }
                     }
                     getNewsFeed.notifyDataSetChanged();
                 }
@@ -84,6 +91,9 @@ public class NewsFeedFragment extends Fragment {
 
         NavController controller = Navigation.findNavController(view);
 
+        if(isloadedOnce){
+            loadData();
+        }
         getNewsFeed.notifyDataSetChanged();
         //Ordering data from bottom to top
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
