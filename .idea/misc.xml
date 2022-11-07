@@ -133,11 +133,15 @@
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/drawable/ic_eye.xml" value="0.1485" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/drawable/ic_eye_close.xml" value="0.1485" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/drawable/search_view_bg.xml" value="0.146" />
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout-long/fragment_profile_pic.xml" value="0.1905982905982906" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout-v26/otp_verification.xml" value="0.18675213675213675" />
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout-v26/register_dialog.xml" value="0.1" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/activity_forgot_pass.xml" value="0.2" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/activity_friend_list.xml" value="0.18675213675213675" />
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/activity_home.xml" value="0.1905982905982906" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/activity_login.xml" value="0.23229166666666667" />
-        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/activity_registration.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/activity_registration.xml" value="0.30886075949367087" />
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/activity_slide_screen.xml" value="0.1905982905982906" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/activity_verification.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/chatlistlayout.xml" value="0.18717948717948718" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/chattoolbar.xml" value="0.264" />
@@ -155,6 +159,8 @@
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/fragment_edit_user_details.xml" value="0.2" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/fragment_forget_pass_otp.xml" value="0.2" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/fragment_get_college.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/fragment_image_post.xml" value="0.1905982905982906" />
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/fragment_interests.xml" value="0.1905982905982906" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/fragment_name_fragement.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/fragment_new_password.xml" value="0.2" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/fragment_news_feed.xml" value="0.23219241443108232" />
@@ -172,8 +178,12 @@
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/list_user_query_layout.xml" value="0.1876068376068376" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/newsfeedbox.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/otp_verification.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/progressdialogotp.xml" value="0.1905982905982906" />
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/register_dialog.xml" value="0.18974358974358974" />
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/registering_dialog.xml" value="0.18974358974358974" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/reply_layout.xml" value="0.1876068376068376" />
         <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/verification_toolbar.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Vishal/AndroidStudioProjects/Socify-App-1/app/src/main/res/layout/webtaglayout.xml" value="0.1" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable-v24/circle_filled.xml" value="0.275" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.197" />
         <entry key="..\:/Users/golub/AndroidStudioProjects/Socify-App/app/src/main/res/drawable/backgroundsplashscreen.xml" value="0.197" />

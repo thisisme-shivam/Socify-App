@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,17 +44,6 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
     public Registration regActivity;
     InterestsFragment interestsFragment;
 
-    public void setonclicklisteners() {
-
-        binding.next3btn.setOnClickListener(v -> {
-
-            //Sending Course
-
-            InterestsFragment interestsFragment = new InterestsFragment();
-            getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, interestsFragment).commit();
-        });
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +56,10 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setonclicklisteners();
-        Log.i("Enterign again" , "ture");
+
+        NavController controller = Navigation.findNavController(view);
+
+
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(80);
         rec = view.findViewById(R.id.CoursesListRV);
@@ -76,6 +70,14 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
         rec.setAdapter(adapter);
         shimmerFrameLayout = getView().findViewById(R.id.shimmer_view_container);
         searchView = getView().findViewById(R.id.search_course);
+
+        requireActivity().findViewById(R.id.back_icon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = CoursesFragmentDirections.actionCoursesFragmentToGetCollegeFragment();
+                controller.navigate(action);
+            }
+        });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -129,10 +131,12 @@ public class CoursesFragment extends Fragment implements GetCollegeAdapter.Colle
 
     @Override
     public void onclick(int position) {
+        NavController controller = Navigation.findNavController(getView());
         regActivity.profiledetails.put("Course",optimizedSearchCourses.newfilterlist.get(position).getcoursename());
         clickd = true;
         searchView.setQuery(optimizedSearchCourses.newfilterlist.get(position).getcoursename(),false);
-        getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, interestsFragment).commit();
+        NavDirections action = CoursesFragmentDirections.actionCoursesFragmentToInterestsFragment();
+        controller.navigate(action);
     }
 
 

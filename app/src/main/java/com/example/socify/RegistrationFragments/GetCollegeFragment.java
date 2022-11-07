@@ -13,6 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,6 +41,7 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
     CoursesFragment coursesFragment;
     CountDownTimer cntr;
     private Integer waitingTime = 200;
+    NavController controller;
     private void filter(String newText){
 
         optimizedSearch.stopRunningThread();
@@ -65,6 +69,7 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
         binding = FragmentGetCollegeBinding.inflate(getLayoutInflater());
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(60);
+        controller = Navigation.findNavController(view);
 
         rec = view.findViewById(R.id.CollegeListRV);
         rec.setHasFixedSize(true);
@@ -76,6 +81,14 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
         layout = getView().findViewById(R.id.shimmer_view_container);
 
         searchview = getView().findViewById(R.id.search_college);
+
+        requireActivity().findViewById(R.id.back_icon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = GetCollegeFragmentDirections.actionGetCollegeFragmentToCoursesFragment();
+                controller.navigate(action);
+            }
+        });
 
 
         searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -115,12 +128,15 @@ public class GetCollegeFragment extends Fragment implements GetCollegeAdapter.Co
 
     @Override
     public void onclick(int position) {
+        controller = Navigation.findNavController(getView());
         String college = optimizedSearch.newfilterlist.get(position).getCollege_name();
         college = college.replaceAll("[^A-Za-z]+", "");
         Log.i("Name",college);
         regActivity.profiledetails.put("College",college);
         searchview.setQuery(optimizedSearch.newfilterlist.get(position).getCollege_name(),true);
-        getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, coursesFragment).commitNowAllowingStateLoss();
+
+        NavDirections action = GetCollegeFragmentDirections.actionGetCollegeFragmentToCoursesFragment();
+        controller.navigate(action);
 
     }
 

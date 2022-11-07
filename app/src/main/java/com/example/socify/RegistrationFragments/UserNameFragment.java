@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -34,7 +37,7 @@ public class UserNameFragment extends Fragment {
     String username, Password;
     Registration regActivity;
     GetCollegeFragment getCollegeFragment;
-
+    NavController controller;
     CountDownTimer cnt;
     public void onclicklisteners() {
         binding.nextbtn.setOnClickListener(new View.OnClickListener() {
@@ -45,8 +48,17 @@ public class UserNameFragment extends Fragment {
                     regActivity.profiledetails.put("Username",username);
                     regActivity.setPassword(Password);
                     //Uploading username & Password and mapping username with phone number
-                    getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, getCollegeFragment).commitNowAllowingStateLoss();
+                    NavDirections action = UserNameFragmentDirections.actionUserNameFragmentToGetCollegeFragment();
+                    controller.navigate(action);
                 }
+            }
+        });
+
+        requireActivity().findViewById(R.id.back_icon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = UserNameFragmentDirections.actionUserNameFragmentToProfilePic();
+                controller.navigate(action);
             }
         });
     }
@@ -94,6 +106,8 @@ public class UserNameFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+         controller = Navigation.findNavController(view);
 
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         bar.setProgress(40);

@@ -16,7 +16,7 @@
         android:layout_marginBottom="18dp"
         android:fontFamily="@font/osr"
         android:gravity="center"
-        android:text="Be more social with Socify! Let us know more about yourself."
+        android:text="Be more social wkhhjjhith Socify! Let us know more about yourself."
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -127,9 +127,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="#D8D9D9"
+        android:backgroundTint="@color/palette_teal"
         android:foregroundGravity="center"
-        android:src="@drawable/arrowgrey"
+        android:src="@drawable/next_btn"
+        app:maxImageSize="45dp"
+        app:tint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

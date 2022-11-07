@@ -18,7 +18,13 @@ import android.widget.Toast;
 import com.example.socify.R;
 import com.example.socify.RegistrationFragments.UserNameFragment;
 import com.example.socify.databinding.FragmentNewPasswordBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +34,8 @@ public class NewPasswordFragment extends Fragment {
     String newPass, confirmPass;
     UserNameFragment userNameFragment = new UserNameFragment();
 
+
+
     void onClickListeners()
     {
         binding.newPassLayout.setEndIconOnClickListener(v -> showpass());
@@ -36,7 +44,6 @@ public class NewPasswordFragment extends Fragment {
             @Override
             public void onClick(View v) {
                newPass = binding.newPassword.getText().toString();
-
 
                if(newPass.isEmpty())
                    binding.newPassLayout.setError("Cannot be Empty");
@@ -49,8 +56,18 @@ public class NewPasswordFragment extends Fragment {
                            "1 number \n" +
                            "1 special character\n" +
                            "and no spaces");
-               else
-                   Toast.makeText(getContext(), "updated", Toast.LENGTH_SHORT).show();
+               else {
+                   Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).updatePassword(binding.newPassword.getText().toString())
+                           .addOnCompleteListener(new OnCompleteListener<Void>() {
+                               @Override
+                               public void onComplete(@NonNull Task<Void> task) {
+                                   if (task.isSuccessful())
+                                       Toast.makeText(getContext(), "Password Updated Successfully", Toast.LENGTH_SHORT).show();
+                                   else
+                                       Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                               }
+                           });
+               }
             }
         });
     }

@@ -8,6 +8,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +37,8 @@ public class InterestsFragment extends Fragment {
     Dialog progressDialog;
     public void onclicklisteners() {
 
+        NavController controller = Navigation.findNavController(getView());
+
          binding.finishbtn.setOnClickListener(v -> {
                      //Getting text from tapped tags
              if (tags.isEmpty() || tags.size() < 3)
@@ -48,6 +53,14 @@ public class InterestsFragment extends Fragment {
              tags.add(themedButton.getText());
              return null;
          });
+
+        requireActivity().findViewById(R.id.back_icon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavDirections action = InterestsFragmentDirections.actionInterestsFragmentToCoursesFragment();
+                controller.navigate(action);
+            }
+        });
     }
 
     private void sendData() {
@@ -78,7 +91,7 @@ public class InterestsFragment extends Fragment {
         regActivity = (Registration) getActivity();
         progressDialog = new Dialog(getContext());
         progressDialog.setCancelable(false);
-        progressDialog.setContentView(R.layout.progressdialogotp);
+        progressDialog.setContentView(R.layout.register_dialog);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
