@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
@@ -64,9 +65,6 @@ public class Home extends AppCompatActivity {
 
     int[] drawables;
     public static GetUserData getUserData;
-    int lastSelected;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +76,12 @@ public class Home extends AppCompatActivity {
         drawables = new int[]{
                 R.drawable.newsgrey,
                 R.drawable.discovergrey,
+                R.drawable.plusicongrey,
                 R.drawable.clubicongrey,
                 R.drawable.profilegrey,
                 R.drawable.newsicon,
                 R.drawable.discovericon,
+                R.drawable.plusicon,
                 R.drawable.clubicon,
                 R.drawable.profileicon
         };
@@ -93,6 +93,8 @@ public class Home extends AppCompatActivity {
         otpDialog.setCancelable(false);
         otpDialog.setContentView(R.layout.post_creation_popup);
         otpDialog.getWindow().setWindowAnimations(R.style.DialogAnimation);
+
+
 
         getUserData = new GetUserData(FirebaseAuth.getInstance().getUid(), new InterfaceClass.LoadDataInterface() {
             @Override
@@ -108,17 +110,51 @@ public class Home extends AppCompatActivity {
             }
         });
 
+
+
     }
 
-
+boolean first = true;
+    int currentIndex =0,lastSelected = 4;
     @Override
     protected void onStart() {
         super.onStart();
-        navController = Navigation.findNavController(this, R.id.FragmentView);
-        NavigationUI.setupWithNavController(binding.bottomnavigationview, navController);
+        if(first){
+            navController = Navigation.findNavController(this, R.id.FragmentView);
+            NavigationUI.setupWithNavController(binding.bottomnavigationview, navController);
+            first = false;
+            navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+                @Override
+                public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
+                    int navId = navDestination.getId();
+                        if(navId == R.id.newsFeedFragment){
+                            currentIndex = 0;
+                            changeIcon();
+                        }else if(navId == R.id.discoverFragment) {
+                            currentIndex = 1;
+                            changeIcon();
+                        }else if(navId == R.id.createFragment) {
+                            currentIndex = 2;
+                            changeIcon();
+                        }else if(navId == R.id.accessMyFragment) {
+                            currentIndex = 3;
+                            changeIcon();
+                        }else if(navId == R.id.profileFragment) {
+                            currentIndex = 4;
+                            changeIcon();
+                        }
+                }
+            });
+        }
+
+
     }
 
-
+    private void changeIcon() {
+        navigationView.getMenu().getItem(lastSelected).setIcon(drawables[lastSelected]);
+        navigationView.getMenu().getItem(currentIndex).setIcon(drawables[currentIndex+5]);
+        lastSelected = currentIndex;
+    }
 
 
 }

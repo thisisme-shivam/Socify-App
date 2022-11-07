@@ -5,6 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.function.ObjIntConsumer;
 
 
 public class NotificationFragment extends Fragment {
@@ -67,6 +72,13 @@ public class NotificationFragment extends Fragment {
 
         rec.setLayoutManager(layoutManager);
         rec.setAdapter(notificationAdapter);
+        NavController controller = Navigation.findNavController(view);
+        getView().findViewById(R.id.back_icon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controller.popBackStack();
+            }
+        });
     }
 
     @Override

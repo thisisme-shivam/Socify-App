@@ -18,11 +18,18 @@
         <action
             android:id="@+id/action_newsFeedFragment_to_allChatFragment"
             app:destination="@id/allChatFragment"
+            app:popUpTo="@id/allChatFragment"
+            app:popUpToInclusive="true"
             app:enterAnim="@anim/enter_fragment"
             app:popExitAnim="@anim/exit_fragment" />
         <action
             android:id="@+id/action_newsFeedFragment_to_commentsFragment"
             app:destination="@id/commentsFragment"
+            app:enterAnim="@anim/enter_fragment"
+            app:popExitAnim="@anim/exit_fragment" />
+        <action
+            android:id="@+id/action_newsFeedFragment_to_visitProfileFragment"
+            app:destination="@id/visitProfile"
             app:enterAnim="@anim/enter_fragment"
             app:popExitAnim="@anim/exit_fragment" />
     </fragment>

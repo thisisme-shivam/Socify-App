@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp">
@@ -16,11 +15,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="228dp"
-        android:layout_height="56dp"
-        android:gravity="start"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/personimage"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,39 +29,20 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="username"
+            android:fontFamily="@font/chatfontmedium"
             android:textColor="@color/black"
-            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/info"
+            android:id="@+id/personname"
+            android:fontFamily="@font/chatfontmedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="information"
+            android:layout_marginTop="6dp"
+            android:textSize="10sp"
             android:textColor="@color/text_grey"
-            android:textSize="18sp" />
-
+            android:text="personname" />
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="31/10/2022"
-        android:textSize="10sp"
-        android:textColor="@color/text_grey"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="12:30"
-        android:textColor="@color/text_grey"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

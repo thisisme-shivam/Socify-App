@@ -37,7 +37,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         NotificationMember member = notifications.get(position);
 
         holder.binding.info.setText(member.getInfo());
-        Glide.with(context).load(member.getImgurl()).into(holder.binding.personimgage);
+        Glide.with(context).load(member.getImgurl()).into(holder.binding.personimage);
         holder.binding.personusername.setText(member.getUsername());
         holder.binding.time.setText(member.getTime());
         holder.binding.date.setText(member.getDate());

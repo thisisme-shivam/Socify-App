@@ -8,12 +8,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.socify.Activities.Home;
 import com.example.socify.Classes.ChatListUser;
 import com.example.socify.HomeFragments.AllChatFragment;
+import com.example.socify.HomeFragments.AllChatFragmentDirections;
 import com.example.socify.HomeFragments.ChatRoomFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.ChatlistlayoutBinding;
@@ -82,14 +86,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
         Glide.with(context).load(chatListUser.getImgUri()).placeholder(R.drawable.user).into(holder.binding.chatprofileimg);
 
         holder.binding.listchat.setOnClickListener(v -> {
-            ChatRoomFragment chatRoomFragment = new ChatRoomFragment();
-            Bundle chatdetails = new Bundle();
-            chatdetails.putString("Name", chatListUser.getName());
-            chatdetails.putString("Img", chatListUser.getImgUri());
-            chatdetails.putString("UID", chatListUser.getUid());
-            chatRoomFragment.setArguments(chatdetails);
-            ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.FragmentView, chatRoomFragment).commit();
+            NavController controller = Navigation.findNavController(v);
+            NavDirections dir = AllChatFragmentDirections.actionAllChatFragmentToChatRoomFragment(chatListUser.getName(),chatListUser.getImgUri(),chatListUser.getUid());
+            controller.navigate(dir);
         });
 
     }

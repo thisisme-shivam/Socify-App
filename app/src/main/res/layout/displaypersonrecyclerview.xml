@@ -7,7 +7,7 @@
     android:padding="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/personimgage"
+        android:id="@+id/personimage"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/person_login"
@@ -21,7 +21,7 @@
         android:orientation="vertical"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/personimgage"
+        app:layout_constraintStart_toEndOf="@+id/personimage"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView

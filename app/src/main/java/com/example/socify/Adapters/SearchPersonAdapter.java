@@ -40,7 +40,7 @@ public class SearchPersonAdapter extends RecyclerView.Adapter<SearchPersonAdapte
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int position) {
         Person person = persons.get(position);
         holder.binding.personusername.setText("@" + person.getUsername());
-        Glide.with(context).load(person.getUri()).placeholder(R.drawable.person_login).into(holder.binding.personimgage);
+        Glide.with(context).load(person.getUri()).placeholder(R.drawable.person_login).into(holder.binding.personimage);
         holder.binding.personname.setText(person.getName());
         if(person.getFollow_status())
             holder.binding.following.setVisibility(View.VISIBLE);

@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.os.CountDownTimer;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +27,6 @@ import androidx.navigation.Navigation;
 import com.example.socify.AESEncryption;
 import com.example.socify.Activities.CropperActivity;
 import com.example.socify.Activities.Registration;
-import com.example.socify.HomeFragments.NewsFeedFragment;
 import com.example.socify.R;
 import com.example.socify.databinding.FragmentProfilePicBinding;
 
@@ -40,6 +42,7 @@ public class ProfilePic extends Fragment {
     String name, passing_year;
     Registration regActivity;
     UserNameFragment userNameFragment;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean FieldValidation() {
 
@@ -67,9 +70,8 @@ public class ProfilePic extends Fragment {
         return false;
     }
 
-    public void onclicklisteners() {
 
-
+    public void setonClickListeners() {
 
         binding.profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +85,12 @@ public class ProfilePic extends Fragment {
                 mTakePhoto.launch("image/*");
             }
         });
+
+        binding.nextbtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+               if(FieldValidation()) {
 
 
 
@@ -117,8 +125,6 @@ public class ProfilePic extends Fragment {
 
                 }
         );
-
-
 
     }
 
@@ -159,6 +165,9 @@ public class ProfilePic extends Fragment {
             }
         });
 
+
+        setonClickListeners();
+
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         binding.profileImage.setImageURI(imgUrl);
         bar.setProgress(20);
@@ -168,7 +177,30 @@ public class ProfilePic extends Fragment {
             years.add(String.valueOf(curr_year + i));
         }
         binding.graduationYear.setItems(years);
+        binding.nametext.setFilters(new InputFilter[] {new InputFilter.LengthFilter(30)});
 
+       setTextChangeListener();
+    }
+
+    private void setTextChangeListener() {
+        binding.nametext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(binding.nametextlayout.isErrorEnabled())
+                    binding.nametextlayout.setErrorEnabled(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
     }
 
@@ -180,6 +212,7 @@ public class ProfilePic extends Fragment {
 
         return binding.getRoot();
     }
+
 
 
 }

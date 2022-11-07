@@ -51,6 +51,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/chatfontmedium"
                         android:text="QueryHub"
+                        android:layout_centerInParent="true"
                         android:textColor="@color/palette_black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
