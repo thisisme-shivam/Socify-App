@@ -2,6 +2,7 @@ package com.example.socify.RegistrationFragments;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -14,7 +15,11 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.example.socify.AESEncryption;
 import com.example.socify.Activities.CropperActivity;
@@ -35,6 +40,7 @@ public class ProfilePic extends Fragment {
     String name, passing_year;
     Registration regActivity;
     UserNameFragment userNameFragment;
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean FieldValidation() {
 
         AESEncryption aesEncryption = new AESEncryption();
@@ -62,6 +68,9 @@ public class ProfilePic extends Fragment {
     }
 
     public void onclicklisteners() {
+
+
+
         binding.profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,18 +83,7 @@ public class ProfilePic extends Fragment {
                 mTakePhoto.launch("image/*");
             }
         });
-        binding.nextbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               if(FieldValidation()) {
 
-                   setData();
-                   //Switching to next fragment
-                   getParentFragmentManager().beginTransaction().replace(R.id.frame_registration, userNameFragment).commitNowAllowingStateLoss();
-                   regActivity.findViewById(R.id.back_icon).setVisibility(View.VISIBLE);
-               }
-            }
-        });
 
 
 
@@ -142,7 +140,24 @@ public class ProfilePic extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        if(passing_year !=null)
+            binding.graduationYear.setText(passing_year);
+        NavController controller = Navigation.findNavController(view);
+
         onclicklisteners();
+
+        binding.nextbtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                if(FieldValidation()) {
+                    setData();
+                    //Switching to next fragment
+                    NavDirections action = ProfilePicDirections.actionProfilePicToUserNameFragment();
+                    controller.navigate(action);
+                }
+            }
+        });
 
         ProgressBar bar = requireActivity().findViewById(R.id.progressBar);
         binding.profileImage.setImageURI(imgUrl);
@@ -153,6 +168,7 @@ public class ProfilePic extends Fragment {
             years.add(String.valueOf(curr_year + i));
         }
         binding.graduationYear.setItems(years);
+
 
     }
 

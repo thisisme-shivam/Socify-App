@@ -98,7 +98,6 @@ public class ForgetPassOtpFragment extends Fragment {
                 progressDialog.show();
                 fauth.signInWithCredential(credential).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        fauth.signOut();
                         otpDialog.dismiss();
                         progressDialog.dismiss();
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.forgetPassFrame, new NewPasswordFragment()).commit();

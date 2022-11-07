@@ -9,10 +9,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.socify.Classes.College;
 import com.example.socify.Classes.Course;
@@ -59,6 +65,22 @@ public class Registration extends AppCompatActivity {
     InterfaceClass.InterestInterface interestInterface;
     String currentuid,phonenumber;
     boolean registrationComplete;
+    static int fragNo = 1;
+
+
+    void onClickListener()
+    {
+        binding.backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController controller = Navigation.findNavController(v);
+                controller.popBackStack();
+            }
+        });
+
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,10 +142,6 @@ public class Registration extends AppCompatActivity {
             }
         });
 
-
-
-
-        getSupportFragmentManager().beginTransaction().add(R.id.frame_registration, new ProfilePic()).commit();
 
     }
 
@@ -264,10 +282,11 @@ public class Registration extends AppCompatActivity {
     }
 
 
-
     @Override
-    protected void onStop() {
-        super.onStop();
-
+    protected void onStart() {
+        super.onStart();
+//        NavController navController = Navigation.findNavController(this, R.id.frame_registration);
+//        NavigationUI.setupWithNavController(binding.toolbar,navController);
     }
+
 }
